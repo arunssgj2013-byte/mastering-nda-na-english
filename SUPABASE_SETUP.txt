@@ -1,0 +1,19 @@
+SUPABASE INTEGRATION - FINAL MANUAL STEP
+
+Backend project: mastering-nda-english
+Website: https://masteringndaenglish.com
+
+Before testing email sign-in, open Supabase Dashboard -> Authentication -> URL Configuration and set:
+Site URL: https://masteringndaenglish.com
+Additional Redirect URLs:
+  https://masteringndaenglish.com/dashboard.html
+  https://masteringndaenglish.com/**
+
+Email passwordless login (Magic Link) is used.
+Do not place any Supabase secret/service-role key in the GitHub repository.
+Only the browser-safe publishable key is included.
+
+Student data tables:
+- student_profiles
+- quiz_attempts
+Both use Row Level Security so signed-in students can access only their own rows.

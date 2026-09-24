@@ -528,3 +528,6 @@ body[data-quiz-kind="sample"] .series-set-card:hover{border-color:#d7aa42;box-sh
 body[data-quiz-kind="sample"] .series-set-no{background:linear-gradient(135deg,#e0ad3f,#f4cd76);color:#241a03}
 body[data-quiz-kind="sample"] .series-go{color:#8c5e05}
 @media(max-width:1180px){.nav{gap:12px;font-size:12px}.nav .quiz-nav-link,.nav .sample-nav-link{padding:8px 9px}}
+
+/* Supabase-authenticated Student Hub */
+.auth-status{border:1px solid #cfd9e6;background:#f4f8fc;color:#41566f;border-radius:11px;padding:11px 13px;font-size:12px;font-weight:700;line-height:1.5}.auth-status.success{background:#eef9f2;border-color:#a9d8b9;color:#25633d}.auth-status.error{background:#fff0f0;border-color:#efc2c2;color:#9e2f2f}.auth-status.hidden{display:none}.student-profile-form button:disabled{opacity:.65;cursor:wait}

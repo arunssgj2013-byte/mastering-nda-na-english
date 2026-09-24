@@ -238,8 +238,15 @@ const QUIZ_PROFILE_KEY='mceStudentProfileV2';
   function saveAttempt(result){
     let profile=null,attempts=[];try{profile=JSON.parse(localStorage.getItem(QUIZ_PROFILE_KEY)||'null')}catch{};try{attempts=JSON.parse(localStorage.getItem(QUIZ_ATTEMPTS_KEY)||'[]')}catch{};
     if(!profile||!currentSet)return;
-    attempts.push({name:profile.name,studentId:profile.studentId,className:profile.className,institution:profile.institution,state:profile.state,setLabel:currentSet.label,setType:currentSet.kind,date:dateKey(),iso:new Date().toISOString(),...result});
+    const iso=new Date().toISOString();
+    const clientAttemptKey=[profile.userId||profile.studentId,currentSet.id,iso].join(':');
+    const record={name:profile.name,studentId:profile.studentId,className:profile.className,institution:profile.institution,state:profile.state,setId:currentSet.id,setLabel:currentSet.label,setType:currentSet.kind,date:dateKey(),iso,clientAttemptKey,...result};
+    attempts.push(record);
     localStorage.setItem(QUIZ_ATTEMPTS_KEY,JSON.stringify(attempts.slice(-400)));
+    if(window.MNEBackend?.saveAttempt){
+      const durationSeconds=Math.max(0,50*60-timerSeconds);
+      window.MNEBackend.saveAttempt({...record,paperId:currentSet.id,totalQuestions:50,durationSeconds}).then(r=>{if(!r?.ok)console.warn('Attempt kept locally; cloud sync did not complete.')}).catch(err=>console.warn('Attempt kept locally; cloud sync failed.',err));
+    }
   }
   function submitQuiz(auto=false){
     if(!currentSet||submitted)return;submitted=true;stopTimer();
