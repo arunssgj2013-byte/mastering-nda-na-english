@@ -1,0 +1,32 @@
+{
+  "version": 36,
+  "verified_sets": [
+    "pyq-2026-ii",
+    "pyq-2026-i",
+    "pyq-2025-ii",
+    "pyq-2025-i",
+    "pyq-2024-ii",
+    "pyq-2024-i",
+    "pyq-2023-ii",
+    "pyq-2023-i",
+    "pyq-2022-ii",
+    "pyq-2022-i",
+    "pyq-2021-i",
+    "pyq-2020-i-ii"
+  ],
+  "verified_question_count": 600,
+  "added": [
+    "pyq-2022-ii",
+    "pyq-2022-i",
+    "pyq-2021-i",
+    "pyq-2020-i-ii"
+  ],
+  "source_answer_validation": "All 200 keyed answers matched the supplied corrected source files before publication.",
+  "notes": [
+    "2022-II target-word alignment uses the cleaned upload-ready version (e.g. FRAIL, MALIGN, MORTAL, FICKLE).",
+    "2021-I Q18 highlights GROW rather than the misformatted source emphasis on abundance.",
+    "2020 I & II Q3 highlights IMPORTANT rather than the misformatted source emphasis.",
+    "2020 I & II Q48 retains supplied key option C and explicitly explains the source mismatch; it was not silently changed.",
+    "Existing PDFs copied unchanged from v35."
+  ]
+}

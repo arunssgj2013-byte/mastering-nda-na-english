@@ -1,0 +1,13 @@
+{
+  "version": 45,
+  "watermark": "\u00a9 Arun Kumar | Mastering NDA/NA English",
+  "watermark_scope": "all downloadable PDFs under assets",
+  "pdf_count": 61,
+  "homepage_image": "assets/images/nda-sword-parade.png",
+  "ui_updates": [
+    "added fourth homepage parade slide",
+    "stronger coloured study-material links",
+    "stronger coloured online-practice selectors"
+  ],
+  "future_pdf_watermark_helper": "tools/apply_pdf_watermark.py"
+}

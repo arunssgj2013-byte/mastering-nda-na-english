@@ -1,0 +1,36 @@
+{
+  "version": 39,
+  "verified_sets": [
+    "pyq-2026-ii",
+    "pyq-2026-i",
+    "pyq-2025-ii",
+    "pyq-2025-i",
+    "pyq-2024-ii",
+    "pyq-2024-i",
+    "pyq-2023-ii",
+    "pyq-2023-i",
+    "pyq-2022-ii",
+    "pyq-2022-i",
+    "pyq-2021-i",
+    "pyq-2020-i-ii",
+    "pyq-2019-ii",
+    "pyq-2019-i",
+    "pyq-2018-ii",
+    "pyq-2017-ii"
+  ],
+  "verified_question_count": 800,
+  "added": [],
+  "source_answer_validation": "All 200 keyed answers for the four newly requested papers match the supplied corrected source files.",
+  "navigation_label": "Online PYQs & Sample Practice",
+  "page_heading": "Online PYQs & Sample Paper Practice",
+  "notes": [
+    "OMR Navigator is visible on the right side of the question column on desktop and remains sticky while the candidate scrolls.",
+    "Before submission, answered question bubbles are green and unanswered question bubbles are red.",
+    "Clicking any OMR bubble jumps directly to that question; the current question is marked with a gold ring.",
+    "Answered and Left counters update instantly after every response.",
+    "After submission, OMR bubbles change to green for correct, red for incorrect and grey for unattempted.",
+    "On tablets and mobile screens the OMR moves above the questions for readability while retaining jump navigation.",
+    "Existing verified question data, answer keys, explanations and PDF assets are unchanged from Version 38."
+  ],
+  "feature_update": "Persistent 50-question OMR progress navigator on the right side of online practice questions."
+}

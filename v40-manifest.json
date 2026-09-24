@@ -1,0 +1,16 @@
+{
+  "version": "40",
+  "base_version": "39",
+  "added_sets": [
+    "pyq-2017-i",
+    "pyq-2016-ii",
+    "pyq-2016-i"
+  ],
+  "published_sets": 19,
+  "published_questions": 950,
+  "notes": [
+    "2018-I remains PDF-only",
+    "Existing PDFs unchanged",
+    "OMR navigator retained from Version 39"
+  ]
+}

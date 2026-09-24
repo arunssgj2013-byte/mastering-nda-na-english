@@ -1,0 +1,41 @@
+{
+  "version": 46,
+  "source": "NDA PRACTICE BOOK-  A-4 SIZE.docx",
+  "online_pyq_sets": 21,
+  "online_pyq_questions": 1050,
+  "online_sample_sets": 12,
+  "online_sample_questions": 600,
+  "sample_ids": [
+    "sample-01",
+    "sample-02",
+    "sample-03",
+    "sample-04",
+    "sample-05",
+    "sample-06",
+    "sample-07",
+    "sample-08",
+    "sample-09",
+    "sample-10",
+    "sample-11",
+    "sample-12"
+  ],
+  "sample_question_counts": {
+    "sample-01": 50,
+    "sample-02": 50,
+    "sample-03": 50,
+    "sample-04": 50,
+    "sample-05": 50,
+    "sample-06": 50,
+    "sample-07": 50,
+    "sample-08": 50,
+    "sample-09": 50,
+    "sample-10": 50,
+    "sample-11": 50,
+    "sample-12": 50
+  },
+  "notes": [
+    "Separate Online PYQs and Online Sample Papers pages",
+    "Same timed OMR interface",
+    "Source directions, answer keys and explanations retained"
+  ]
+}

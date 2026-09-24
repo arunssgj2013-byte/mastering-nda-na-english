@@ -1,0 +1,42 @@
+{
+  "version": 37,
+  "verified_sets": [
+    "pyq-2026-ii",
+    "pyq-2026-i",
+    "pyq-2025-ii",
+    "pyq-2025-i",
+    "pyq-2024-ii",
+    "pyq-2024-i",
+    "pyq-2023-ii",
+    "pyq-2023-i",
+    "pyq-2022-ii",
+    "pyq-2022-i",
+    "pyq-2021-i",
+    "pyq-2020-i-ii",
+    "pyq-2019-ii",
+    "pyq-2019-i",
+    "pyq-2018-ii",
+    "pyq-2018-i",
+    "pyq-2017-ii"
+  ],
+  "verified_question_count": 850,
+  "added": [
+    "pyq-2019-ii",
+    "pyq-2019-i",
+    "pyq-2018-ii",
+    "pyq-2018-i",
+    "pyq-2017-ii"
+  ],
+  "source_answer_validation": "All 250 keyed answers for the five newly published papers matched the supplied corrected source files before publication.",
+  "navigation_label": "Online PYQ & Sample Practice",
+  "notes": [
+    "2019-II, 2019-I, 2018-II, 2018-I and 2017-II were added as verified 50-question online practice sets.",
+    "Dedicated year pages were added for 2019, 2018 and 2017.",
+    "2017-I remains PDF-only until its corrected source is supplied.",
+    "2018-II Q29 retains supplied key option D (Turned off) with the source note preserved.",
+    "2018-I Q30 and Q33 retain the supplied keyed answers and source notes rather than being silently corrected.",
+    "2017-II Q12 and Q45 retain the supplied keyed answers and notes.",
+    "The main navigation hyperlink formerly labelled Quizzes is now labelled Online PYQ & Sample Practice; the underlying quizzes.html path remains unchanged for compatibility.",
+    "All 61 PDF assets are byte-for-byte unchanged from v36."
+  ]
+}

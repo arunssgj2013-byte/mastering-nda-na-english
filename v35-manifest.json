@@ -1,0 +1,22 @@
+{
+  "version": 35,
+  "verified_sets": [
+    "pyq-2026-ii",
+    "pyq-2026-i",
+    "pyq-2025-ii",
+    "pyq-2025-i",
+    "pyq-2024-ii",
+    "pyq-2024-i",
+    "pyq-2023-ii",
+    "pyq-2023-i"
+  ],
+  "verified_question_count": 400,
+  "added": [
+    "pyq-2023-ii",
+    "pyq-2023-i"
+  ],
+  "notes": [
+    "2023-I Q47 accepts both B and D exactly as supplied source key.",
+    "Existing PDFs copied unchanged from v34."
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "version": 43,
+  "change": "Replaced all year-wise NDA/NA English PYQ PDFs from 2015-I through 2026-II with PDFs rebuilt directly from Set Wise PYQ.docx; removed header page numbers; preserved source content.",
+  "pdf_count": 22,
+  "pdfs": [
+    {
+      "file": "NDA-NA-English-2015-I.pdf",
+      "size": 104528,
+      "sha256": "ee0c5065ffe11c80702ed5ab8f304767c682e98217a0149af19e645a92d72a05"
+    },
+    {
+      "file": "NDA-NA-English-2015-II.pdf",
+      "size": 93865,
+      "sha256": "7302a940c4d6e845ef7d38516ac3787159946bcccfc4a46208f0a902e7c4874e"
+    },
+    {
+      "file": "NDA-NA-English-2016-I.pdf",
+      "size": 108208,
+      "sha256": "4003774370c6cd24cec90699b7115860570e9d078260b84b366400a4caa27fea"
+    },
+    {
+      "file": "NDA-NA-English-2016-II.pdf",
+      "size": 106060,
+      "sha256": "7de870b2bab2bdd0da602d9a799ac939d9272268730ac0ebae8407d37fdf90ad"
+    },
+    {
+      "file": "NDA-NA-English-2017-I.pdf",
+      "size": 104230,
+      "sha256": "933e6b84ff8ca0480c420ebabe70ca718272f3d9d570165ea39c4cf8ef9113a9"
+    },
+    {
+      "file": "NDA-NA-English-2017-II.pdf",
+      "size": 96680,
+      "sha256": "281982b341a944241424494e43d70fd3c124c338a3156d1c57cc4603fd969754"
+    },
+    {
+      "file": "NDA-NA-English-2018-I.pdf",
+      "size": 109861,
+      "sha256": "f9404260e2c6baec9508300f03dfdf25f3f379e4c178f78381cb9b212b84c9ea"
+    },
+    {
+      "file": "NDA-NA-English-2018-II.pdf",
+      "size": 105952,
+      "sha256": "548b0cf7103f9c9ac33c2cf1ed8f79199692ee68a9ba6db072882dc85de873d2"
+    },
+    {
+      "file": "NDA-NA-English-2019-I.pdf",
+      "size": 110468,
+      "sha256": "a34754e4ec08569238e7a01bdb7ffb35982479655179899a6bc33d8449b36f40"
+    },
+    {
+      "file": "NDA-NA-English-2019-II.pdf",
+      "size": 106181,
+      "sha256": "a6c8f857c9c07bae34465a8bde123c27058744b228abded1a1a4d4c0c14ac9d7"
+    },
+    {
+      "file": "NDA-NA-English-2020-I-II.pdf",
+      "size": 95174,
+      "sha256": "f6136157cd5ebfbd56d4e7260926cc7a1031ee5e22553b1310133e8c9bbc0591"
+    },
+    {
+      "file": "NDA-NA-English-2021-I.pdf",
+      "size": 101917,
+      "sha256": "858f706e2c713d02bd053df35b1b2bb9623d48e0ca5e6c81962bda9feaa65347"
+    },
+    {
+      "file": "NDA-NA-English-2022-I.pdf",
+      "size": 102959,
+      "sha256": "c7a6dd72de27ae96f98399d80a20bc94423ee460449512b021e3575e9d9e481d"
+    },
+    {
+      "file": "NDA-NA-English-2022-II.pdf",
+      "size": 95127,
+      "sha256": "aa5c0a662922fe2a09a016a2bc40ea6be34c9361c1e5faa0481bc8bc3d2d92ba"
+    },
+    {
+      "file": "NDA-NA-English-2023-I.pdf",
+      "size": 101313,
+      "sha256": "86af1f4409c932bf6cbd5b75f81775aa58e4cabc64f1783690e38c8f98c6b9f7"
+    },
+    {
+      "file": "NDA-NA-English-2023-II.pdf",
+      "size": 111414,
+      "sha256": "88fa290f4b47ce29318b9801d2936c5a8f1fc47f975602265a026ae3f8d2aae0"
+    },
+    {
+      "file": "NDA-NA-English-2024-I.pdf",
+      "size": 105768,
+      "sha256": "797cfd28256c1f19b5cb07ae95f8ec3ca7205d85c3b429a15eab252a3b01d2a7"
+    },
+    {
+      "file": "NDA-NA-English-2024-II.pdf",
+      "size": 104810,
+      "sha256": "3dd9e29af2b0ac4f1c3b1bd080a99fefbb96175eafcf81b48bb42512071e562d"
+    },
+    {
+      "file": "NDA-NA-English-2025-I.pdf",
+      "size": 114686,
+      "sha256": "96dfd1c973af9f488d5251c401ab3b6150d73ac01c63f9a1b409edd10171bebe"
+    },
+    {
+      "file": "NDA-NA-English-2025-II.pdf",
+      "size": 108393,
+      "sha256": "7b38ff370bf804f5a43c5a5b679e9373a762febe9ce1d0fa3cc479e4c75fd3c1"
+    },
+    {
+      "file": "NDA-NA-English-2026-I.pdf",
+      "size": 91312,
+      "sha256": "c86102b4183a95909d818d9205d3fb18e48e1807a533f74ff98081b03bfad557"
+    },
+    {
+      "file": "NDA-NA-English-2026-II.pdf",
+      "size": 113617,
+      "sha256": "4c8c7b821ecf6726849cb3dc5e36cc09b1e48bb9812ade3766029f7e9ff5e30e"
+    }
+  ]
+}

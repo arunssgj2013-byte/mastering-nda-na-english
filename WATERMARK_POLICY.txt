@@ -1,0 +1,10 @@
+PDF WATERMARK POLICY
+
+All downloadable PDF study material published on this website should carry the diagonal watermark:
+© Arun Kumar | Mastering NDA/NA English
+
+This applies to year-wise PYQs, topic-wise PYQs, grammar material, vocabulary material, and any future PDF study material.
+Before publishing newly added PDFs, run:
+python tools/apply_pdf_watermark.py
+
+No footer watermark is used.

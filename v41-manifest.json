@@ -1,0 +1,11 @@
+{
+  "version": 41,
+  "verified_pyq_sets": 21,
+  "questions": 1050,
+  "added": [
+    "pyq-2015-ii",
+    "pyq-2015-i"
+  ],
+  "omr": "persistent sticky right-side navigator; green answered, red unanswered; click-to-jump",
+  "source_pdfs_unchanged": true
+}
