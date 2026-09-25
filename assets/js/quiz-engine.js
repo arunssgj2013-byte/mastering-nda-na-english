@@ -120,7 +120,7 @@ const QUIZ_PROFILE_KEY='mceStudentProfileV2';
     if(!grid)return;
     if(!list.length){grid.innerHTML='<div class="quiz-empty-state"><strong>No verified set published yet</strong><span>More corrected papers will be added progressively.</span></div>';return;}
     grid.innerHTML=list.map((s,i)=>`<button class="series-set-card" type="button" data-set-id="${esc(s.id)}"><span class="series-set-no">${String(i+1).padStart(2,'0')}</span><div><small>MANUALLY VERIFIED PAPER</small><h3>${esc(s.label)}</h3><p>50 Questions • 200 Marks • 50 Minutes • Source-corrected</p></div><span class="series-go">Start →</span></button>`).join('');
-    grid.querySelectorAll('[data-set-id]').forEach(btn=>btn.addEventListener('click',()=>loadSet(btn.dataset.setId,true)));
+    grid.querySelectorAll('[data-set-id]').forEach(btn=>btn.addEventListener('click',()=>guardedLoadSet(btn.dataset.setId,true,false)));
   }
   function setCurrentOmr(qNum){
     if(!omrGrid)return;
@@ -239,11 +239,17 @@ const QUIZ_PROFILE_KEY='mceStudentProfileV2';
     if(window.MNEPortal)window.MNEPortal.logActivity('quiz_open',set.id,set.label,{kind:set.kind}).catch(()=>{});
     if(scroll)document.getElementById('quizArena')?.scrollIntoView({behavior:'smooth',block:'start'});
   }
+  async function guardedLoadSet(id,scroll=false,startAfter=false){
+    const set=getSet(id);if(!set)return false;
+    const pendingUrl=`quizzes.html?mode=${encodeURIComponent(set.kind)}&set=${encodeURIComponent(set.id)}`;
+    if(window.MNEPortal){const ok=await window.MNEPortal.requireSession({pendingUrl});if(!ok)return false}
+    loadSet(id,scroll);if(startAfter)startTimer();return true;
+  }
   function saveAttempt(result,sectionStats={}){
     let profile=null,attempts=[];try{profile=JSON.parse(localStorage.getItem(QUIZ_PROFILE_KEY)||'null')}catch{};try{attempts=JSON.parse(localStorage.getItem(QUIZ_ATTEMPTS_KEY)||'[]')}catch{};
     if(!profile||!currentSet)return;
     const iso=new Date().toISOString();
-    const localRecord={name:profile.name,studentId:profile.studentId||profile.id,className:profile.className,school:profile.school,state:profile.state,setId:currentSet.id,setLabel:currentSet.label,setType:currentSet.kind,date:dateKey(),iso,...result};
+    const localRecord={name:profile.name,userId:profile.userId||profile.studentId||profile.id,studentId:profile.studentId||profile.id,userType:profile.userType||'STUDENT',className:profile.className,school:profile.school,state:profile.state,setId:currentSet.id,setLabel:currentSet.label,setType:currentSet.kind,date:dateKey(),iso,...result};
     attempts.push(localRecord);localStorage.setItem(QUIZ_ATTEMPTS_KEY,JSON.stringify(attempts.slice(-400)));
     if(window.MNEPortal){
       const key=`${profile.id||profile.studentId||profile.email}|${currentSet.id}|${iso}`;
@@ -266,10 +272,12 @@ const QUIZ_PROFILE_KEY='mceStudentProfileV2';
     const catHtml=Object.entries(cats).map(([name,v])=>{const pct=Math.round(v.correct/v.total*100);return `<div class="section-score"><strong>${esc(name)}</strong><div class="mini-progress"><span style="width:${pct}%"></span></div><small>${v.correct} / ${v.total} correct (${pct}%)</small></div>`}).join('');
     if(scoreBox){
       let resultProfile=null;try{resultProfile=JSON.parse(localStorage.getItem(QUIZ_PROFILE_KEY)||'null')}catch{}
-      const studentName=esc(resultProfile?.name||'Registered Student');
-      const studentClass=esc(resultProfile?.className||'—');
+      const userName=esc(resultProfile?.name||'Registered User');
+      const userType=String(resultProfile?.userType||'STUDENT').toUpperCase();
+      const userRole=esc(userType==='TEACHER'?'Teacher':userType==='OTHER'?'Other User':'Student');
+      const classMeta=userType==='STUDENT'&&resultProfile?.className?`<span><b>Class:</b> ${esc(resultProfile.className)}</span>`:'';
       const resultDate=esc(new Date().toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}));
-      scoreBox.classList.remove('hidden');scoreBox.innerHTML=`<div class="print-result-brand"><strong>Mastering NDA/NA English</strong><span>Official Practice Result Sheet</span></div><div class="print-result-meta"><span><b>Student:</b> ${studentName}</span><span><b>Class:</b> ${studentClass}</span><span><b>Date:</b> ${resultDate}</span></div><div class="score-headline"><div class="score-title"><h3>Scorecard & Result Summary</h3><p>${auto?'Time is over — the paper was auto-submitted. ':'Paper submitted successfully. '}<b>${esc(currentSet.label)}</b></p></div><div class="score-badge">${grade}</div></div><div class="score-grid"><div class="score-card"><b>${correct}</b><span>Correct</span></div><div class="score-card"><b>${wrong}</b><span>Incorrect</span></div><div class="score-card"><b>${unattempted}</b><span>Unattempted</span></div><div class="score-card"><b>${accuracy.toFixed(1)}%</b><span>Accuracy</span></div><div class="score-card"><b>${overall.toFixed(1)}%</b><span>Overall</span></div><div class="score-card"><b>${marks}</b><span>Marks / 200</span></div></div><div class="section-head" style="margin-top:18px"><div><div class="section-kicker">Category-wise Performance</div><h2 class="section-title" style="font-size:28px">Your strengths and revision areas</h2></div></div><div class="section-score-grid">${catHtml}</div><div class="result-actions"><a class="btn btn-primary" href="dashboard.html">Student Dashboard</a><button class="btn btn-outline" type="button" id="printSeriesResultBtn">Print Result Sheet</button></div>`;scoreBox.scrollIntoView({behavior:'smooth',block:'start'});document.getElementById('printSeriesResultBtn')?.addEventListener('click',printResultOnly)}
+      scoreBox.classList.remove('hidden');scoreBox.innerHTML=`<div class="print-result-brand"><strong>Mastering NDA/NA English</strong><span>Official Practice Result Sheet</span></div><div class="print-result-meta"><span><b>User:</b> ${userName}</span><span><b>Role:</b> ${userRole}</span>${classMeta}<span><b>Date:</b> ${resultDate}</span></div><div class="score-headline"><div class="score-title"><h3>Scorecard & Result Summary</h3><p>${auto?'Time is over — the paper was auto-submitted. ':'Paper submitted successfully. '}<b>${esc(currentSet.label)}</b></p></div><div class="score-badge">${grade}</div></div><div class="score-grid"><div class="score-card"><b>${correct}</b><span>Correct</span></div><div class="score-card"><b>${wrong}</b><span>Incorrect</span></div><div class="score-card"><b>${unattempted}</b><span>Unattempted</span></div><div class="score-card"><b>${accuracy.toFixed(1)}%</b><span>Accuracy</span></div><div class="score-card"><b>${overall.toFixed(1)}%</b><span>Overall</span></div><div class="score-card"><b>${marks}</b><span>Marks / 200</span></div></div><div class="section-head" style="margin-top:18px"><div><div class="section-kicker">Category-wise Performance</div><h2 class="section-title" style="font-size:28px">Your strengths and revision areas</h2></div></div><div class="section-score-grid">${catHtml}</div><div class="result-actions"><a class="btn btn-primary" href="dashboard.html">User Dashboard</a><button class="btn btn-outline" type="button" id="printSeriesResultBtn">Print Result Sheet</button></div>`;scoreBox.scrollIntoView({behavior:'smooth',block:'start'});document.getElementById('printSeriesResultBtn')?.addEventListener('click',printResultOnly)}
     currentSet.questions.forEach(q=>{const b=omrGrid?.querySelector(`[data-q="${q.n}"]`),sel=document.querySelector(`input[name="sq${q.n}"]:checked`),accepted=Array.isArray(q.a)?q.a:[q.a];b?.classList.remove('answered','unanswered','correct','wrong','unattempted');if(!sel)b?.classList.add('unattempted');else if(accepted.includes(Number(sel.value)))b?.classList.add('correct');else b?.classList.add('wrong')});
     if(answeredCount)answeredCount.textContent=String(attempted);if(leftCount)leftCount.textContent=String(unattempted);
     saveAttempt({correct,incorrect:wrong,unattempted,accuracy:Number(accuracy.toFixed(1)),overall:Number(overall.toFixed(1)),marks},cats);
@@ -278,8 +286,8 @@ const QUIZ_PROFILE_KEY='mceStudentProfileV2';
   kindButtons.forEach(b=>b.addEventListener('click',()=>renderSetLibrary(b.dataset.seriesKind)));
   submitBtn?.addEventListener('click',()=>submitQuiz(false));submitOmrBtn?.addEventListener('click',()=>submitQuiz(false));resetBtn?.addEventListener('click',clearQuiz);startTimerBtn?.addEventListener('click',startTimer);pauseTimerBtn?.addEventListener('click',pauseTimer);resetTimerBtn?.addEventListener('click',resetTimer);
   const dailySet=sets[(dayNumber()%sets.length+sets.length)%sets.length];
-  if(dailyTitle)dailyTitle.textContent=dailySet.label;if(dailyDesc)dailyDesc.textContent=`Today’s automatic ${dailySet.kind==='pyq'?'Previous Years Question':'Trend Practice Sample Paper'} set — 50 source-based questions.`;dailyBtn?.addEventListener('click',()=>{renderSetLibrary(dailySet.kind);loadSet(dailySet.id,true);startTimer()});
+  if(dailyTitle)dailyTitle.textContent=dailySet.label;if(dailyDesc)dailyDesc.textContent=`Today’s automatic ${dailySet.kind==='pyq'?'Previous Years Question':'Trend Practice Sample Paper'} set — 50 source-based questions.`;dailyBtn?.addEventListener('click',()=>{renderSetLibrary(dailySet.kind);guardedLoadSet(dailySet.id,true,true)});
   const params=new URLSearchParams(location.search);let mode=params.get('mode');let setId=params.get('set');
   if(!mode&&setId){const found=getSet(setId);if(found)mode=found.kind}
-  if(mode!=='sample')mode='pyq';renderSetLibrary(mode);if(setId&&getSet(setId))loadSet(setId,false);
+  if(mode!=='sample')mode='pyq';renderSetLibrary(mode);if(setId&&getSet(setId))guardedLoadSet(setId,false,false);
 })();

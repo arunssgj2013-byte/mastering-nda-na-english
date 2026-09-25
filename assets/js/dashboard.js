@@ -2,10 +2,12 @@
   const $=id=>document.getElementById(id);
   const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
   const fmtDate=v=>v?new Date(v).toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short'}):'—';
+  const roleLabel=t=>t==='TEACHER'?'Teacher':t==='OTHER'?'Other User':'Student';
   function render(data){
-    const p=data.student||{}, s=data.summary||{};
-    $('dashboardStudentName').textContent=p.name||'Student';
-    $('dashboardStudentMeta').textContent=[p.className?`Class ${p.className}`:'',p.state,p.pincode,p.school&&p.school!=='NONE'?p.school:'No school',p.email].filter(Boolean).join(' • ');
+    const p=data.user||data.student||{},s=data.summary||{};
+    $('dashboardStudentName').textContent=p.name||'User';
+    const meta=[roleLabel(p.userType),p.userType==='STUDENT'&&p.className?`Class ${p.className}`:'',p.state,p.pincode,p.school&&p.school!=='NONE'?p.school:'No school / institution',p.email].filter(Boolean);
+    $('dashboardStudentMeta').textContent=meta.join(' • ');
     $('dashAttempts').textContent=s.totalAttempts||0;
     $('dashBestScore').textContent=Number(s.bestScore||0).toFixed(2).replace(/\.00$/,'');
     $('dashAccuracy').textContent=Number(s.averageAccuracy||0).toFixed(1)+'%';
@@ -19,8 +21,8 @@
     $('activityTable').innerHTML=activity.length?activity.slice(0,20).map(a=>`<div class="activity-row"><span>${esc((a.event_type||'activity').replaceAll('_',' '))}</span><div><b>${esc(a.resource_title||a.resource_id||'Website activity')}</b><small>${fmtDate(a.created_at)}</small></div></div>`).join(''):'<div class="empty-state">Your recent learning activity will appear here.</div>';
   }
   async function load(){
-    const panel=$('studentDashboardPanel');
-    if(!window.MNEPortal)return;
+    const panel=$('studentDashboardPanel');if(!window.MNEPortal)return;
+    const ok=await window.MNEPortal.requireSession({pendingUrl:location.pathname+location.search,mustAuthenticate:true});if(!ok)return;
     try{const data=await window.MNEPortal.call('dashboard',{},true);render(data);panel?.classList.remove('dashboard-loading')}catch(e){if(panel)panel.innerHTML=`<div class="dashboard-card"><h3>Unable to load performance</h3><p>${esc(e.message)}</p></div>`}
   }
   document.addEventListener('DOMContentLoaded',load);

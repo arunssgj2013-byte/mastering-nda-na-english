@@ -473,3 +473,25 @@ html.auth-pending body>*:not(.auth-gate):not(.visitor-live-badge){visibility:hid
   body.print-result-only #seriesScoreBox .mini-progress{height:5px}
   body.print-result-only #seriesScoreBox .section-score small{font-size:8px;margin-top:4px}
 }
+
+/* V50 — open browsing + user registration roles */
+body.auth-modal-open{overflow:hidden}
+.access-auth-gate{background:rgba(5,18,36,.76);backdrop-filter:blur(8px)}
+.access-auth-gate .auth-shell{max-height:94vh;overflow:auto}
+.auth-close{position:absolute;right:13px;top:13px;width:36px;height:36px;border:0;border-radius:50%;background:#edf2f8;color:var(--navy);font-size:24px;line-height:1;cursor:pointer;z-index:2}
+.auth-close:hover{background:#dfe8f3}
+.access-gate-notice{margin:18px 0 4px;border:1px solid #d9e5f3;background:#f5f9ff;border-radius:14px;padding:11px 13px;display:grid;gap:2px;color:#40526a}
+.access-gate-notice b{color:var(--navy);font-size:12px}.access-gate-notice span{font-size:10px;line-height:1.45}
+.auth-role-section{border:1px solid #d7e2ef;border-radius:15px;padding:11px 12px 12px;margin:0;min-width:0}
+.auth-role-section legend{padding:0 6px;color:var(--navy);font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.07em}
+.auth-role-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.auth-role-option{display:block!important;cursor:pointer}
+.auth-role-option input{position:absolute;opacity:0;pointer-events:none}
+.auth-role-option span{display:block;border:1px solid #d4deea;border-radius:12px;padding:10px 9px;background:#fff;min-height:66px;transition:.16s}
+.auth-role-option b{display:block;color:var(--navy);font-size:10px}.auth-role-option small{display:block;margin-top:3px;color:#738096;font-size:9px;line-height:1.3;font-weight:500}
+.auth-role-option input:checked+span{border-color:#315f91;background:#edf5ff;box-shadow:0 0 0 2px rgba(49,95,145,.10)}
+.admin-filters{grid-template-columns:minmax(220px,1fr) 150px 150px 200px auto}
+.admin-table{min-width:1160px}
+@media(max-width:1050px){.admin-filters{grid-template-columns:1fr 1fr 1fr}}
+@media(max-width:700px){.auth-role-grid{grid-template-columns:1fr}.auth-role-option span{min-height:auto}.auth-close{right:9px;top:9px}.access-gate-notice{margin-top:15px}}
+@media(max-width:650px){.admin-filters{grid-template-columns:1fr}}

@@ -1,0 +1,45 @@
+MASTERING NDA/NA ENGLISH — V50 DEPLOYMENT NOTES
+
+V50 changes the access model from an entry gate to access-time registration/login.
+
+WHAT CHANGED
+1. Open browsing
+   - Visitors can enter and browse the website, books, study-material listings, PYQ pages and online-practice catalogue without registering.
+   - Registration/Login is requested only when a visitor tries to download/open a protected PDF, start an online test, or open the personal User Hub.
+
+2. User Registration / User Login
+   - Student-specific labels were replaced by User Registration and User Login.
+   - Registration now asks the user to choose one role:
+       AS STUDENT
+       AS TEACHER
+       AS OTHER USER
+   - Other User is intended for parents, guardians and general learners.
+
+3. Conditional Class field
+   - Class I–XII appears only when AS STUDENT is selected.
+   - Teachers and Other Users are not asked to select a class.
+
+4. User Hub and Admin reporting
+   - Student Hub is renamed User Hub in the visible website interface.
+   - Admin dashboard can filter/display users by role.
+   - Existing registered records are preserved and classified as STUDENT for backward compatibility.
+
+5. Backend
+   - Supabase students table now contains user_type: STUDENT / TEACHER / OTHER.
+   - student-portal Edge Function V2 is deployed and supports role-aware registration.
+   - Existing sessions, attempts, activity, visitor records and secure Admin authentication are preserved.
+
+6. Cache refresh
+   - Website asset query strings updated to v=50.
+
+UNCHANGED
+- 61 downloadable PDFs are byte-identical to V49.
+- Admin password/email verification/MFA security remains separate and unchanged.
+- Existing quiz questions, answers and explanations remain unchanged.
+
+GITHUB DESKTOP
+Summary:
+Update website to V50 with open browsing and user roles
+
+Description:
+Opened website browsing before login, moved registration/login to protected resource access, replaced student access with User Register/User Login, added Student/Teacher/Other User roles, made Class conditional for students, updated User Hub/Admin role reporting, and added V50 cache-busting.
