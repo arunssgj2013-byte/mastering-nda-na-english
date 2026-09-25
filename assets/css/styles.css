@@ -432,3 +432,44 @@ html.auth-pending body>*:not(.auth-gate):not(.visitor-live-badge){visibility:hid
 @media(max-width:1000px){.nav-signout{width:100%;border-radius:10px;padding:10px 12px;text-align:center}.nav-signout:hover{transform:none}}
 @media(max-width:850px){.omr-live-controls{grid-template-columns:1fr auto;gap:7px;margin:0 0 7px}.omr-live-timer{display:flex;align-items:center;justify-content:center;gap:7px;padding:5px 9px}.omr-live-timer span{font-size:7px}.omr-live-timer strong{font-size:16px;margin:0}.omr-submit-btn{padding:6px 12px;font-size:9px;min-width:92px}.series-question{scroll-margin-top:250px!important}}
 @media(max-width:520px){.auth-tabs.auth-tabs-three{gap:4px}.auth-tabs.auth-tabs-three button{padding:9px 5px;font-size:10px}.omr-submit-btn{min-width:82px;padding:6px 9px}.omr-live-controls{grid-template-columns:minmax(0,1fr) auto}}
+
+
+/* V48 — result-only printing */
+.print-result-brand,.print-result-meta{display:none}
+@media print{
+  @page{size:A4 portrait;margin:10mm}
+  body.print-result-only{background:#fff!important;color:#111!important}
+  body.print-result-only .announce,
+  body.print-result-only .site-header,
+  body.print-result-only .vertical-quick-nav,
+  body.print-result-only footer,
+  body.print-result-only main>section:not(#quizArena){display:none!important}
+  body.print-result-only #quizArena{display:block!important;padding:0!important;margin:0!important;background:#fff!important}
+  body.print-result-only #quizArena>.container{max-width:none!important;width:100%!important;padding:0!important;margin:0!important}
+  body.print-result-only #quizArena .quiz-workspace{display:block!important;box-shadow:none!important;border:0!important;border-radius:0!important;padding:0!important;margin:0!important;background:#fff!important}
+  body.print-result-only #quizArena .quiz-workspace>.quiz-toolbar,
+  body.print-result-only #quizArena .quiz-workspace>.quiz-command-strip,
+  body.print-result-only #quizArena .quiz-workspace>.quiz-main-layout{display:none!important}
+  body.print-result-only #seriesScoreBox{display:block!important;margin:0!important;padding:0!important;border:0!important;border-radius:0!important;box-shadow:none!important;background:#fff!important}
+  body.print-result-only #seriesScoreBox .result-actions{display:none!important}
+  body.print-result-only #seriesScoreBox .print-result-brand{display:flex!important;align-items:flex-end;justify-content:space-between;gap:12px;border-bottom:2px solid #071a35;padding:0 0 8px;margin:0 0 9px;color:#071a35}
+  body.print-result-only #seriesScoreBox .print-result-brand strong{font-family:Georgia,"Times New Roman",serif;font-size:20px}
+  body.print-result-only #seriesScoreBox .print-result-brand span{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+  body.print-result-only #seriesScoreBox .print-result-meta{display:flex!important;flex-wrap:wrap;gap:8px 22px;padding:7px 9px;margin:0 0 10px;border:1px solid #d7e4f5;border-radius:8px;font-size:10px}
+  body.print-result-only #seriesScoreBox .score-headline{margin-bottom:10px;gap:10px}
+  body.print-result-only #seriesScoreBox .score-title h3{font-size:20px;margin-bottom:3px}
+  body.print-result-only #seriesScoreBox .score-title p{font-size:10px}
+  body.print-result-only #seriesScoreBox .score-badge{padding:7px 10px;border-radius:10px;box-shadow:none;font-size:10px}
+  body.print-result-only #seriesScoreBox .score-grid{grid-template-columns:repeat(6,1fr)!important;gap:6px!important;margin-bottom:10px!important}
+  body.print-result-only #seriesScoreBox .score-card{padding:7px 5px;border-radius:8px;break-inside:avoid}
+  body.print-result-only #seriesScoreBox .score-card b{font-size:17px;margin-bottom:1px}
+  body.print-result-only #seriesScoreBox .score-card span{font-size:8px}
+  body.print-result-only #seriesScoreBox .section-head{margin-top:8px!important;margin-bottom:5px!important}
+  body.print-result-only #seriesScoreBox .section-kicker{font-size:8px}
+  body.print-result-only #seriesScoreBox .section-title{font-size:17px!important;margin:2px 0 0!important}
+  body.print-result-only #seriesScoreBox .section-score-grid{grid-template-columns:repeat(2,1fr)!important;gap:6px!important;margin-top:5px!important}
+  body.print-result-only #seriesScoreBox .section-score{padding:7px 8px;border-radius:8px;break-inside:avoid}
+  body.print-result-only #seriesScoreBox .section-score strong{font-size:9px;margin-bottom:4px}
+  body.print-result-only #seriesScoreBox .mini-progress{height:5px}
+  body.print-result-only #seriesScoreBox .section-score small{font-size:8px;margin-top:4px}
+}

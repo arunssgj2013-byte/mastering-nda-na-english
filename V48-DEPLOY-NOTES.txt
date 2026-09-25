@@ -1,0 +1,10 @@
+V48 RESULT-ONLY PRINT PATCH
+
+Overwrite the matching V47 files with this patch.
+
+Changed files:
+- quizzes.html
+- assets/css/styles.css
+- assets/js/quiz-engine.js
+
+Result: Clicking “Print Result Sheet” prints only the result sheet and category-wise performance, not the question paper.
