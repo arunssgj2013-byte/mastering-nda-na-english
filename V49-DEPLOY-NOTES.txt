@@ -1,0 +1,14 @@
+V49 Student Access Label Clarity Update
+
+Changes:
+- REGISTER renamed to STUDENT REGISTER.
+- LOGIN renamed to STUDENT LOGIN.
+- ADMIN renamed to ADMIN LOGIN.
+- Registration heading and help text clarified for new students.
+- Form labels clarified as Student Name, Student Class, School Name and Student Email.
+- Main registration action renamed to Register as Student & Continue.
+- Student login action renamed to Login as Student.
+- Admin panel heading clarified as Admin Login.
+- Asset query version bumped to v49 to reduce stale browser cache.
+
+No PDFs, quiz questions, answers, Supabase database schema or authentication logic were changed.
