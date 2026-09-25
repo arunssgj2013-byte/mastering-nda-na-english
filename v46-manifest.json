@@ -1,41 +1,646 @@
 {
-  "version": 46,
-  "source": "NDA PRACTICE BOOK-  A-4 SIZE.docx",
-  "online_pyq_sets": 21,
-  "online_pyq_questions": 1050,
-  "online_sample_sets": 12,
-  "online_sample_questions": 600,
-  "sample_ids": [
-    "sample-01",
-    "sample-02",
-    "sample-03",
-    "sample-04",
-    "sample-05",
-    "sample-06",
-    "sample-07",
-    "sample-08",
-    "sample-09",
-    "sample-10",
-    "sample-11",
-    "sample-12"
-  ],
-  "sample_question_counts": {
-    "sample-01": 50,
-    "sample-02": 50,
-    "sample-03": 50,
-    "sample-04": 50,
-    "sample-05": 50,
-    "sample-06": 50,
-    "sample-07": 50,
-    "sample-08": 50,
-    "sample-09": 50,
-    "sample-10": 50,
-    "sample-11": 50,
-    "sample-12": 50
+  "version": "46",
+  "generated_at_utc": "2026-09-25T05:59:31.896017+00:00",
+  "summary": {
+    "files": 127,
+    "pdfs": 61,
+    "html": 23
   },
-  "notes": [
-    "Separate Online PYQs and Online Sample Papers pages",
-    "Same timed OMR interface",
-    "Source directions, answer keys and explanations retained"
+  "files": [
+    {
+      "path": "README.txt",
+      "bytes": 4268,
+      "sha256": "d6901edbee20d125d5e16ab7b726ebf4dbb47137a35c89e7a71d13e2604dbcec"
+    },
+    {
+      "path": "V45-DEPLOY-NOTES.txt",
+      "bytes": 2281,
+      "sha256": "39bcb238278d5d91506dbb365ea8c85e7dc40e6f0cda751c6208bd52af399299"
+    },
+    {
+      "path": "V46-DEPLOY-NOTES.txt",
+      "bytes": 2273,
+      "sha256": "f62708e4f315b3698ae2ebe89ff1de8b7a963e0e9900b9a244777b942852d393"
+    },
+    {
+      "path": "about.html",
+      "bytes": 866,
+      "sha256": "65b426feb84944b479cf04ca846c2f6d26b471b8bd5a8a2da2148add269d6fb9"
+    },
+    {
+      "path": "admin.html",
+      "bytes": 7993,
+      "sha256": "113e19b9a1b21b82dcb44711dcfd4b242511e310485f516e2324be8ee50abde6"
+    },
+    {
+      "path": "assets/css/styles.css",
+      "bytes": 108812,
+      "sha256": "8377edef4e6b5de6a7feb482136e962bed08f5b025e13fbcddb8d3964554daaf"
+    },
+    {
+      "path": "assets/grammar/100-Golden-Rules-of-English-Grammar.pdf",
+      "bytes": 2259647,
+      "sha256": "325cfe42af19ce03df2d8d0fc20f849843b7fbd2dd09613b50d891d1b2db06c1"
+    },
+    {
+      "path": "assets/images/arun-kumar.jpg",
+      "bytes": 105673,
+      "sha256": "88148b5c4461b246b4b05108be4449e9007049808dd47f80386bd1c17d0110a2"
+    },
+    {
+      "path": "assets/images/golden-rules-preview.png",
+      "bytes": 92226,
+      "sha256": "e2d340dfe51e511b68f57fd52406fafa9989d9578073c73243e68bac8423738e"
+    },
+    {
+      "path": "assets/images/mastering-nda-cover.png",
+      "bytes": 390923,
+      "sha256": "03d96d36735f1a8f374fdb1779a1159c157af20aac26fa0b5232afb5fae258f3"
+    },
+    {
+      "path": "assets/images/mastering-nda-spread.png",
+      "bytes": 861610,
+      "sha256": "08f5c858c7926ff7fb74dbdeefb1aa067ed2c6359d2f06eee98d5f9663dc542d"
+    },
+    {
+      "path": "assets/images/mce-logo.png",
+      "bytes": 1584734,
+      "sha256": "f6b3c7819f301b52ddfbc6e34d381e700110b3385bb03931ac8143a2d907cce1"
+    },
+    {
+      "path": "assets/images/mce-mark.png",
+      "bytes": 1584734,
+      "sha256": "f6b3c7819f301b52ddfbc6e34d381e700110b3385bb03931ac8143a2d907cce1"
+    },
+    {
+      "path": "assets/images/mne-logo.png",
+      "bytes": 1584734,
+      "sha256": "f6b3c7819f301b52ddfbc6e34d381e700110b3385bb03931ac8143a2d907cce1"
+    },
+    {
+      "path": "assets/images/mne-mark.png",
+      "bytes": 1584734,
+      "sha256": "f6b3c7819f301b52ddfbc6e34d381e700110b3385bb03931ac8143a2d907cce1"
+    },
+    {
+      "path": "assets/images/nda-building-clean.jpg",
+      "bytes": 169122,
+      "sha256": "25a9fdf7c191ef46cac8a12cb57dd007da1b4444dfe40b929f5a00bee0ad673c"
+    },
+    {
+      "path": "assets/images/nda-building-home.jpg",
+      "bytes": 168979,
+      "sha256": "500398d15ef7909becc9361706ad5b65637a798b953e1f177e79ae766e168d26"
+    },
+    {
+      "path": "assets/images/nda-parade-dark.jpg",
+      "bytes": 482308,
+      "sha256": "756548106d22819b9a111ffb2ffb896942aba6cbb83cc242f77344389814524a"
+    },
+    {
+      "path": "assets/images/nda-parade-white.jpg",
+      "bytes": 219405,
+      "sha256": "cb9ec375755f33fdff795ae6b1496426604236a751fb638d423a186abaad8018"
+    },
+    {
+      "path": "assets/images/nda-parade.jpg",
+      "bytes": 482308,
+      "sha256": "756548106d22819b9a111ffb2ffb896942aba6cbb83cc242f77344389814524a"
+    },
+    {
+      "path": "assets/images/practice-cover.png",
+      "bytes": 519299,
+      "sha256": "d56143a78067b382d6a955395842072e15e30165b1dca71afbfe78f95ae834c3"
+    },
+    {
+      "path": "assets/images/practice-spread.png",
+      "bytes": 1007101,
+      "sha256": "6bbdfcf4c607eddcbff439d1766007a073d1e142cf14a9da8c8985c41cc5b9af"
+    },
+    {
+      "path": "assets/images/question-bank-cover.png",
+      "bytes": 295269,
+      "sha256": "fb604809c47916f363d0032b55296968d924664a7e421d73c793eb9bbde69b7a"
+    },
+    {
+      "path": "assets/images/question-bank-spread.png",
+      "bytes": 503160,
+      "sha256": "a39982350828f0d8974b9ab4ac13803dbc82a5a7da121cc96911094ac752e3c9"
+    },
+    {
+      "path": "assets/images/vocabulary-cover.png",
+      "bytes": 384397,
+      "sha256": "9b928bb166d5787d8d80e44c14b94f907f4b6f14599b315c7494673bd066e937"
+    },
+    {
+      "path": "assets/images/vocabulary-spread.png",
+      "bytes": 1199508,
+      "sha256": "d7f1e155bba18dc637107c5ed66757f18f5ed54f54f3e49ca08b94dc229db5ce"
+    },
+    {
+      "path": "assets/js/admin.js",
+      "bytes": 18803,
+      "sha256": "a035520f02c06423e78bd1cc3e5c15a57bc7c4cb8ec328488580367e1bc79c90"
+    },
+    {
+      "path": "assets/js/dashboard.js",
+      "bytes": 3333,
+      "sha256": "220db85834c1adccadc0680bcea94c15a3d43a6045215e3808041816f2ecaecf"
+    },
+    {
+      "path": "assets/js/portal.js",
+      "bytes": 12059,
+      "sha256": "f4742c4582eaf2e1aa0dff34bd57397bce4e10886946999ad50c01327aca4b2d"
+    },
+    {
+      "path": "assets/js/quiz-bank.js",
+      "bytes": 25456,
+      "sha256": "bbf89b6b432271fa7c472d89292a01eb82f070dc3dd5069b908721153f9e29e6"
+    },
+    {
+      "path": "assets/js/quiz-engine.js",
+      "bytes": 23747,
+      "sha256": "2d5e3d786191f57acd4acd562bc571f00f2b223c5df6eff14e5139dcd91e1203"
+    },
+    {
+      "path": "assets/js/quiz-series.js",
+      "bytes": 393447,
+      "sha256": "ce3c3cfd3267e8e8a95fc289c92ff996034007c1bc44a5f9f08a8eea22479d74"
+    },
+    {
+      "path": "assets/js/site.js",
+      "bytes": 15306,
+      "sha256": "01486fb4a7e70ffa32aad840c1634d5876d702d124c21df5e487d574c0c55eab"
+    },
+    {
+      "path": "assets/nda-mastery/MCE-NDA-01-Noun.pdf",
+      "bytes": 2244092,
+      "sha256": "77c6fa4f74cc86ed35a3192a97b588c4017676dabb705fb206f5dbb3393e4fb5"
+    },
+    {
+      "path": "assets/nda-mastery/MCE-NDA-02-Pronoun.pdf",
+      "bytes": 2635220,
+      "sha256": "8213d8960b35ffd4795e7da0690ab4743d129f497efbce51e2f6462c5d03087c"
+    },
+    {
+      "path": "assets/nda-mastery/MCE-NDA-03-Adjective.pdf",
+      "bytes": 2345527,
+      "sha256": "30bc578c5789b81ec925236f2543e9387822f2090f94b09f21b3a54bfc736151"
+    },
+    {
+      "path": "assets/nda-mastery/MCE-NDA-04-Determiners.pdf",
+      "bytes": 2305573,
+      "sha256": "a3accc17cfeec0525e9b19e1c585ed4d8c900108cd72e6b3bf2227235d677c6c"
+    },
+    {
+      "path": "assets/nda-mastery/MCE-NDA-05-Adverb.pdf",
+      "bytes": 2561075,
+      "sha256": "ed4dc6e591e7b3ffb58fd4d880e6e7ac5c3532604cd20e4165359a951a040a85"
+    },
+    {
+      "path": "assets/nda-mastery/MCE-NDA-06-Subject-Verb-Agreement.pdf",
+      "bytes": 2333524,
+      "sha256": "2dc8b65a6674532d8a4e30030ef8f6c2ecb3091ea3a9fe984ed167c94df755b7"
+    },
+    {
+      "path": "assets/nda-mastery/MCE-NDA-07-Conjunctions.pdf",
+      "bytes": 2352487,
+      "sha256": "c371735564f05aac1197dde5ba5bfc1aa388a24f5db4f6229f7b84ebc776b49e"
+    },
+    {
+      "path": "assets/nda-mastery/MCE-NDA-08-Fill-in-the-Blanks.pdf",
+      "bytes": 2971628,
+      "sha256": "8a8c37a0c5ce73aee3a9b797121403548633c6614948a2ef48d0ba2b5fde8946"
+    },
+    {
+      "path": "assets/nda-mastery/MCE-NDA-09-Spotting-Errors.pdf",
+      "bytes": 3168017,
+      "sha256": "fc7609c2b6dbfb6837ed796ed487e4d7060a7034b77100494e81b6886355d25e"
+    },
+    {
+      "path": "assets/nda-mastery/MCE-NDA-10-Sentence-Improvement.pdf",
+      "bytes": 2156488,
+      "sha256": "2b3139dbc2e8929e46be63ec6e099190e3dd1313ab4125b1d539ae1c78654144"
+    },
+    {
+      "path": "assets/nda-mastery/MCE-NDA-11-Ordering-Words-Sentences.pdf",
+      "bytes": 4817628,
+      "sha256": "acd074440ce9d3b26f94207c84a669e16dc856270b0e485e4ab03ceba7b85c44"
+    },
+    {
+      "path": "assets/nda-mastery/MCE-NDA-12-Active-Passive-Voice.pdf",
+      "bytes": 2231630,
+      "sha256": "391a12894955812293bbbd6d235f5b82b94df1ce8865db200f3ad8ddaa46f079"
+    },
+    {
+      "path": "assets/nda-mastery/MCE-NDA-13-Narration.pdf",
+      "bytes": 2230463,
+      "sha256": "82b2236380c754c2e0e635221c898dbc33a8d9af19b236c551bbb41eef4be3d5"
+    },
+    {
+      "path": "assets/nda-mastery/MCE-NDA-14-Question-Tags.pdf",
+      "bytes": 2294007,
+      "sha256": "a3f44b2abbc3c476230070e779bba90ea797672de9a64454e1e26393e3c8a942"
+    },
+    {
+      "path": "assets/nda-mastery/MCE-NDA-15-Conditionals-Infinitives-Gerunds.pdf",
+      "bytes": 2193991,
+      "sha256": "244772304aac5f805c2448b86716b77e6d40e3d65b3747acc5f54ea2668a9fd9"
+    },
+    {
+      "path": "assets/nda-mastery/MCE-NDA-16-Reading-Comprehension.pdf",
+      "bytes": 2933304,
+      "sha256": "91c2c2f1a6939ef6a68c3a10ec28afd968fea01884b9d717eb2bab004587e75b"
+    },
+    {
+      "path": "assets/nda-mastery/MCE-NDA-17-Word-Class.pdf",
+      "bytes": 2217145,
+      "sha256": "f7431b930395e2cb0e1761da0a342f94bacf4da1d026ea26b59b74b4fccb81b0"
+    },
+    {
+      "path": "assets/nda-mastery/MCE-NDA-18-Commonly-Misspelled-Words.pdf",
+      "bytes": 2097612,
+      "sha256": "c4596ddaa63df05b697ddf008ebec4c632b59273384f2b452694e310b8348e47"
+    },
+    {
+      "path": "assets/pyq/NDA-NA-English-2015-I.pdf",
+      "bytes": 106451,
+      "sha256": "6de166f61a02f49bb627e1a778a394e76229b895c440ac0dca5875750a3082d0"
+    },
+    {
+      "path": "assets/pyq/NDA-NA-English-2015-II.pdf",
+      "bytes": 95751,
+      "sha256": "2e5b162a10edc9340762ef2b7bb69dde41153a96ff15570e67f1560407131c98"
+    },
+    {
+      "path": "assets/pyq/NDA-NA-English-2016-I.pdf",
+      "bytes": 109993,
+      "sha256": "f8cffab1da1632aa1e42416ce27fb660423500272260e08ff1f07af521f13536"
+    },
+    {
+      "path": "assets/pyq/NDA-NA-English-2016-II.pdf",
+      "bytes": 108157,
+      "sha256": "7105789d244efc9d7dfc62bd4f58803affe1525da7005131d3a5ecea784b6563"
+    },
+    {
+      "path": "assets/pyq/NDA-NA-English-2017-I.pdf",
+      "bytes": 106152,
+      "sha256": "0067f5776c6112596122b4b3acc3336b0176d52110d4bfea670dcead93c87cab"
+    },
+    {
+      "path": "assets/pyq/NDA-NA-English-2017-II.pdf",
+      "bytes": 98566,
+      "sha256": "63b9eeeb679c11abab03d96175fedc470a999cf055861435a0b437f55b24d509"
+    },
+    {
+      "path": "assets/pyq/NDA-NA-English-2018-I.pdf",
+      "bytes": 111962,
+      "sha256": "9f89fb0c93fba62bd169fae41a34ee1b3fd4463c348b0e19f505a1545396c8c2"
+    },
+    {
+      "path": "assets/pyq/NDA-NA-English-2018-II.pdf",
+      "bytes": 107876,
+      "sha256": "4e9018ba3738b4930b8e99ad93d6207ad408e98159e01cd46d339cd2a94fb115"
+    },
+    {
+      "path": "assets/pyq/NDA-NA-English-2019-I.pdf",
+      "bytes": 112391,
+      "sha256": "c58502468b9ac2616e88f0a083b8fc9691ef1ae06149fa04ceedd40e977a74ae"
+    },
+    {
+      "path": "assets/pyq/NDA-NA-English-2019-II.pdf",
+      "bytes": 108102,
+      "sha256": "8d7ef86e634eb64195efc8edc8ecfea3d566f83618797db4c63543152f7ccb0c"
+    },
+    {
+      "path": "assets/pyq/NDA-NA-English-2020-I-II.pdf",
+      "bytes": 97062,
+      "sha256": "6f19f1172e0cc7b514cac8cbe17c13291dc30e29c22fcf3e2c850bfe343392ff"
+    },
+    {
+      "path": "assets/pyq/NDA-NA-English-2021-I.pdf",
+      "bytes": 103839,
+      "sha256": "85f65d43527ca5e9520f3b5255cb77d5eae80bbc5a0dda8b5dad702c1b5d07b6"
+    },
+    {
+      "path": "assets/pyq/NDA-NA-English-2022-I.pdf",
+      "bytes": 104882,
+      "sha256": "8aa8ae7908aa5c8f526076fbfb394324b058ec0c14e0c93dd2aa428e41393984"
+    },
+    {
+      "path": "assets/pyq/NDA-NA-English-2022-II.pdf",
+      "bytes": 97011,
+      "sha256": "a2b49a52de1996b9838057cdb55aa4a33c71f60b787c46140ced3a5d9b625b61"
+    },
+    {
+      "path": "assets/pyq/NDA-NA-English-2023-I.pdf",
+      "bytes": 103413,
+      "sha256": "208f403a449e46d90bb4da33b6925c7eba7ea7fd21939e61d8324a54b3da9cbd"
+    },
+    {
+      "path": "assets/pyq/NDA-NA-English-2023-II.pdf",
+      "bytes": 113844,
+      "sha256": "98e761b1a75dde78856f6a9befbcc62d86041f454368b68c891348d0f00053b7"
+    },
+    {
+      "path": "assets/pyq/NDA-NA-English-2024-I.pdf",
+      "bytes": 107690,
+      "sha256": "865d034ed371af4c6569bf8bfeb4a2d47416179409a7efb722b7a2e847358776"
+    },
+    {
+      "path": "assets/pyq/NDA-NA-English-2024-II.pdf",
+      "bytes": 106734,
+      "sha256": "399b4a0982ab4951e9f8219b0f87b975d45ca2ee3b83ebf75d3b306b9c35e9d7"
+    },
+    {
+      "path": "assets/pyq/NDA-NA-English-2025-I.pdf",
+      "bytes": 116964,
+      "sha256": "20712d81e53bb6f81c356377b35547a90c55a225cbb12930542480f3742315a3"
+    },
+    {
+      "path": "assets/pyq/NDA-NA-English-2025-II.pdf",
+      "bytes": 110459,
+      "sha256": "aa7165a0e31a2b9d6e05b6eb52981a493c6ffa4c6610191daaf61446b0b8e8f9"
+    },
+    {
+      "path": "assets/pyq/NDA-NA-English-2026-I.pdf",
+      "bytes": 93022,
+      "sha256": "ab5167564aecc43b31a09e5e88c276094981c615456b4c812b27347d9f4f2734"
+    },
+    {
+      "path": "assets/pyq/NDA-NA-English-2026-II.pdf",
+      "bytes": 115580,
+      "sha256": "6a767bbbd06d339d4d484d59555ef6092d498a7bcaee468bd43d83ad94f36921"
+    },
+    {
+      "path": "assets/question-bank/MCE-QB-01-Synonyms-PYQs.pdf",
+      "bytes": 2137518,
+      "sha256": "b97cdbe4aadbc91ed3c4523a1ced73ce0a2b9a22edaad5eeae6bb5d051522884"
+    },
+    {
+      "path": "assets/question-bank/MCE-QB-02-Antonyms-PYQs.pdf",
+      "bytes": 2022900,
+      "sha256": "cc0e15de17b3db469bde671d1737d1ba13561f256847c1c6ac5c8c132fb17590"
+    },
+    {
+      "path": "assets/question-bank/MCE-QB-03-Idioms-Phrases-PYQs.pdf",
+      "bytes": 917715,
+      "sha256": "afae683900a7937040a58548e9fb0e0e6cee2ecf28d063d75746f1a4e0440d3a"
+    },
+    {
+      "path": "assets/question-bank/MCE-QB-04-Fill-in-the-Blanks-PYQs.pdf",
+      "bytes": 1880870,
+      "sha256": "23c4d40d9386bfb5a746c2d51f4460c10d782679189967649c5a553c345d3c83"
+    },
+    {
+      "path": "assets/question-bank/MCE-QB-05-Spotting-Errors-PYQs.pdf",
+      "bytes": 1946851,
+      "sha256": "6f86ebaf7d0d413f0515eaa678749c72ad8d9b9c4e254ee6ab1c3a6f3911ea8d"
+    },
+    {
+      "path": "assets/question-bank/MCE-QB-06-Sentence-Improvement-PYQs.pdf",
+      "bytes": 960653,
+      "sha256": "6505be157905db3532a0734444e2626279cd773cf6eaeafff987487f5cebd7a2"
+    },
+    {
+      "path": "assets/question-bank/MCE-QB-07-Ordering-of-Words-PYQs.pdf",
+      "bytes": 2180520,
+      "sha256": "f308b2e5276012bfd4adab33c7b05b7073fffd252a8a71a8434cd3ddb9339423"
+    },
+    {
+      "path": "assets/question-bank/MCE-QB-08-Sentence-Ordering-PYQs.pdf",
+      "bytes": 2091799,
+      "sha256": "e0257081ce2aff706566864fcb0343101221940cbf8e30a2887249b684e68088"
+    },
+    {
+      "path": "assets/question-bank/MCE-QB-09-Reading-Comprehension-PYQs.pdf",
+      "bytes": 1806099,
+      "sha256": "f6988b14df92bedddc7478cd31c18513397e86ec8c862dda24565d31f9e38e63"
+    },
+    {
+      "path": "assets/question-bank/MCE-QB-10-Grammar-at-a-Glance.pdf",
+      "bytes": 1368777,
+      "sha256": "22f492bdd66f32d59f8e151c000ebc13c4f7754c2422de132712f75398d2fde4"
+    },
+    {
+      "path": "assets/vocabulary/MCE-Vocabulary-01-Synonyms.pdf",
+      "bytes": 5323004,
+      "sha256": "834e6148c97c1ec445cc185eec95ff96e5236f113f6f181c6b38658fe43b4fac"
+    },
+    {
+      "path": "assets/vocabulary/MCE-Vocabulary-02-Antonyms.pdf",
+      "bytes": 4973489,
+      "sha256": "46bdc7de61d7d659a5508f08356ed1b937b12ef32ff779c9e117d4846da0ee55"
+    },
+    {
+      "path": "assets/vocabulary/MCE-Vocabulary-03-Idioms-and-Phrases.pdf",
+      "bytes": 5607699,
+      "sha256": "d6dc3e3d8650e54d13ad7a9a3f4a353f2d054488b3e9292e5b8953b316619915"
+    },
+    {
+      "path": "assets/vocabulary/MCE-Vocabulary-04-Phrasal-Verbs.pdf",
+      "bytes": 4593656,
+      "sha256": "5f998cf79891aa46f3a95d3a4ce9c9efb419abe1104e3a021b328c14b425282f"
+    },
+    {
+      "path": "assets/vocabulary/MCE-Vocabulary-05-Prepositional-Collocations.pdf",
+      "bytes": 5424146,
+      "sha256": "b3140988189385a03fd2adec66c9c78016813d2e8948a6e45f92bfd1a24cf754"
+    },
+    {
+      "path": "assets/vocabulary/MCE-Vocabulary-06-Homonyms-and-Confusing-Words.pdf",
+      "bytes": 5848143,
+      "sha256": "e6464995e120002ccf5daf3f47282d7b7943e35c9864bf2a989043dbc85eb8a7"
+    },
+    {
+      "path": "assets/vocabulary/MCE-Vocabulary-07-One-Word-Substitutions.pdf",
+      "bytes": 5705959,
+      "sha256": "a68c5ca01faf0d2169356d2202af1189dd48e2da6c165549e114690c1151c4c2"
+    },
+    {
+      "path": "assets/vocabulary/MCE-Vocabulary-08-Prepositional-Phrases.pdf",
+      "bytes": 2009718,
+      "sha256": "9d79e81e104c179476c934e3c7fedf93556060d5d71b4547f646f0345f2bdc39"
+    },
+    {
+      "path": "assets/vocabulary/MCE-Vocabulary-09-Root-Words-Prefixes-Suffixes.pdf",
+      "bytes": 1966880,
+      "sha256": "db9c5541a166aed7e43c53ac519470cec3b31fe1c1fb36112caaf8ccf7daa845"
+    },
+    {
+      "path": "assets/vocabulary/MCE-Vocabulary-Learning-Guide.pdf",
+      "bytes": 1219010,
+      "sha256": "76d318ced53ec11764513a852fdf3b374e8ccaaa9a4183df7b40719607d41bf2"
+    },
+    {
+      "path": "author-contact.html",
+      "bytes": 6198,
+      "sha256": "b7bfcb9704fd593c8c432861e8cb0ad555cb57f92c7a7f1d4bedbd6abf3b1838"
+    },
+    {
+      "path": "books.html",
+      "bytes": 9445,
+      "sha256": "f9e2984ff0b2e3a40281264402d3d493dec5286f263735b1458d65aedbb0fdfb"
+    },
+    {
+      "path": "contact.html",
+      "bytes": 848,
+      "sha256": "28936724606a931a438e937b9e00ac7ff314ec89d2dc9f742e5daff61bd6bf9e"
+    },
+    {
+      "path": "dashboard.html",
+      "bytes": 6497,
+      "sha256": "f201072e070eb675e19c6ff016ed64612d9d14957025d6e5444a935eab16fa32"
+    },
+    {
+      "path": "exams.html",
+      "bytes": 856,
+      "sha256": "6d10e83ab84249865810700f033f2c5810e516f0da75bfff16fb521f2b64b168"
+    },
+    {
+      "path": "index.html",
+      "bytes": 22087,
+      "sha256": "5eee1c3e98ba7bcd55fda9f6c3391e93a33fec4a4c636cab27909fd0da256f65"
+    },
+    {
+      "path": "practice.html",
+      "bytes": 7504,
+      "sha256": "e2b3e804b7484dbeb74c5c82c900ce34d278328cd33ffec7b9dae30d8151717b"
+    },
+    {
+      "path": "pyq-2015.html",
+      "bytes": 5879,
+      "sha256": "00b2d76a453691add814d0ac12d21db17cb219b12b8de5d76668ae3c85ad112d"
+    },
+    {
+      "path": "pyq-2016.html",
+      "bytes": 5865,
+      "sha256": "832b5b3170c9d1c09fa64098b1d0f872bac80270e34797f799c1e3cf6998dc5e"
+    },
+    {
+      "path": "pyq-2017.html",
+      "bytes": 5865,
+      "sha256": "8c342f27f9a77ae80f9b860a3c8e0d9eadf4b5dc5b8cea49e903f5eac8d45d7d"
+    },
+    {
+      "path": "pyq-2018.html",
+      "bytes": 5894,
+      "sha256": "820800bf98c1fb6f2c1b83a2a0c7bbfc3377a33c1f211641e0abc4359562820d"
+    },
+    {
+      "path": "pyq-2019.html",
+      "bytes": 5827,
+      "sha256": "b06882d43ddd5a194a524138ec6b5e4c26dd0a2488fbf13465b7272ec949aa38"
+    },
+    {
+      "path": "pyq-2020.html",
+      "bytes": 5254,
+      "sha256": "23ec25ff9b1022763811269124c042419e6afc426bd250866746cc6cd1a88671"
+    },
+    {
+      "path": "pyq-2021.html",
+      "bytes": 5224,
+      "sha256": "0e5419788e14ba8287b6ec3ee4d6c27634f35431f1fd53bcb440710a876eefc6"
+    },
+    {
+      "path": "pyq-2022.html",
+      "bytes": 5659,
+      "sha256": "fe2813db016344bb08f0d8df380c86816fda4e13f1e452df2804e3fb125e0bfe"
+    },
+    {
+      "path": "pyq-2023.html",
+      "bytes": 5643,
+      "sha256": "2a3aca82e50577b81b3735635f1e4c215792eb2c3a21b895a51ea359b14a07e2"
+    },
+    {
+      "path": "pyq-2024.html",
+      "bytes": 5643,
+      "sha256": "45771a2227f02c4971736759389ce631763457fc69b6737a2a01e47fe3f2a4b9"
+    },
+    {
+      "path": "pyq-2025.html",
+      "bytes": 5598,
+      "sha256": "c9ce12651cbb64623c211f54cdcee6e36dd165dabc79264e2d02a49e1a89bcb7"
+    },
+    {
+      "path": "pyq-2026.html",
+      "bytes": 5598,
+      "sha256": "334467c9618ee683582021f41fe6ae64a39d416f5dc988c88facb0a0d7e71db2"
+    },
+    {
+      "path": "quizzes.html",
+      "bytes": 9108,
+      "sha256": "0498c3d0a99369206f3940f094cfdef42ad3ca7e89883d3d4b99687564bf8247"
+    },
+    {
+      "path": "resources.html",
+      "bytes": 39933,
+      "sha256": "90bcfa6e0605f4558ee844c06448e2837e07eea312a4d3cf234f0054694c80f2"
+    },
+    {
+      "path": "supabase/functions/student-portal/deno.json",
+      "bytes": 50,
+      "sha256": "61477b52017618475741b7431487617e2bc5af4d584822271a4950d164f112f6"
+    },
+    {
+      "path": "supabase/functions/student-portal/index.ts",
+      "bytes": 12510,
+      "sha256": "11a627b02661640af68b1a98ed4721197e48034b601cbfc3f8fafbb806385be5"
+    },
+    {
+      "path": "v34-manifest.json",
+      "bytes": 97,
+      "sha256": "561ea2552f146d5927d38cb66d80df165c86574898d815b37baa1db3f79161c1"
+    },
+    {
+      "path": "v35-manifest.json",
+      "bytes": 416,
+      "sha256": "5c37155f118b4ce7f3783e6db001d762e09ee362fed7a14a7ad646f12ddd3847"
+    },
+    {
+      "path": "v36-manifest.json",
+      "bytes": 1001,
+      "sha256": "b253660d837ddc6b6f199a54c1b56b0129f9b9368b67516c6c04a3c3d1536a20"
+    },
+    {
+      "path": "v37-manifest.json",
+      "bytes": 1498,
+      "sha256": "5d20ec0edbb5cc6cac8c23ff90b70f6eabb13dca4370560285bc1a9b114b2da1"
+    },
+    {
+      "path": "v38-manifest.json",
+      "bytes": 1357,
+      "sha256": "77cda24adf3a63b322180404cf7022fc20e61cb6a1aa2f6917bbd93cd86c1936"
+    },
+    {
+      "path": "v39-manifest.json",
+      "bytes": 1535,
+      "sha256": "15844937a7c415ca31eceae550f08a0d7225c90f5ede33089a3645c39fb6bbab"
+    },
+    {
+      "path": "v40-manifest.json",
+      "bytes": 301,
+      "sha256": "1aa2fe7ba1ba5ce728d955c97605aa38b2779eb9828e0e5f52cb773862450eec"
+    },
+    {
+      "path": "v41-manifest.json",
+      "bytes": 252,
+      "sha256": "4e4ff2fab8fe33f60a86084f1a0a151aac3054aa838c74de02460694d931b9b7"
+    },
+    {
+      "path": "v42-manifest.json",
+      "bytes": 300,
+      "sha256": "4b2b56093914a2c6fe65b997feb3476ae330acec484471cc52e9462e886b8afb"
+    },
+    {
+      "path": "v43-manifest.json",
+      "bytes": 3800,
+      "sha256": "fd4b3bdb2e81d2b9fec1f5488ca13c4343b489cf55128fc4d42728813479163e"
+    },
+    {
+      "path": "v45-manifest.json",
+      "bytes": 529,
+      "sha256": "6b1502132e5bce9a38ef8fa81814a16fc92a4031daa3ea012c1db0a3ae3c06a3"
+    }
   ]
 }

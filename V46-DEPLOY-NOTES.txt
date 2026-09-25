@@ -1,0 +1,37 @@
+MASTERING NDA/NA ENGLISH — VERSION 46
+Secure Admin Dashboard + Searchable State/UT Selector
+
+WHAT CHANGED
+1. Added a private administrator dashboard at /admin.html.
+2. Admin access uses Supabase Auth: email + password + verified email.
+3. Password reset is available by verified admin email.
+4. Optional authenticator-app 2-step verification can be enabled from the Admin Dashboard. Once enabled, it is required for future admin sessions.
+5. Admin Dashboard shows visitors, registered students, recent active students, quiz attempts, average accuracy, student-wise performance, growth, login history, quiz history and learning activity.
+6. Student performance records can be opened individually and exported as CSV.
+7. Admin page is intentionally absent from the public navigation and has noindex/nofollow metadata.
+8. Student registration State/UT field is now a searchable dropdown. Tapping it shows all States/UTs; typing filters the list.
+9. Cache-busting ?v=46 has been added to local CSS/JS references to reduce stale mobile-browser interfaces after deployment.
+
+FIRST ADMIN SETUP
+1. Deploy the V46 files.
+2. Open: https://YOUR-DOMAIN/admin.html
+3. Choose "First-time admin setup".
+4. Create a strong password for the approved site administrator email.
+5. Open the Supabase verification email and confirm the address.
+6. Return to /admin.html and sign in.
+7. Recommended: click "Enable 2-Step Verification", scan the QR code in an authenticator app, and confirm the 6-digit code.
+
+PRIVACY / SECURITY
+- Student-side login remains verification-free as requested.
+- Admin-side access is completely separate and protected with Supabase Auth.
+- Student/admin reporting tables are not directly readable by public browser clients; private data is returned only through the authorised admin Edge Function.
+- The Supabase project currently reports "Leaked Password Protection" as disabled. If available on your plan, enable it in Supabase Auth security/password settings for an additional password-safety check.
+
+SUPABASE BACKEND
+Already integrated in the connected project:
+- admin_users
+- admin_audit_log
+- admin-portal Edge Function (JWT protected)
+- private reporting views hardened
+
+DO NOT upload any Supabase service-role key to the website. V46 does not contain one.

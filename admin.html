@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Administrator Dashboard | Mastering NDA/NA English</title>
+<link rel="icon" href="assets/images/mce-mark.png">
+<link rel="stylesheet" href="assets/css/styles.css?v=46">
+</head>
+<body class="admin-body">
+<header class="admin-topbar"><div class="admin-topbar-inner"><a class="admin-brand" href="index.html"><img src="assets/images/mce-mark.png" alt="Mastering NDA/NA English"><div><b>Mastering NDA/NA English</b><span>Secure Administrator Console</span></div></a><a class="admin-home-link" href="index.html">← Public Website</a></div></header>
+<main class="admin-wrap">
+<div id="adminStatus" class="admin-status"></div>
+
+<section data-admin-screen="login" class="admin-auth-card">
+  <div class="admin-lock">🔐</div><div class="section-kicker">Private Access</div><h1>Administrator Login</h1><p>This area contains student registration, activity and performance data. Access is restricted to an approved, verified administrator account.</p>
+  <form id="adminLoginForm" class="admin-auth-form"><label>Admin Email<input id="adminLoginEmail" type="email" name="email" autocomplete="username" required></label><label>Password<input type="password" name="password" autocomplete="current-password" required></label><button class="btn btn-primary" type="submit">Secure Login</button></form>
+  <div class="admin-auth-actions"><button id="forgotPasswordBtn" class="admin-text-btn" type="button">Forgot password?</button><button id="showActivateBtn" class="admin-text-btn" type="button">First-time admin setup</button></div>
+  <p class="admin-security-note">Admin access uses Supabase Auth with password protection and verified email. Two-step verification with an authenticator app can also be enabled and then becomes mandatory for this admin account.</p>
+</section>
+
+<section data-admin-screen="activate" class="admin-auth-card hidden">
+  <div class="admin-lock">✉</div><div class="section-kicker">First-time Setup</div><h2>Create Administrator Password</h2><p>Only the approved administrator email can activate this console. A verification email will be sent before access is granted.</p>
+  <form id="adminActivateForm" class="admin-auth-form"><label>Approved Admin Email<input id="activateEmail" type="email" name="email" readonly required></label><label>Create Password<input type="password" name="password" autocomplete="new-password" minlength="10" required></label><label>Confirm Password<input type="password" name="confirm" autocomplete="new-password" minlength="10" required></label><button class="btn btn-primary" type="submit">Create & Send Verification</button></form>
+  <button id="backToLoginBtn" class="admin-text-btn" type="button">← Back to login</button>
+</section>
+
+<section data-admin-screen="recovery" class="admin-auth-card hidden">
+  <div class="admin-lock">🔑</div><div class="section-kicker">Password Recovery</div><h2>Set New Administrator Password</h2><p>Choose a strong password of at least 10 characters.</p>
+  <form id="adminRecoveryForm" class="admin-auth-form"><label>New Password<input type="password" name="password" autocomplete="new-password" minlength="10" required></label><label>Confirm New Password<input type="password" name="confirm" autocomplete="new-password" minlength="10" required></label><button class="btn btn-primary" type="submit">Update Password</button></form>
+</section>
+
+<section data-admin-screen="mfa" class="admin-auth-card hidden">
+  <div class="admin-lock">🛡</div><div class="section-kicker">Two-Step Verification</div><h2>Authenticator Code Required</h2><p>Enter the current 6-digit code from your authenticator app to continue to private student records.</p>
+  <form id="mfaChallengeForm" class="admin-auth-form"><label>6-digit Code<input id="mfaCode" name="code" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="one-time-code" required></label><button class="btn btn-primary" type="submit">Verify & Continue</button></form>
+</section>
+
+<section data-admin-screen="dashboard" id="adminDashboard" class="hidden">
+  <div class="admin-dashboard-head"><div><div class="section-kicker">Administrator Command Centre</div><h1>Student & Website Analytics</h1><p id="adminIdentity">Secure administrator</p><div class="admin-secure-chip">● Verified private dashboard</div></div><div class="admin-dashboard-actions"><button id="adminRefreshBtn" class="btn btn-outline" type="button">Refresh Data</button><button id="exportStudentsBtn" class="btn btn-outline" type="button">Export CSV</button><button id="adminLogoutBtn" class="btn btn-primary" type="button">Logout</button></div></div>
+
+  <div class="admin-mfa-banner"><div><strong id="adminMfaState">2-Step Verification</strong><p>Add an authenticator app for stronger protection of student data. Once enabled, it will be required for future admin sessions.</p></div><button id="enableMfaBtn" class="btn btn-gold" type="button">Enable 2-Step Verification</button></div>
+  <div id="mfaSetupBox" class="admin-card hidden"><div class="admin-card-head"><div><div class="section-kicker">Security Upgrade</div><h2>Set up Authenticator App</h2></div></div><div class="admin-mfa-grid"><img id="mfaSetupQr" alt="Authenticator QR code"><div><p>Scan this QR code in Google Authenticator, Microsoft Authenticator, Authy, 1Password or a compatible app. If scanning is unavailable, enter this secret manually:</p><div id="mfaSetupSecret" class="admin-secret"></div><form id="mfaSetupForm" class="admin-auth-form"><label>6-digit Code<input id="mfaSetupCode" name="code" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="one-time-code" required></label><button class="btn btn-primary" type="submit">Confirm & Require 2-Step Verification</button></form></div></div></div>
+
+  <div id="adminStats" class="admin-stats"></div>
+
+  <section class="admin-card"><div class="admin-card-head"><div><div class="section-kicker">Students</div><h2>Registration & Performance Overview</h2></div><small id="adminStudentCountLabel"></small></div><div class="admin-filters"><input id="adminSearch" type="search" placeholder="Search name, email, school, PIN…"><select id="adminClassFilter"><option value="">All Classes</option></select><select id="adminStateFilter"><option value="">All States/UTs</option></select><button class="btn btn-outline" type="button" onclick="document.getElementById('adminSearch').value='';document.getElementById('adminClassFilter').value='';document.getElementById('adminStateFilter').value='';document.getElementById('adminSearch').dispatchEvent(new Event('input'))">Clear Filters</button></div><div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Student</th><th>Class</th><th>State/UT</th><th>School</th><th>Attempts</th><th>Best Score</th><th>Avg Accuracy</th><th>Growth</th><th>Last Activity</th><th>Record</th></tr></thead><tbody id="adminStudentsBody"></tbody></table></div></section>
+
+  <section class="admin-card"><div class="admin-card-head"><div><div class="section-kicker">Live Records</div><h2>Recent Website & Student Activity</h2></div></div><div class="admin-feed-grid"><div class="admin-feed-box"><h3>Recent Logins</h3><div id="recentAdminLogins" class="admin-feed"></div></div><div class="admin-feed-box"><h3>Recent Quiz Attempts</h3><div id="recentAdminAttempts" class="admin-feed"></div></div><div class="admin-feed-box"><h3>Recent Learning Activity</h3><div id="recentAdminActivity" class="admin-feed"></div></div></div></section>
+</section>
+</main>
+
+<div id="studentDetailModal" class="admin-modal hidden"><div class="admin-modal-panel"><button id="studentModalClose" class="modal-close" style="float:right" aria-label="Close">×</button><div id="studentDetailContent"></div></div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/admin.js?v=46"></script>
+</body></html>
