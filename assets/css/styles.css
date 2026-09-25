@@ -399,135 +399,16 @@ body{background:linear-gradient(180deg,#f8fbff,#f5f8fc)}
 .omr-dot.answered{background:#2f9a62!important}
 .omr-dot.unanswered{background:#c94f4f!important}
 
-/* Version 45: clearer colour accents for study links + new homepage parade slide */
-:root{
-  --teal:#087b72;
-  --teal2:#10a091;
-  --orange:#c96c22;
-  --violet:#6948b8;
-}
-
-/* Keep the military-academic look, but make actionable links immediately visible. */
-.nav .quiz-nav-link{
-  color:#fff !important;
-  background:linear-gradient(135deg,#1756a0,#087b72);
-  padding:9px 12px;
-  border-radius:10px;
-  box-shadow:0 7px 18px rgba(23,86,160,.18);
-}
-.nav .quiz-nav-link:hover{color:#fff !important;transform:translateY(-1px)}
-
-.btn-outline{
-  color:#124f91;
-  border-color:#9cc2eb;
-  background:linear-gradient(180deg,#fff,#eef6ff);
-}
-.btn-outline:hover{border-color:#1756a0;box-shadow:0 10px 22px rgba(23,86,160,.13)}
-
-/* Year-wise PDF links */
-.paper-btn.download{
-  color:#fff;
-  background:linear-gradient(135deg,#1756a0,#2677c9);
-  border-color:#1756a0;
-  box-shadow:0 7px 16px rgba(23,86,160,.14);
-}
-.paper-btn.download:hover{border-color:#0d417d;box-shadow:0 10px 24px rgba(23,86,160,.22)}
-.paper-btn.download:after{color:#0a5e4d;background:#dff8ef}
-
-/* Study libraries: each area gets a distinct but restrained accent. */
-.nda-download-card .small-btn.primary,
-.nda-download-card .small-btn:not(.disabled){
-  color:#fff;
-  background:linear-gradient(135deg,#1756a0,#2677c9);
-  border-color:#1756a0;
-  box-shadow:0 7px 16px rgba(23,86,160,.14);
-}
-.vocab-download-card .small-btn.primary,
-.vocab-download-card .small-btn:not(.disabled){
-  color:#fff;
-  background:linear-gradient(135deg,#087b72,#10a091);
-  border-color:#087b72;
-  box-shadow:0 7px 16px rgba(8,123,114,.14);
-}
-.qb-download-card .small-btn.primary,
-.qb-download-card .small-btn:not(.disabled){
-  color:#231a05;
-  background:linear-gradient(135deg,#e0ad3f,#f4cd76);
-  border-color:#d4a035;
-  box-shadow:0 7px 16px rgba(201,155,57,.18);
-}
-.golden-resource .btn-primary{background:linear-gradient(135deg,#6948b8,#8367ca)}
-
-.resource-link b{
-  display:inline-flex;
-  width:max-content;
-  margin-top:12px;
-  padding:7px 10px;
-  border-radius:9px;
-  background:#e9f3ff;
-  color:#15579e;
-  border:1px solid #c9def5;
-}
-.resource-link:nth-child(2) b{background:#e4f8f3;color:#087b72;border-color:#bfe8dd}
-.resource-link:nth-child(4) b{background:#fff2cd;color:#76570e;border-color:#ead18d}
-.resource-card.resource-link:hover{border-color:#9fc2e8;box-shadow:0 14px 30px rgba(23,86,160,.11);transform:translateY(-3px)}
-
-/* Quiz paper selectors are now visually unmistakable as clickable items. */
-.series-set-card{border-top:4px solid #1756a0;background:linear-gradient(180deg,#fff,#f8fbff)}
-.series-set-card:nth-child(3n+2){border-top-color:#087b72;background:linear-gradient(180deg,#fff,#f7fdfb)}
-.series-set-card:nth-child(3n){border-top-color:#c99b39;background:linear-gradient(180deg,#fff,#fffcf4)}
-.series-set-no{background:linear-gradient(135deg,#e6f1ff,#dcecff);color:#124f91}
-.series-set-card:nth-child(3n+2) .series-set-no{background:#dff7f1;color:#087b72}
-.series-set-card:nth-child(3n) .series-set-no{background:#fff2ca;color:#7b5b0b}
-.series-go{
-  padding:7px 10px;border-radius:999px;background:#1756a0;color:#fff;
-}
-.series-set-card:nth-child(3n+2) .series-go{background:#087b72}
-.series-set-card:nth-child(3n) .series-go{background:#c48b20;color:#fff}
-
-/* Slightly richer section accents without making the site crowded. */
-.student-hub-home{background:linear-gradient(180deg,#f9fcff,#eef6ff)}
-.daily-quiz-home{background:linear-gradient(180deg,#fffaf0,#f7fbff) !important}
-.question-bank-section{background:linear-gradient(180deg,#fffaf0 0%,#f7fbff 100%)}
-
-/* New user-supplied ceremonial parade slide. */
-.slide-cta{
-  display:inline-flex;
-  margin-top:14px;
-  padding:8px 12px;
-  border-radius:9px;
-  background:linear-gradient(135deg,#f0c66f,#c99b39);
-  color:#1b1a16;
-  font-size:11px;
-  font-weight:900;
-  box-shadow:0 8px 20px rgba(0,0,0,.18);
-}
-.slide-cta:hover{transform:translateY(-1px)}
-
-@media(max-width:760px){
-  .nav .quiz-nav-link{background:transparent;color:#1756a0 !important;padding:9px 0;box-shadow:none}
-  .paper-btn.download{width:100%;justify-content:space-between}
-}
-
-
-/* Version 46: separate Online Sample Paper practice link and cards */
-.nav .sample-nav-link{
-  color:#2d2106 !important;
-  background:linear-gradient(135deg,#f2c86f,#e2aa39);
-  padding:9px 12px;
-  border-radius:10px;
-  box-shadow:0 7px 18px rgba(201,155,57,.18);
-  white-space:nowrap;
-}
-.nav .sample-nav-link:hover,.nav .sample-nav-link.active{color:#201704 !important;transform:translateY(-1px)}
-.sample-flash-btn{box-shadow:0 0 0 rgba(201,155,57,0);animation:flashPulse 1.25s infinite alternate}
-.sample-slide-cta{margin-left:8px;background:linear-gradient(135deg,#e0ad3f,#f4cd76)!important;color:#231a05!important;border-color:#d4a035!important}
-body[data-quiz-kind="sample"] .quiz-command-hero{background:linear-gradient(135deg,#fffaf0,#f6fbff)}
-body[data-quiz-kind="sample"] .series-set-card{border-color:#ead8a7;background:linear-gradient(180deg,#fffdf8,#fff9ea)}
-body[data-quiz-kind="sample"] .series-set-card:hover{border-color:#d7aa42;box-shadow:0 16px 34px rgba(180,125,20,.13)}
-body[data-quiz-kind="sample"] .series-set-no{background:linear-gradient(135deg,#e0ad3f,#f4cd76);color:#241a03}
-body[data-quiz-kind="sample"] .series-go{color:#8c5e05}
-@media(max-width:1180px){.nav{gap:12px;font-size:12px}.nav .quiz-nav-link,.nav .sample-nav-link{padding:8px 9px}}
-
-/* Supabase-authenticated Student Hub */
-.auth-status{border:1px solid #cfd9e6;background:#f4f8fc;color:#41566f;border-radius:11px;padding:11px 13px;font-size:12px;font-weight:700;line-height:1.5}.auth-status.success{background:#eef9f2;border-color:#a9d8b9;color:#25633d}.auth-status.error{background:#fff0f0;border-color:#efc2c2;color:#9e2f2f}.auth-status.hidden{display:none}.student-profile-form button:disabled{opacity:.65;cursor:wait}
+/* Version 45: registration-first student portal and Supabase performance records */
+html.auth-pending body>*:not(.auth-gate):not(.visitor-live-badge){visibility:hidden!important}
+.auth-gate{position:fixed;inset:0;z-index:99999;background:linear-gradient(135deg,#06182f 0%,#0d3565 54%,#132a48 100%);display:grid;place-items:center;padding:20px;overflow:auto}
+.auth-shell{width:min(760px,100%);background:#fff;border-radius:28px;box-shadow:0 30px 80px rgba(0,0,0,.28);padding:26px;position:relative}
+.auth-brand{display:flex;align-items:center;gap:14px;padding-right:150px}.auth-brand img{width:58px;height:58px;object-fit:contain}.auth-brand b{display:block;color:var(--navy);font:700 24px/1.05 Georgia,"Times New Roman",serif}.auth-brand span{display:block;color:var(--muted);font-size:13px;margin-top:4px}
+.auth-visitor{position:absolute;right:26px;top:26px;border:1px solid #d7e2ef;background:#f5f8fc;border-radius:16px;padding:9px 13px;text-align:center}.auth-visitor span{display:block;font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:800}.auth-visitor strong{display:block;color:var(--navy);font-size:20px;margin-top:2px}
+.auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;background:#edf2f8;border-radius:16px;padding:5px;margin:24px 0 20px}.auth-tabs button{border:0;background:transparent;border-radius:12px;padding:11px;font-weight:900;color:#64748b;cursor:pointer}.auth-tabs button.active{background:#fff;color:var(--navy);box-shadow:0 5px 16px rgba(7,26,53,.1)}
+.auth-shell h2{margin:0 0 6px;color:var(--navy);font:700 28px/1.1 Georgia,"Times New Roman",serif}.auth-shell>section>p{margin:0 0 18px;color:var(--muted);line-height:1.55}.auth-form{display:grid;grid-template-columns:1fr 1fr;gap:14px}.auth-form label{font-size:12px;font-weight:800;color:var(--ink);display:grid;gap:7px}.auth-form input,.auth-form select{width:100%;border:1px solid #cfd9e7;border-radius:13px;padding:12px 13px;font:inherit;color:var(--ink);background:#fff}.auth-form input:focus,.auth-form select:focus{outline:3px solid rgba(19,74,133,.12);border-color:#547da8}.auth-full{grid-column:1/-1}.auth-check{display:flex!important;grid-template-columns:auto 1fr;align-items:center;gap:8px!important}.auth-check input{width:18px;height:18px}.auth-message{min-height:18px;font-size:12px;color:#2d6a45}.auth-message.error{color:#a72e34;font-weight:700}.auth-note{margin:18px 0 0;font-size:11px;line-height:1.45;color:#738096;border-top:1px solid #e5eaf1;padding-top:13px}
+.visitor-live-badge{position:fixed;left:18px;bottom:18px;z-index:9000;background:#071a35;color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:8px 13px;display:flex;gap:9px;align-items:center;box-shadow:0 12px 30px rgba(7,26,53,.24);font-size:11px}.visitor-live-badge span{color:#c7d5e7}.visitor-live-badge strong{color:#f1c85a;font-size:14px}
+.account-chip{position:fixed;right:18px;bottom:18px;z-index:8999;background:#fff;border:1px solid #d8e0eb;border-radius:999px;display:flex;align-items:center;gap:8px;padding:6px 7px 6px 13px;box-shadow:0 12px 30px rgba(7,26,53,.16)}.account-chip a{text-decoration:none;color:var(--ink);display:grid}.account-chip a span{font-size:11px;font-weight:900}.account-chip a small{font-size:9px;color:var(--muted)}.account-chip button{border:0;border-radius:999px;background:#edf2f8;color:var(--navy);font-size:10px;font-weight:800;padding:8px 10px;cursor:pointer}
+.performance-table,.activity-table{display:grid;gap:9px}.performance-row{display:grid;grid-template-columns:minmax(180px,1.5fr) .7fr .7fr .65fr auto;gap:10px;align-items:center;border:1px solid var(--line);border-radius:15px;padding:12px;background:#fff}.performance-row div{display:grid;gap:3px}.performance-row small{color:var(--muted)}.growth-up{color:#237a49}.growth-down{color:#b53d44}.mini-action{text-decoration:none;border:1px solid #d7e2ef;border-radius:999px;padding:7px 10px;color:var(--navy);font-size:10px;font-weight:900;white-space:nowrap}.activity-row{display:grid;grid-template-columns:120px 1fr;gap:12px;border-bottom:1px solid var(--line);padding:10px 0}.activity-row>span{text-transform:capitalize;color:var(--blue);font-size:11px;font-weight:900}.activity-row div{display:grid;gap:2px}.activity-row small{color:var(--muted)}
+.dashboard-loading{opacity:.72}
+@media(max-width:700px){.auth-shell{padding:20px}.auth-brand{padding-right:0}.auth-visitor{position:static;margin-top:14px;display:flex;justify-content:center;gap:8px;align-items:center}.auth-visitor span,.auth-visitor strong{display:inline;margin:0}.auth-form{grid-template-columns:1fr}.auth-full{grid-column:auto}.auth-shell h2{font-size:24px}.visitor-live-badge{left:10px;bottom:10px}.account-chip{right:10px;bottom:10px}.performance-row{grid-template-columns:1fr 1fr}.performance-row div{grid-column:1/-1}.performance-row .mini-action{justify-self:start}.attempt-row{grid-template-columns:1fr 1fr!important}.attempt-row>div{grid-column:1/-1}}

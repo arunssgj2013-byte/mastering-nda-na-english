@@ -3,8 +3,6 @@ const QUIZ_ATTEMPTS_KEY='mceQuizAttempts';
 const QUIZ_PROFILE_KEY='mceStudentProfileV2';
 (function(){
   const sets=(window.getStoredQuizSeries?window.getStoredQuizSeries(QUIZ_SERIES):(Array.isArray(QUIZ_SERIES)?JSON.parse(JSON.stringify(QUIZ_SERIES)):[]));
-  const fixedKind=(document.body.dataset.quizKind||'').trim();
-  const currentPage=(location.pathname.split('/').pop()||'quizzes.html');
   const kindButtons=[...document.querySelectorAll('[data-series-kind]')];
   const grid=document.getElementById('setSelectorGrid');
   const seriesKicker=document.getElementById('seriesKicker');
@@ -28,7 +26,7 @@ const QUIZ_PROFILE_KEY='mceStudentProfileV2';
   const dailyTitle=document.getElementById('dailyQuizTitle');
   const dailyDesc=document.getElementById('dailyQuizDesc');
   const dailyBtn=document.getElementById('startDailySetBtn');
-  let currentKind=fixedKind||'pyq', currentSet=null, timerSeconds=50*60, timerId=null, submitted=false, questionObserver=null;
+  let currentKind='pyq', currentSet=null, timerSeconds=50*60, timerId=null, submitted=false, questionObserver=null;
   const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
   const dateKey=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
   const dayNumber=()=>Math.floor(new Date().setHours(0,0,0,0)/86400000);
@@ -75,10 +73,6 @@ const QUIZ_PROFILE_KEY='mceStudentProfileV2';
       'Narration':'Choose the option that correctly changes the sentence between direct and indirect speech.',
       'Word Class':'Identify the correct grammatical class or part of speech of the indicated word.',
       'Spelling':'Choose the correctly spelt word or the option that satisfies the spelling instruction.',
-      'Cloze Test':'Read the passage carefully and choose the most appropriate word for each numbered blank.',
-      'Discourse Markers':'Choose the discourse marker or expression that best completes the sentence logically and grammatically.',
-      'Foreign Expressions':'Choose the option that best expresses the meaning of the given foreign or Latin expression.',
-      'Confusing Words':'Choose the option that correctly distinguishes the meanings and usage of the given words.',
       'Grammar & Usage':'Choose the option that makes the sentence grammatically correct and appropriate in standard English.'
     };
     return map[category]||map['Grammar & Usage'];
@@ -116,7 +110,7 @@ const QUIZ_PROFILE_KEY='mceStudentProfileV2';
     if(seriesDescription)seriesDescription.textContent=kind==='pyq'?'Only manually corrected PYQ papers are published here. Each set preserves the supplied questions, directions, answer key and explanations.':'Only manually corrected Sample Papers are published here.';
     if(!grid)return;
     if(!list.length){grid.innerHTML='<div class="quiz-empty-state"><strong>No verified set published yet</strong><span>More corrected papers will be added progressively.</span></div>';return;}
-    grid.innerHTML=list.map((s,i)=>`<button class="series-set-card" type="button" data-set-id="${esc(s.id)}"><span class="series-set-no">${String(i+1).padStart(2,'0')}</span><div><small>${kind==='pyq'?'MANUALLY VERIFIED PYQ':'SOURCE-VERIFIED SAMPLE PAPER'}</small><h3>${esc(s.label)}</h3><p>50 Questions • 200 Marks • 50 Minutes • Answers & Explanations</p></div><span class="series-go">Start →</span></button>`).join('');
+    grid.innerHTML=list.map((s,i)=>`<button class="series-set-card" type="button" data-set-id="${esc(s.id)}"><span class="series-set-no">${String(i+1).padStart(2,'0')}</span><div><small>MANUALLY VERIFIED PAPER</small><h3>${esc(s.label)}</h3><p>50 Questions • 200 Marks • 50 Minutes • Source-corrected</p></div><span class="series-go">Start →</span></button>`).join('');
     grid.querySelectorAll('[data-set-id]').forEach(btn=>btn.addEventListener('click',()=>loadSet(btn.dataset.setId,true)));
   }
   function setCurrentOmr(qNum){
@@ -232,20 +226,19 @@ const QUIZ_PROFILE_KEY='mceStudentProfileV2';
     quizContainer.querySelectorAll('input[type="radio"]').forEach(inp=>inp.addEventListener('change',()=>{updateOmr();const q=inp.closest('.series-question')?.dataset.q;if(q)setCurrentOmr(q)}));
     renderOmr();
     watchCurrentQuestion();
-    history.replaceState(null,'',`${currentPage}?mode=${set.kind}&set=${encodeURIComponent(set.id)}`);
+    history.replaceState(null,'',`quizzes.html?mode=${set.kind}&set=${encodeURIComponent(set.id)}`);
+    if(window.MNEPortal)window.MNEPortal.logActivity('quiz_open',set.id,set.label,{kind:set.kind}).catch(()=>{});
     if(scroll)document.getElementById('quizArena')?.scrollIntoView({behavior:'smooth',block:'start'});
   }
-  function saveAttempt(result){
+  function saveAttempt(result,sectionStats={}){
     let profile=null,attempts=[];try{profile=JSON.parse(localStorage.getItem(QUIZ_PROFILE_KEY)||'null')}catch{};try{attempts=JSON.parse(localStorage.getItem(QUIZ_ATTEMPTS_KEY)||'[]')}catch{};
     if(!profile||!currentSet)return;
     const iso=new Date().toISOString();
-    const clientAttemptKey=[profile.userId||profile.studentId,currentSet.id,iso].join(':');
-    const record={name:profile.name,studentId:profile.studentId,className:profile.className,institution:profile.institution,state:profile.state,setId:currentSet.id,setLabel:currentSet.label,setType:currentSet.kind,date:dateKey(),iso,clientAttemptKey,...result};
-    attempts.push(record);
-    localStorage.setItem(QUIZ_ATTEMPTS_KEY,JSON.stringify(attempts.slice(-400)));
-    if(window.MNEBackend?.saveAttempt){
-      const durationSeconds=Math.max(0,50*60-timerSeconds);
-      window.MNEBackend.saveAttempt({...record,paperId:currentSet.id,totalQuestions:50,durationSeconds}).then(r=>{if(!r?.ok)console.warn('Attempt kept locally; cloud sync did not complete.')}).catch(err=>console.warn('Attempt kept locally; cloud sync failed.',err));
+    const localRecord={name:profile.name,studentId:profile.studentId||profile.id,className:profile.className,school:profile.school,state:profile.state,setId:currentSet.id,setLabel:currentSet.label,setType:currentSet.kind,date:dateKey(),iso,...result};
+    attempts.push(localRecord);localStorage.setItem(QUIZ_ATTEMPTS_KEY,JSON.stringify(attempts.slice(-400)));
+    if(window.MNEPortal){
+      const key=`${profile.id||profile.studentId||profile.email}|${currentSet.id}|${iso}`;
+      window.MNEPortal.call('submit_attempt',{paperId:currentSet.id,paperTitle:currentSet.label,paperType:currentSet.kind,correct:result.correct,incorrect:result.incorrect,unattempted:result.unattempted,totalQuestions:currentSet.questions.length,score:result.marks,accuracy:result.accuracy,overallPercent:result.overall,durationSeconds:Math.max(0,50*60-timerSeconds),sectionStats,clientAttemptKey:key},true).catch(err=>console.warn('Attempt sync failed',err));
     }
   }
   function submitQuiz(auto=false){
@@ -265,17 +258,14 @@ const QUIZ_PROFILE_KEY='mceStudentProfileV2';
     if(scoreBox){scoreBox.classList.remove('hidden');scoreBox.innerHTML=`<div class="score-headline"><div class="score-title"><h3>Scorecard & Result Summary</h3><p>${auto?'Time is over — the paper was auto-submitted. ':'Paper submitted successfully. '}<b>${esc(currentSet.label)}</b></p></div><div class="score-badge">${grade}</div></div><div class="score-grid"><div class="score-card"><b>${correct}</b><span>Correct</span></div><div class="score-card"><b>${wrong}</b><span>Incorrect</span></div><div class="score-card"><b>${unattempted}</b><span>Unattempted</span></div><div class="score-card"><b>${accuracy.toFixed(1)}%</b><span>Accuracy</span></div><div class="score-card"><b>${overall.toFixed(1)}%</b><span>Overall</span></div><div class="score-card"><b>${marks}</b><span>Marks / 200</span></div></div><div class="section-head" style="margin-top:18px"><div><div class="section-kicker">Category-wise Performance</div><h2 class="section-title" style="font-size:28px">Your strengths and revision areas</h2></div></div><div class="section-score-grid">${catHtml}</div><div class="result-actions"><a class="btn btn-primary" href="dashboard.html">Student Dashboard</a><button class="btn btn-outline" type="button" id="printSeriesResultBtn">Print Result</button></div>`;scoreBox.scrollIntoView({behavior:'smooth',block:'start'});document.getElementById('printSeriesResultBtn')?.addEventListener('click',()=>window.print())}
     currentSet.questions.forEach(q=>{const b=omrGrid?.querySelector(`[data-q="${q.n}"]`),sel=document.querySelector(`input[name="sq${q.n}"]:checked`),accepted=Array.isArray(q.a)?q.a:[q.a];b?.classList.remove('answered','unanswered','correct','wrong','unattempted');if(!sel)b?.classList.add('unattempted');else if(accepted.includes(Number(sel.value)))b?.classList.add('correct');else b?.classList.add('wrong')});
     if(answeredCount)answeredCount.textContent=String(attempted);if(leftCount)leftCount.textContent=String(unattempted);
-    saveAttempt({correct,incorrect:wrong,unattempted,accuracy:Number(accuracy.toFixed(1)),overall:Number(overall.toFixed(1)),marks});
+    saveAttempt({correct,incorrect:wrong,unattempted,accuracy:Number(accuracy.toFixed(1)),overall:Number(overall.toFixed(1)),marks},cats);
   }
   function clearQuiz(){if(!currentSet)return;document.querySelectorAll('#seriesQuizQuestions input[type="radio"]').forEach(i=>i.checked=false);document.querySelectorAll('#seriesQuizQuestions .quiz-option').forEach(x=>x.classList.remove('correct','wrong'));document.querySelectorAll('#seriesQuizQuestions .quiz-explainer').forEach(x=>{x.classList.add('hidden');x.innerHTML=''});if(scoreBox){scoreBox.classList.add('hidden');scoreBox.innerHTML=''}submitted=false;resetTimer();renderOmr()}
   kindButtons.forEach(b=>b.addEventListener('click',()=>renderSetLibrary(b.dataset.seriesKind)));
   submitBtn?.addEventListener('click',()=>submitQuiz(false));resetBtn?.addEventListener('click',clearQuiz);startTimerBtn?.addEventListener('click',startTimer);pauseTimerBtn?.addEventListener('click',pauseTimer);resetTimerBtn?.addEventListener('click',resetTimer);
-  const dailyPool=fixedKind?sets.filter(s=>s.kind===fixedKind):sets;
-  const dailySet=dailyPool[(dayNumber()%dailyPool.length+dailyPool.length)%dailyPool.length];
-  if(dailySet){if(dailyTitle)dailyTitle.textContent=dailySet.label;if(dailyDesc)dailyDesc.textContent=`Today’s ${dailySet.kind==='pyq'?'Previous Years Question':'Sample Paper'} practice — 50 source-based questions.`;dailyBtn?.addEventListener('click',()=>{renderSetLibrary(dailySet.kind);loadSet(dailySet.id,true);startTimer()});}
-  const params=new URLSearchParams(location.search);let mode=fixedKind||params.get('mode');let setId=params.get('set');
+  const dailySet=sets[(dayNumber()%sets.length+sets.length)%sets.length];
+  if(dailyTitle)dailyTitle.textContent=dailySet.label;if(dailyDesc)dailyDesc.textContent=`Today’s automatic ${dailySet.kind==='pyq'?'Previous Years Question':'Trend Practice Sample Paper'} set — 50 source-based questions.`;dailyBtn?.addEventListener('click',()=>{renderSetLibrary(dailySet.kind);loadSet(dailySet.id,true);startTimer()});
+  const params=new URLSearchParams(location.search);let mode=params.get('mode');let setId=params.get('set');
   if(!mode&&setId){const found=getSet(setId);if(found)mode=found.kind}
-  if(mode!=='sample')mode='pyq';
-  if(fixedKind)mode=fixedKind;
-  renderSetLibrary(mode);if(setId&&getSet(setId)&&(!fixedKind||getSet(setId).kind===fixedKind))loadSet(setId,false);
+  if(mode!=='sample')mode='pyq';renderSetLibrary(mode);if(setId&&getSet(setId))loadSet(setId,false);
 })();

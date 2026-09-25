@@ -1,0 +1,31 @@
+MASTERING NDA/NA ENGLISH — VERSION 45
+Student Portal + Supabase Performance Integration
+
+LIVE SUPABASE PROJECT
+Project: mastering-nda-english
+Project ref: qwpmbrysjxqislxnwwlk
+Edge Function: student-portal (deployed and active)
+
+KEY CHANGES
+1. Removed OTP / email-link verification from the website login flow.
+2. Added two access options: REGISTER and LOGIN.
+3. Registration fields: Name, Class (Roman numeral selection), State/UT (searchable selection), PIN Code, School or None, Email.
+4. Login accepts only an email already present in the student registry.
+5. Registration/login gate is applied to every website HTML page. PDF clicks are therefore available only after website registration/login through the UI.
+6. Added persistent unique visitor counter shown on the access screen and as a live bottom badge.
+7. Added Supabase student records, login events, sessions, quiz attempts, activity records and visitor records.
+8. Student Hub now shows total attempts, best marks, average accuracy, growth, number of papers, paper-wise repeated-attempt growth, recent attempts, reattempt links and activity.
+9. Quiz submissions sync to Supabase and preserve repeated attempts instead of overwriting earlier ones.
+10. Existing student profiles and prior Supabase quiz attempts were migrated into the new student performance system.
+11. Admin-readable Supabase views created:
+    - student_performance_overview
+    - student_attempt_details
+    - student_activity_report
+    - site_visitor_summary
+12. Existing watermarked PDFs remain included.
+
+IMPORTANT SECURITY NOTE
+The requested login method uses only a registered email and deliberately does not use OTP/email verification. It can confirm that an email is registered and syntactically valid, but it cannot prove that the person typing that email owns the mailbox. If stronger identity protection is required later, add a password or restore email verification.
+
+STATIC PDF NOTE
+Website UI access is gated before PDFs can be opened. Because PDFs are static files inside a deployable website package, a person who already knows a direct PDF asset URL may be able to request that URL directly from a static host. Fully server-enforced PDF protection requires serving PDFs from private storage or an authenticated server endpoint.
