@@ -15,11 +15,13 @@ const QUIZ_PROFILE_KEY='mceStudentProfileV2';
   const modeBadge=document.getElementById('seriesModeBadge');
   const scoreBox=document.getElementById('seriesScoreBox');
   const submitBtn=document.getElementById('submitSeriesQuizBtn');
+  const submitOmrBtn=document.getElementById('submitSeriesQuizOmrBtn');
   const resetBtn=document.getElementById('resetSeriesQuizBtn');
   const startTimerBtn=document.getElementById('startSeriesTimerBtn');
   const pauseTimerBtn=document.getElementById('pauseSeriesTimerBtn');
   const resetTimerBtn=document.getElementById('resetSeriesTimerBtn');
   const timerDisplay=document.getElementById('seriesTimerDisplay');
+  const stickyTimerDisplay=document.getElementById('seriesStickyTimerDisplay');
   const omrGrid=document.getElementById('seriesOmrGrid');
   const answeredCount=document.getElementById('seriesOmrAnsweredCount');
   const leftCount=document.getElementById('seriesOmrLeftCount');
@@ -33,7 +35,7 @@ const QUIZ_PROFILE_KEY='mceStudentProfileV2';
   const getSet=id=>sets.find(s=>s.id===id);
   const formatTime=s=>`${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;
   const stopTimer=()=>{clearInterval(timerId);timerId=null};
-  const updateTimer=()=>{if(timerDisplay)timerDisplay.textContent=formatTime(timerSeconds)};
+  const updateTimer=()=>{const value=formatTime(timerSeconds);if(timerDisplay)timerDisplay.textContent=value;if(stickyTimerDisplay)stickyTimerDisplay.textContent=value;document.documentElement.classList.toggle('timer-low',timerSeconds<=300&&timerSeconds>0)};
   function resetTimer(){stopTimer();timerSeconds=50*60;updateTimer()}
   function startTimer(){if(!currentSet||submitted||timerId)return;timerId=setInterval(()=>{timerSeconds--;updateTimer();if(timerSeconds<=0){timerSeconds=0;updateTimer();stopTimer();submitQuiz(true)}},1000)}
   function pauseTimer(){stopTimer()}
@@ -191,7 +193,7 @@ const QUIZ_PROFILE_KEY='mceStudentProfileV2';
     if(activeType)activeType.textContent=set.kind==='pyq'?'Previous Years Question Practice':'Exam Trend Sample Paper Practice';
     if(modeBadge)modeBadge.textContent=set.label;
     if(activeMeta)activeMeta.textContent=`50 questions • 200 marks • 50 minutes • +4 correct • −1.33 wrong • ${set.kind==='pyq'?'Authentic PYQ':'Source: Practice Book Sample Paper'}`;
-    [submitBtn,resetBtn,startTimerBtn,pauseTimerBtn,resetTimerBtn].forEach(b=>{if(b)b.disabled=false});
+    [submitBtn,submitOmrBtn,resetBtn,startTimerBtn,pauseTimerBtn,resetTimerBtn].forEach(b=>{if(b)b.disabled=false});
     if(scoreBox){scoreBox.classList.add('hidden');scoreBox.innerHTML=''}
     let lastContext='',lastCategory='';
     quizContainer.innerHTML=set.questions.map((q,i)=>{
@@ -242,7 +244,7 @@ const QUIZ_PROFILE_KEY='mceStudentProfileV2';
     }
   }
   function submitQuiz(auto=false){
-    if(!currentSet||submitted)return;submitted=true;stopTimer();
+    if(!currentSet||submitted)return;submitted=true;stopTimer();if(submitBtn)submitBtn.disabled=true;if(submitOmrBtn)submitOmrBtn.disabled=true;
     let correct=0,attempted=0;const cats={};let lastContext='';
     currentSet.questions.forEach(q=>{
       if(q.c)lastContext=q.c;const cat=inferCategory(q,lastContext);if(!cats[cat])cats[cat]={total:0,correct:0};cats[cat].total++;
@@ -260,9 +262,9 @@ const QUIZ_PROFILE_KEY='mceStudentProfileV2';
     if(answeredCount)answeredCount.textContent=String(attempted);if(leftCount)leftCount.textContent=String(unattempted);
     saveAttempt({correct,incorrect:wrong,unattempted,accuracy:Number(accuracy.toFixed(1)),overall:Number(overall.toFixed(1)),marks},cats);
   }
-  function clearQuiz(){if(!currentSet)return;document.querySelectorAll('#seriesQuizQuestions input[type="radio"]').forEach(i=>i.checked=false);document.querySelectorAll('#seriesQuizQuestions .quiz-option').forEach(x=>x.classList.remove('correct','wrong'));document.querySelectorAll('#seriesQuizQuestions .quiz-explainer').forEach(x=>{x.classList.add('hidden');x.innerHTML=''});if(scoreBox){scoreBox.classList.add('hidden');scoreBox.innerHTML=''}submitted=false;resetTimer();renderOmr()}
+  function clearQuiz(){if(!currentSet)return;if(submitBtn)submitBtn.disabled=false;if(submitOmrBtn)submitOmrBtn.disabled=false;document.querySelectorAll('#seriesQuizQuestions input[type="radio"]').forEach(i=>i.checked=false);document.querySelectorAll('#seriesQuizQuestions .quiz-option').forEach(x=>x.classList.remove('correct','wrong'));document.querySelectorAll('#seriesQuizQuestions .quiz-explainer').forEach(x=>{x.classList.add('hidden');x.innerHTML=''});if(scoreBox){scoreBox.classList.add('hidden');scoreBox.innerHTML=''}submitted=false;resetTimer();renderOmr()}
   kindButtons.forEach(b=>b.addEventListener('click',()=>renderSetLibrary(b.dataset.seriesKind)));
-  submitBtn?.addEventListener('click',()=>submitQuiz(false));resetBtn?.addEventListener('click',clearQuiz);startTimerBtn?.addEventListener('click',startTimer);pauseTimerBtn?.addEventListener('click',pauseTimer);resetTimerBtn?.addEventListener('click',resetTimer);
+  submitBtn?.addEventListener('click',()=>submitQuiz(false));submitOmrBtn?.addEventListener('click',()=>submitQuiz(false));resetBtn?.addEventListener('click',clearQuiz);startTimerBtn?.addEventListener('click',startTimer);pauseTimerBtn?.addEventListener('click',pauseTimer);resetTimerBtn?.addEventListener('click',resetTimer);
   const dailySet=sets[(dayNumber()%sets.length+sets.length)%sets.length];
   if(dailyTitle)dailyTitle.textContent=dailySet.label;if(dailyDesc)dailyDesc.textContent=`Today’s automatic ${dailySet.kind==='pyq'?'Previous Years Question':'Trend Practice Sample Paper'} set — 50 source-based questions.`;dailyBtn?.addEventListener('click',()=>{renderSetLibrary(dailySet.kind);loadSet(dailySet.id,true);startTimer()});
   const params=new URLSearchParams(location.search);let mode=params.get('mode');let setId=params.get('set');

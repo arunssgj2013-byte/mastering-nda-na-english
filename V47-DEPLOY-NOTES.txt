@@ -1,0 +1,10 @@
+Mastering NDA/NA English — Version 47
+
+Changes:
+1. Added persistent Submit Test button inside the sticky OMR panel.
+2. Added persistent Time Left display inside the sticky OMR panel; it remains visible while questions are scrolled and pulses during the final 5 minutes.
+3. Moved student Sign Out from the floating bottom chip to the top navigation, immediately after Author & Contact.
+4. Added an ADMIN tab to the registration/login gate linking to the secure Administrator Login.
+5. Updated cache-busting asset version to v=47.
+
+Deploy by overwriting the matching files on the existing V46 website.

@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex,nofollow">
 <title>Administrator Dashboard | Mastering NDA/NA English</title>
 <link rel="icon" href="assets/images/mce-mark.png">
-<link rel="stylesheet" href="assets/css/styles.css?v=46">
+<link rel="stylesheet" href="assets/css/styles.css?v=47">
 </head>
 <body class="admin-body">
 <header class="admin-topbar"><div class="admin-topbar-inner"><a class="admin-brand" href="index.html"><img src="assets/images/mce-mark.png" alt="Mastering NDA/NA English"><div><b>Mastering NDA/NA English</b><span>Secure Administrator Console</span></div></a><a class="admin-home-link" href="index.html">← Public Website</a></div></header>
@@ -44,7 +44,7 @@
 
   <div id="adminStats" class="admin-stats"></div>
 
-  <section class="admin-card"><div class="admin-card-head"><div><div class="section-kicker">Students</div><h2>Registration & Performance Overview</h2></div><small id="adminStudentCountLabel"></small></div><div class="admin-filters"><input id="adminSearch" type="search" placeholder="Search name, email, school, PIN…"><select id="adminClassFilter"><option value="">All Classes</option></select><select id="adminStateFilter"><option value="">All States/UTs</option></select><button class="btn btn-outline" type="button" onclick="document.getElementById('adminSearch').value='';document.getElementById('adminClassFilter').value='';document.getElementById('adminStateFilter').value='';document.getElementById('adminSearch').dispatchEvent(new Event('input'))">Clear Filters</button></div><div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Student</th><th>Class</th><th>State/UT</th><th>School</th><th>Attempts</th><th>Best Score</th><th>Avg Accuracy</th><th>Growth</th><th>Last Activity</th><th>Record</th></tr></thead><tbody id="adminStudentsBody"></tbody></table></div></section>
+  <section class="admin-card"><div class="admin-card-head"><div><div class="section-kicker">Students</div><h2>Registration & Performance Overview</h2></div><small id="adminStudentCountLabel"></small></div><div class="admin-filters"><input id="adminSearch" type="search" placeholder="Search name, email, school, PIN…"><select id="adminClassFilter"><option value="">All Classes</option></select><select id="adminStateFilter"><option value="">All States/UTs</option></select><button class="btn btn-outline" type="button" onclick="document.getElementById('adminSearch').value='';document.getElementById('adminClassFilter').value='';document.getElementById('adminStateFilter').value='';document.getElementById('adminSearch').dispatchEvent(new Event('input'))">Clear Filters</button></div><div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Student</th><th>Class</th><th>State/UT</th><th>PIN</th><th>School</th><th>Attempts</th><th>Best Score</th><th>Avg Accuracy</th><th>Growth</th><th>Last Activity</th><th>Record</th></tr></thead><tbody id="adminStudentsBody"></tbody></table></div></section>
 
   <section class="admin-card"><div class="admin-card-head"><div><div class="section-kicker">Live Records</div><h2>Recent Website & Student Activity</h2></div></div><div class="admin-feed-grid"><div class="admin-feed-box"><h3>Recent Logins</h3><div id="recentAdminLogins" class="admin-feed"></div></div><div class="admin-feed-box"><h3>Recent Quiz Attempts</h3><div id="recentAdminAttempts" class="admin-feed"></div></div><div class="admin-feed-box"><h3>Recent Learning Activity</h3><div id="recentAdminActivity" class="admin-feed"></div></div></div></section>
 </section>
@@ -53,5 +53,5 @@
 <div id="studentDetailModal" class="admin-modal hidden"><div class="admin-modal-panel"><button id="studentModalClose" class="modal-close" style="float:right" aria-label="Close">×</button><div id="studentDetailContent"></div></div></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="assets/js/admin.js?v=46"></script>
+<script src="assets/js/admin.js?v=47"></script>
 </body></html>
