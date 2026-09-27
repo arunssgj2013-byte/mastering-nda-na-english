@@ -1,4 +1,4 @@
-// V55R1 navigation bridge: expose the new NDA English guides throughout the main site
+// V56 navigation bridge + India school search integration
 (function(){
   const nav=document.querySelector('.site-header .nav');
   if(nav && !nav.querySelector('.study-material-dropdown')){
@@ -39,7 +39,13 @@
     }
   }
 
-  // Run the original site behaviour unchanged after the navigation is upgraded.
+  // Add India-wide school autocomplete to the registration form.
+  const schoolSearch=document.createElement('script');
+  schoolSearch.src='assets/js/school-search-v56.js?v=56';
+  schoolSearch.async=false;
+  document.head.appendChild(schoolSearch);
+
+  // Run the original site behaviour unchanged after the enhancements are registered.
   const core=document.createElement('script');
   core.src='assets/js/site-core-v55.js?v=55r1';
   core.async=false;
