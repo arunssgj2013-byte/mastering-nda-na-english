@@ -1,16 +1,14 @@
 V55 — SEO Foundation & Content Discovery Update
 
 Implemented:
-- Unique SEO titles and meta descriptions for main public pages and every PYQ year page.
-- Canonical URLs across public pages; noindex/canonical handling for legacy redirects and private dashboard/admin pages.
-- Open Graph and Twitter sharing metadata.
-- JSON-LD structured data (WebSite, Person, WebPage/CollectionPage/Article, BreadcrumbList).
-- Eight focused, original NDA English guide pages: syllabus, exam pattern, PYQ hub, mock tests, grammar, vocabulary, GAT English and preparation strategy.
-- Strong internal linking from Home and Study Material to the new guides.
-- PYQ archive links and year-page hub references.
-- Updated sitemap.xml and robots.txt.
-- Image width/height attributes and lazy-loading for non-critical images to improve layout stability/performance.
-- Existing question-bank/PYQ PDFs, quiz questions, options, answers and explanations were not edited.
+- Eight focused NDA English SEO guide pages: syllabus, exam pattern, PYQ hub, mock tests, grammar, vocabulary, GAT English and preparation strategy.
+- Each new guide includes a descriptive title, meta description, canonical URL, index/follow directive and basic structured data.
+- New internal links connect the guide pages with PYQs, online practice and study resources.
+- Added a dedicated 2015–2026 NDA English PYQ hub.
+- Added responsive SEO guide styling in assets/css/seo-v55.css.
+- Updated sitemap.xml so Google can discover the eight new guide pages alongside the existing public pages and year-wise PYQ pages.
+- Kept robots.txt pointed to the same sitemap URL and blocked the admin page from crawling.
+- Existing question-bank/PYQ PDFs, quiz questions, options, answers, explanations, Supabase logic, dashboards and test engine files were not edited.
 
 Google Search Console:
-The existing sitemap submission remains valid because the sitemap URL is unchanged. After deployment, Google can re-read the updated sitemap automatically. For the new high-value guide pages, URL Inspection can be used selectively after deployment.
+The existing sitemap submission remains valid because the sitemap URL is unchanged. After deployment, Google can re-read the updated sitemap automatically. Use URL Inspection selectively for the new high-value guide pages after deployment.
