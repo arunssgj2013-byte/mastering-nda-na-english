@@ -1,0 +1,22 @@
+V51 — Single-Question Mobile-Friendly Test Interface
+
+Changes:
+- All online tests now display one question at a time.
+- Previous / Save & Next / Clear Response controls added.
+- OMR/Question Navigator remains available for direct question jumps.
+- Timer and Submit Test remain persistently visible with the OMR controls.
+- Mobile layout uses a compact sticky timer/submit area and horizontally scrollable question navigator.
+- Directions and passage/context are carried forward for the active question where needed, without altering source question data.
+- After submission, review remains one question at a time and the user can navigate through OMR or Next/Previous.
+
+Content integrity:
+- assets/js/quiz-series.js was NOT modified.
+- SHA-256: ce3c3cfd3267e8e8a95fc289c92ff996034007c1bc44a5f9f08a8eea22479d74
+- 21 online PYQ sets validated.
+- 1,050 questions validated.
+- Questions, options, keyed answers and explanations remain exactly as in V50.
+
+Files changed:
+- quizzes.html
+- assets/js/quiz-engine.js
+- assets/css/styles.css

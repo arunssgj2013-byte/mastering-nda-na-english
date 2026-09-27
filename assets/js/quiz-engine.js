@@ -25,10 +25,15 @@ const QUIZ_PROFILE_KEY='mceStudentProfileV2';
   const omrGrid=document.getElementById('seriesOmrGrid');
   const answeredCount=document.getElementById('seriesOmrAnsweredCount');
   const leftCount=document.getElementById('seriesOmrLeftCount');
+  const questionNav=document.getElementById('seriesQuestionNav');
+  const questionProgress=document.getElementById('seriesQuestionProgress');
+  const prevQuestionBtn=document.getElementById('prevSeriesQuestionBtn');
+  const nextQuestionBtn=document.getElementById('nextSeriesQuestionBtn');
+  const clearQuestionBtn=document.getElementById('clearCurrentQuestionBtn');
   const dailyTitle=document.getElementById('dailyQuizTitle');
   const dailyDesc=document.getElementById('dailyQuizDesc');
   const dailyBtn=document.getElementById('startDailySetBtn');
-  let currentKind='pyq', currentSet=null, timerSeconds=50*60, timerId=null, submitted=false, questionObserver=null;
+  let currentKind='pyq', currentSet=null, timerSeconds=50*60, timerId=null, submitted=false, questionObserver=null, currentQuestionIndex=0;
   const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
   const dateKey=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
   const dayNumber=()=>Math.floor(new Date().setHours(0,0,0,0)/86400000);
@@ -126,28 +131,59 @@ const QUIZ_PROFILE_KEY='mceStudentProfileV2';
     if(!omrGrid)return;
     omrGrid.querySelectorAll('.omr-q.current').forEach(b=>b.classList.remove('current'));
     const bubble=omrGrid.querySelector(`[data-q="${qNum}"]`);
-    if(bubble){bubble.classList.add('current');bubble.setAttribute('aria-current','true')}
+    if(bubble){
+      bubble.classList.add('current');
+      bubble.setAttribute('aria-current','true');
+      try{bubble.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'})}catch{}
+    }
     omrGrid.querySelectorAll('.omr-q:not(.current)').forEach(b=>b.removeAttribute('aria-current'));
   }
+  function questionSlides(){
+    return [...document.querySelectorAll('#seriesQuizQuestions .question-slide')];
+  }
+  function updateQuestionNav(){
+    const total=currentSet?.questions?.length||0;
+    if(questionProgress)questionProgress.textContent=total?`Question ${currentQuestionIndex+1} of ${total}`:'';
+    if(prevQuestionBtn)prevQuestionBtn.disabled=!total||currentQuestionIndex<=0;
+    if(nextQuestionBtn){
+      nextQuestionBtn.disabled=!total;
+      if(submitted)nextQuestionBtn.textContent=currentQuestionIndex>=total-1?'End of Review':'Next Question';
+      else nextQuestionBtn.textContent=currentQuestionIndex>=total-1?'Review OMR':'Save & Next';
+    }
+    if(clearQuestionBtn)clearQuestionBtn.disabled=!total||submitted;
+  }
+  function showQuestion(index,{scroll=true,flash=false}={}){
+    const slides=questionSlides();
+    if(!slides.length||!currentSet)return;
+    currentQuestionIndex=Math.max(0,Math.min(slides.length-1,Number(index)||0));
+    slides.forEach((slide,i)=>{
+      const active=i===currentQuestionIndex;
+      slide.classList.toggle('active',active);
+      slide.hidden=!active;
+      slide.setAttribute('aria-hidden',active?'false':'true');
+    });
+    const q=currentSet.questions[currentQuestionIndex];
+    if(q)setCurrentOmr(q.n);
+    updateQuestionNav();
+    const active=slides[currentQuestionIndex];
+    if(flash&&active){
+      active.querySelector('.series-question')?.classList.add('question-jump-flash');
+      setTimeout(()=>active.querySelector('.series-question')?.classList.remove('question-jump-flash'),650);
+    }
+    if(scroll){
+      const stage=document.getElementById('seriesQuestionStage')||active;
+      try{stage?.scrollIntoView({behavior:'smooth',block:'start'})}catch{}
+    }
+  }
   function jumpToQuestion(qNum){
-    const target=document.querySelector(`.series-question[data-q="${qNum}"]`);
-    if(!target)return;
-    setCurrentOmr(qNum);
-    target.scrollIntoView({behavior:'smooth',block:'start'});
-    target.classList.add('question-jump-flash');
-    setTimeout(()=>target.classList.remove('question-jump-flash'),700);
+    if(!currentSet)return;
+    const idx=currentSet.questions.findIndex(q=>String(q.n)===String(qNum));
+    if(idx<0)return;
+    showQuestion(idx,{scroll:true,flash:true});
   }
   function watchCurrentQuestion(){
     if(questionObserver){questionObserver.disconnect();questionObserver=null}
-    const cards=[...document.querySelectorAll('.series-question')];
-    if(!cards.length)return;
-    if('IntersectionObserver' in window){
-      questionObserver=new IntersectionObserver(entries=>{
-        const visible=entries.filter(e=>e.isIntersecting).sort((a,b)=>Math.abs(a.boundingClientRect.top-150)-Math.abs(b.boundingClientRect.top-150));
-        if(visible[0])setCurrentOmr(visible[0].target.dataset.q);
-      },{root:null,rootMargin:'-110px 0px -62% 0px',threshold:[0,.05,.25]});
-      cards.forEach(card=>questionObserver.observe(card));
-    }
+    // V51 uses a single-question stage, so the active question is controlled directly.
   }
   function renderOmr(){
     if(!omrGrid)return;
@@ -155,7 +191,7 @@ const QUIZ_PROFILE_KEY='mceStudentProfileV2';
     omrGrid.innerHTML=Array.from({length:total},(_,i)=>`<button type="button" class="omr-q unanswered" data-q="${i+1}" aria-label="Go to question ${i+1}" title="Go to Question ${i+1}">${i+1}</button>`).join('');
     omrGrid.querySelectorAll('.omr-q').forEach(b=>b.addEventListener('click',()=>jumpToQuestion(b.dataset.q)));
     updateOmr();
-    setCurrentOmr(1);
+    setCurrentOmr(currentSet?.questions?.[currentQuestionIndex]?.n||1);
   }
   function updateOmr(){
     const total=currentSet?.questions?.length||50;
@@ -195,14 +231,15 @@ const QUIZ_PROFILE_KEY='mceStudentProfileV2';
   }
   function loadSet(id,scroll=false){
     const set=getSet(id);if(!set)return;
-    currentSet=set;submitted=false;stopTimer();resetTimer();
+    currentSet=set;submitted=false;currentQuestionIndex=0;stopTimer();resetTimer();
     if(activeLabel)activeLabel.textContent=set.label;
     if(activeType)activeType.textContent=set.kind==='pyq'?'Previous Years Question Practice':'Exam Trend Sample Paper Practice';
     if(modeBadge)modeBadge.textContent=set.label;
     if(activeMeta)activeMeta.textContent=`50 questions • 200 marks • 50 minutes • +4 correct • −1.33 wrong • ${set.kind==='pyq'?'Authentic PYQ':'Source: Practice Book Sample Paper'}`;
     [submitBtn,submitOmrBtn,resetBtn,startTimerBtn,pauseTimerBtn,resetTimerBtn].forEach(b=>{if(b)b.disabled=false});
+    if(questionNav)questionNav.classList.remove('hidden');
     if(scoreBox){scoreBox.classList.add('hidden');scoreBox.innerHTML=''}
-    let lastContext='',lastCategory='';
+    let lastContext='',lastCategory='',carryDirectionBlock='',carryContextBlock='';
     quizContainer.innerHTML=set.questions.map((q,i)=>{
       const sourceContext=q.c||'';
       const sourceDirection=q.d||'';
@@ -229,12 +266,23 @@ const QUIZ_PROFILE_KEY='mceStudentProfileV2';
         directionBlock=needsDirection?directionHtml(category,sourceDirection||(sourceIsDirection?sourceContext:'')):'';
         if(q.c && !isDirectionText(sourceContext)) contextBlock=contextHtml(q.c,false,'Source Context');
       }
+      if(directionBlock)carryDirectionBlock=directionBlock;
+      else if(category!==lastCategory)carryDirectionBlock=directionHtml(category,'');
+      if(contextBlock)carryContextBlock=contextBlock;
+      else if((q.c||q.d) && !actualPassage)carryContextBlock='';
+      const displayDirection=directionBlock||carryDirectionBlock;
+      const displayContext=contextBlock||carryContextBlock;
       lastCategory=category;
-      return `${directionBlock}<article class="quiz-card series-question" data-q="${q.n}" data-index="${i}"><div class="quiz-card-top"><span class="quiz-type">${esc(category)}</span><span class="quiz-num">Q${q.n}</span></div>${contextBlock}${q.q?`<h3>${highlightQuestionText(q,category)}</h3>`:''}<div class="quiz-options">${opts}</div><div class="quiz-explainer hidden" id="sexp${q.n}"></div></article>`;
+      return `<section class="question-slide${i===0?' active':''}" data-index="${i}" data-q="${q.n}" ${i===0?'':'hidden'} aria-hidden="${i===0?'false':'true'}">${displayDirection}${displayContext}<article class="quiz-card series-question" data-q="${q.n}" data-index="${i}"><div class="quiz-card-top"><span class="quiz-type">${esc(category)}</span><span class="quiz-num">Question ${q.n} of ${set.questions.length}</span></div>${q.q?`<h3>${highlightQuestionText(q,category)}</h3>`:''}<div class="quiz-options">${opts}</div><div class="quiz-explainer hidden" id="sexp${q.n}"></div></article></section>`;
     }).join('');
-    quizContainer.querySelectorAll('input[type="radio"]').forEach(inp=>inp.addEventListener('change',()=>{updateOmr();const q=inp.closest('.series-question')?.dataset.q;if(q)setCurrentOmr(q)}));
+    quizContainer.querySelectorAll('input[type="radio"]').forEach(inp=>inp.addEventListener('change',()=>{
+      updateOmr();
+      const q=inp.closest('.series-question')?.dataset.q;
+      if(q)setCurrentOmr(q);
+    }));
     renderOmr();
     watchCurrentQuestion();
+    showQuestion(0,{scroll:false});
     history.replaceState(null,'',`quizzes.html?mode=${set.kind}&set=${encodeURIComponent(set.id)}`);
     if(window.MNEPortal)window.MNEPortal.logActivity('quiz_open',set.id,set.label,{kind:set.kind}).catch(()=>{});
     if(scroll)document.getElementById('quizArena')?.scrollIntoView({behavior:'smooth',block:'start'});
@@ -280,9 +328,25 @@ const QUIZ_PROFILE_KEY='mceStudentProfileV2';
       scoreBox.classList.remove('hidden');scoreBox.innerHTML=`<div class="print-result-brand"><strong>Mastering NDA/NA English</strong><span>Official Practice Result Sheet</span></div><div class="print-result-meta"><span><b>User:</b> ${userName}</span><span><b>Role:</b> ${userRole}</span>${classMeta}<span><b>Date:</b> ${resultDate}</span></div><div class="score-headline"><div class="score-title"><h3>Scorecard & Result Summary</h3><p>${auto?'Time is over — the paper was auto-submitted. ':'Paper submitted successfully. '}<b>${esc(currentSet.label)}</b></p></div><div class="score-badge">${grade}</div></div><div class="score-grid"><div class="score-card"><b>${correct}</b><span>Correct</span></div><div class="score-card"><b>${wrong}</b><span>Incorrect</span></div><div class="score-card"><b>${unattempted}</b><span>Unattempted</span></div><div class="score-card"><b>${accuracy.toFixed(1)}%</b><span>Accuracy</span></div><div class="score-card"><b>${overall.toFixed(1)}%</b><span>Overall</span></div><div class="score-card"><b>${marks}</b><span>Marks / 200</span></div></div><div class="section-head" style="margin-top:18px"><div><div class="section-kicker">Category-wise Performance</div><h2 class="section-title" style="font-size:28px">Your strengths and revision areas</h2></div></div><div class="section-score-grid">${catHtml}</div><div class="result-actions"><a class="btn btn-primary" href="dashboard.html">User Dashboard</a><button class="btn btn-outline" type="button" id="printSeriesResultBtn">Print Result Sheet</button></div>`;scoreBox.scrollIntoView({behavior:'smooth',block:'start'});document.getElementById('printSeriesResultBtn')?.addEventListener('click',printResultOnly)}
     currentSet.questions.forEach(q=>{const b=omrGrid?.querySelector(`[data-q="${q.n}"]`),sel=document.querySelector(`input[name="sq${q.n}"]:checked`),accepted=Array.isArray(q.a)?q.a:[q.a];b?.classList.remove('answered','unanswered','correct','wrong','unattempted');if(!sel)b?.classList.add('unattempted');else if(accepted.includes(Number(sel.value)))b?.classList.add('correct');else b?.classList.add('wrong')});
     if(answeredCount)answeredCount.textContent=String(attempted);if(leftCount)leftCount.textContent=String(unattempted);
+    updateQuestionNav();
     saveAttempt({correct,incorrect:wrong,unattempted,accuracy:Number(accuracy.toFixed(1)),overall:Number(overall.toFixed(1)),marks},cats);
   }
-  function clearQuiz(){if(!currentSet)return;if(submitBtn)submitBtn.disabled=false;if(submitOmrBtn)submitOmrBtn.disabled=false;document.querySelectorAll('#seriesQuizQuestions input[type="radio"]').forEach(i=>i.checked=false);document.querySelectorAll('#seriesQuizQuestions .quiz-option').forEach(x=>x.classList.remove('correct','wrong'));document.querySelectorAll('#seriesQuizQuestions .quiz-explainer').forEach(x=>{x.classList.add('hidden');x.innerHTML=''});if(scoreBox){scoreBox.classList.add('hidden');scoreBox.innerHTML=''}submitted=false;resetTimer();renderOmr()}
+  function clearQuiz(){if(!currentSet)return;if(submitBtn)submitBtn.disabled=false;if(submitOmrBtn)submitOmrBtn.disabled=false;document.querySelectorAll('#seriesQuizQuestions input[type="radio"]').forEach(i=>i.checked=false);document.querySelectorAll('#seriesQuizQuestions .quiz-option').forEach(x=>x.classList.remove('correct','wrong'));document.querySelectorAll('#seriesQuizQuestions .quiz-explainer').forEach(x=>{x.classList.add('hidden');x.innerHTML=''});if(scoreBox){scoreBox.classList.add('hidden');scoreBox.innerHTML=''}submitted=false;currentQuestionIndex=0;resetTimer();renderOmr();showQuestion(0,{scroll:false})}
+  prevQuestionBtn?.addEventListener('click',()=>showQuestion(currentQuestionIndex-1,{scroll:true}));
+  nextQuestionBtn?.addEventListener('click',()=>{
+    if(!currentSet)return;
+    if(currentQuestionIndex<currentSet.questions.length-1)showQuestion(currentQuestionIndex+1,{scroll:true});
+    else{
+      setCurrentOmr(currentSet.questions[currentQuestionIndex]?.n||currentSet.questions.length);
+      try{document.getElementById('seriesOmrPanel')?.scrollIntoView({behavior:'smooth',block:'nearest'})}catch{}
+    }
+  });
+  clearQuestionBtn?.addEventListener('click',()=>{
+    if(!currentSet||submitted)return;
+    const q=currentSet.questions[currentQuestionIndex];if(!q)return;
+    document.querySelectorAll(`input[name="sq${q.n}"]`).forEach(inp=>inp.checked=false);
+    updateOmr();setCurrentOmr(q.n);
+  });
   kindButtons.forEach(b=>b.addEventListener('click',()=>renderSetLibrary(b.dataset.seriesKind)));
   submitBtn?.addEventListener('click',()=>submitQuiz(false));submitOmrBtn?.addEventListener('click',()=>submitQuiz(false));resetBtn?.addEventListener('click',clearQuiz);startTimerBtn?.addEventListener('click',startTimer);pauseTimerBtn?.addEventListener('click',pauseTimer);resetTimerBtn?.addEventListener('click',resetTimer);
   const dailySet=sets[(dayNumber()%sets.length+sets.length)%sets.length];
