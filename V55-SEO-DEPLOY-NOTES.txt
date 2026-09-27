@@ -1,0 +1,14 @@
+V55 — SEO Foundation & Content Discovery Update
+
+Implemented:
+- Eight focused NDA English SEO guide pages: syllabus, exam pattern, PYQ hub, mock tests, grammar, vocabulary, GAT English and preparation strategy.
+- Each new guide includes a descriptive title, meta description, canonical URL, index/follow directive and basic structured data.
+- New internal links connect the guide pages with PYQs, online practice and study resources.
+- Added a dedicated 2015–2026 NDA English PYQ hub.
+- Added responsive SEO guide styling in assets/css/seo-v55.css.
+- Updated sitemap.xml so Google can discover the eight new guide pages alongside the existing public pages and year-wise PYQ pages.
+- Kept robots.txt pointed to the same sitemap URL and blocked the admin page from crawling.
+- Existing question-bank/PYQ PDFs, quiz questions, options, answers, explanations, Supabase logic, dashboards and test engine files were not edited.
+
+Google Search Console:
+The existing sitemap submission remains valid because the sitemap URL is unchanged. After deployment, Google can re-read the updated sitemap automatically. Use URL Inspection selectively for the new high-value guide pages after deployment.

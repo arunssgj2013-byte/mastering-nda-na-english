@@ -1,0 +1,19 @@
+{
+  "version": "V55",
+  "date": "2026-09-27",
+  "name": "SEO Foundation & Content Discovery Update",
+  "new_files": [
+    "sitemap.xml",
+    "robots.txt",
+    "nda-english-syllabus.html",
+    "nda-english-exam-pattern.html",
+    "nda-english-pyq.html",
+    "nda-english-mock-test.html",
+    "nda-english-grammar.html",
+    "nda-english-vocabulary.html",
+    "nda-gat-english.html",
+    "nda-english-preparation.html",
+    "V55-SEO-DEPLOY-NOTES.txt"
+  ],
+  "protected_data_note": "Question banks, PYQ PDFs, quiz questions/options/answers/explanations unchanged."
+}
