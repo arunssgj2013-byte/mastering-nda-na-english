@@ -904,3 +904,39 @@ body.auth-modal-open{overflow:hidden}
   .mobile-browser-note b{font-weight:900;color:#8b6000}
 }
 @media print{.mobile-browser-note{display:none!important}}
+
+/* V54: compact two-choice Online Practice gateway */
+.quiz-command-hero{padding:34px 0 28px!important}
+.quiz-command-hero h1{font-size:clamp(34px,4vw,52px);margin:10px 0 10px}
+.practice-hero-copy{max-width:880px!important;font-size:14px;line-height:1.6;margin:0}
+.practice-gateway-section{padding:34px 0 58px!important;background:linear-gradient(180deg,#f7faff,#eef4fb)}
+.practice-gateway-head{max-width:900px;margin:0 auto 18px;text-align:center}
+.practice-gateway-head .section-title{font-size:34px;margin:5px 0 8px}
+.practice-gateway-head p{margin:0;color:var(--muted);font-size:13px}
+.practice-gateway-stack{display:grid;grid-template-columns:1fr;gap:16px;max-width:920px;margin:0 auto}
+.practice-choice-card{position:relative;overflow:hidden;border-radius:22px;padding:24px 28px;background:linear-gradient(135deg,#071a35,#123e74);color:#fff;border:1px solid rgba(255,255,255,.08);box-shadow:0 16px 38px rgba(7,26,53,.15)}
+.practice-choice-card:after{content:"";position:absolute;right:-55px;bottom:-75px;width:190px;height:190px;border-radius:50%;border:1px solid rgba(241,200,90,.18);pointer-events:none}
+.practice-choice-card.practice-choice-sample{background:linear-gradient(135deg,#0a2345,#184f86)}
+.practice-choice-copy{position:relative;z-index:1;max-width:760px}
+.practice-choice-label{display:inline-flex;color:#ffd878;font-size:10px;font-weight:900;letter-spacing:.13em;text-transform:uppercase;margin-bottom:5px}
+.practice-choice-card h2{font-family:Georgia,"Times New Roman",serif;font-size:30px;line-height:1.08;margin:3px 0 8px;color:#fff}
+.practice-choice-card p{margin:0;color:#d9e5f5;font-size:13px;line-height:1.55}
+.practice-choice-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}
+.practice-choice-tags span{display:inline-flex;align-items:center;min-height:28px;padding:0 10px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);font-size:9px;font-weight:800;color:#eef5ff}
+.practice-choice-action{position:relative;z-index:1;margin-top:16px;min-width:220px;box-shadow:0 10px 22px rgba(0,0,0,.14)}
+.practice-library-panel{padding-top:38px!important}
+.practice-library-tools{display:flex;align-items:center;margin-bottom:16px}
+.practice-back-btn{border:1px solid #cbd8e8;background:#fff;color:var(--navy);border-radius:999px;min-height:38px;padding:0 14px;font-size:10px;font-weight:900;cursor:pointer;box-shadow:0 6px 18px rgba(7,26,53,.05)}
+.practice-back-btn:hover{border-color:var(--gold);transform:translateY(-1px)}
+#quizArena{padding-top:34px!important}
+@media(max-width:650px){
+  .quiz-command-hero{padding:28px 0 22px!important}
+  .quiz-command-hero h1{font-size:34px}
+  .practice-gateway-section{padding:26px 0 42px!important}
+  .practice-gateway-head{text-align:left;margin-bottom:14px}
+  .practice-gateway-head .section-title{font-size:29px}
+  .practice-choice-card{padding:21px 20px;border-radius:18px}
+  .practice-choice-card h2{font-size:25px}
+  .practice-choice-action{width:100%;min-width:0}
+  .practice-choice-tags{gap:6px}
+}

@@ -37,9 +37,13 @@ const QUIZ_PROFILE_KEY='mceStudentProfileV2';
   const skipReviewBtn=document.getElementById('skipReviewQuestionBtn');
   const omrCurrentLabel=document.getElementById('seriesOmrCurrentLabel');
   const omrRangeLabel=document.getElementById('seriesOmrRangeLabel');
-  const dailyTitle=document.getElementById('dailyQuizTitle');
-  const dailyDesc=document.getElementById('dailyQuizDesc');
-  const dailyBtn=document.getElementById('startDailySetBtn');
+  const practiceGateway=document.getElementById('practiceGateway');
+  const setLibrarySection=document.getElementById('setLibrary');
+  const quizArenaSection=document.getElementById('quizArena');
+  const openPyqLibraryBtn=document.getElementById('openPyqLibraryBtn');
+  const openSampleLibraryBtn=document.getElementById('openSampleLibraryBtn');
+  const backToPracticeGatewayBtn=document.getElementById('backToPracticeGatewayBtn');
+  const backToSetLibraryBtn=document.getElementById('backToSetLibraryBtn');
   let currentKind='pyq', currentSet=null, timerSeconds=50*60, timerId=null, submitted=false, questionObserver=null, currentQuestionIndex=0;
   const reviewQuestions=new Set();
   const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
@@ -123,6 +127,28 @@ const QUIZ_PROFILE_KEY='mceStudentProfileV2';
     }
     return safe.replace(/\n/g,'<br>');
   }
+  function showGateway({scroll=false,updateUrl=true}={}){
+    stopTimer();
+    practiceGateway?.classList.remove('hidden');
+    setLibrarySection?.classList.add('hidden');
+    quizArenaSection?.classList.add('hidden');
+    mobileTestDock?.classList.remove('active');
+    document.body.classList.remove('quiz-test-active');
+    if(updateUrl)history.replaceState(null,'','quizzes.html');
+    if(scroll)practiceGateway?.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function showLibrary(kind,{scroll=true,updateUrl=true}={}){
+    if(kind!=='sample')kind='pyq';
+    stopTimer();
+    renderSetLibrary(kind);
+    practiceGateway?.classList.add('hidden');
+    setLibrarySection?.classList.remove('hidden');
+    quizArenaSection?.classList.add('hidden');
+    mobileTestDock?.classList.remove('active');
+    document.body.classList.remove('quiz-test-active');
+    if(updateUrl)history.replaceState(null,'',`quizzes.html?mode=${encodeURIComponent(kind)}`);
+    if(scroll)setLibrarySection?.scrollIntoView({behavior:'smooth',block:'start'});
+  }
   function renderSetLibrary(kind){
     currentKind=kind;
     kindButtons.forEach(b=>b.classList.toggle('active',b.dataset.seriesKind===kind));
@@ -132,7 +158,7 @@ const QUIZ_PROFILE_KEY='mceStudentProfileV2';
     if(seriesDescription)seriesDescription.textContent=kind==='pyq'?'Only manually corrected PYQ papers are published here. Each set preserves the supplied questions, directions, answer key and explanations.':'Only manually corrected Sample Papers are published here.';
     if(!grid)return;
     if(!list.length){grid.innerHTML='<div class="quiz-empty-state"><strong>No verified set published yet</strong><span>More corrected papers will be added progressively.</span></div>';return;}
-    grid.innerHTML=list.map((s,i)=>`<button class="series-set-card" type="button" data-set-id="${esc(s.id)}"><span class="series-set-no">${String(i+1).padStart(2,'0')}</span><div><small>MANUALLY VERIFIED PAPER</small><h3>${esc(s.label)}</h3><p>50 Questions • 200 Marks • 50 Minutes • Source-corrected</p></div><span class="series-go">Start →</span></button>`).join('');
+    grid.innerHTML=list.map((s,i)=>`<button class="series-set-card" type="button" data-set-id="${esc(s.id)}"><span class="series-set-no">${String(i+1).padStart(2,'0')}</span><div><small>${kind==='pyq'?'MANUALLY VERIFIED PYQ':'SAMPLE PRACTICE PAPER'}</small><h3>${esc(s.label)}</h3><p>50 Questions • 200 Marks • 50 Minutes • ${kind==='pyq'?'Source-corrected':'Exam-oriented practice'}</p></div><span class="series-go">Attempt →</span></button>`).join('');
     grid.querySelectorAll('[data-set-id]').forEach(btn=>btn.addEventListener('click',()=>guardedLoadSet(btn.dataset.setId,true,false)));
   }
   function setCurrentOmr(qNum){
@@ -253,6 +279,9 @@ const QUIZ_PROFILE_KEY='mceStudentProfileV2';
   function loadSet(id,scroll=false){
     const set=getSet(id);if(!set)return;
     currentSet=set;submitted=false;currentQuestionIndex=0;reviewQuestions.clear();stopTimer();resetTimer();
+    practiceGateway?.classList.add('hidden');
+    setLibrarySection?.classList.add('hidden');
+    quizArenaSection?.classList.remove('hidden');
     if(activeLabel)activeLabel.textContent=set.label;
     if(activeType)activeType.textContent=set.kind==='pyq'?'Previous Years Question Practice':'Exam Trend Sample Paper Practice';
     if(modeBadge)modeBadge.textContent=set.label;
@@ -386,11 +415,19 @@ const QUIZ_PROFILE_KEY='mceStudentProfileV2';
     reviewQuestions.delete(String(q.n));
     updateOmr();setCurrentOmr(q.n);updateQuestionNav();
   });
-  kindButtons.forEach(b=>b.addEventListener('click',()=>renderSetLibrary(b.dataset.seriesKind)));
+  kindButtons.forEach(b=>b.addEventListener('click',()=>showLibrary(b.dataset.seriesKind)));
+  openPyqLibraryBtn?.addEventListener('click',()=>showLibrary('pyq'));
+  openSampleLibraryBtn?.addEventListener('click',()=>showLibrary('sample'));
+  backToPracticeGatewayBtn?.addEventListener('click',()=>showGateway({scroll:true}));
+  backToSetLibraryBtn?.addEventListener('click',()=>showLibrary(currentSet?.kind||currentKind,{scroll:true}));
   submitBtn?.addEventListener('click',()=>submitQuiz(false));submitOmrBtn?.addEventListener('click',()=>submitQuiz(false));submitMobileBtn?.addEventListener('click',()=>submitQuiz(false));resetBtn?.addEventListener('click',clearQuiz);startTimerBtn?.addEventListener('click',startTimer);pauseTimerBtn?.addEventListener('click',pauseTimer);resetTimerBtn?.addEventListener('click',resetTimer);
-  const dailySet=sets[(dayNumber()%sets.length+sets.length)%sets.length];
-  if(dailyTitle)dailyTitle.textContent=dailySet.label;if(dailyDesc)dailyDesc.textContent=`Today’s automatic ${dailySet.kind==='pyq'?'Previous Years Question':'Trend Practice Sample Paper'} set — 50 source-based questions.`;dailyBtn?.addEventListener('click',()=>{renderSetLibrary(dailySet.kind);guardedLoadSet(dailySet.id,true,true)});
   const params=new URLSearchParams(location.search);let mode=params.get('mode');let setId=params.get('set');
   if(!mode&&setId){const found=getSet(setId);if(found)mode=found.kind}
-  if(mode!=='sample')mode='pyq';renderSetLibrary(mode);if(setId&&getSet(setId))guardedLoadSet(setId,false,false);
+  if(setId&&getSet(setId)){
+    const found=getSet(setId);renderSetLibrary(found.kind);guardedLoadSet(setId,false,false);
+  }else if(mode==='sample'||mode==='pyq'){
+    showLibrary(mode,{scroll:false,updateUrl:false});
+  }else{
+    showGateway({scroll:false,updateUrl:false});
+  }
 })();
