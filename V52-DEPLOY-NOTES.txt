@@ -1,0 +1,33 @@
+MASTERING NDA/NA ENGLISH — V52 DEPLOYMENT NOTES
+
+UPDATE: ABOUT NDA EXAM INFORMATION HUB
+
+What changed
+------------
+1. Added “About NDA Exam” immediately after Home in the main navigation.
+2. Added a polished desktop dropdown and mobile accordion-style submenu.
+3. Added one comprehensive, maintainable page: about-nda.html.
+4. Dropdown sections:
+   • NDA/NA Overview
+   • Eligibility Criteria
+   • Exam Structure
+   • NDA/NA Syllabus
+   • Written Exam Pattern
+   • GAT & English
+   • Selection Process
+   • SSB & Medical
+5. Written Exam Pattern covers Mathematics + complete GAT before the English-specific section.
+6. Added current paper-format details: Maths 120 Q / 300; GAT 150 Q / 600; English 50 Q / 200; GK 100 Q / 400.
+7. Added one-third negative-marking rule and concise SSB Stage I / Stage II information.
+8. Eligibility age is deliberately notification-specific; the page tells candidates to use the exact DOB window in the applicable UPSC notice.
+9. Added official UPSC/NDA reference links and “verified 26 September 2026” accuracy note.
+10. Existing theme, books, resources, question banks, PYQs, quizzes, Supabase/auth, dashboard, admin and result functionality were not redesigned or removed.
+
+Deployment
+----------
+FULL ZIP: upload/extract the complete V52 deployment package over the current site.
+PATCH ZIP: upload the patch contents preserving the same folder structure.
+
+Important
+---------
+Do not delete the assets folder. The new About NDA page reuses the existing NDA building image and site branding.

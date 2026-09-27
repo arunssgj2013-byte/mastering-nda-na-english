@@ -1,0 +1,370 @@
+{
+  "version": "52",
+  "title": "About NDA Exam Navigation & Information Hub",
+  "built_from": "mastering_nda_na_english_v51_deploy.zip",
+  "verified_date": "2026-09-26",
+  "changed_files": [
+    "V52-DEPLOY-NOTES.txt",
+    "about-nda.html",
+    "assets/css/styles.css",
+    "assets/js/site.js",
+    "author-contact.html",
+    "books.html",
+    "dashboard.html",
+    "index.html",
+    "practice.html",
+    "pyq-2015.html",
+    "pyq-2016.html",
+    "pyq-2017.html",
+    "pyq-2018.html",
+    "pyq-2019.html",
+    "pyq-2020.html",
+    "pyq-2021.html",
+    "pyq-2022.html",
+    "pyq-2023.html",
+    "pyq-2024.html",
+    "pyq-2025.html",
+    "pyq-2026.html",
+    "quizzes.html",
+    "resources.html"
+  ],
+  "navigation_pages": [
+    "about-nda.html",
+    "author-contact.html",
+    "books.html",
+    "dashboard.html",
+    "index.html",
+    "practice.html",
+    "pyq-2015.html",
+    "pyq-2016.html",
+    "pyq-2017.html",
+    "pyq-2018.html",
+    "pyq-2019.html",
+    "pyq-2020.html",
+    "pyq-2021.html",
+    "pyq-2022.html",
+    "pyq-2023.html",
+    "pyq-2024.html",
+    "pyq-2025.html",
+    "pyq-2026.html",
+    "quizzes.html",
+    "resources.html"
+  ],
+  "protected_data_fingerprints": [
+    {
+      "file": "assets/grammar/100-Golden-Rules-of-English-Grammar.pdf",
+      "sha256": "325cfe42af19ce03df2d8d0fc20f849843b7fbd2dd09613b50d891d1b2db06c1",
+      "bytes": 2259647
+    },
+    {
+      "file": "assets/js/quiz-bank.js",
+      "sha256": "bbf89b6b432271fa7c472d89292a01eb82f070dc3dd5069b908721153f9e29e6",
+      "bytes": 25456
+    },
+    {
+      "file": "assets/js/quiz-series.js",
+      "sha256": "ce3c3cfd3267e8e8a95fc289c92ff996034007c1bc44a5f9f08a8eea22479d74",
+      "bytes": 393447
+    },
+    {
+      "file": "assets/nda-mastery/MCE-NDA-01-Noun.pdf",
+      "sha256": "77c6fa4f74cc86ed35a3192a97b588c4017676dabb705fb206f5dbb3393e4fb5",
+      "bytes": 2244092
+    },
+    {
+      "file": "assets/nda-mastery/MCE-NDA-02-Pronoun.pdf",
+      "sha256": "8213d8960b35ffd4795e7da0690ab4743d129f497efbce51e2f6462c5d03087c",
+      "bytes": 2635220
+    },
+    {
+      "file": "assets/nda-mastery/MCE-NDA-03-Adjective.pdf",
+      "sha256": "30bc578c5789b81ec925236f2543e9387822f2090f94b09f21b3a54bfc736151",
+      "bytes": 2345527
+    },
+    {
+      "file": "assets/nda-mastery/MCE-NDA-04-Determiners.pdf",
+      "sha256": "a3accc17cfeec0525e9b19e1c585ed4d8c900108cd72e6b3bf2227235d677c6c",
+      "bytes": 2305573
+    },
+    {
+      "file": "assets/nda-mastery/MCE-NDA-05-Adverb.pdf",
+      "sha256": "ed4dc6e591e7b3ffb58fd4d880e6e7ac5c3532604cd20e4165359a951a040a85",
+      "bytes": 2561075
+    },
+    {
+      "file": "assets/nda-mastery/MCE-NDA-06-Subject-Verb-Agreement.pdf",
+      "sha256": "2dc8b65a6674532d8a4e30030ef8f6c2ecb3091ea3a9fe984ed167c94df755b7",
+      "bytes": 2333524
+    },
+    {
+      "file": "assets/nda-mastery/MCE-NDA-07-Conjunctions.pdf",
+      "sha256": "c371735564f05aac1197dde5ba5bfc1aa388a24f5db4f6229f7b84ebc776b49e",
+      "bytes": 2352487
+    },
+    {
+      "file": "assets/nda-mastery/MCE-NDA-08-Fill-in-the-Blanks.pdf",
+      "sha256": "8a8c37a0c5ce73aee3a9b797121403548633c6614948a2ef48d0ba2b5fde8946",
+      "bytes": 2971628
+    },
+    {
+      "file": "assets/nda-mastery/MCE-NDA-09-Spotting-Errors.pdf",
+      "sha256": "fc7609c2b6dbfb6837ed796ed487e4d7060a7034b77100494e81b6886355d25e",
+      "bytes": 3168017
+    },
+    {
+      "file": "assets/nda-mastery/MCE-NDA-10-Sentence-Improvement.pdf",
+      "sha256": "2b3139dbc2e8929e46be63ec6e099190e3dd1313ab4125b1d539ae1c78654144",
+      "bytes": 2156488
+    },
+    {
+      "file": "assets/nda-mastery/MCE-NDA-11-Ordering-Words-Sentences.pdf",
+      "sha256": "acd074440ce9d3b26f94207c84a669e16dc856270b0e485e4ab03ceba7b85c44",
+      "bytes": 4817628
+    },
+    {
+      "file": "assets/nda-mastery/MCE-NDA-12-Active-Passive-Voice.pdf",
+      "sha256": "391a12894955812293bbbd6d235f5b82b94df1ce8865db200f3ad8ddaa46f079",
+      "bytes": 2231630
+    },
+    {
+      "file": "assets/nda-mastery/MCE-NDA-13-Narration.pdf",
+      "sha256": "82b2236380c754c2e0e635221c898dbc33a8d9af19b236c551bbb41eef4be3d5",
+      "bytes": 2230463
+    },
+    {
+      "file": "assets/nda-mastery/MCE-NDA-14-Question-Tags.pdf",
+      "sha256": "a3f44b2abbc3c476230070e779bba90ea797672de9a64454e1e26393e3c8a942",
+      "bytes": 2294007
+    },
+    {
+      "file": "assets/nda-mastery/MCE-NDA-15-Conditionals-Infinitives-Gerunds.pdf",
+      "sha256": "244772304aac5f805c2448b86716b77e6d40e3d65b3747acc5f54ea2668a9fd9",
+      "bytes": 2193991
+    },
+    {
+      "file": "assets/nda-mastery/MCE-NDA-16-Reading-Comprehension.pdf",
+      "sha256": "91c2c2f1a6939ef6a68c3a10ec28afd968fea01884b9d717eb2bab004587e75b",
+      "bytes": 2933304
+    },
+    {
+      "file": "assets/nda-mastery/MCE-NDA-17-Word-Class.pdf",
+      "sha256": "f7431b930395e2cb0e1761da0a342f94bacf4da1d026ea26b59b74b4fccb81b0",
+      "bytes": 2217145
+    },
+    {
+      "file": "assets/nda-mastery/MCE-NDA-18-Commonly-Misspelled-Words.pdf",
+      "sha256": "c4596ddaa63df05b697ddf008ebec4c632b59273384f2b452694e310b8348e47",
+      "bytes": 2097612
+    },
+    {
+      "file": "assets/pyq/NDA-NA-English-2015-I.pdf",
+      "sha256": "6de166f61a02f49bb627e1a778a394e76229b895c440ac0dca5875750a3082d0",
+      "bytes": 106451
+    },
+    {
+      "file": "assets/pyq/NDA-NA-English-2015-II.pdf",
+      "sha256": "2e5b162a10edc9340762ef2b7bb69dde41153a96ff15570e67f1560407131c98",
+      "bytes": 95751
+    },
+    {
+      "file": "assets/pyq/NDA-NA-English-2016-I.pdf",
+      "sha256": "f8cffab1da1632aa1e42416ce27fb660423500272260e08ff1f07af521f13536",
+      "bytes": 109993
+    },
+    {
+      "file": "assets/pyq/NDA-NA-English-2016-II.pdf",
+      "sha256": "7105789d244efc9d7dfc62bd4f58803affe1525da7005131d3a5ecea784b6563",
+      "bytes": 108157
+    },
+    {
+      "file": "assets/pyq/NDA-NA-English-2017-I.pdf",
+      "sha256": "0067f5776c6112596122b4b3acc3336b0176d52110d4bfea670dcead93c87cab",
+      "bytes": 106152
+    },
+    {
+      "file": "assets/pyq/NDA-NA-English-2017-II.pdf",
+      "sha256": "63b9eeeb679c11abab03d96175fedc470a999cf055861435a0b437f55b24d509",
+      "bytes": 98566
+    },
+    {
+      "file": "assets/pyq/NDA-NA-English-2018-I.pdf",
+      "sha256": "9f89fb0c93fba62bd169fae41a34ee1b3fd4463c348b0e19f505a1545396c8c2",
+      "bytes": 111962
+    },
+    {
+      "file": "assets/pyq/NDA-NA-English-2018-II.pdf",
+      "sha256": "4e9018ba3738b4930b8e99ad93d6207ad408e98159e01cd46d339cd2a94fb115",
+      "bytes": 107876
+    },
+    {
+      "file": "assets/pyq/NDA-NA-English-2019-I.pdf",
+      "sha256": "c58502468b9ac2616e88f0a083b8fc9691ef1ae06149fa04ceedd40e977a74ae",
+      "bytes": 112391
+    },
+    {
+      "file": "assets/pyq/NDA-NA-English-2019-II.pdf",
+      "sha256": "8d7ef86e634eb64195efc8edc8ecfea3d566f83618797db4c63543152f7ccb0c",
+      "bytes": 108102
+    },
+    {
+      "file": "assets/pyq/NDA-NA-English-2020-I-II.pdf",
+      "sha256": "6f19f1172e0cc7b514cac8cbe17c13291dc30e29c22fcf3e2c850bfe343392ff",
+      "bytes": 97062
+    },
+    {
+      "file": "assets/pyq/NDA-NA-English-2021-I.pdf",
+      "sha256": "85f65d43527ca5e9520f3b5255cb77d5eae80bbc5a0dda8b5dad702c1b5d07b6",
+      "bytes": 103839
+    },
+    {
+      "file": "assets/pyq/NDA-NA-English-2022-I.pdf",
+      "sha256": "8aa8ae7908aa5c8f526076fbfb394324b058ec0c14e0c93dd2aa428e41393984",
+      "bytes": 104882
+    },
+    {
+      "file": "assets/pyq/NDA-NA-English-2022-II.pdf",
+      "sha256": "a2b49a52de1996b9838057cdb55aa4a33c71f60b787c46140ced3a5d9b625b61",
+      "bytes": 97011
+    },
+    {
+      "file": "assets/pyq/NDA-NA-English-2023-I.pdf",
+      "sha256": "208f403a449e46d90bb4da33b6925c7eba7ea7fd21939e61d8324a54b3da9cbd",
+      "bytes": 103413
+    },
+    {
+      "file": "assets/pyq/NDA-NA-English-2023-II.pdf",
+      "sha256": "98e761b1a75dde78856f6a9befbcc62d86041f454368b68c891348d0f00053b7",
+      "bytes": 113844
+    },
+    {
+      "file": "assets/pyq/NDA-NA-English-2024-I.pdf",
+      "sha256": "865d034ed371af4c6569bf8bfeb4a2d47416179409a7efb722b7a2e847358776",
+      "bytes": 107690
+    },
+    {
+      "file": "assets/pyq/NDA-NA-English-2024-II.pdf",
+      "sha256": "399b4a0982ab4951e9f8219b0f87b975d45ca2ee3b83ebf75d3b306b9c35e9d7",
+      "bytes": 106734
+    },
+    {
+      "file": "assets/pyq/NDA-NA-English-2025-I.pdf",
+      "sha256": "20712d81e53bb6f81c356377b35547a90c55a225cbb12930542480f3742315a3",
+      "bytes": 116964
+    },
+    {
+      "file": "assets/pyq/NDA-NA-English-2025-II.pdf",
+      "sha256": "aa7165a0e31a2b9d6e05b6eb52981a493c6ffa4c6610191daaf61446b0b8e8f9",
+      "bytes": 110459
+    },
+    {
+      "file": "assets/pyq/NDA-NA-English-2026-I.pdf",
+      "sha256": "ab5167564aecc43b31a09e5e88c276094981c615456b4c812b27347d9f4f2734",
+      "bytes": 93022
+    },
+    {
+      "file": "assets/pyq/NDA-NA-English-2026-II.pdf",
+      "sha256": "6a767bbbd06d339d4d484d59555ef6092d498a7bcaee468bd43d83ad94f36921",
+      "bytes": 115580
+    },
+    {
+      "file": "assets/question-bank/MCE-QB-01-Synonyms-PYQs.pdf",
+      "sha256": "b97cdbe4aadbc91ed3c4523a1ced73ce0a2b9a22edaad5eeae6bb5d051522884",
+      "bytes": 2137518
+    },
+    {
+      "file": "assets/question-bank/MCE-QB-02-Antonyms-PYQs.pdf",
+      "sha256": "cc0e15de17b3db469bde671d1737d1ba13561f256847c1c6ac5c8c132fb17590",
+      "bytes": 2022900
+    },
+    {
+      "file": "assets/question-bank/MCE-QB-03-Idioms-Phrases-PYQs.pdf",
+      "sha256": "afae683900a7937040a58548e9fb0e0e6cee2ecf28d063d75746f1a4e0440d3a",
+      "bytes": 917715
+    },
+    {
+      "file": "assets/question-bank/MCE-QB-04-Fill-in-the-Blanks-PYQs.pdf",
+      "sha256": "23c4d40d9386bfb5a746c2d51f4460c10d782679189967649c5a553c345d3c83",
+      "bytes": 1880870
+    },
+    {
+      "file": "assets/question-bank/MCE-QB-05-Spotting-Errors-PYQs.pdf",
+      "sha256": "6f86ebaf7d0d413f0515eaa678749c72ad8d9b9c4e254ee6ab1c3a6f3911ea8d",
+      "bytes": 1946851
+    },
+    {
+      "file": "assets/question-bank/MCE-QB-06-Sentence-Improvement-PYQs.pdf",
+      "sha256": "6505be157905db3532a0734444e2626279cd773cf6eaeafff987487f5cebd7a2",
+      "bytes": 960653
+    },
+    {
+      "file": "assets/question-bank/MCE-QB-07-Ordering-of-Words-PYQs.pdf",
+      "sha256": "f308b2e5276012bfd4adab33c7b05b7073fffd252a8a71a8434cd3ddb9339423",
+      "bytes": 2180520
+    },
+    {
+      "file": "assets/question-bank/MCE-QB-08-Sentence-Ordering-PYQs.pdf",
+      "sha256": "e0257081ce2aff706566864fcb0343101221940cbf8e30a2887249b684e68088",
+      "bytes": 2091799
+    },
+    {
+      "file": "assets/question-bank/MCE-QB-09-Reading-Comprehension-PYQs.pdf",
+      "sha256": "f6988b14df92bedddc7478cd31c18513397e86ec8c862dda24565d31f9e38e63",
+      "bytes": 1806099
+    },
+    {
+      "file": "assets/question-bank/MCE-QB-10-Grammar-at-a-Glance.pdf",
+      "sha256": "22f492bdd66f32d59f8e151c000ebc13c4f7754c2422de132712f75398d2fde4",
+      "bytes": 1368777
+    },
+    {
+      "file": "assets/vocabulary/MCE-Vocabulary-01-Synonyms.pdf",
+      "sha256": "834e6148c97c1ec445cc185eec95ff96e5236f113f6f181c6b38658fe43b4fac",
+      "bytes": 5323004
+    },
+    {
+      "file": "assets/vocabulary/MCE-Vocabulary-02-Antonyms.pdf",
+      "sha256": "46bdc7de61d7d659a5508f08356ed1b937b12ef32ff779c9e117d4846da0ee55",
+      "bytes": 4973489
+    },
+    {
+      "file": "assets/vocabulary/MCE-Vocabulary-03-Idioms-and-Phrases.pdf",
+      "sha256": "d6dc3e3d8650e54d13ad7a9a3f4a353f2d054488b3e9292e5b8953b316619915",
+      "bytes": 5607699
+    },
+    {
+      "file": "assets/vocabulary/MCE-Vocabulary-04-Phrasal-Verbs.pdf",
+      "sha256": "5f998cf79891aa46f3a95d3a4ce9c9efb419abe1104e3a021b328c14b425282f",
+      "bytes": 4593656
+    },
+    {
+      "file": "assets/vocabulary/MCE-Vocabulary-05-Prepositional-Collocations.pdf",
+      "sha256": "b3140988189385a03fd2adec66c9c78016813d2e8948a6e45f92bfd1a24cf754",
+      "bytes": 5424146
+    },
+    {
+      "file": "assets/vocabulary/MCE-Vocabulary-06-Homonyms-and-Confusing-Words.pdf",
+      "sha256": "e6464995e120002ccf5daf3f47282d7b7943e35c9864bf2a989043dbc85eb8a7",
+      "bytes": 5848143
+    },
+    {
+      "file": "assets/vocabulary/MCE-Vocabulary-07-One-Word-Substitutions.pdf",
+      "sha256": "a68c5ca01faf0d2169356d2202af1189dd48e2da6c165549e114690c1151c4c2",
+      "bytes": 5705959
+    },
+    {
+      "file": "assets/vocabulary/MCE-Vocabulary-08-Prepositional-Phrases.pdf",
+      "sha256": "9d79e81e104c179476c934e3c7fedf93556060d5d71b4547f646f0345f2bdc39",
+      "bytes": 2009718
+    },
+    {
+      "file": "assets/vocabulary/MCE-Vocabulary-09-Root-Words-Prefixes-Suffixes.pdf",
+      "sha256": "db9c5541a166aed7e43c53ac519470cec3b31fe1c1fb36112caaf8ccf7daa845",
+      "bytes": 1966880
+    },
+    {
+      "file": "assets/vocabulary/MCE-Vocabulary-Learning-Guide.pdf",
+      "sha256": "76d318ced53ec11764513a852fdf3b374e8ccaaa9a4183df7b40719607d41bf2",
+      "bytes": 1219010
+    }
+  ]
+}
