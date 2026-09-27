@@ -1,0 +1,117 @@
+{
+  "version": "V52R1",
+  "base_version": "V52",
+  "update": "About NDA Exam presentation refinement + Books navigation repositioning",
+  "changed_files": [
+    {
+      "path": "about-nda.html",
+      "sha256": "f5f56753c2245e36c524510dc8c02edfefd92237bb08eebbcb32c4f2c534e6ab",
+      "size": 20831
+    },
+    {
+      "path": "dashboard.html",
+      "sha256": "11c908f49963c0a86ed335d7a011edeac9bf67dc4a0fabe2025f9b9b6e848fcc",
+      "size": 7110
+    },
+    {
+      "path": "resources.html",
+      "sha256": "2c0b2c0e3c682018288a72029f5b59f7099bd66fbb558d689e8d45c5eb01dae8",
+      "size": 40570
+    },
+    {
+      "path": "books.html",
+      "sha256": "d58968cbf45b5b26ff2315af18d13c86db251dd0e9cce96d996c52efbe54a084",
+      "size": 10082
+    },
+    {
+      "path": "practice.html",
+      "sha256": "499310a229ffbc280c232443e3f9ede53866ad2f268f2a062e6a61e520edb808",
+      "size": 8141
+    },
+    {
+      "path": "index.html",
+      "sha256": "c675372197b80815bf6400efb71f9c9bda46a60743b5ea2221983ec1d23fa50a",
+      "size": 22837
+    },
+    {
+      "path": "author-contact.html",
+      "sha256": "b7e020b89a0ad519e9d5cef29d46d74ea4cc9578da72314f3f1260aee368438b",
+      "size": 6835
+    },
+    {
+      "path": "quizzes.html",
+      "sha256": "b340115bf66eac85d040580b58a1f7211c519c479acdfe3ab4a39838aa24a06c",
+      "size": 10350
+    },
+    {
+      "path": "pyq-2015.html",
+      "sha256": "d436a0fedda257187a428016636ec4cac4ed46d2046ff077c95ff84afa91d7de",
+      "size": 6516
+    },
+    {
+      "path": "pyq-2016.html",
+      "sha256": "f719a2e4451dce3afcd9dcc2f68d2b308dfd6a2f0488534924bed5fde9d3bf3a",
+      "size": 6502
+    },
+    {
+      "path": "pyq-2017.html",
+      "sha256": "094d96c48cb21febe6c6a4ffda76645855702c57ed1f620680b0d112c00f6673",
+      "size": 6502
+    },
+    {
+      "path": "pyq-2018.html",
+      "sha256": "84adbda116b75ae6a22a1a180c38d7b9b46b076714c4b2b4d841731f79f5d80f",
+      "size": 6531
+    },
+    {
+      "path": "pyq-2019.html",
+      "sha256": "35aef09ba8dad91320a589c96e6fb0bcaec0f4e38f943ee4f834d24a0b4832bf",
+      "size": 6464
+    },
+    {
+      "path": "pyq-2020.html",
+      "sha256": "a3d32f0485fa7ee0b5bfe6e4a05c101f281cb7faf9d3fe13f5293a923202c1f7",
+      "size": 5891
+    },
+    {
+      "path": "pyq-2021.html",
+      "sha256": "acbec628165612f9aa6b9d89dbc75bdc564befbe2fcd3fc114ca7a14d481bfbf",
+      "size": 5861
+    },
+    {
+      "path": "pyq-2022.html",
+      "sha256": "6ec168313bf9dfd398978cdf10949bfa9d06dd43e33cad9f7f1420a292124637",
+      "size": 6296
+    },
+    {
+      "path": "pyq-2023.html",
+      "sha256": "368ec608dc8c87467ba2c75f9c6a9c213a1d82d8647c48ce72bf72c48629e782",
+      "size": 6280
+    },
+    {
+      "path": "pyq-2024.html",
+      "sha256": "1995373dca5a7c997b1cd144293cc27122450d7b5965bb3247f7ae5473ee061a",
+      "size": 6280
+    },
+    {
+      "path": "pyq-2025.html",
+      "sha256": "7029ec5eede0f1ef14601324d8788f7ec403f3920349cfd19ae48b6f820d7fe9",
+      "size": 6235
+    },
+    {
+      "path": "pyq-2026.html",
+      "sha256": "015a3b6d8b5cb240795ccd537f824b0d397f851da8040a79734f998080ec22be",
+      "size": 6235
+    },
+    {
+      "path": "assets/css/styles.css",
+      "sha256": "5fda78057c45a1fc158dee9e7d6ebe00dbadf4d99c0b9d8076d4dcbdb98ce342",
+      "size": 143003
+    },
+    {
+      "path": "V52R1-DEPLOY-NOTES.txt",
+      "sha256": "a442a7f24192159585c1a6ce470345e8420cb3c325110a3170f5344aaedccbe4",
+      "size": 1194
+    }
+  ]
+}

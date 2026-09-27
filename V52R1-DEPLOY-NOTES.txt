@@ -1,0 +1,28 @@
+MASTERING NDA/NA ENGLISH — V52R1 PRESENTATION REFINEMENT
+
+Purpose
+- Refines the already deployed V52 About NDA Exam section for stronger readability and visual hierarchy.
+
+Presentation improvements
+- Stronger navy/gold section-heading panels.
+- Distinct soft background colours for each NDA information section.
+- Larger and bolder headings and body text.
+- More prominent exam-fact cards and score tiles.
+- Point-wise visual treatment for information cards.
+- Added clear labels such as KEY POINTS, SUBJECT-WISE SYLLABUS, PAPER-WISE PATTERN and STEP-BY-STEP FLOW.
+- Larger and clearer written-exam tables, syllabus lists, GAT cards and selection-flow blocks.
+- Improved mobile readability and spacing.
+
+Navigation adjustment
+- Books moved to immediately before Author & Contact in the main navigation.
+
+Preserved
+- NDA/NA factual content and page structure.
+- PYQ/question-bank questions, options, answers and explanations.
+- Supabase integration.
+- User Login/Register and User Hub.
+- Admin Dashboard.
+- Online tests, attempt tracking, result sheet and print-result-only features.
+
+Deployment
+- If V52 is already deployed, upload/replace the files in the V52R1 patch ZIP at the same paths.
