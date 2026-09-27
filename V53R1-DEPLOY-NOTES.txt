@@ -1,0 +1,8 @@
+Mastering NDA/NA English — V53R1 Mobile Guidance Notice
+Base: V53
+
+Change:
+1. Added a highlighted mobile-only note inside the question-attempt area:
+   “Mobile User Tip: For the best question-attempting experience, enable Desktop Site/Desktop Mode from your browser menu.”
+2. The notice is intentionally hidden on desktop/PC to keep the desktop interface unchanged.
+3. No question data, answer keys, explanations, test logic, OMR behavior, Supabase features, dashboards or results functionality were changed.

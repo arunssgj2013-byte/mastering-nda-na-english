@@ -1,0 +1,18 @@
+{
+  "version": "V53R1",
+  "base": "V53",
+  "title": "Mobile Desktop Mode Guidance Notice",
+  "changed_files": [
+    "quizzes.html",
+    "assets/css/styles.css"
+  ],
+  "preserved": [
+    "PYQ and sample-paper question-bank data",
+    "correct answers and explanations",
+    "test navigation and Skip & Review behavior",
+    "Supabase attempt tracking",
+    "User Login/Register",
+    "User and Admin dashboards",
+    "result sheet and print-result-only functionality"
+  ]
+}

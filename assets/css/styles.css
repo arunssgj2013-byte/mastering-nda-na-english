@@ -869,3 +869,38 @@ body.auth-modal-open{overflow:hidden}
 }
 @keyframes timerV53Pulse{from{opacity:1}to{opacity:.68}}
 @media print{.mobile-test-dock{display:none!important}}
+
+
+/* V53R1 — mobile guidance for the question-attempt interface. */
+.mobile-browser-note{display:none}
+@media(max-width:650px){
+  .mobile-browser-note{
+    display:flex;
+    align-items:flex-start;
+    gap:9px;
+    margin:10px 0 12px;
+    padding:10px 12px;
+    border:1.5px solid #e3b84e;
+    border-left:4px solid #c79416;
+    border-radius:12px;
+    background:#fff8df;
+    color:#41320d;
+    box-shadow:0 5px 14px rgba(111,82,12,.08);
+  }
+  .mobile-browser-note-icon{
+    flex:0 0 22px;
+    width:22px;
+    height:22px;
+    display:grid;
+    place-items:center;
+    margin-top:1px;
+    border-radius:50%;
+    background:#c79416;
+    color:#fff;
+    font:900 13px/1 Arial,sans-serif;
+  }
+  .mobile-browser-note p{margin:0;font-size:11.5px;line-height:1.45;font-weight:600}
+  .mobile-browser-note strong{font-weight:900;color:#2d2208}
+  .mobile-browser-note b{font-weight:900;color:#8b6000}
+}
+@media print{.mobile-browser-note{display:none!important}}
