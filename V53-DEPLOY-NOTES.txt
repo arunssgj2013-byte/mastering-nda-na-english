@@ -1,0 +1,14 @@
+Mastering NDA/NA English — V53 Test Interface Refinement
+Base: V52R1
+
+Changes:
+1. Light-theme question card with stronger border and a distinct question-text panel.
+2. Options use clearer light backgrounds, stronger borders and a selected-option highlight.
+3. Mobile-only persistent top exam strip shows Current Question, live Timer and Submit Test throughout an active attempt.
+4. Mobile OMR remains available as a horizontal question navigator without competing for sticky screen space.
+5. Added functional Skip & Review at the bottom question-control area. Review-marked questions are shown distinctly in the OMR.
+6. Strengthened Clear Response, Previous, Save & Next and Review button borders/highlighting.
+7. OMR heading now dynamically displays “Attempting Question X” instead of “50-Question OMR”.
+8. Desktop layout remains unchanged apart from the requested visual/control refinements.
+9. PYQ/sample-paper question data, options, answers and explanations are unchanged.
+10. Supabase attempt tracking, login/register, dashboards and result/print features are preserved.

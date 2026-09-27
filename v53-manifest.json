@@ -1,0 +1,18 @@
+{
+  "version": "V53",
+  "base": "V52R1",
+  "title": "Responsive Test Interface Refinement",
+  "changed_files": [
+    "quizzes.html",
+    "assets/css/styles.css",
+    "assets/js/quiz-engine.js"
+  ],
+  "preserved": [
+    "PYQ and sample-paper question-bank data",
+    "correct answers and explanations",
+    "Supabase attempt tracking",
+    "User Login/Register",
+    "User and Admin dashboards",
+    "result sheet and print-result-only functionality"
+  ]
+}

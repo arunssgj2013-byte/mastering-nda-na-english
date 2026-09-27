@@ -16,12 +16,16 @@ const QUIZ_PROFILE_KEY='mceStudentProfileV2';
   const scoreBox=document.getElementById('seriesScoreBox');
   const submitBtn=document.getElementById('submitSeriesQuizBtn');
   const submitOmrBtn=document.getElementById('submitSeriesQuizOmrBtn');
+  const submitMobileBtn=document.getElementById('submitSeriesQuizMobileBtn');
   const resetBtn=document.getElementById('resetSeriesQuizBtn');
   const startTimerBtn=document.getElementById('startSeriesTimerBtn');
   const pauseTimerBtn=document.getElementById('pauseSeriesTimerBtn');
   const resetTimerBtn=document.getElementById('resetSeriesTimerBtn');
   const timerDisplay=document.getElementById('seriesTimerDisplay');
   const stickyTimerDisplay=document.getElementById('seriesStickyTimerDisplay');
+  const mobileTimerDisplay=document.getElementById('seriesMobileTimerDisplay');
+  const mobileQuestionDisplay=document.getElementById('seriesMobileQuestionDisplay');
+  const mobileTestDock=document.getElementById('seriesMobileTestDock');
   const omrGrid=document.getElementById('seriesOmrGrid');
   const answeredCount=document.getElementById('seriesOmrAnsweredCount');
   const leftCount=document.getElementById('seriesOmrLeftCount');
@@ -30,10 +34,14 @@ const QUIZ_PROFILE_KEY='mceStudentProfileV2';
   const prevQuestionBtn=document.getElementById('prevSeriesQuestionBtn');
   const nextQuestionBtn=document.getElementById('nextSeriesQuestionBtn');
   const clearQuestionBtn=document.getElementById('clearCurrentQuestionBtn');
+  const skipReviewBtn=document.getElementById('skipReviewQuestionBtn');
+  const omrCurrentLabel=document.getElementById('seriesOmrCurrentLabel');
+  const omrRangeLabel=document.getElementById('seriesOmrRangeLabel');
   const dailyTitle=document.getElementById('dailyQuizTitle');
   const dailyDesc=document.getElementById('dailyQuizDesc');
   const dailyBtn=document.getElementById('startDailySetBtn');
   let currentKind='pyq', currentSet=null, timerSeconds=50*60, timerId=null, submitted=false, questionObserver=null, currentQuestionIndex=0;
+  const reviewQuestions=new Set();
   const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
   const dateKey=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
   const dayNumber=()=>Math.floor(new Date().setHours(0,0,0,0)/86400000);
@@ -47,7 +55,7 @@ const QUIZ_PROFILE_KEY='mceStudentProfileV2';
     window.addEventListener('afterprint',cleanup,{once:true});
     setTimeout(()=>window.print(),60);
   }
-  const updateTimer=()=>{const value=formatTime(timerSeconds);if(timerDisplay)timerDisplay.textContent=value;if(stickyTimerDisplay)stickyTimerDisplay.textContent=value;document.documentElement.classList.toggle('timer-low',timerSeconds<=300&&timerSeconds>0)};
+  const updateTimer=()=>{const value=formatTime(timerSeconds);if(timerDisplay)timerDisplay.textContent=value;if(stickyTimerDisplay)stickyTimerDisplay.textContent=value;if(mobileTimerDisplay)mobileTimerDisplay.textContent=value;document.documentElement.classList.toggle('timer-low',timerSeconds<=300&&timerSeconds>0)};
   function resetTimer(){stopTimer();timerSeconds=50*60;updateTimer()}
   function startTimer(){if(!currentSet||submitted||timerId)return;timerId=setInterval(()=>{timerSeconds--;updateTimer();if(timerSeconds<=0){timerSeconds=0;updateTimer();stopTimer();submitQuiz(true)}},1000)}
   function pauseTimer(){stopTimer()}
@@ -143,7 +151,12 @@ const QUIZ_PROFILE_KEY='mceStudentProfileV2';
   }
   function updateQuestionNav(){
     const total=currentSet?.questions?.length||0;
+    const q=currentSet?.questions?.[currentQuestionIndex];
+    const qNum=q?.n??(currentQuestionIndex+1);
     if(questionProgress)questionProgress.textContent=total?`Question ${currentQuestionIndex+1} of ${total}`:'';
+    if(mobileQuestionDisplay)mobileQuestionDisplay.textContent=total?`Q${qNum} / ${total}`:'Q–';
+    if(omrCurrentLabel)omrCurrentLabel.textContent=total?`Attempting Question ${qNum}`:'Question Navigator';
+    if(omrRangeLabel)omrRangeLabel.textContent=total?`Q1–Q${total}`:'';
     if(prevQuestionBtn)prevQuestionBtn.disabled=!total||currentQuestionIndex<=0;
     if(nextQuestionBtn){
       nextQuestionBtn.disabled=!total;
@@ -151,6 +164,11 @@ const QUIZ_PROFILE_KEY='mceStudentProfileV2';
       else nextQuestionBtn.textContent=currentQuestionIndex>=total-1?'Review OMR':'Save & Next';
     }
     if(clearQuestionBtn)clearQuestionBtn.disabled=!total||submitted;
+    if(skipReviewBtn){
+      skipReviewBtn.disabled=!total||submitted;
+      skipReviewBtn.classList.toggle('is-marked',!!q&&reviewQuestions.has(String(qNum)));
+      skipReviewBtn.textContent=!!q&&reviewQuestions.has(String(qNum))?'Review Marked — Next':'Skip & Review';
+    }
   }
   function showQuestion(index,{scroll=true,flash=false}={}){
     const slides=questionSlides();
@@ -200,9 +218,12 @@ const QUIZ_PROFILE_KEY='mceStudentProfileV2';
       const sel=document.querySelector(`input[name="sq${i}"]:checked`);if(sel)n++;
       const bubble=omrGrid?.querySelector(`[data-q="${i}"]`);
       if(bubble && !submitted){
-        bubble.classList.remove('answered','unanswered','correct','wrong','unattempted');
-        bubble.classList.add(sel?'answered':'unanswered');
-        bubble.setAttribute('aria-label',`${sel?'Answered':'Not answered'} — go to question ${i}`);
+        const isReview=reviewQuestions.has(String(i));
+        bubble.classList.remove('answered','unanswered','correct','wrong','unattempted','review');
+        bubble.classList.add(isReview?'review':(sel?'answered':'unanswered'));
+        const state=isReview?'Marked for review':(sel?'Answered':'Not answered');
+        bubble.setAttribute('aria-label',`${state} — go to question ${i}`);
+        bubble.setAttribute('title',`${state} — Question ${i}`);
       }
     }
     if(answeredCount)answeredCount.textContent=String(n);
@@ -231,12 +252,14 @@ const QUIZ_PROFILE_KEY='mceStudentProfileV2';
   }
   function loadSet(id,scroll=false){
     const set=getSet(id);if(!set)return;
-    currentSet=set;submitted=false;currentQuestionIndex=0;stopTimer();resetTimer();
+    currentSet=set;submitted=false;currentQuestionIndex=0;reviewQuestions.clear();stopTimer();resetTimer();
     if(activeLabel)activeLabel.textContent=set.label;
     if(activeType)activeType.textContent=set.kind==='pyq'?'Previous Years Question Practice':'Exam Trend Sample Paper Practice';
     if(modeBadge)modeBadge.textContent=set.label;
     if(activeMeta)activeMeta.textContent=`50 questions • 200 marks • 50 minutes • +4 correct • −1.33 wrong • ${set.kind==='pyq'?'Authentic PYQ':'Source: Practice Book Sample Paper'}`;
-    [submitBtn,submitOmrBtn,resetBtn,startTimerBtn,pauseTimerBtn,resetTimerBtn].forEach(b=>{if(b)b.disabled=false});
+    [submitBtn,submitOmrBtn,submitMobileBtn,resetBtn,startTimerBtn,pauseTimerBtn,resetTimerBtn].forEach(b=>{if(b)b.disabled=false});
+    mobileTestDock?.classList.add('active');
+    document.body.classList.add('quiz-test-active');
     if(questionNav)questionNav.classList.remove('hidden');
     if(scoreBox){scoreBox.classList.add('hidden');scoreBox.innerHTML=''}
     let lastContext='',lastCategory='',carryDirectionBlock='',carryContextBlock='';
@@ -276,8 +299,11 @@ const QUIZ_PROFILE_KEY='mceStudentProfileV2';
       return `<section class="question-slide${i===0?' active':''}" data-index="${i}" data-q="${q.n}" ${i===0?'':'hidden'} aria-hidden="${i===0?'false':'true'}">${displayDirection}${displayContext}<article class="quiz-card series-question" data-q="${q.n}" data-index="${i}"><div class="quiz-card-top"><span class="quiz-type">${esc(category)}</span><span class="quiz-num">Question ${q.n} of ${set.questions.length}</span></div>${q.q?`<h3>${highlightQuestionText(q,category)}</h3>`:''}<div class="quiz-options">${opts}</div><div class="quiz-explainer hidden" id="sexp${q.n}"></div></article></section>`;
     }).join('');
     quizContainer.querySelectorAll('input[type="radio"]').forEach(inp=>inp.addEventListener('change',()=>{
+      const card=inp.closest('.series-question');
+      card?.querySelectorAll('.quiz-option').forEach(o=>o.classList.remove('selected'));
+      inp.closest('.quiz-option')?.classList.add('selected');
       updateOmr();
-      const q=inp.closest('.series-question')?.dataset.q;
+      const q=card?.dataset.q;
       if(q)setCurrentOmr(q);
     }));
     renderOmr();
@@ -305,7 +331,7 @@ const QUIZ_PROFILE_KEY='mceStudentProfileV2';
     }
   }
   function submitQuiz(auto=false){
-    if(!currentSet||submitted)return;submitted=true;stopTimer();if(submitBtn)submitBtn.disabled=true;if(submitOmrBtn)submitOmrBtn.disabled=true;
+    if(!currentSet||submitted)return;submitted=true;stopTimer();if(submitBtn)submitBtn.disabled=true;if(submitOmrBtn)submitOmrBtn.disabled=true;if(submitMobileBtn)submitMobileBtn.disabled=true;mobileTestDock?.classList.remove('active');document.body.classList.remove('quiz-test-active');
     let correct=0,attempted=0;const cats={};let lastContext='';
     currentSet.questions.forEach(q=>{
       if(q.c)lastContext=q.c;const cat=inferCategory(q,lastContext);if(!cats[cat])cats[cat]={total:0,correct:0};cats[cat].total++;
@@ -326,29 +352,42 @@ const QUIZ_PROFILE_KEY='mceStudentProfileV2';
       const classMeta=userType==='STUDENT'&&resultProfile?.className?`<span><b>Class:</b> ${esc(resultProfile.className)}</span>`:'';
       const resultDate=esc(new Date().toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}));
       scoreBox.classList.remove('hidden');scoreBox.innerHTML=`<div class="print-result-brand"><strong>Mastering NDA/NA English</strong><span>Official Practice Result Sheet</span></div><div class="print-result-meta"><span><b>User:</b> ${userName}</span><span><b>Role:</b> ${userRole}</span>${classMeta}<span><b>Date:</b> ${resultDate}</span></div><div class="score-headline"><div class="score-title"><h3>Scorecard & Result Summary</h3><p>${auto?'Time is over — the paper was auto-submitted. ':'Paper submitted successfully. '}<b>${esc(currentSet.label)}</b></p></div><div class="score-badge">${grade}</div></div><div class="score-grid"><div class="score-card"><b>${correct}</b><span>Correct</span></div><div class="score-card"><b>${wrong}</b><span>Incorrect</span></div><div class="score-card"><b>${unattempted}</b><span>Unattempted</span></div><div class="score-card"><b>${accuracy.toFixed(1)}%</b><span>Accuracy</span></div><div class="score-card"><b>${overall.toFixed(1)}%</b><span>Overall</span></div><div class="score-card"><b>${marks}</b><span>Marks / 200</span></div></div><div class="section-head" style="margin-top:18px"><div><div class="section-kicker">Category-wise Performance</div><h2 class="section-title" style="font-size:28px">Your strengths and revision areas</h2></div></div><div class="section-score-grid">${catHtml}</div><div class="result-actions"><a class="btn btn-primary" href="dashboard.html">User Dashboard</a><button class="btn btn-outline" type="button" id="printSeriesResultBtn">Print Result Sheet</button></div>`;scoreBox.scrollIntoView({behavior:'smooth',block:'start'});document.getElementById('printSeriesResultBtn')?.addEventListener('click',printResultOnly)}
-    currentSet.questions.forEach(q=>{const b=omrGrid?.querySelector(`[data-q="${q.n}"]`),sel=document.querySelector(`input[name="sq${q.n}"]:checked`),accepted=Array.isArray(q.a)?q.a:[q.a];b?.classList.remove('answered','unanswered','correct','wrong','unattempted');if(!sel)b?.classList.add('unattempted');else if(accepted.includes(Number(sel.value)))b?.classList.add('correct');else b?.classList.add('wrong')});
+    currentSet.questions.forEach(q=>{const b=omrGrid?.querySelector(`[data-q="${q.n}"]`),sel=document.querySelector(`input[name="sq${q.n}"]:checked`),accepted=Array.isArray(q.a)?q.a:[q.a];b?.classList.remove('answered','unanswered','correct','wrong','unattempted','review');if(!sel)b?.classList.add('unattempted');else if(accepted.includes(Number(sel.value)))b?.classList.add('correct');else b?.classList.add('wrong')});
     if(answeredCount)answeredCount.textContent=String(attempted);if(leftCount)leftCount.textContent=String(unattempted);
     updateQuestionNav();
     saveAttempt({correct,incorrect:wrong,unattempted,accuracy:Number(accuracy.toFixed(1)),overall:Number(overall.toFixed(1)),marks},cats);
   }
-  function clearQuiz(){if(!currentSet)return;if(submitBtn)submitBtn.disabled=false;if(submitOmrBtn)submitOmrBtn.disabled=false;document.querySelectorAll('#seriesQuizQuestions input[type="radio"]').forEach(i=>i.checked=false);document.querySelectorAll('#seriesQuizQuestions .quiz-option').forEach(x=>x.classList.remove('correct','wrong'));document.querySelectorAll('#seriesQuizQuestions .quiz-explainer').forEach(x=>{x.classList.add('hidden');x.innerHTML=''});if(scoreBox){scoreBox.classList.add('hidden');scoreBox.innerHTML=''}submitted=false;currentQuestionIndex=0;resetTimer();renderOmr();showQuestion(0,{scroll:false})}
+  function clearQuiz(){if(!currentSet)return;if(submitBtn)submitBtn.disabled=false;if(submitOmrBtn)submitOmrBtn.disabled=false;if(submitMobileBtn)submitMobileBtn.disabled=false;mobileTestDock?.classList.add('active');document.body.classList.add('quiz-test-active');reviewQuestions.clear();document.querySelectorAll('#seriesQuizQuestions input[type="radio"]').forEach(i=>i.checked=false);document.querySelectorAll('#seriesQuizQuestions .quiz-option').forEach(x=>x.classList.remove('correct','wrong','selected'));document.querySelectorAll('#seriesQuizQuestions .quiz-explainer').forEach(x=>{x.classList.add('hidden');x.innerHTML=''});if(scoreBox){scoreBox.classList.add('hidden');scoreBox.innerHTML=''}submitted=false;currentQuestionIndex=0;resetTimer();renderOmr();showQuestion(0,{scroll:false})}
   prevQuestionBtn?.addEventListener('click',()=>showQuestion(currentQuestionIndex-1,{scroll:true}));
   nextQuestionBtn?.addEventListener('click',()=>{
     if(!currentSet)return;
+    const q=currentSet.questions[currentQuestionIndex];
+    if(q&&document.querySelector(`input[name="sq${q.n}"]:checked`))reviewQuestions.delete(String(q.n));
+    updateOmr();
     if(currentQuestionIndex<currentSet.questions.length-1)showQuestion(currentQuestionIndex+1,{scroll:true});
     else{
       setCurrentOmr(currentSet.questions[currentQuestionIndex]?.n||currentSet.questions.length);
       try{document.getElementById('seriesOmrPanel')?.scrollIntoView({behavior:'smooth',block:'nearest'})}catch{}
     }
   });
+  skipReviewBtn?.addEventListener('click',()=>{
+    if(!currentSet||submitted)return;
+    const q=currentSet.questions[currentQuestionIndex];if(!q)return;
+    reviewQuestions.add(String(q.n));
+    updateOmr();updateQuestionNav();
+    if(currentQuestionIndex<currentSet.questions.length-1)showQuestion(currentQuestionIndex+1,{scroll:true});
+    else try{document.getElementById('seriesOmrPanel')?.scrollIntoView({behavior:'smooth',block:'nearest'})}catch{}
+  });
   clearQuestionBtn?.addEventListener('click',()=>{
     if(!currentSet||submitted)return;
     const q=currentSet.questions[currentQuestionIndex];if(!q)return;
     document.querySelectorAll(`input[name="sq${q.n}"]`).forEach(inp=>inp.checked=false);
-    updateOmr();setCurrentOmr(q.n);
+    document.querySelectorAll(`input[name="sq${q.n}"]`).forEach(inp=>inp.closest('.quiz-option')?.classList.remove('selected'));
+    reviewQuestions.delete(String(q.n));
+    updateOmr();setCurrentOmr(q.n);updateQuestionNav();
   });
   kindButtons.forEach(b=>b.addEventListener('click',()=>renderSetLibrary(b.dataset.seriesKind)));
-  submitBtn?.addEventListener('click',()=>submitQuiz(false));submitOmrBtn?.addEventListener('click',()=>submitQuiz(false));resetBtn?.addEventListener('click',clearQuiz);startTimerBtn?.addEventListener('click',startTimer);pauseTimerBtn?.addEventListener('click',pauseTimer);resetTimerBtn?.addEventListener('click',resetTimer);
+  submitBtn?.addEventListener('click',()=>submitQuiz(false));submitOmrBtn?.addEventListener('click',()=>submitQuiz(false));submitMobileBtn?.addEventListener('click',()=>submitQuiz(false));resetBtn?.addEventListener('click',clearQuiz);startTimerBtn?.addEventListener('click',startTimer);pauseTimerBtn?.addEventListener('click',pauseTimer);resetTimerBtn?.addEventListener('click',resetTimer);
   const dailySet=sets[(dayNumber()%sets.length+sets.length)%sets.length];
   if(dailyTitle)dailyTitle.textContent=dailySet.label;if(dailyDesc)dailyDesc.textContent=`Today’s automatic ${dailySet.kind==='pyq'?'Previous Years Question':'Trend Practice Sample Paper'} set — 50 source-based questions.`;dailyBtn?.addEventListener('click',()=>{renderSetLibrary(dailySet.kind);guardedLoadSet(dailySet.id,true,true)});
   const params=new URLSearchParams(location.search);let mode=params.get('mode');let setId=params.get('set');
