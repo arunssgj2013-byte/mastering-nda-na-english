@@ -1,0 +1,35 @@
+name: Apply NDA-II 2014 English PYQ V69
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-pyq-2014-ii-v69.yml'
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Load 2014 II PYQ before quiz engine
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('quizzes.html')
+          s=p.read_text()
+          addon='<script src="assets/js/pyq-2014-ii.js?v=69"></script>'
+          anchor='<script src="assets/js/quiz-series.js?v=50"></script>'
+          if addon not in s:
+              if anchor not in s:
+                  raise SystemExit('quiz-series script anchor not found')
+              s=s.replace(anchor,anchor+addon,1)
+          p.write_text(s)
+          PY
+      - name: Commit 2014 II PYQ loader
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add quizzes.html
+          git commit -m "Publish NDA-II 2014 English in online PYQ practice"
+          git push
