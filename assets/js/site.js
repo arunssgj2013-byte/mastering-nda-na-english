@@ -9,13 +9,7 @@
         ['nda-english-syllabus.html','NDA English Syllabus'],
         ['nda-english-exam-pattern.html','NDA English Exam Pattern'],
         ['nda-english-pyq.html','NDA English PYQs'],
-        ['nda-english-mock-test.html','NDA English Mock Tests'],
-        ['nda-english-grammar.html','NDA English Grammar'],
-        ['nda-english-vocabulary.html','NDA English Vocabulary'],
-        ['nda-english-comprehension.html','NDA English Comprehension'],
-        ['nda-english-cohesion.html','Cohesion & Sentence Sense'],
-        ['nda-gat-english.html','NDA GAT English'],
-        ['nda-english-preparation.html','NDA English Preparation Strategy']
+        ['nda-english-mock-test.html','NDA English Mock Tests']
       ];
       const page=(location.pathname.split('/').pop()||'index.html').toLowerCase();
       const onStudyPage=studyPages.some(([href])=>href===page);
