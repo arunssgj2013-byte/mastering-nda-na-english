@@ -1,4 +1,4 @@
-// V65 navigation bridge + colourful dropdowns/mobile tabs + clickable NDA English core areas + homepage practice CTA
+// V70 navigation bridge + colourful dropdowns/mobile tabs + clickable NDA English core areas + homepage practice CTA
 (function(){
   // Load the lightweight visual enhancement styles site-wide.
   if(!document.querySelector('link[data-mce-highlights="v58"]')){
@@ -42,15 +42,24 @@
   if(nav && !nav.querySelector('.study-material-dropdown')){
     const resourceLink=[...nav.querySelectorAll('a[href="resources.html"]')][0];
     if(resourceLink){
+      // Keep the dropdown focused on core Study Material pages only.
+      // PYQs and Mock Tests remain available through their existing pages/cards and the separate Online Practice navigation.
       const studyPages=[
         ['resources.html','Study Material Home'],
         ['nda-english-syllabus.html','NDA English Syllabus'],
-        ['nda-english-exam-pattern.html','NDA English Exam Pattern'],
-        ['nda-english-pyq.html','NDA English PYQs'],
-        ['nda-english-mock-test.html','NDA English Mock Tests']
+        ['nda-english-exam-pattern.html','NDA English Exam Pattern']
+      ];
+      const studySectionPages=[
+        ...studyPages.map(([href])=>href),
+        'nda-english-pyq.html',
+        'nda-english-mock-test.html',
+        'nda-english-grammar.html',
+        'nda-english-vocabulary.html',
+        'nda-english-comprehension.html',
+        'nda-english-cohesion.html'
       ];
       const page=(location.pathname.split('/').pop()||'index.html').toLowerCase();
-      const onStudyPage=studyPages.some(([href])=>href===page);
+      const onStudyPage=studySectionPages.includes(page);
       const wrap=document.createElement('div');
       wrap.className='nav-dropdown study-material-dropdown';
       const toggle=document.createElement('button');
