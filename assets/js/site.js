@@ -1,4 +1,4 @@
-// V59 navigation bridge + colourful dropdowns + clickable NDA English core areas
+// V60 navigation bridge + colourful dropdowns/mobile tabs + clickable NDA English core areas
 (function(){
   // Load the lightweight visual enhancement styles site-wide.
   if(!document.querySelector('link[data-mce-highlights="v58"]')){
@@ -13,6 +13,13 @@
     style.rel='stylesheet';
     style.href='assets/css/about-nav-v59.css?v=59';
     style.dataset.mceAboutNav='v59';
+    document.head.appendChild(style);
+  }
+  if(!document.querySelector('link[data-mce-mobile-nav="v60"]')){
+    const style=document.createElement('link');
+    style.rel='stylesheet';
+    style.href='assets/css/mobile-nav-v60.css?v=60';
+    style.dataset.mceMobileNav='v60';
     document.head.appendChild(style);
   }
 
@@ -65,6 +72,18 @@
       wrap.append(toggle,menu);
       resourceLink.replaceWith(wrap);
     }
+  }
+
+  // Give every top-level mobile navigation item a different colour.
+  // Study Material and Online PYQs/Sample Practice receive a soft blinking/glow treatment.
+  if(nav){
+    [...nav.children].forEach((item,i)=>{
+      const control=item.matches('a')?item:item.querySelector(':scope > .nav-dropdown-toggle');
+      if(!control)return;
+      control.classList.add('mce-topnav',`mce-topnav-theme-${Math.min(i,6)}`);
+    });
+    nav.querySelector('.study-material-dropdown > .nav-dropdown-toggle')?.classList.add('mce-attention-nav');
+    nav.querySelector(':scope > a.quiz-nav-link')?.classList.add('mce-attention-nav');
   }
 
   const page=(location.pathname.split('/').pop()||'index.html').toLowerCase();
