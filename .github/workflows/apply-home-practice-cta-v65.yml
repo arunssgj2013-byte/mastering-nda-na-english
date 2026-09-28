@@ -1,0 +1,41 @@
+name: Apply homepage free practice CTA V65
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-home-practice-cta-v65.yml'
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add CTA stylesheet and card
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          style_anchor='<link rel="stylesheet" href="assets/css/home-cards-v64.css?v=64">'
+          style_new=style_anchor+'<link rel="stylesheet" href="assets/css/home-practice-cta-v65.css?v=65">'
+          if 'home-practice-cta-v65.css' not in s:
+              if style_anchor not in s:
+                  raise SystemExit('Homepage card stylesheet anchor not found')
+              s=s.replace(style_anchor,style_new,1)
+          lead='<p class="lead">Books, grammar mastery, topic-wise PYQs, year-wise PYQs, <b>manually verified online practice</b> and focused guidance crafted specially for serious NDA & Naval Academy aspirants.</p>'
+          cta='''<a class="hero-practice-cta" href="quizzes.html" aria-label="Register free and start NDA/NA online PYQ and sample paper practice"><span class="hero-practice-badge">FREE PRACTICE</span><strong>Register Free &amp; Start Online Practice</strong><small>Attempt NDA/NA PYQs &amp; Sample Papers with OMR, timer and instant results.</small><span class="hero-practice-action">Choose a Test &amp; Start</span></a>'''
+          if 'hero-practice-cta' not in s:
+              if lead not in s:
+                  raise SystemExit('Hero lead anchor not found')
+              s=s.replace(lead,lead+cta,1)
+          p.write_text(s)
+          PY
+      - name: Commit homepage CTA
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Add free online practice CTA to homepage hero"
+          git push
