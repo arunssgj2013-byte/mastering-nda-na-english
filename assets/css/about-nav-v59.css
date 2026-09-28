@@ -1,0 +1,9 @@
+/* V59 About NDA Exam dropdown: simplified four-item menu with colour highlights */
+.about-nda-dropdown .nav-dropdown-menu a.mce-about-nav-color{border-radius:10px;margin:4px 6px;padding:10px 12px!important;border-left:4px solid var(--about-accent);background:linear-gradient(135deg,var(--about-bg1),var(--about-bg2))!important;color:#10243e!important;font-weight:800;box-shadow:0 4px 12px rgba(11,31,58,.06);transition:transform .18s ease,box-shadow .18s ease,filter .18s ease}
+.about-nda-dropdown .nav-dropdown-menu a.mce-about-nav-color:hover,.about-nda-dropdown .nav-dropdown-menu a.mce-about-nav-color.active{transform:translateX(3px);box-shadow:0 8px 20px rgba(11,31,58,.13);filter:saturate(1.08)}
+.about-nda-dropdown .nav-dropdown-menu a.mce-about-nav-color:after{display:none!important}
+.about-nda-dropdown .nav-dropdown-menu a:nth-child(1){--about-accent:#1756a0;--about-bg1:#eef6ff;--about-bg2:#dcecff}
+.about-nda-dropdown .nav-dropdown-menu a:nth-child(2){--about-accent:#7c4dcc;--about-bg1:#f6f1ff;--about-bg2:#e9e0ff}
+.about-nda-dropdown .nav-dropdown-menu a:nth-child(3){--about-accent:#0f8a72;--about-bg1:#edfbf7;--about-bg2:#d7f5ed}
+.about-nda-dropdown .nav-dropdown-menu a:nth-child(4){--about-accent:#c78100;--about-bg1:#fff8e8;--about-bg2:#ffedbd}
+@media(max-width:720px){.about-nda-dropdown .nav-dropdown-menu a.mce-about-nav-color{margin:4px 0;padding:11px 12px!important}}
