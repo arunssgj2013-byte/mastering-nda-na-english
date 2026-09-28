@@ -1,4 +1,4 @@
-// V60 navigation bridge + colourful dropdowns/mobile tabs + clickable NDA English core areas
+// V65 navigation bridge + colourful dropdowns/mobile tabs + clickable NDA English core areas + homepage practice CTA
 (function(){
   // Load the lightweight visual enhancement styles site-wide.
   if(!document.querySelector('link[data-mce-highlights="v58"]')){
@@ -87,6 +87,26 @@
   }
 
   const page=(location.pathname.split('/').pop()||'index.html').toLowerCase();
+
+  // Homepage: add an attractive free-practice CTA that sends visitors to the test-selection portal.
+  if(page==='index.html' || page===''){
+    if(!document.querySelector('link[data-mce-home-practice="v65"]')){
+      const style=document.createElement('link');
+      style.rel='stylesheet';
+      style.href='assets/css/home-practice-cta-v65.css?v=65';
+      style.dataset.mceHomePractice='v65';
+      document.head.appendChild(style);
+    }
+    const heroLead=document.querySelector('.hero .lead');
+    if(heroLead && !document.querySelector('.hero-practice-cta')){
+      const cta=document.createElement('a');
+      cta.className='hero-practice-cta';
+      cta.href='quizzes.html';
+      cta.setAttribute('aria-label','Register free and start NDA/NA online PYQ and sample paper practice');
+      cta.innerHTML='<span class="hero-practice-badge">FREE PRACTICE</span><strong>Register Free &amp; Start Online Practice</strong><small>Attempt NDA/NA PYQs &amp; Sample Papers with OMR, timer and instant results.</small><span class="hero-practice-action">Choose a Test &amp; Start</span>';
+      heroLead.insertAdjacentElement('afterend',cta);
+    }
+  }
 
   // Colour the complete Study Material page without changing any resource links or content.
   if(page==='resources.html'){
