@@ -1,6 +1,6 @@
-// V58 navigation bridge + colourful study-material highlights + clickable NDA English core areas
+// V59 navigation bridge + colourful dropdowns + clickable NDA English core areas
 (function(){
-  // Load the lightweight visual enhancement stylesheet site-wide.
+  // Load the lightweight visual enhancement styles site-wide.
   if(!document.querySelector('link[data-mce-highlights="v58"]')){
     const style=document.createElement('link');
     style.rel='stylesheet';
@@ -8,8 +8,30 @@
     style.dataset.mceHighlights='v58';
     document.head.appendChild(style);
   }
+  if(!document.querySelector('link[data-mce-about-nav="v59"]')){
+    const style=document.createElement('link');
+    style.rel='stylesheet';
+    style.href='assets/css/about-nav-v59.css?v=59';
+    style.dataset.mceAboutNav='v59';
+    document.head.appendChild(style);
+  }
 
   const nav=document.querySelector('.site-header .nav');
+
+  // Keep only the first four About NDA Exam items and colour-highlight them.
+  if(nav){
+    const aboutDrop=[...nav.querySelectorAll('.nav-dropdown')].find(drop=>{
+      const toggle=drop.querySelector('.nav-dropdown-toggle');
+      return toggle && toggle.textContent.trim().toLowerCase().startsWith('about nda exam');
+    });
+    if(aboutDrop){
+      aboutDrop.classList.add('about-nda-dropdown');
+      const aboutLinks=[...aboutDrop.querySelectorAll('.nav-dropdown-menu a')];
+      aboutLinks.slice(4).forEach(a=>a.remove());
+      aboutLinks.slice(0,4).forEach(a=>a.classList.add('mce-about-nav-color'));
+    }
+  }
+
   if(nav && !nav.querySelector('.study-material-dropdown')){
     const resourceLink=[...nav.querySelectorAll('a[href="resources.html"]')][0];
     if(resourceLink){
