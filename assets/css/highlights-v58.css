@@ -1,0 +1,42 @@
+/* V58 colourful card and Study Material navigation highlights */
+:root{--mce-blue:#1756a0;--mce-navy:#0b1f3a;--mce-gold:#c99b39}
+
+/* Study Material dropdown: five clear colour-coded destinations */
+.study-material-dropdown .nav-dropdown-menu a.mce-nav-color{border-radius:10px;margin:4px 6px;padding:10px 12px!important;border-left:4px solid var(--mce-accent);background:linear-gradient(135deg,var(--mce-bg1),var(--mce-bg2))!important;color:#10243e!important;font-weight:800;box-shadow:0 4px 12px rgba(11,31,58,.06);transition:transform .18s ease,box-shadow .18s ease,filter .18s ease}
+.study-material-dropdown .nav-dropdown-menu a.mce-nav-color:hover,.study-material-dropdown .nav-dropdown-menu a.mce-nav-color.active{transform:translateX(3px);box-shadow:0 8px 20px rgba(11,31,58,.13);filter:saturate(1.08)}
+.study-material-dropdown .nav-dropdown-menu a.mce-nav-color:after{display:none!important}
+.study-material-dropdown .nav-dropdown-menu a:nth-child(1){--mce-accent:#1756a0;--mce-bg1:#eef6ff;--mce-bg2:#dcecff}
+.study-material-dropdown .nav-dropdown-menu a:nth-child(2){--mce-accent:#8b5cf6;--mce-bg1:#f5f1ff;--mce-bg2:#e9e1ff}
+.study-material-dropdown .nav-dropdown-menu a:nth-child(3){--mce-accent:#c98a13;--mce-bg1:#fff8e8;--mce-bg2:#ffedbd}
+.study-material-dropdown .nav-dropdown-menu a:nth-child(4){--mce-accent:#0f8a72;--mce-bg1:#ecfbf7;--mce-bg2:#d5f5ec}
+.study-material-dropdown .nav-dropdown-menu a:nth-child(5){--mce-accent:#d04f72;--mce-bg1:#fff0f5;--mce-bg2:#ffe0ea}
+
+/* Resources page: every learning card gets a colour identity. */
+.resource-colour-theme .mce-color-card{--mce-accent:#1756a0;--mce-bg1:#f2f7ff;--mce-bg2:#e6f0ff;--mce-card-ink:#10243e;--mce-card-muted:#50627a;position:relative;overflow:hidden;background:linear-gradient(145deg,var(--mce-bg1),var(--mce-bg2))!important;border:1px solid color-mix(in srgb,var(--mce-accent) 34%,#ffffff)!important;border-top:4px solid var(--mce-accent)!important;color:var(--mce-card-ink)!important;box-shadow:0 9px 23px rgba(11,31,58,.09)!important;transition:transform .2s ease,box-shadow .2s ease,filter .2s ease;animation:mceCardGlow 4.6s ease-in-out infinite}
+.resource-colour-theme .mce-color-card:hover{transform:translateY(-4px);box-shadow:0 15px 32px color-mix(in srgb,var(--mce-accent) 20%,transparent)!important;filter:saturate(1.08)}
+.resource-colour-theme .mce-color-card:before{content:"";position:absolute;inset:-90% -45%;pointer-events:none;background:linear-gradient(115deg,transparent 42%,rgba(255,255,255,.58) 50%,transparent 58%);transform:translateX(-58%);animation:mceCardShine 7.5s ease-in-out infinite}
+.resource-colour-theme .mce-color-card>*{position:relative;z-index:1}
+.resource-colour-theme .mce-color-card h2,.resource-colour-theme .mce-color-card h3,.resource-colour-theme .mce-color-card b,.resource-colour-theme .mce-color-card strong{color:var(--mce-card-ink)!important}
+.resource-colour-theme .mce-color-card p,.resource-colour-theme .mce-color-card small{color:var(--mce-card-muted)!important}
+.resource-colour-theme .mce-color-card>a,.resource-colour-theme .mce-color-card a{color:var(--mce-accent)!important;font-weight:850}
+.resource-colour-theme .mce-color-card>span:first-child,.resource-colour-theme .mce-color-card .stepno,.resource-colour-theme .mce-color-card .qb-unit,.resource-colour-theme .mce-color-card .qb-index{background:color-mix(in srgb,var(--mce-accent) 12%,#fff)!important;color:var(--mce-accent)!important;border-color:color-mix(in srgb,var(--mce-accent) 30%,#fff)!important}
+
+.resource-colour-theme .mce-theme-0{--mce-accent:#1756a0;--mce-bg1:#eef6ff;--mce-bg2:#dcecff}
+.resource-colour-theme .mce-theme-1{--mce-accent:#7c4dcc;--mce-bg1:#f6f1ff;--mce-bg2:#e9e0ff}
+.resource-colour-theme .mce-theme-2{--mce-accent:#0f8a72;--mce-bg1:#edfbf7;--mce-bg2:#d7f5ed}
+.resource-colour-theme .mce-theme-3{--mce-accent:#c78100;--mce-bg1:#fff8e8;--mce-bg2:#ffedbd}
+.resource-colour-theme .mce-theme-4{--mce-accent:#c94669;--mce-bg1:#fff1f5;--mce-bg2:#ffdee8}
+.resource-colour-theme .mce-theme-5{--mce-accent:#157f9c;--mce-bg1:#eefaff;--mce-bg2:#d8f3fb}
+.resource-colour-theme .mce-theme-6{--mce-accent:#5f7f22;--mce-bg1:#f5fae9;--mce-bg2:#e7f2c9}
+.resource-colour-theme .mce-theme-7{--mce-accent:#b45c18;--mce-bg1:#fff5ec;--mce-bg2:#ffe5d0}
+
+/* Make the two expandable resource navigation bars look like coloured cards too. */
+.resource-colour-theme .study-path-details>summary,.resource-colour-theme .vault-catalogue-details>summary{position:relative;border:1px solid #c8d9ec!important;border-left:5px solid #1756a0!important;border-radius:14px!important;background:linear-gradient(100deg,#eef6ff,#f7f1ff,#fff8e8)!important;color:#10243e!important;font-weight:900!important;box-shadow:0 7px 20px rgba(11,31,58,.09);animation:mceSummaryGlow 5s ease-in-out infinite;cursor:pointer}
+.resource-colour-theme .vault-catalogue-details>summary{border-left-color:#c78100!important;background:linear-gradient(100deg,#fff8e8,#edf9f6,#eef6ff)!important}
+
+@keyframes mceCardGlow{0%,100%{box-shadow:0 8px 20px rgba(11,31,58,.08),0 0 0 0 color-mix(in srgb,var(--mce-accent) 0%,transparent)!important}50%{box-shadow:0 12px 28px rgba(11,31,58,.12),0 0 0 4px color-mix(in srgb,var(--mce-accent) 10%,transparent)!important}}
+@keyframes mceCardShine{0%,72%,100%{transform:translateX(-62%)}84%{transform:translateX(62%)}}
+@keyframes mceSummaryGlow{0%,100%{box-shadow:0 7px 20px rgba(11,31,58,.08)}50%{box-shadow:0 9px 27px rgba(23,86,160,.18)}}
+
+@media(max-width:720px){.study-material-dropdown .nav-dropdown-menu a.mce-nav-color{margin:4px 0;padding:11px 12px!important}.resource-colour-theme .mce-color-card{border-top-width:3px!important}}
+@media(prefers-reduced-motion:reduce){.resource-colour-theme .mce-color-card,.resource-colour-theme .mce-color-card:before,.resource-colour-theme .study-path-details>summary,.resource-colour-theme .vault-catalogue-details>summary{animation:none!important}}
