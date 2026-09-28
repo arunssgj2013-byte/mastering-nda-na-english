@@ -1,5 +1,14 @@
-// V57 navigation bridge + clickable NDA English core areas
+// V58 navigation bridge + colourful study-material highlights + clickable NDA English core areas
 (function(){
+  // Load the lightweight visual enhancement stylesheet site-wide.
+  if(!document.querySelector('link[data-mce-highlights="v58"]')){
+    const style=document.createElement('link');
+    style.rel='stylesheet';
+    style.href='assets/css/highlights-v58.css?v=58';
+    style.dataset.mceHighlights='v58';
+    document.head.appendChild(style);
+  }
+
   const nav=document.querySelector('.site-header .nav');
   if(nav && !nav.querySelector('.study-material-dropdown')){
     const resourceLink=[...nav.querySelectorAll('a[href="resources.html"]')][0];
@@ -27,6 +36,7 @@
         const a=document.createElement('a');
         a.href=href;
         a.textContent=label;
+        a.classList.add('mce-nav-color');
         if(href===page)a.classList.add('active');
         menu.appendChild(a);
       });
@@ -35,8 +45,26 @@
     }
   }
 
-  // Turn the four syllabus core areas into colourful, fully clickable learning cards.
   const page=(location.pathname.split('/').pop()||'index.html').toLowerCase();
+
+  // Colour the complete Study Material page without changing any resource links or content.
+  if(page==='resources.html'){
+    document.body.classList.add('resource-colour-theme');
+    const selectors=[
+      'main article[class*="card"]',
+      'main a[class*="card"]',
+      'main .resource-tile',
+      'main .study-path .step',
+      'main .golden-rule-samples > div',
+      'main [class*="-grid"] > div[class*="card"]'
+    ];
+    const cards=[...new Set(selectors.flatMap(sel=>[...document.querySelectorAll(sel)]))];
+    cards.forEach((card,i)=>{
+      card.classList.add('mce-color-card',`mce-theme-${i%8}`);
+    });
+  }
+
+  // Turn the four syllabus core areas into colourful, fully clickable learning cards.
   if(page==='nda-english-syllabus.html'){
     const heading=[...document.querySelectorAll('.seo-guide-section h2')].find(h=>h.textContent.trim().toLowerCase()==='core areas to prepare');
     const grid=heading?.parentElement?.querySelector('.seo-guide-grid');
