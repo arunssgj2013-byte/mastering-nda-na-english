@@ -1,0 +1,41 @@
+name: Apply CBT test experience V67
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-test-experience-v67.yml'
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Wire CBT methodology layer into online practice
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('quizzes.html')
+          s=p.read_text()
+          css='<link rel="stylesheet" href="assets/css/test-experience-v67.css?v=67">'
+          if 'test-experience-v67.css' not in s:
+              anchor='<link rel="stylesheet" href="assets/css/styles.css?v=54">'
+              if anchor not in s:
+                  raise SystemExit('Base stylesheet anchor not found')
+              s=s.replace(anchor,anchor+css,1)
+          js='<script src="assets/js/test-experience-v67.js?v=67"></script>'
+          if 'test-experience-v67.js' not in s:
+              anchor='<script src="assets/js/quiz-engine.js?v=54"></script>'
+              if anchor not in s:
+                  raise SystemExit('Quiz engine anchor not found')
+              s=s.replace(anchor,js+anchor,1)
+          p.write_text(s)
+          PY
+      - name: Commit methodology-only online test upgrade
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add quizzes.html
+          git commit -m "Upgrade online tests to instruction-first CBT flow"
+          git push
