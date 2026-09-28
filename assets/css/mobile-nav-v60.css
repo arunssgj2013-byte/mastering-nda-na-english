@@ -1,0 +1,68 @@
+/* V60 mobile navigation colours and attention highlights */
+@media (max-width:980px){
+  .site-header .nav > a.mce-topnav,
+  .site-header .nav > .nav-dropdown > .nav-dropdown-toggle.mce-topnav{
+    width:100%;
+    min-height:42px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:10px 12px!important;
+    margin:4px 0;
+    border:1px solid var(--mce-nav-border,#dbe4ef)!important;
+    border-left:5px solid var(--mce-nav-accent,#1756a0)!important;
+    border-radius:12px!important;
+    background:linear-gradient(135deg,var(--mce-nav-bg1,#f4f8ff),var(--mce-nav-bg2,#e7f0ff))!important;
+    color:#10243e!important;
+    font-weight:850!important;
+    text-align:left;
+    box-shadow:0 5px 14px rgba(11,31,58,.07);
+    transition:transform .18s ease,box-shadow .18s ease,filter .18s ease;
+  }
+  .site-header .nav > a.mce-topnav:after{display:none!important}
+  .site-header .nav > a.mce-topnav:hover,
+  .site-header .nav > .nav-dropdown > .nav-dropdown-toggle.mce-topnav:hover{
+    transform:translateX(2px);
+    box-shadow:0 8px 20px rgba(11,31,58,.12);
+    filter:saturate(1.08);
+  }
+
+  .site-header .nav .mce-topnav-theme-0{--mce-nav-accent:#1756a0;--mce-nav-border:#bfd5ee;--mce-nav-bg1:#eef6ff;--mce-nav-bg2:#dfeeff}
+  .site-header .nav .mce-topnav-theme-1{--mce-nav-accent:#7c4dcc;--mce-nav-border:#d5c7ef;--mce-nav-bg1:#f7f2ff;--mce-nav-bg2:#ece3ff}
+  .site-header .nav .mce-topnav-theme-2{--mce-nav-accent:#0f8a72;--mce-nav-border:#b8e1d7;--mce-nav-bg1:#edfbf7;--mce-nav-bg2:#d9f5ed}
+  .site-header .nav .mce-topnav-theme-3{--mce-nav-accent:#d04f72;--mce-nav-border:#efc1cf;--mce-nav-bg1:#fff1f5;--mce-nav-bg2:#ffe1ea}
+  .site-header .nav .mce-topnav-theme-4{--mce-nav-accent:#157f9c;--mce-nav-border:#bae0ea;--mce-nav-bg1:#eefaff;--mce-nav-bg2:#daf3fa}
+  .site-header .nav .mce-topnav-theme-5{--mce-nav-accent:#c78100;--mce-nav-border:#ead59f;--mce-nav-bg1:#fff8e8;--mce-nav-bg2:#ffedbd}
+  .site-header .nav .mce-topnav-theme-6{--mce-nav-accent:#9b4a9f;--mce-nav-border:#dfc2e1;--mce-nav-bg1:#fff3ff;--mce-nav-bg2:#f4e1f6}
+
+  /* Visitor-attention animation for the two principal learning destinations. */
+  .site-header .nav .mce-attention-nav{
+    position:relative;
+    font-weight:900!important;
+    animation:mceNavAttention 1.55s ease-in-out infinite;
+  }
+  .site-header .nav .mce-attention-nav:before{
+    content:"";
+    position:absolute;
+    inset:-2px;
+    border-radius:13px;
+    border:2px solid color-mix(in srgb,var(--mce-nav-accent) 48%,transparent);
+    opacity:.25;
+    pointer-events:none;
+    animation:mceNavRing 1.55s ease-in-out infinite;
+  }
+}
+
+@keyframes mceNavAttention{
+  0%,100%{filter:brightness(1);box-shadow:0 5px 14px rgba(11,31,58,.08)}
+  50%{filter:brightness(1.08) saturate(1.12);box-shadow:0 9px 24px color-mix(in srgb,var(--mce-nav-accent) 26%,transparent)}
+}
+@keyframes mceNavRing{
+  0%,100%{opacity:.18;transform:scale(1)}
+  50%{opacity:.62;transform:scale(1.015)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .site-header .nav .mce-attention-nav,
+  .site-header .nav .mce-attention-nav:before{animation:none!important}
+}
