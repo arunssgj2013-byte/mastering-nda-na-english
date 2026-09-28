@@ -1,0 +1,41 @@
+name: Apply homepage study material CTA V66
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-home-study-cta-v66.yml'
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add secondary Study Material CTA
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          style_anchor='<link rel="stylesheet" href="assets/css/home-practice-cta-v65.css?v=65">'
+          style_new=style_anchor+'<link rel="stylesheet" href="assets/css/home-study-cta-v66.css?v=66">'
+          if 'home-study-cta-v66.css' not in s:
+              if style_anchor not in s:
+                  raise SystemExit('Practice CTA stylesheet anchor not found')
+              s=s.replace(style_anchor,style_new,1)
+          buttons='<div class="btnrow"><a class="btn btn-primary" href="books.html">Explore Books</a><a class="btn btn-outline" href="resources.html#preparation-path">NDA/NA Study Material</a><a class="btn btn-outline" href="dashboard.html">User Login / Hub</a></div>'
+          study='''<a class="hero-study-cta" href="resources.html" aria-label="Explore NDA/NA English study material"><span class="hero-study-icon" aria-hidden="true">✦</span><span class="hero-study-copy"><span class="hero-study-badge">FREE STUDY MATERIAL</span><strong>Study First. Practise Smarter.</strong><small>Grammar, vocabulary, PYQs and focused NDA/NA English resources.</small><span class="hero-study-action">Explore Study Material</span><em class="hero-study-note">Register / login when opening learning resources.</em></span></a>'''
+          if 'hero-study-cta' not in s:
+              if buttons not in s:
+                  raise SystemExit('Homepage hero button row not found')
+              s=s.replace(buttons,buttons+study,1)
+          p.write_text(s)
+          PY
+      - name: Commit homepage Study Material CTA
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Add secondary Study Material CTA to homepage"
+          git push
