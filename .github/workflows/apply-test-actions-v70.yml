@@ -1,0 +1,35 @@
+name: Apply visible test actions V70
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-test-actions-v70.yml'
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add immediate-below-options test action layout
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('quizzes.html')
+          s=p.read_text()
+          css='<link rel="stylesheet" href="assets/css/test-actions-v70.css?v=70">'
+          if 'test-actions-v70.css' not in s:
+              anchor='<link rel="stylesheet" href="assets/css/test-experience-v67.css?v=67">'
+              if anchor not in s:
+                  raise SystemExit('Test experience stylesheet anchor not found')
+              s=s.replace(anchor,anchor+css,1)
+          p.write_text(s)
+          PY
+      - name: Commit mobile-visible test controls
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add quizzes.html
+          git commit -m "Keep test action buttons below answer options"
+          git push
