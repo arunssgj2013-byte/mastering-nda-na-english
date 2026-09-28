@@ -1,0 +1,35 @@
+name: Apply homepage card styling V64
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-home-cards-v64.yml'
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add homepage card stylesheet
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          old='<link rel="stylesheet" href="assets/css/styles.css?v=52r1">'
+          new=old+'<link rel="stylesheet" href="assets/css/home-cards-v64.css?v=64">'
+          if 'home-cards-v64.css' not in s:
+              if old not in s:
+                  raise SystemExit('Expected stylesheet link not found')
+              s=s.replace(old,new,1)
+              p.write_text(s)
+          PY
+      - name: Commit homepage update
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Load premium homepage statistic card styling"
+          git push
