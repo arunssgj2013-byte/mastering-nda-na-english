@@ -1,0 +1,41 @@
+name: Apply Sample Papers 19 and 20 V79
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-sample-papers-19-20-v79.yml'
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add Sample Papers 19 and 20 to online practice
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('quizzes.html')
+          s=p.read_text()
+          anchor='<script src="assets/js/sample-paper-18-v77.js?v=77"></script>'
+          if anchor not in s:
+              raise SystemExit('Sample Paper 18 script anchor not found')
+          tags='<script src="assets/js/sample-paper-19-v78.js?v=78"></script><script src="assets/js/sample-paper-20-v79.js?v=79"></script>'
+          if 'sample-paper-19-v78.js' not in s and 'sample-paper-20-v79.js' not in s:
+              s=s.replace(anchor,anchor+tags,1)
+          else:
+              if 'sample-paper-19-v78.js' not in s:
+                  s=s.replace(anchor,anchor+'<script src="assets/js/sample-paper-19-v78.js?v=78"></script>',1)
+              if 'sample-paper-20-v79.js' not in s:
+                  a='<script src="assets/js/sample-paper-19-v78.js?v=78"></script>' if 'sample-paper-19-v78.js' in s else anchor
+                  s=s.replace(a,a+'<script src="assets/js/sample-paper-20-v79.js?v=79"></script>',1)
+          p.write_text(s)
+          PY
+      - name: Commit Sample Papers 19 and 20 links
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add quizzes.html
+          git commit -m "Publish Sample Papers 19 and 20 in online practice"
+          git push
