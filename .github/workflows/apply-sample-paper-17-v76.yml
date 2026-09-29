@@ -1,0 +1,35 @@
+name: Apply Sample Paper 17 V76
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-sample-paper-17-v76.yml'
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add Sample Paper 17 to online practice
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('quizzes.html')
+          s=p.read_text()
+          tag='<script src="assets/js/sample-paper-17-v76.js?v=76"></script>'
+          if 'sample-paper-17-v76.js' not in s:
+              anchor='<script src="assets/js/sample-paper-16-v75.js?v=75"></script>'
+              if anchor not in s:
+                  raise SystemExit('Sample Paper 16 script anchor not found')
+              s=s.replace(anchor,anchor+tag,1)
+          p.write_text(s)
+          PY
+      - name: Commit Sample Paper 17 link
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add quizzes.html
+          git commit -m "Publish Sample Paper 17 in online practice"
+          git push
