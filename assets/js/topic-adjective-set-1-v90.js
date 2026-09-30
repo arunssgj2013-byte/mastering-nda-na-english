@@ -1,0 +1,66 @@
+/* Topic Wise Practice — Adjective, Practice Set 1. Supplied questions/options/answers/explanations preserved. */
+(function(){
+const D={
+error:'Directions: Identify the part of the sentence that contains the error.',
+fill:'Directions: Choose the most appropriate option to complete the sentence correctly.',
+improve:'Directions: Choose the option that best improves the underlined or indicated part without changing the intended meaning.',
+correct:'Directions: Choose the grammatically correct sentence.',
+confuse:'Directions: Choose the adjective that best fits the meaning and usage of the sentence.',
+quant:'Directions: Choose the correct quantitative adjective.',
+part:'Directions: Choose the correct participial adjective.',
+compare:'Directions: Choose the option that correctly expresses the required comparison.',
+prep:'Directions: Choose the correct preposition used with the adjective.',
+order:'Directions: Choose the option with the most natural order of adjectives.',
+distrib:'Directions: Choose the correct distributive adjective.',
+adv:'Directions: Choose the form that correctly functions as an adjective in the sentence.',
+measure:'Directions: Choose the adjective that correctly completes the measurement expression.',
+few:'Directions: Choose the correct form from few, a few, the few, or little.',
+too:'Directions: Choose the option that correctly completes the adjective construction.',
+parallel:'Directions: Choose the option that maintains correct comparative parallelism.'
+};
+const questions=[
+{n:1,c:D.error,q:'This is / the most perfect solution / to the problem / suggested so far.',o:['This is','the most perfect solution','to the problem','suggested so far'],a:1,e:'Perfect is traditionally treated as an absolute adjective in competitive-exam grammar and is not normally compared. Correct: the perfect solution.'},
+{n:2,c:D.fill,q:'Of the two proposals, this one appears to be _____.',o:['best','the best','better','more better'],a:2,e:'When two persons or things are compared, the comparative degree is used.'},
+{n:3,c:D.improve,q:'She is more intelligent than any student in her class.',o:['more intelligent than any other student','most intelligent than any student','more intelligent from any other student','intelligent than all student'],a:0,e:'Since she herself is a student of the class, the comparison must exclude her: any other student.'},
+{n:4,c:D.correct,q:'Choose the grammatically correct sentence.',o:['He is senior than me.','He is senior to me.','He is more senior than me.','He is senior from me.'],a:1,e:'Adjectives such as senior, junior, superior, inferior, prior and posterior traditionally take to, not than.'},
+{n:5,c:D.error,q:'There are / less students / in the classroom today / than there were yesterday.',o:['There are','less students','in the classroom today','than there were yesterday'],a:1,e:'Students is a plural countable noun, so fewer students is required.'},
+{n:6,c:D.confuse,q:'The _____ chapter of the book deals with the causes of the conflict.',o:['later','latter','latest','lastest'],a:1,e:'Latter refers to the second of two things previously mentioned. Later relates to time.'},
+{n:7,c:D.error,q:'My brother is / elder than me / by nearly / three years.',o:['My brother is','elder than me','by nearly','three years'],a:1,e:'Elder is normally used with to in such traditional constructions, or more naturally older than. Correct: elder to me in traditional exam grammar, though older than me is standard modern usage.'},
+{n:8,c:D.quant,q:'There is _____ hope of his recovering completely; the doctors are extremely worried.',o:['a little','little','few','a few'],a:1,e:'Little means hardly any and has a negative sense. It is used with uncountable nouns such as hope.'},
+{n:9,c:D.fill,q:'I have read _____ books on military history, so I can suggest some good titles.',o:['little','a little','few','a few'],a:3,e:'Books is countable. A few means some and has a positive sense.'},
+{n:10,c:D.correct,q:'Choose the correct sentence.',o:['This problem is more easier than the previous one.','This problem is much easier than the previous one.','This problem is much more easier than the previous one.','This problem is very easier than the previous one.'],a:1,e:'Easier is already comparative. More easier is a double comparative. Much can correctly intensify a comparative.'},
+{n:11,c:D.error,q:'He is / one of the best player / our school has / ever produced.',o:['He is','one of the best player','our school has','ever produced'],a:1,e:'The construction is one of the + superlative + plural noun. Correct: one of the best players.'},
+{n:12,c:D.part,q:"The cadets were _____ by the instructor's demonstration.",o:['fascinating','fascinated','fascinate','fascination'],a:1,e:'Fascinated describes how the cadets felt. Fascinating describes something that causes fascination.'},
+{n:13,c:D.part,q:'It was one of the most _____ lectures I had attended.',o:['interested','interesting','interest','interestingly'],a:1,e:'The lecture causes interest, so the -ing adjective interesting is required.'},
+{n:14,c:D.compare,q:'No other metal is as useful as iron for this particular purpose. Choose the correct transformation.',o:['Iron is more useful than all metals.','Iron is the most useful of all metals for this particular purpose.','Iron is more useful than any other metal for this particular purpose.','Iron is useful than any metal for this particular purpose.'],a:2,e:'No other + positive degree can be transformed into comparative + than any other without changing the basic meaning.'},
+{n:15,c:D.error,q:'Of all the cadets / in the squadron, / Rohan is more disciplined / than the others.',o:['Of all the cadets','in the squadron','Rohan is more disciplined','than the others'],a:2,e:'The opening phrase of all the cadets calls for a superlative construction: Rohan is the most disciplined.'},
+{n:16,c:D.prep,q:'He is fully conscious _____ the consequences of his decision.',o:['about','from','of','with'],a:2,e:'The standard construction is conscious of something.'},
+{n:17,c:D.confuse,q:'The school has introduced a _____ programme for developing communication skills.',o:['comprehensive','comprehensible','comprehended','comprehending'],a:0,e:'Comprehensive means complete or covering many aspects. Comprehensible means capable of being understood.'},
+{n:18,c:D.error,q:'This is / a worth-seeing monument / and attracts thousands / of visitors every year.',o:['This is','a worth-seeing monument','and attracts thousands','of visitors every year'],a:1,e:'Worth is normally followed by a gerund: a monument worth seeing.'},
+{n:19,c:D.order,q:'Choose the most natural order of adjectives.',o:['a wooden beautiful old table','an old wooden beautiful table','a beautiful old wooden table','a wooden old beautiful table'],a:2,e:'The normal order is broadly opinion → age → material → noun: beautiful old wooden table.'},
+{n:20,c:D.distrib,q:'_____ candidate was given five minutes to answer the questions.',o:['Every','All','Both','Many'],a:0,e:'Every is followed by a singular countable noun: every candidate.'},
+{n:21,c:D.error,q:'She has / a few knowledge / of French but cannot / speak it fluently.',o:['She has','a few knowledge','of French but cannot','speak it fluently'],a:1,e:'Knowledge is uncountable, so a little knowledge is required.'},
+{n:22,c:D.improve,q:'The population of this town is greater than that city.',o:['greater than that of that city','greater than those of that city','more greater than that city','greatest than that city'],a:0,e:'A population must be compared with another population, not with a city. That substitutes for population.'},
+{n:23,c:D.fill,q:'_____ you practise, _____ you become.',o:['More, better','The more, the better','The most, the best','More, the best'],a:1,e:'The correlative comparative construction is the + comparative..., the + comparative...'},
+{n:24,c:D.error,q:'This route is / preferable than / the one we followed / yesterday.',o:['This route is','preferable than','the one we followed','yesterday'],a:1,e:'Preferable takes to, not than. Correct: preferable to the one...'},
+{n:25,c:D.adv,q:'After the long journey, the soldiers looked _____.',o:['tiredly','tired','tiringly','more tiredly'],a:1,e:'Look is a linking verb here and is followed by an adjective describing the subject.'},
+{n:26,c:D.correct,q:'Choose the correct sentence.',o:['He is enough strong to lift the box.','He is strong enough to lift the box.','He is enough stronger to lift the box.','He enough is strong to lift the box.'],a:1,e:'When enough modifies an adjective, it normally comes after the adjective: strong enough.'},
+{n:27,c:D.error,q:'He is / much more taller / than his elder brother / at present.',o:['He is','much more taller','than his elder brother','at present'],a:1,e:'Taller is already comparative. Correct: much taller.'},
+{n:28,c:D.confuse,q:"The medicine had no _____ effect on the patient's condition.",o:['beneficial','beneficent','beneficiary','benefited'],a:0,e:'Beneficial means producing a good or useful effect. Beneficent generally describes a person or action that does good.'},
+{n:29,c:D.compare,q:'Very few cities in India are as crowded as Mumbai. Choose the correct transformation.',o:['Mumbai is more crowded than every city in India.','Mumbai is one of the most crowded cities in India.','Mumbai is the most crowded city in India.','Mumbai is more crowded than all city in India.'],a:1,e:'Very few...as + positive + as corresponds to one of the + superlative + plural noun.'},
+{n:30,c:D.error,q:'He has / enough of experience / to handle / such difficult situations.',o:['He has','enough of experience','to handle','such difficult situations'],a:1,e:'Before a noun used generally, enough comes directly before it: enough experience.'},
+{n:31,c:D.measure,q:'The river is nearly two kilometres _____.',o:['broadly','breadth','wide','widely'],a:2,e:'After a measurement, an adjective such as wide, long, high, deep is used: two kilometres wide.'},
+{n:32,c:D.compare,q:'This is _____ of the two methods suggested by the committee.',o:['the best','the better','better','best'],a:1,e:'When selecting between two definite alternatives, the + comparative is traditionally used: the better of the two.'},
+{n:33,c:D.error,q:'The weather today / is more colder / than it was / yesterday.',o:['The weather today','is more colder','than it was','yesterday'],a:1,e:'Colder is already comparative. Correct: is colder or is much colder.'},
+{n:34,c:D.confuse,q:'The principal is the _____ authority in all academic matters in the school.',o:['farther','further','farthest','furthestly'],a:1,e:'Further can mean additional or more advanced in an abstract/non-physical sense. Here it means higher/additional authority in the intended comparison. Better natural wording: The principal has further authority... For website use, this item is better treated as a distinction question rather than a fixed institutional claim.'},
+{n:35,c:D.few,q:'_____ friends he has are always ready to help him.',o:['Few','A few','The few','Little'],a:2,e:'The few means the small number that exist. The definite article is appropriate because the sentence refers to all of his limited number of friends.'},
+{n:36,c:D.error,q:'She is / the eldest of the two sisters / and has always / looked after the younger one.',o:['She is','the eldest of the two sisters','and has always','looked after the younger one'],a:1,e:'For comparison between two, the comparative degree is used. Correct: the elder of the two sisters.'},
+{n:37,c:D.too,q:'The question was _____ difficult for most candidates to answer correctly.',o:['very','enough','too','much'],a:2,e:'The construction too + adjective + for + noun/pronoun + to-infinitive expresses excessive degree: too difficult for most candidates to answer.'},
+{n:38,c:D.parallel,q:'The new system is not only faster but also _____ than the previous one.',o:['more reliable','most reliable','reliabler','more reliably'],a:0,e:'The comparison requires parallel comparative adjectives: faster and more reliable.'},
+{n:39,c:D.error,q:'No other mountain / in the world is / higher than Mount Everest / in elevation.',o:['No other mountain','in the world is','higher than Mount Everest','in elevation'],a:2,e:'After No other..., the positive-degree construction is required: No other mountain in the world is as high as Mount Everest. Alternatively: Mount Everest is higher than any other mountain in the world.'},
+{n:40,c:D.improve,q:'Of all the solutions suggested by the committee, this appears to be the most practical and easiest to implement.',o:['the more practical and easier','the most practical and the easiest','more practical and easiest','most practical and easier'],a:1,e:'Since the comparison is with all the solutions, superlative forms are required. Maintaining parallel structure gives the most practical and the easiest.'}
+];
+if(typeof TOPIC_PRACTICE_SERIES!=='undefined'&&Array.isArray(TOPIC_PRACTICE_SERIES)){
+  TOPIC_PRACTICE_SERIES.push({id:'adjective-set-1',topic:'Adjective',setNo:1,label:'Adjective — Practice Set 1',duration:50,marksPerCorrect:4,negativeMark:1.33,questions});
+}
+})();
