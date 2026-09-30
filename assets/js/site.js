@@ -1,4 +1,4 @@
-// V70 navigation bridge + colourful dropdowns/mobile tabs + clickable NDA English core areas + homepage practice CTA
+// V80 navigation bridge + colourful dropdowns/mobile tabs + topic-wise practice navigation + homepage practice CTA
 (function(){
   // Load the lightweight visual enhancement styles site-wide.
   if(!document.querySelector('link[data-mce-highlights="v58"]')){
@@ -24,6 +24,19 @@
   }
 
   const nav=document.querySelector('.site-header .nav');
+
+  // Add Topic Wise Practice Online as a dedicated top-level navigation tab after Online PYQs & Sample Practice.
+  if(nav && !nav.querySelector('.topic-practice-nav-link')){
+    const quizLink=nav.querySelector(':scope > a.quiz-nav-link') || [...nav.querySelectorAll(':scope > a')].find(a=>a.getAttribute('href')==='quizzes.html');
+    if(quizLink){
+      const topicLink=document.createElement('a');
+      topicLink.href='topic-practice.html';
+      topicLink.className='topic-practice-nav-link';
+      topicLink.innerHTML='Topic Wise Practice Online <span class="nav-flash-badge">NEW</span>';
+      if((location.pathname.split('/').pop()||'').toLowerCase()==='topic-practice.html')topicLink.classList.add('active');
+      quizLink.insertAdjacentElement('afterend',topicLink);
+    }
+  }
 
   // Keep only the first four About NDA Exam items and colour-highlight them.
   if(nav){
@@ -84,7 +97,7 @@
   }
 
   // Give every top-level mobile navigation item a different colour.
-  // Study Material and Online PYQs/Sample Practice receive a soft blinking/glow treatment.
+  // Study Material, Online PYQs/Sample Practice and Topic Wise Practice receive a soft blinking/glow treatment.
   if(nav){
     [...nav.children].forEach((item,i)=>{
       const control=item.matches('a')?item:item.querySelector(':scope > .nav-dropdown-toggle');
@@ -93,6 +106,7 @@
     });
     nav.querySelector('.study-material-dropdown > .nav-dropdown-toggle')?.classList.add('mce-attention-nav');
     nav.querySelector(':scope > a.quiz-nav-link')?.classList.add('mce-attention-nav');
+    nav.querySelector(':scope > a.topic-practice-nav-link')?.classList.add('mce-attention-nav');
   }
 
   const page=(location.pathname.split('/').pop()||'index.html').toLowerCase();
