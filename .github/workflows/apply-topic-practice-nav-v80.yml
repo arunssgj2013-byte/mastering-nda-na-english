@@ -1,0 +1,55 @@
+name: Apply Topic Practice Navigation V80
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-topic-practice-nav-v80.yml'
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add Topic Wise Practice Online navigation
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('assets/js/site.js')
+          s=p.read_text()
+          anchor="  const nav=document.querySelector('.site-header .nav');\n"
+          block="""
+
+  // Add Topic Wise Practice Online as a dedicated top-level navigation tab after Online PYQs & Sample Practice.
+  if(nav && !nav.querySelector('.topic-practice-nav-link')){
+    const quizLink=nav.querySelector(':scope > a.quiz-nav-link') || [...nav.querySelectorAll(':scope > a')].find(a=>a.getAttribute('href')==='quizzes.html');
+    if(quizLink){
+      const topicLink=document.createElement('a');
+      topicLink.href='topic-practice.html';
+      topicLink.className='topic-practice-nav-link';
+      topicLink.innerHTML='Topic Wise Practice Online <span class="nav-flash-badge">NEW</span>';
+      if((location.pathname.split('/').pop()||'').toLowerCase()==='topic-practice.html')topicLink.classList.add('active');
+      quizLink.insertAdjacentElement('afterend',topicLink);
+    }
+  }
+"""
+          if 'topic-practice-nav-link' not in s:
+              if anchor not in s:
+                  raise SystemExit('Navigation anchor not found')
+              s=s.replace(anchor,anchor+block,1)
+          old="    nav.querySelector(':scope > a.quiz-nav-link')?.classList.add('mce-attention-nav');\n"
+          new=old+"    nav.querySelector(':scope > a.topic-practice-nav-link')?.classList.add('mce-attention-nav');\n"
+          if "a.topic-practice-nav-link')?.classList.add('mce-attention-nav')" not in s:
+              if old not in s:
+                  raise SystemExit('Attention-nav anchor not found')
+              s=s.replace(old,new,1)
+          p.write_text(s)
+          PY
+      - name: Commit Topic Practice navigation
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/js/site.js
+          git commit -m "Add Topic Wise Practice Online navigation tab"
+          git push
