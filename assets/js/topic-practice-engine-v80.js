@@ -27,7 +27,7 @@
   function showSets(topic){
     const list=series.filter(s=>s.topic===topic);
     setTitle.textContent=topic;
-    setGrid.innerHTML=list.map((s,i)=>`<button class="topic-set-card" type="button" data-set="${esc(s.id)}"><span class="topic-set-no">${String(s.setNo||i+1).padStart(2,'0')}</span><div><h3>${esc(s.label||`${topic} — Practice Set ${i+1}`)}</h3><p>${s.questions?.length||0} Questions • ${s.duration||20} Minutes • Online MCQ Practice</p></div><span class="topic-set-go">Attempt →</span></button>`).join('');
+    setGrid.innerHTML=list.map((s,i)=>`<button class="topic-set-card" type="button" data-set="${esc(s.id)}"><span class="topic-set-no">${String(s.setNo||i+1).padStart(2,'0')}</span><div><h3>${esc(s.label||`${topic} — Practice Set ${i+1}`)}</h3><p>${s.questions?.length||0} Questions • ${s.duration||50} Minutes • Online MCQ Practice</p></div><span class="topic-set-go">Attempt →</span></button>`).join('');
     setPanel.classList.remove('hidden');testPanel.classList.add('hidden');
     setGrid.querySelectorAll('[data-set]').forEach(b=>b.addEventListener('click',()=>prepareSet(b.dataset.set)));
     setPanel.scrollIntoView({behavior:'smooth',block:'start'});
@@ -39,12 +39,12 @@
   }
   function showInstructions(s){
     document.querySelector('.topic-instruction-overlay')?.remove();
-    const total=s.questions?.length||0,dur=s.duration||20;
-    const o=document.createElement('div');o.className='topic-instruction-overlay';o.innerHTML=`<div class="topic-instruction-card"><div class="topic-instruction-head"><small>Topic Wise Practice Online</small><h2>${esc(s.label||s.topic)}</h2></div><div class="topic-instruction-body"><p><b>${total} Questions</b> • <b>${dur} Minutes</b> • One question at a time</p><ul><li>The timer starts when you begin the test.</li><li>Use Save & Next to record your response and continue.</li><li>Use Skip & Review to mark a question for revisiting.</li><li>Correct answers and explanations appear after submission.</li></ul><div class="topic-instruction-actions"><button class="cancel" type="button">Back</button><button class="start" type="button">START PRACTICE</button></div></div></div>`;
+    const total=s.questions?.length||0,dur=s.duration||50;
+    const o=document.createElement('div');o.className='topic-instruction-overlay';o.innerHTML=`<div class="topic-instruction-card"><div class="topic-instruction-head"><small>Topic Wise Practice Online</small><h2>${esc(s.label||s.topic)}</h2></div><div class="topic-instruction-body"><p><b>${total} Questions</b> • <b>${dur} Minutes</b> • One question at a time</p><ul><li>The test contains ${total} questions and the total time allowed is ${dur} minutes.</li><li>The timer starts when you begin the test.</li><li>Use Save & Next to record your response and continue.</li><li>Use Skip & Review to mark a question for revisiting.</li><li>Correct answers and explanations appear after submission.</li></ul><div class="topic-instruction-actions"><button class="cancel" type="button">Back</button><button class="start" type="button">START PRACTICE</button></div></div></div>`;
     document.body.appendChild(o);o.querySelector('.cancel').onclick=()=>o.remove();o.querySelector('.start').onclick=()=>{o.remove();startTest()};
   }
   function startTest(){
-    if(!activeSet)return;index=0;answers={};review=new Set();submitted=false;seconds=(activeSet.duration||20)*60;scoreBox.classList.add('hidden');setPanel.classList.add('hidden');testPanel.classList.remove('hidden');renderQuestion();renderOmr();updateTimer();clearInterval(timerId);timerId=setInterval(()=>{seconds--;updateTimer();if(seconds<=0){clearInterval(timerId);submitTest(true)}},1000);testPanel.scrollIntoView({behavior:'smooth',block:'start'});
+    if(!activeSet)return;index=0;answers={};review=new Set();submitted=false;seconds=(activeSet.duration||50)*60;scoreBox.classList.add('hidden');setPanel.classList.add('hidden');testPanel.classList.remove('hidden');renderQuestion();renderOmr();updateTimer();clearInterval(timerId);timerId=setInterval(()=>{seconds--;updateTimer();if(seconds<=0){clearInterval(timerId);submitTest(true)}},1000);testPanel.scrollIntoView({behavior:'smooth',block:'start'});
   }
   function updateTimer(){timerEl.textContent=`${String(Math.floor(seconds/60)).padStart(2,'0')}:${String(Math.max(0,seconds%60)).padStart(2,'0')}`}
   function renderQuestion(){
