@@ -43,6 +43,6 @@ const questions=[
 {"n":40,"c":"Directions: Choose the option that correctly completes the sentence according to the rules of Subject–Verb Agreement.","q":"Few of the candidates who _____ for the interview possess the required experience.","o":["has applied","is applying","have applied","applies"],"a":2,"e":"Who refers to the plural noun candidates, so the relative clause requires the plural verb have applied."}
 ];
 if(typeof TOPIC_PRACTICE_SERIES!=='undefined'&&Array.isArray(TOPIC_PRACTICE_SERIES)){
-  TOPIC_PRACTICE_SERIES.push({id:'sva-set-1',topic:'Subject–Verb Agreement (SVA)',setNo:1,label:'Subject–Verb Agreement — Practice Set 1',duration:50,marksPerCorrect:1,negativeMark:0,questions});
+  TOPIC_PRACTICE_SERIES.push({id:'sva-set-1',topic:'Subject–Verb Agreement (SVA)',setNo:1,label:'Subject–Verb Agreement — Practice Set 1',duration:50,marksPerCorrect:4,negativeMark:1.33,questions});
 }
 })();
