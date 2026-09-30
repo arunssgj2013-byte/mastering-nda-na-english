@@ -1,0 +1,82 @@
+/* V105 — High-attention homepage cards for Study Material and Topic-wise Online Practice. */
+.hero .hero-study-cta.attention-card{
+  width:min(100%,430px);
+  min-height:112px;
+  border-width:1px;
+  border-style:solid;
+  box-shadow:0 14px 30px rgba(7,26,53,.16),0 1px 0 rgba(255,255,255,.55) inset;
+}
+.hero .hero-study-cta.attention-card .hero-study-badge{
+  padding:3px 8px;
+  background:rgba(255,255,255,.86);
+  color:inherit;
+  border:1px solid rgba(255,255,255,.72);
+  font-size:8px;
+  letter-spacing:.12em;
+}
+.hero .hero-study-cta.attention-card strong{
+  margin-top:5px;
+  font-size:19px;
+  line-height:1.12;
+  letter-spacing:-.01em;
+}
+.hero .hero-study-cta.attention-card small{
+  margin-top:5px;
+  font-size:10px;
+  line-height:1.38;
+}
+.hero .hero-study-cta.attention-card .hero-study-action{
+  margin-top:7px;
+  font-size:10.5px;
+}
+.hero .hero-study-cta.study-material-card{
+  color:#3f2a00;
+  background:linear-gradient(135deg,#ffd95b 0%,#ffbf26 52%,#f39a12 100%);
+  border-color:#e59c12;
+}
+.hero .hero-study-cta.study-material-card::after{
+  background:rgba(255,255,255,.18);
+}
+.hero .hero-study-cta.study-material-card .hero-study-icon{
+  background:linear-gradient(135deg,#082c59,#0c5f9f);
+  color:#ffe18a;
+  box-shadow:0 8px 18px rgba(7,26,53,.24);
+}
+.hero .hero-study-cta.study-material-card strong{color:#102b4e}
+.hero .hero-study-cta.study-material-card small{color:#503a0a}
+.hero .hero-study-cta.study-material-card .hero-study-action{color:#082e60}
+.hero .hero-study-cta.study-material-card .hero-study-note{color:#684a08}
+
+.hero .hero-study-cta.topic-practice-card{
+  color:#fff;
+  background:linear-gradient(135deg,#0864b5 0%,#048ec2 52%,#03a8a0 100%);
+  border-color:#0776ad;
+}
+.hero .hero-study-cta.topic-practice-card::after{
+  background:rgba(255,255,255,.14);
+}
+.hero .hero-study-cta.topic-practice-card .hero-study-icon{
+  background:rgba(5,34,69,.88);
+  color:#ffe479;
+  box-shadow:0 8px 18px rgba(4,34,69,.28);
+}
+.hero .hero-study-cta.topic-practice-card .hero-study-badge{
+  background:rgba(255,255,255,.16);
+  color:#fff5bf;
+  border-color:rgba(255,255,255,.28);
+}
+.hero .hero-study-cta.topic-practice-card strong{color:#fff}
+.hero .hero-study-cta.topic-practice-card small{color:#e7f8ff}
+.hero .hero-study-cta.topic-practice-card .hero-study-action{color:#fff4a6}
+.hero .hero-study-cta.topic-practice-card .hero-study-note{color:#d6f4ff}
+
+.hero .hero-study-cta.attention-card:hover,
+.hero .hero-study-cta.attention-card:focus-visible{
+  transform:translateY(-3px);
+  box-shadow:0 18px 36px rgba(7,26,53,.22),0 0 0 3px rgba(255,255,255,.34);
+}
+@media (max-width:700px){
+  .hero .hero-study-cta.attention-card{min-height:104px;padding:13px 14px}
+  .hero .hero-study-cta.attention-card strong{font-size:17px}
+  .hero .hero-study-cta.attention-card small{font-size:9.7px}
+}
