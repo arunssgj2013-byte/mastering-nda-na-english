@@ -1,4 +1,4 @@
-/* V66 — Secondary homepage Study Material CTA. Elegant, intentionally quieter than Free Practice. */
+/* V66 — Homepage Study Material and Topic-wise Practice attention cards. */
 .hero .hero-study-cta{
   position:relative;
   display:flex;
@@ -10,24 +10,31 @@
   border-radius:16px;
   overflow:hidden;
   color:#0b2850;
-  background:linear-gradient(135deg,rgba(255,255,255,.98) 0%,#f8fbff 58%,#fff8e8 100%);
   border:1px solid rgba(201,155,57,.58);
-  box-shadow:0 10px 26px rgba(7,26,53,.10),0 0 0 1px rgba(255,255,255,.75) inset;
+  box-shadow:0 12px 28px rgba(7,26,53,.16),0 0 0 1px rgba(255,255,255,.45) inset;
   transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
+}
+.hero .hero-study-cta[href="resources.html"]{
+  background:linear-gradient(135deg,#ffd95b 0%,#ffbf26 52%,#f39a12 100%);
+  border-color:#df9710;
+}
+.hero .hero-study-cta[href="topic-practice.html"]{
+  background:linear-gradient(135deg,#075fae 0%,#078bc0 52%,#06a39c 100%);
+  border-color:#0674aa;
+  color:#fff;
 }
 .hero .hero-study-cta::after{
   content:"";
   position:absolute;
   width:92px;height:92px;border-radius:50%;
   right:-32px;bottom:-48px;
-  background:rgba(201,155,57,.10);
+  background:rgba(255,255,255,.16);
   pointer-events:none;
 }
 .hero .hero-study-cta:hover,
 .hero .hero-study-cta:focus-visible{
-  transform:translateY(-2px);
-  border-color:rgba(201,155,57,.88);
-  box-shadow:0 14px 32px rgba(7,26,53,.14),0 0 0 3px rgba(201,155,57,.10);
+  transform:translateY(-3px);
+  box-shadow:0 17px 36px rgba(7,26,53,.24),0 0 0 3px rgba(255,255,255,.30);
   outline:none;
 }
 .hero .hero-study-icon{
@@ -37,62 +44,79 @@
   display:grid;
   place-items:center;
   background:linear-gradient(135deg,#0a315f,#165f9e);
-  color:#f4cf7c;
+  color:#ffe184;
   font-size:20px;
-  box-shadow:0 8px 18px rgba(7,26,53,.16);
+  box-shadow:0 8px 18px rgba(7,26,53,.23);
+}
+.hero .hero-study-cta[href="topic-practice.html"] .hero-study-icon{
+  background:rgba(4,34,68,.9);
+  color:#ffe680;
 }
 .hero .hero-study-copy{display:block;min-width:0;flex:1}
+
+/* The service name is now the visual headline. */
 .hero .hero-study-badge{
-  display:inline-flex;
-  padding:3px 7px;
-  border-radius:999px;
-  background:#fff3d3;
-  color:#77540a;
-  font-size:8px;
+  display:block;
+  padding:0;
+  border-radius:0;
+  background:transparent;
+  color:#102b4e;
+  font-size:18px;
+  line-height:1.12;
   font-weight:900;
-  letter-spacing:.11em;
+  letter-spacing:-.01em;
   text-transform:uppercase;
 }
+.hero .hero-study-cta[href="topic-practice.html"] .hero-study-badge{color:#fff}
+
+/* The former headline is deliberately secondary so the visitor first sees the service name. */
 .hero .hero-study-cta strong{
   display:block;
-  margin-top:5px;
-  color:#0a274e;
-  font-size:16px;
-  line-height:1.18;
+  margin-top:4px;
+  color:#5a420b;
+  font-size:10px;
+  line-height:1.28;
+  font-weight:800;
 }
+.hero .hero-study-cta[href="topic-practice.html"] strong{color:#d9f5ff}
 .hero .hero-study-cta small{
   display:block;
   margin-top:4px;
-  color:#5f6e82;
-  font-size:10px;
+  color:#4d3a10;
+  font-size:9.8px;
   line-height:1.4;
 }
+.hero .hero-study-cta[href="topic-practice.html"] small{color:#e8f9ff}
 .hero .hero-study-action{
   display:block;
   margin-top:6px;
-  color:#145d9c;
-  font-size:10px;
+  color:#082e60;
+  font-size:10.5px;
   font-weight:900;
 }
+.hero .hero-study-cta[href="topic-practice.html"] .hero-study-action{color:#fff1a3}
 .hero .hero-study-action::after{content:"  →";transition:transform .2s ease}
 .hero .hero-study-note{
   display:block;
   margin-top:3px;
-  color:#8a6b2c;
+  color:#684a08;
   font-size:8.5px;
   font-style:normal;
 }
+.hero .hero-study-cta[href="topic-practice.html"] .hero-study-note{color:#d5f3ff}
 @media (min-width:901px){.hero .hero-study-cta{max-width:405px}}
 @media (max-width:900px){.hero .hero-study-cta{width:100%;max-width:none}}
 @media (max-width:700px){
   .hero .hero-study-cta{
     width:100%;
     margin:12px 0 0;
-    padding:12px 13px;
+    padding:13px 14px;
     border-radius:14px;
+    min-height:104px;
   }
-  .hero .hero-study-icon{flex-basis:40px;width:40px;height:40px;font-size:18px}
-  .hero .hero-study-cta strong{font-size:14px}
-  .hero .hero-study-cta small{font-size:9.5px}
+  .hero .hero-study-icon{flex-basis:42px;width:42px;height:42px;font-size:19px}
+  .hero .hero-study-badge{font-size:16.5px}
+  .hero .hero-study-cta strong{font-size:9.5px}
+  .hero .hero-study-cta small{font-size:9.3px}
 }
 @media (prefers-reduced-motion:reduce){.hero .hero-study-cta{transition:none!important}}
