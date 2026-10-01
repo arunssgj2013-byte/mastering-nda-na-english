@@ -1,4 +1,4 @@
-// V80 navigation bridge + colourful dropdowns/mobile tabs + topic-wise practice navigation + homepage practice CTA
+// V114 navigation bridge + colourful dropdowns/mobile tabs + topic/vocabulary practice navigation + homepage practice CTA
 (function(){
   // Load the lightweight visual enhancement styles site-wide.
   if(!document.querySelector('link[data-mce-highlights="v58"]')){
@@ -24,6 +24,7 @@
   }
 
   const nav=document.querySelector('.site-header .nav');
+  const currentPage=(location.pathname.split('/').pop()||'index.html').toLowerCase();
 
   // Add Topic Wise Practice Online as a dedicated top-level navigation tab after Online PYQs & Sample Practice.
   if(nav && !nav.querySelector('.topic-practice-nav-link')){
@@ -33,9 +34,22 @@
       topicLink.href='topic-practice.html';
       topicLink.className='topic-practice-nav-link';
       topicLink.innerHTML='Topic Wise Practice Online <span class="nav-flash-badge">NEW</span>';
-      if((location.pathname.split('/').pop()||'').toLowerCase()==='topic-practice.html')topicLink.classList.add('active');
+      if(currentPage==='topic-practice.html')topicLink.classList.add('active');
       quizLink.insertAdjacentElement('afterend',topicLink);
     }
+  }
+
+  // Add Vocabulary Practice as a dedicated top-level navigation tab after Topic Wise Practice Online.
+  if(nav && !nav.querySelector('.vocabulary-practice-nav-link')){
+    const topicLink=nav.querySelector(':scope > a.topic-practice-nav-link') || [...nav.querySelectorAll(':scope > a')].find(a=>a.getAttribute('href')==='topic-practice.html');
+    const quizLink=nav.querySelector(':scope > a.quiz-nav-link') || [...nav.querySelectorAll(':scope > a')].find(a=>a.getAttribute('href')==='quizzes.html');
+    const vocabLink=document.createElement('a');
+    vocabLink.href='vocabulary-practice.html';
+    vocabLink.className='vocabulary-practice-nav-link';
+    vocabLink.innerHTML='Vocabulary Practice <span class="nav-flash-badge">NEW</span>';
+    if(currentPage==='vocabulary-practice.html')vocabLink.classList.add('active');
+    if(topicLink)topicLink.insertAdjacentElement('afterend',vocabLink);
+    else if(quizLink)quizLink.insertAdjacentElement('afterend',vocabLink);
   }
 
   // Keep only the first four About NDA Exam items and colour-highlight them.
@@ -71,8 +85,7 @@
         'nda-english-comprehension.html',
         'nda-english-cohesion.html'
       ];
-      const page=(location.pathname.split('/').pop()||'index.html').toLowerCase();
-      const onStudyPage=studySectionPages.includes(page);
+      const onStudyPage=studySectionPages.includes(currentPage);
       const wrap=document.createElement('div');
       wrap.className='nav-dropdown study-material-dropdown';
       const toggle=document.createElement('button');
@@ -88,7 +101,7 @@
         a.href=href;
         a.textContent=label;
         a.classList.add('mce-nav-color');
-        if(href===page)a.classList.add('active');
+        if(href===currentPage)a.classList.add('active');
         menu.appendChild(a);
       });
       wrap.append(toggle,menu);
@@ -97,7 +110,7 @@
   }
 
   // Give every top-level mobile navigation item a different colour.
-  // Study Material, Online PYQs/Sample Practice and Topic Wise Practice receive a soft blinking/glow treatment.
+  // Practice navigation items receive a soft blinking/glow treatment.
   if(nav){
     [...nav.children].forEach((item,i)=>{
       const control=item.matches('a')?item:item.querySelector(':scope > .nav-dropdown-toggle');
@@ -107,9 +120,10 @@
     nav.querySelector('.study-material-dropdown > .nav-dropdown-toggle')?.classList.add('mce-attention-nav');
     nav.querySelector(':scope > a.quiz-nav-link')?.classList.add('mce-attention-nav');
     nav.querySelector(':scope > a.topic-practice-nav-link')?.classList.add('mce-attention-nav');
+    nav.querySelector(':scope > a.vocabulary-practice-nav-link')?.classList.add('mce-attention-nav');
   }
 
-  const page=(location.pathname.split('/').pop()||'index.html').toLowerCase();
+  const page=currentPage;
 
   // Homepage: add an attractive free-practice CTA that sends visitors to the test-selection portal.
   if(page==='index.html' || page===''){
