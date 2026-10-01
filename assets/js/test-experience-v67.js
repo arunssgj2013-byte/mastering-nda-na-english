@@ -1,5 +1,7 @@
 /* V67 — CBT-style test methodology layer.
    Intentionally does not edit question banks, options, answer keys or explanations. */
+/* Load the latest standalone sample-paper registry entry synchronously before quiz-engine.js runs. */
+document.write('<script src="assets/js/sample-paper-23-v82.js?v=82"><\/script>');
 (function(){
   let nativeSetClick=false;
   let pendingSetButton=null;
