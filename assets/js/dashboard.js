@@ -3,7 +3,7 @@
   const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
   const fmtDate=v=>v?new Date(v).toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short'}):'—';
   const roleLabel=t=>t==='TEACHER'?'Teacher':t==='OTHER'?'Other User':'Student';
-  const reattemptHref=(paperId,paperType='')=>String(paperType||'').toLowerCase()==='topic'?`topic-practice.html?set=${encodeURIComponent(paperId)}`:`quizzes.html?mode=${encodeURIComponent(paperType||'pyq')}&set=${encodeURIComponent(paperId)}`;
+  const reattemptHref=(paperId,paperType='')=>String(paperId||'').startsWith('vocab-')?`vocabulary-practice.html?set=${encodeURIComponent(paperId)}`:String(paperType||'').toLowerCase()==='topic'?`topic-practice.html?set=${encodeURIComponent(paperId)}`:`quizzes.html?mode=${encodeURIComponent(paperType||'pyq')}&set=${encodeURIComponent(paperId)}`;
   function render(data){
     const p=data.user||data.student||{},s=data.summary||{};
     $('dashboardStudentName').textContent=p.name||'User';
