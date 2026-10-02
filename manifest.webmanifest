@@ -1,0 +1,48 @@
+{
+  "name": "Mastering NDA/NA English",
+  "short_name": "NDA English",
+  "description": "NDA/NA English preparation with study material, PYQs, topic-wise practice, vocabulary practice and user progress.",
+  "id": "./",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#071a35",
+  "theme_color": "#071a35",
+  "lang": "en-IN",
+  "categories": ["education"],
+  "icons": [
+    {
+      "src": "assets/images/app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Online PYQs",
+      "short_name": "PYQs",
+      "url": "./quizzes.html",
+      "icons": [{"src":"assets/images/app-icon.svg","sizes":"any","type":"image/svg+xml"}]
+    },
+    {
+      "name": "Topic Practice",
+      "short_name": "Topics",
+      "url": "./topic-practice.html",
+      "icons": [{"src":"assets/images/app-icon.svg","sizes":"any","type":"image/svg+xml"}]
+    },
+    {
+      "name": "Vocabulary Practice",
+      "short_name": "Vocabulary",
+      "url": "./vocabulary-practice.html",
+      "icons": [{"src":"assets/images/app-icon.svg","sizes":"any","type":"image/svg+xml"}]
+    },
+    {
+      "name": "User Hub",
+      "short_name": "User Hub",
+      "url": "./dashboard.html",
+      "icons": [{"src":"assets/images/app-icon.svg","sizes":"any","type":"image/svg+xml"}]
+    }
+  ]
+}
