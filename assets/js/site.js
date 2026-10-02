@@ -1,5 +1,53 @@
-// V115 navigation bridge + colourful dropdowns/mobile tabs + topic/vocabulary practice navigation
+// V116 navigation bridge + colourful dropdowns/mobile tabs + PWA support
 (function(){
+  // PWA shell: manifest, theme, install support and service-worker registration.
+  if(!document.querySelector('link[rel="manifest"]')){
+    const manifest=document.createElement('link');
+    manifest.rel='manifest';
+    manifest.href='manifest.webmanifest?v=1';
+    document.head.appendChild(manifest);
+  }
+  if(!document.querySelector('meta[name="theme-color"]')){
+    const theme=document.createElement('meta');
+    theme.name='theme-color';
+    theme.content='#071a35';
+    document.head.appendChild(theme);
+  }
+  if(!document.querySelector('link[data-mce-pwa="v116"]')){
+    const pwaStyle=document.createElement('link');
+    pwaStyle.rel='stylesheet';
+    pwaStyle.href='assets/css/pwa-v116.css?v=116';
+    pwaStyle.dataset.mcePwa='v116';
+    document.head.appendChild(pwaStyle);
+  }
+  if('serviceWorker' in navigator){
+    window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=1',{scope:'./'}).catch(()=>{}),{once:true});
+  }
+  let deferredInstallPrompt=null;
+  const installBtn=document.createElement('button');
+  installBtn.type='button';
+  installBtn.className='mne-install-app';
+  installBtn.setAttribute('aria-label','Install Mastering NDA/NA English app');
+  installBtn.innerHTML='<span class="dot" aria-hidden="true"></span><span>Install App</span>';
+  const mountInstallButton=()=>{if(!installBtn.isConnected)document.body.appendChild(installBtn);};
+  window.addEventListener('beforeinstallprompt',event=>{
+    event.preventDefault();
+    deferredInstallPrompt=event;
+    mountInstallButton();
+    installBtn.classList.add('show');
+  });
+  installBtn.addEventListener('click',async()=>{
+    if(!deferredInstallPrompt)return;
+    deferredInstallPrompt.prompt();
+    try{await deferredInstallPrompt.userChoice;}catch(e){}
+    deferredInstallPrompt=null;
+    installBtn.classList.remove('show');
+  });
+  window.addEventListener('appinstalled',()=>{
+    deferredInstallPrompt=null;
+    installBtn.classList.remove('show');
+  });
+
   // Load the lightweight visual enhancement styles site-wide.
   if(!document.querySelector('link[data-mce-highlights="v58"]')){
     const style=document.createElement('link');
