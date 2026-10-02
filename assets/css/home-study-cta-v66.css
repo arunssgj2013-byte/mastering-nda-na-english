@@ -104,6 +104,23 @@
   font-style:normal;
 }
 .hero .hero-study-cta[href="topic-practice.html"] .hero-study-note{color:#d5f3ff}
+
+.hero .hero-study-cta[href="vocabulary-practice.html"]{
+  background:linear-gradient(135deg,#5b2c83 0%,#7b3fa3 50%,#b45aa8 100%);
+  border-color:#6f3c91;
+  color:#fff;
+}
+.hero .hero-study-cta[href="vocabulary-practice.html"] .hero-study-icon{
+  background:rgba(49,20,77,.92);
+  color:#ffe680;
+  font-weight:900;
+}
+.hero .hero-study-cta[href="vocabulary-practice.html"] .hero-study-badge{color:#fff}
+.hero .hero-study-cta[href="vocabulary-practice.html"] strong{color:#f3e7ff}
+.hero .hero-study-cta[href="vocabulary-practice.html"] small{color:#f7ecff}
+.hero .hero-study-cta[href="vocabulary-practice.html"] .hero-study-action{color:#ffe89a}
+.hero .hero-study-cta[href="vocabulary-practice.html"] .hero-study-note{color:#eadcff}
+
 @media (min-width:901px){.hero .hero-study-cta{max-width:405px}}
 @media (max-width:900px){.hero .hero-study-cta{width:100%;max-width:none}}
 @media (max-width:700px){
