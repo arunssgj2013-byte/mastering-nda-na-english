@@ -1,10 +1,10 @@
-// V116 navigation bridge + colourful dropdowns/mobile tabs + PWA support
+// V117 navigation bridge + colourful dropdowns/mobile tabs + PWA support
 (function(){
   // PWA shell: manifest, theme, install support and service-worker registration.
   if(!document.querySelector('link[rel="manifest"]')){
     const manifest=document.createElement('link');
     manifest.rel='manifest';
-    manifest.href='manifest.webmanifest?v=1';
+    manifest.href='manifest.webmanifest?v=2';
     document.head.appendChild(manifest);
   }
   if(!document.querySelector('meta[name="theme-color"]')){
@@ -13,15 +13,38 @@
     theme.content='#071a35';
     document.head.appendChild(theme);
   }
-  if(!document.querySelector('link[data-mce-pwa="v116"]')){
+  if(!document.querySelector('link[data-mce-pwa="v117"]')){
     const pwaStyle=document.createElement('link');
     pwaStyle.rel='stylesheet';
     pwaStyle.href='assets/css/pwa-v116.css?v=116';
-    pwaStyle.dataset.mcePwa='v116';
+    pwaStyle.dataset.mcePwa='v117';
     document.head.appendChild(pwaStyle);
   }
+  if(!document.querySelector('link[rel="apple-touch-icon"]')){
+    const appleIcon=document.createElement('link');
+    appleIcon.rel='apple-touch-icon';
+    appleIcon.sizes='192x192';
+    appleIcon.href='assets/images/app-icon-192.png?v=2';
+    document.head.appendChild(appleIcon);
+  }
+  [
+    ['mobile-web-app-capable','yes'],
+    ['apple-mobile-web-app-capable','yes'],
+    ['apple-mobile-web-app-status-bar-style','black-translucent'],
+    ['apple-mobile-web-app-title','NDA English']
+  ].forEach(([name,content])=>{
+    if(!document.querySelector(`meta[name="${name}"]`)){
+      const meta=document.createElement('meta');
+      meta.name=name;
+      meta.content=content;
+      document.head.appendChild(meta);
+    }
+  });
+  if(window.matchMedia?.('(display-mode: standalone)').matches || window.navigator.standalone===true){
+    document.documentElement.classList.add('mne-pwa-standalone');
+  }
   if('serviceWorker' in navigator){
-    window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=1',{scope:'./'}).catch(()=>{}),{once:true});
+    window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=2',{scope:'./'}).catch(()=>{}),{once:true});
   }
   let deferredInstallPrompt=null;
   const installBtn=document.createElement('button');
