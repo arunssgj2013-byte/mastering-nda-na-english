@@ -1,0 +1,12 @@
+/* PWA install affordance — shown only when installation is available. */
+.mne-install-app{
+  position:fixed;right:18px;bottom:18px;z-index:90;display:none;align-items:center;gap:9px;
+  border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:11px 16px;
+  background:linear-gradient(135deg,#071a35,#123e74);color:#fff;font:800 12px/1 Arial,sans-serif;
+  box-shadow:0 14px 34px rgba(7,26,53,.28);cursor:pointer
+}
+.mne-install-app.show{display:inline-flex}
+.mne-install-app .dot{width:9px;height:9px;border-radius:50%;background:#f1c85a;box-shadow:0 0 0 4px rgba(241,200,90,.18)}
+.mne-install-app:hover{transform:translateY(-1px)}
+@media(max-width:650px){.mne-install-app{right:10px;bottom:10px;padding:10px 13px;font-size:11px}}
+@media print{.mne-install-app{display:none!important}}
