@@ -3,20 +3,45 @@
   "short_name": "NDA English",
   "description": "NDA/NA English preparation with study material, PYQs, topic-wise practice, vocabulary practice and user progress.",
   "id": "./",
-  "start_url": "./index.html",
+  "start_url": "./index.html?source=pwa",
   "scope": "./",
   "display": "standalone",
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
   "orientation": "portrait-primary",
   "background_color": "#071a35",
   "theme_color": "#071a35",
   "lang": "en-IN",
-  "categories": ["education"],
+  "categories": [
+    "education"
+  ],
+  "prefer_related_applications": false,
   "icons": [
+    {
+      "src": "assets/images/app-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/images/app-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/images/app-icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
     {
       "src": "assets/images/app-icon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ],
   "shortcuts": [
@@ -24,25 +49,49 @@
       "name": "Online PYQs",
       "short_name": "PYQs",
       "url": "./quizzes.html",
-      "icons": [{"src":"assets/images/app-icon.svg","sizes":"any","type":"image/svg+xml"}]
+      "icons": [
+        {
+          "src": "assets/images/app-icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
     },
     {
       "name": "Topic Practice",
       "short_name": "Topics",
       "url": "./topic-practice.html",
-      "icons": [{"src":"assets/images/app-icon.svg","sizes":"any","type":"image/svg+xml"}]
+      "icons": [
+        {
+          "src": "assets/images/app-icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
     },
     {
       "name": "Vocabulary Practice",
       "short_name": "Vocabulary",
       "url": "./vocabulary-practice.html",
-      "icons": [{"src":"assets/images/app-icon.svg","sizes":"any","type":"image/svg+xml"}]
+      "icons": [
+        {
+          "src": "assets/images/app-icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
     },
     {
       "name": "User Hub",
       "short_name": "User Hub",
       "url": "./dashboard.html",
-      "icons": [{"src":"assets/images/app-icon.svg","sizes":"any","type":"image/svg+xml"}]
+      "icons": [
+        {
+          "src": "assets/images/app-icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
     }
   ]
 }
