@@ -1,4 +1,4 @@
-const CACHE_VERSION='mne-pwa-v1';
+const CACHE_VERSION='mne-pwa-v2';
 const STATIC_CACHE=CACHE_VERSION+'-static';
 const RUNTIME_CACHE=CACHE_VERSION+'-runtime';
 const APP_SHELL=[
@@ -7,18 +7,27 @@ const APP_SHELL=[
   './offline.html',
   './manifest.webmanifest',
   './assets/images/app-icon.svg',
+  './assets/images/app-icon-192.png',
+  './assets/images/app-icon-512.png',
+  './assets/images/app-icon-maskable-512.png',
   './assets/images/mce-mark.png',
   './assets/css/styles.css?v=52r1',
-  './assets/js/site.js?v=116'
+  './assets/css/pwa-v116.css?v=116',
+  './assets/js/site.js?v=117'
 ];
 
 self.addEventListener('install',event=>{
-  event.waitUntil(caches.open(STATIC_CACHE).then(cache=>cache.addAll(APP_SHELL)).then(()=>self.skipWaiting()));
+  event.waitUntil(
+    caches.open(STATIC_CACHE)
+      .then(cache=>cache.addAll(APP_SHELL))
+      .then(()=>self.skipWaiting())
+  );
 });
 
 self.addEventListener('activate',event=>{
   event.waitUntil(
-    caches.keys().then(keys=>Promise.all(keys.filter(key=>!key.startsWith(CACHE_VERSION)).map(key=>caches.delete(key))))
+    caches.keys()
+      .then(keys=>Promise.all(keys.filter(key=>!key.startsWith(CACHE_VERSION)).map(key=>caches.delete(key))))
       .then(()=>self.clients.claim())
   );
 });
