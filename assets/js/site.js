@@ -1,4 +1,4 @@
-// V117 navigation bridge + colourful dropdowns/mobile tabs + PWA support
+// V118 navigation bridge + legal footer links + colourful dropdowns/mobile tabs + PWA support
 (function(){
   // PWA shell: manifest, theme, install support and service-worker registration.
   if(!document.querySelector('link[rel="manifest"]')){
@@ -237,6 +237,23 @@
       });
     }
   }
+
+  // Ensure legal links are available consistently in public-page footers.
+  document.querySelectorAll('.footer-links').forEach(footerLinks=>{
+    const legalLinks=[
+      ['privacy.html','Privacy Policy'],
+      ['terms.html','Terms & Conditions'],
+      ['disclaimer.html','Disclaimer']
+    ];
+    legalLinks.forEach(([href,label])=>{
+      if(!footerLinks.querySelector(`a[href="${href}"]`)){
+        const a=document.createElement('a');
+        a.href=href;
+        a.textContent=label;
+        footerLinks.appendChild(a);
+      }
+    });
+  });
 
   // Run the original site behaviour unchanged after the navigation/page enhancement.
   const core=document.createElement('script');
