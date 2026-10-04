@@ -167,6 +167,52 @@
     font-size:16px;
   }
 }
+</style><style>
+/* Homepage refinement v70 — accessibility, responsive polish, calmer motion. */
+.hero .premium-hero-slider{min-height:500px;border-radius:26px}
+.hero .hero-slide img{min-height:500px}
+.hero .hero-slide-overlay h3{font-size:clamp(26px,2.4vw,34px)}
+.home-action-card:focus-visible,
+.home-secondary-actions a:focus-visible,
+.home-section-jump-inner a:focus-visible,
+.hero-arrow:focus-visible,
+.hero-slider-dots button:focus-visible{
+  outline:3px solid #f0c66f;
+  outline-offset:3px;
+}
+.home-action-card strong{letter-spacing:-.01em}
+.home-section-jump{margin-top:14px}
+.home-section-jump-inner{gap:10px}
+.home-section-jump-inner a{transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.section{scroll-margin-top:96px}
+@media(max-width:1000px){
+  .hero .hero-grid{grid-template-columns:1fr;gap:26px;padding:32px 0 46px}
+  .hero .hero-visual{min-height:0;width:min(100%,720px);margin-inline:auto}
+  .hero .premium-hero-slider{min-height:460px}
+  .hero .hero-slide img{min-height:460px}
+  .vertical-quick-nav{display:none}
+}
+@media(max-width:650px){
+  .hero .hero-grid{padding:24px 0 34px}
+  .hero .home-primary-actions{margin-top:16px}
+  .hero .premium-hero-slider{min-height:410px;border-radius:20px}
+  .hero .hero-slide img{min-height:410px}
+  .hero .hero-slide-overlay{left:18px;right:18px;bottom:70px}
+  .hero .hero-slide-overlay h3{font-size:26px}
+  .hero .hero-slide-overlay p{font-size:12px;line-height:1.5}
+  .hero .hero-slider-topline{top:14px;left:14px;right:14px;gap:6px}
+  .hero .hero-slider-topline span{padding:6px 9px;font-size:9px}
+  .stats-wrap{margin-top:-16px}
+  .home-section-jump-inner{padding-inline:0}
+}
+@media(max-width:420px){
+  .hero .hero-slider-topline span:nth-child(3){display:none}
+  .hero .premium-hero-slider,.hero .hero-slide img{min-height:390px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
 </style></head><body><div class="announce"><div class="container"><strong>Latest Release:</strong> NDA/NA English Practice Book · 22 PYQ Sets · 12 Sample Papers</div></div>
 <header class="site-header"><div class="container navrow"><a class="brand" href="index.html"><img src="assets/images/mce-mark.png" alt="Mastering NDA/NA English logo"><span class="brand-copy"><b>Mastering NDA/NA English</b><small>National Defence Academy & Naval Academy</small></span></a><button class="menu-btn" aria-label="Menu" aria-expanded="false">☰</button><nav class="nav"><a href="index.html" class="active">Home</a><div class="nav-dropdown"><button class="nav-dropdown-toggle" type="button" aria-expanded="false" aria-haspopup="true">About NDA Exam <span aria-hidden="true">⌄</span></button><div class="nav-dropdown-menu"><a href="about-nda.html#overview">NDA/NA Overview</a><a href="about-nda.html#eligibility">Eligibility Criteria</a><a href="about-nda.html#exam-structure">Exam Structure</a><a href="about-nda.html#syllabus">NDA/NA Syllabus</a><a href="about-nda.html#written-pattern">Written Exam Pattern</a><a href="about-nda.html#gat-english">GAT & English</a><a href="about-nda.html#selection">Selection Process</a><a href="about-nda.html#ssb-medical">SSB & Medical</a></div></div><a href="resources.html">NDA/NA Study Material</a><a href="quizzes.html" class="quiz-nav-link">Online PYQs &amp; Sample Practice</a><a href="dashboard.html" class="student-nav-link">User Hub</a><a href="books.html">Books</a><a href="author-contact.html">Author &amp; Contact</a></nav></div></header><aside class="vertical-quick-nav" aria-label="Quick navigation"><div class="vertical-nav-title">Quick Links</div><a class="vertical-link active" href="index.html" title="Home"><b>HM</b><span>Home</span></a><a class="vertical-link" href="about-nda.html" title="About NDA Exam"><b>NE</b><span>About NDA Exam</span></a><a class="vertical-link" href="books.html" title="Books"><b>BK</b><span>Books</span></a><a class="vertical-link" href="resources.html" title="NDA/NA Study Material"><b>ND</b><span>NDA/NA Study Material</span></a><a class="vertical-link" href="quizzes.html" title="Online Practice"><b>OP</b><span>Online PYQs</span></a><a class="vertical-link" href="dashboard.html" title="User Hub"><b>ST</b><span>User Hub</span></a><a class="vertical-link" href="author-contact.html" title="Author & Contact"><b>AC</b><span>Author & Contact</span></a></aside>
 <main>
