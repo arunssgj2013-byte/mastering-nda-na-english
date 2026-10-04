@@ -1099,3 +1099,63 @@ input:focus,select:focus,textarea:focus{outline:3px solid rgba(23,86,160,.13);ou
   .hub-shortcut{min-height:64px}
 }
 @media(prefers-reduced-motion:reduce){.hub-shortcut{transition:none}.hub-shortcut:hover{transform:none}}
+
+
+/* Unified result experience v75 — shared scorecard/review presentation only. */
+.quiz-score-box,.topic-score{
+  padding:24px;border:1px solid #d8e3ef;border-radius:var(--mce-radius-lg);
+  background:linear-gradient(145deg,#f8fbff 0%,#fff 62%,#fffaf0 100%);
+  box-shadow:var(--mce-shadow);color:var(--mce-ink);
+}
+.print-result-brand{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding-bottom:13px;margin-bottom:14px;border-bottom:1px solid #dfe7f0;
+}
+.print-result-brand strong{font:700 18px/1.2 Georgia,"Times New Roman",serif;color:var(--mce-navy)}
+.print-result-brand span{color:#946a18;font-size:9px;font-weight:900;letter-spacing:.11em;text-transform:uppercase}
+.print-result-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin-bottom:18px;color:#63738a;font-size:10px}
+.print-result-meta b{color:#294663}
+.score-headline{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:18px}
+.score-title h3{margin:0;color:var(--mce-navy);font:700 clamp(23px,3vw,31px)/1.15 Georgia,"Times New Roman",serif}
+.score-title p{margin:6px 0 0;color:var(--mce-muted);font-size:12px}
+.score-badge{
+  flex:0 0 auto;padding:9px 14px;border:1px solid #d6b968;border-radius:999px;
+  background:#fff8e8;color:#77530d;font-size:10px;font-weight:950;letter-spacing:.07em;text-transform:uppercase;
+}
+.score-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.score-card{
+  min-height:92px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:13px 8px;border:1px solid var(--mce-line);border-radius:15px;background:#fff;text-align:center;
+  box-shadow:0 4px 14px rgba(7,26,53,.035);
+}
+.score-card b{color:var(--mce-navy);font:700 25px/1 Georgia,"Times New Roman",serif}
+.score-card span{margin-top:7px;color:#718096;font-size:8px;font-weight:900;letter-spacing:.07em;text-transform:uppercase}
+.score-card:nth-child(1){border-top:3px solid #4d9b6a}.score-card:nth-child(2){border-top:3px solid #bd6262}
+.score-card:nth-child(3){border-top:3px solid #8996a8}.score-card:nth-child(4),.score-card:nth-child(5){border-top:3px solid #4f7fb5}.score-card:nth-child(6){border-top:3px solid var(--mce-gold)}
+.section-score-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
+.section-score{padding:14px;border:1px solid var(--mce-line);border-radius:14px;background:#fff}
+.section-score strong{display:block;color:var(--mce-navy);font-size:11px}
+.section-score small{display:block;margin-top:7px;color:var(--mce-muted);font-size:9px}
+.mini-progress{height:6px;margin-top:9px;border-radius:999px;background:#e8edf4;overflow:hidden}
+.mini-progress span{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#1c5b9f,#c99b39)}
+.result-actions{padding-top:17px;margin-top:20px;border-top:1px solid #e1e8f0}
+.quiz-explainer,.topic-answer-review{
+  margin-top:14px;padding:14px 16px;border:1px solid #dce5ef;border-left:4px solid var(--mce-gold);
+  border-radius:12px;background:#fbfcfe;color:#4f6075;font-size:12px;line-height:1.65;
+}
+.quiz-explainer strong,.topic-answer-review b{color:var(--mce-navy)}
+.quiz-option.correct,.topic-option.correct{border-color:#78b58c;background:#f0faf3}
+.quiz-option.wrong,.topic-option.wrong{border-color:#d68b8b;background:#fff4f4}
+@media(max-width:900px){.score-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:600px){
+  .quiz-score-box,.topic-score{padding:17px;border-radius:17px}
+  .print-result-brand,.score-headline{align-items:flex-start;flex-direction:column}
+  .print-result-brand{gap:4px}.score-badge{align-self:flex-start}
+  .score-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .score-card{min-height:82px}.score-card b{font-size:22px}
+  .result-actions{display:grid;grid-template-columns:1fr}.result-actions .btn{width:100%;justify-content:center}
+}
+@media print{
+  .quiz-score-box,.topic-score{box-shadow:none!important;background:#fff!important;border:1px solid #cfd8e3!important}
+  .score-card,.section-score{break-inside:avoid;box-shadow:none!important}
+}
