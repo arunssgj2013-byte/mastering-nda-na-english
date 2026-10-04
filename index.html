@@ -388,6 +388,22 @@ footer{border-top:4px solid #c99b39}
   .home-resource-gateway-card>span{width:34px;height:34px}
   .home-resource-gateway-card>b{grid-column:2;margin-top:2px}
 }
+<style>
+/* Homepage site search — self-contained and non-invasive. */
+.home-site-search{max-width:760px;margin:20px 0 2px}
+.home-site-search>label{display:block;margin:0 0 7px;font-size:13px;font-weight:800;letter-spacing:.02em}
+.home-site-search-box{display:flex;gap:8px;padding:6px;border:1px solid rgba(255,255,255,.28);border-radius:15px;background:rgba(255,255,255,.12);box-shadow:0 10px 26px rgba(0,0,0,.10)}
+.home-site-search-box input{min-width:0;flex:1;border:0;outline:0;border-radius:10px;padding:11px 13px;background:#fff;color:#172133;font:inherit}
+.home-site-search-box input::placeholder{color:#69778b}
+.home-site-search-box button{border:0;border-radius:10px;padding:0 18px;background:#f2b84b;color:#071a35;font:inherit;font-weight:800;cursor:pointer}
+.home-site-search-results{margin-top:8px;padding:7px;border-radius:14px;background:#fff;color:#172133;box-shadow:0 16px 34px rgba(7,26,53,.22)}
+.home-site-search-result{display:block;padding:10px 11px;border-radius:9px;text-decoration:none;color:#172133}
+.home-site-search-result:hover,.home-site-search-result:focus{background:#f3f6fa;outline:none}
+.home-site-search-result strong{display:block;font-size:14px;line-height:1.3;color:#071a35}
+.home-site-search-result span{display:block;margin-top:2px;font-size:12px;line-height:1.4;color:#627087}
+.home-site-search-empty{padding:11px;font-size:13px;color:#627087}
+@media(max-width:600px){.home-site-search{margin-top:16px}.home-site-search-box{gap:5px}.home-site-search-box button{padding:0 12px}.home-site-search-box input{padding:10px;font-size:14px}}
+</style>
 </style></head><body><div class="announce"><div class="container"><strong>Latest Release:</strong> NDA/NA English Practice Book · 22 PYQ Sets · 12 Sample Papers</div></div>
 <header class="site-header"><div class="container navrow"><a class="brand" href="index.html"><img src="assets/images/mce-mark.png" alt="Mastering NDA/NA English logo"><span class="brand-copy"><b>Mastering NDA/NA English</b><small>National Defence Academy & Naval Academy</small></span></a><button class="menu-btn" aria-label="Menu" aria-expanded="false">☰</button><nav class="nav"><a href="index.html" class="active">Home</a><div class="nav-dropdown"><button class="nav-dropdown-toggle" type="button" aria-expanded="false" aria-haspopup="true">About NDA Exam <span aria-hidden="true">⌄</span></button><div class="nav-dropdown-menu"><a href="about-nda.html#overview">NDA/NA Overview</a><a href="about-nda.html#eligibility">Eligibility Criteria</a><a href="about-nda.html#exam-structure">Exam Structure</a><a href="about-nda.html#syllabus">NDA/NA Syllabus</a><a href="about-nda.html#written-pattern">Written Exam Pattern</a><a href="about-nda.html#gat-english">GAT & English</a><a href="about-nda.html#selection">Selection Process</a><a href="about-nda.html#ssb-medical">SSB & Medical</a></div></div><a href="resources.html">NDA/NA Study Material</a><a href="quizzes.html" class="quiz-nav-link">Online PYQs &amp; Sample Practice</a><a href="dashboard.html" class="student-nav-link">User Hub</a><a href="books.html">Books</a><a href="author-contact.html">Author &amp; Contact</a></nav></div></header><aside class="vertical-quick-nav" aria-label="Quick navigation"><div class="vertical-nav-title">Quick Links</div><a class="vertical-link active" href="index.html" title="Home"><b>HM</b><span>Home</span></a><a class="vertical-link" href="about-nda.html" title="About NDA Exam"><b>NE</b><span>About NDA Exam</span></a><a class="vertical-link" href="books.html" title="Books"><b>BK</b><span>Books</span></a><a class="vertical-link" href="resources.html" title="NDA/NA Study Material"><b>ND</b><span>NDA/NA Study Material</span></a><a class="vertical-link" href="quizzes.html" title="Online Practice"><b>OP</b><span>Online PYQs</span></a><a class="vertical-link" href="dashboard.html" title="User Hub"><b>ST</b><span>User Hub</span></a><a class="vertical-link" href="author-contact.html" title="Author & Contact"><b>AC</b><span>Author & Contact</span></a></aside>
 <main>
@@ -397,6 +413,11 @@ footer{border-top:4px solid #c99b39}
   <span><strong>Arun Kumar</strong><small>Author • Mentor • NDA/NA English Educator</small></span>
   <b aria-hidden="true">→</b>
 </a>
+<div class="home-site-search" role="search" aria-label="Search Mastering NDA/NA English">
+<label for="homeSiteSearch">Find what you need</label>
+<div class="home-site-search-box"><input id="homeSiteSearch" type="search" placeholder="Search grammar, vocabulary, PYQs, exam pattern..." autocomplete="off" aria-controls="homeSiteSearchResults" aria-expanded="false"><button type="button" id="homeSiteSearchButton">Search</button></div>
+<div class="home-site-search-results" id="homeSiteSearchResults" hidden aria-live="polite"></div>
+</div>
 <div class="home-primary-actions" aria-label="Start NDA/NA English preparation">
 <a class="home-action-card primary" href="quizzes.html"><strong>Start Practice</strong><span>OMR • Timer • Instant Results</span></a>
 <a class="home-action-card" href="quizzes.html"><strong>Attempt PYQs</strong><span>21 Verified Papers • 1050 Questions</span></a>
@@ -456,4 +477,40 @@ footer{border-top:4px solid #c99b39}
 </section>
 <section class="section section-soft daily-quiz-home" id="home-online-practice"><div class="container quiz-home-grid"><div><div class="section-kicker quiz-flash-label">ONLINE PRACTICE CENTRE • VERIFIED PAPER SERIES</div><h2 class="section-title">Twenty-one verified PYQ practice sets are now live</h2><p class="lead" style="font-size:16px">The online practice bank is being rebuilt carefully from your corrected source files. <b>Verified online papers now include 2026-II through 2020-I &amp; II, both 2019 papers, 2018-II, both 2017 papers, both 2016 papers and both 2015 papers.</b> These sets include directions, highlighted target words, source answer keys and explanations.</p><div class="topic-chips"><span>21 Verified PYQs</span><span>1050 Questions</span><span>OMR Mode</span><span>50-Min Timer</span><span>+4 / −1.33</span><span>Scorecard</span></div><div class="btnrow"><a class="btn btn-primary quiz-flash-btn" href="quizzes.html">Open Online Practice Series</a></div></div><div class="quiz-promo-card quiz-promo-flash"><div class="quiz-promo-top"><span class="coming">LIVE</span><strong>21 Verified Papers</strong></div><ul><li>Verified sets include both 2019 papers, 2018-II, both 2017 papers, both 2016 papers and both 2015 papers</li><li>Directions shown clearly before each question type</li><li>Important target words highlighted</li><li>Answers and explanations after submission</li><li>Timer, OMR navigation and scorecard</li></ul></div></div></section>
 
-</main><footer><div class="container compact-footer"><div class="footer-brand"><img src="assets/images/mce-logo.png" alt="Mastering NDA/NA English logo"><p>Focused NDA/NA English preparation by Arun Kumar — Author • Mentor • Guide.</p></div><div class="footer-links footer-links-inline"><a href="index.html">Home</a><a href="about-nda.html">About NDA Exam</a><a href="books.html">Books</a><a href="resources.html">NDA/NA Study Material</a><a href="quizzes.html">Online PYQs</a><a href="dashboard.html">User Hub</a><a href="author-contact.html">Author &amp; Contact</a></div></div><div class="container copyright">© 2026 Arun Kumar. All Rights Reserved.<br><span class="footer-disclaimer">Independent educational website for NDA/NA English preparation; not an official UPSC or National Defence Academy website.</span></div></footer><script src="assets/js/portal.js?v=50"></script><script src="assets/js/site.js?v=117"></script></body></html>
+</main><footer><div class="container compact-footer"><div class="footer-brand"><img src="assets/images/mce-logo.png" alt="Mastering NDA/NA English logo"><p>Focused NDA/NA English preparation by Arun Kumar — Author • Mentor • Guide.</p></div><div class="footer-links footer-links-inline"><a href="index.html">Home</a><a href="about-nda.html">About NDA Exam</a><a href="books.html">Books</a><a href="resources.html">NDA/NA Study Material</a><a href="quizzes.html">Online PYQs</a><a href="dashboard.html">User Hub</a><a href="author-contact.html">Author &amp; Contact</a></div></div><div class="container copyright">© 2026 Arun Kumar. All Rights Reserved.<br><span class="footer-disclaimer">Independent educational website for NDA/NA English preparation; not an official UPSC or National Defence Academy website.</span></div></footer><script>
+(function(){
+  const items=[
+    ['Start Online Practice','quizzes.html','PYQs sample papers OMR timer mock test online practice questions'],
+    ['Topic-wise Practice','topic-practice.html','grammar topic wise practice subject verb agreement narration voice question tags articles prepositions tenses modifiers non finites conditionals'],
+    ['Vocabulary Practice','vocabulary-practice.html','vocabulary synonyms antonyms idioms one word substitution homonyms spelling phrasal verbs word power'],
+    ['Free Study Material','resources.html','study material grammar vocabulary PYQs notes resources free'],
+    ['NDA English Grammar','nda-english-grammar.html','grammar rules error spotting sentence improvement subject verb agreement articles prepositions tenses narration voice'],
+    ['NDA English Vocabulary','nda-english-vocabulary.html','vocabulary synonyms antonyms idioms one word substitution words'],
+    ['NDA English Comprehension','nda-english-comprehension.html','reading comprehension passage RC'],
+    ['NDA English Cohesion','nda-english-cohesion.html','cohesion ordering sentences para jumbles discourse'],
+    ['NDA English Syllabus','nda-english-syllabus.html','syllabus topics English GAT NDA NA'],
+    ['NDA English Exam Pattern','nda-english-exam-pattern.html','exam pattern marks questions negative marking GAT English'],
+    ['NDA GAT English','nda-gat-english.html','GAT general ability test English NDA'],
+    ['NDA English Preparation','nda-english-preparation.html','preparation strategy study plan guidance'],
+    ['NDA English PYQs','nda-english-pyq.html','previous year questions PYQ papers'],
+    ['NDA English Mock Test','nda-english-mock-test.html','mock test sample paper practice'],
+    ['About NDA/NA Exam','about-nda.html','eligibility exam structure syllabus written pattern selection SSB medical overview'],
+    ['Books','books.html','books grammar vocabulary PYQ sample papers Arun Kumar'],
+    ['Author & Contact','author-contact.html','Arun Kumar author mentor educator contact'],
+    ...Array.from({length:12},(_,i)=>{const y=2015+i;return ['NDA English PYQ '+y,'pyq-'+y+'.html',y+' previous year question paper PYQ NDA English'];})
+  ];
+  const input=document.getElementById('homeSiteSearch'), box=document.getElementById('homeSiteSearchResults'), btn=document.getElementById('homeSiteSearchButton');
+  if(!input||!box||!btn)return;
+  function esc(s){return s.replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+  function run(){
+    const q=input.value.trim().toLowerCase(), terms=q.split(/\s+/).filter(Boolean);
+    if(!q){box.hidden=true;input.setAttribute('aria-expanded','false');return}
+    const ranked=items.map((x,i)=>{const hay=(x[0]+' '+x[2]).toLowerCase();let score=0;terms.forEach(t=>{if(x[0].toLowerCase().includes(t))score+=4;if(hay.includes(t))score+=2});return {x,score,i}}).filter(o=>o.score>0).sort((a,b)=>b.score-a.score||a.i-b.i).slice(0,6);
+    box.innerHTML=ranked.length?ranked.map(o=>'<a class="home-site-search-result" href="'+o.x[1]+'"><strong>'+esc(o.x[0])+'</strong><span>'+esc(o.x[2].split(' ').slice(0,9).join(' '))+'</span></a>').join(''):'<div class="home-site-search-empty">No exact match found. Try “grammar”, “vocabulary”, “PYQ”, “mock test” or a year such as “2024”.</div>';
+    box.hidden=false;input.setAttribute('aria-expanded','true');
+  }
+  btn.addEventListener('click',run);input.addEventListener('input',run);input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();run()}if(e.key==='Escape'){box.hidden=true;input.setAttribute('aria-expanded','false')}});
+  document.addEventListener('click',e=>{if(!e.target.closest('.home-site-search')){box.hidden=true;input.setAttribute('aria-expanded','false')}});
+})();
+</script>
+<script src="assets/js/portal.js?v=50"></script><script src="assets/js/site.js?v=117"></script></body></html>
