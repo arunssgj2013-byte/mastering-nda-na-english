@@ -940,3 +940,63 @@ body.auth-modal-open{overflow:hidden}
   .practice-choice-action{width:100%;min-width:0}
   .practice-choice-tags{gap:6px}
 }
+
+
+/* Premium site system v72 — shared public-page visual refinement; functionality untouched. */
+:root{
+  --premium-shadow:0 16px 42px rgba(7,26,53,.085);
+  --premium-shadow-hover:0 22px 52px rgba(7,26,53,.13);
+  --premium-border:rgba(7,26,53,.10);
+}
+.site-header{box-shadow:0 8px 28px rgba(7,26,53,.05)}
+.navrow{height:74px}
+.brand img{width:54px;height:54px}
+.brand-copy b{letter-spacing:-.015em}
+.nav a,.nav-dropdown-toggle{transition:color .18s ease,background .18s ease}
+.nav a:hover,.nav-dropdown-toggle:hover{color:var(--blue)}
+.page-hero{
+  border-bottom:1px solid rgba(7,26,53,.07);
+}
+.page-hero-grid{padding-top:58px;padding-bottom:58px}
+.page-hero h1{max-width:900px;text-wrap:balance}
+.page-hero .lead{color:#52637b}
+.section-title{text-wrap:balance}
+.section-head{margin-bottom:32px}
+.section-kicker{letter-spacing:.14em}
+.btn{transition:transform .18s ease,box-shadow .18s ease,background .18s ease,border-color .18s ease}
+.btn:hover{transform:translateY(-1px)}
+.book-card,.resource-card,.exam-card,.dashboard-card,.hub-shortcut,.gateway-card,.practice-choice-card,.info-card{
+  border-color:var(--premium-border);
+}
+.book-card:hover,.resource-link:hover,.gateway-card:hover,.hub-shortcut:hover{
+  box-shadow:var(--premium-shadow-hover);
+}
+input,select,textarea{border-radius:10px}
+input:focus,select:focus,textarea:focus{
+  outline:3px solid rgba(23,86,160,.14);
+  outline-offset:1px;
+  border-color:#4e82bd;
+}
+a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
+  outline:3px solid #f0c66f;
+  outline-offset:3px;
+}
+footer{border-top:4px solid var(--gold)}
+.footer-links-inline a{opacity:.86;transition:opacity .18s ease,color .18s ease}
+.footer-links-inline a:hover{opacity:1;color:var(--gold2)}
+.vertical-quick-nav{box-shadow:0 12px 30px rgba(7,26,53,.10)}
+@media(max-width:1000px){
+  .navrow{height:72px}
+  .vertical-quick-nav{display:none}
+  .page-hero-grid{padding-top:46px;padding-bottom:46px}
+}
+@media(max-width:650px){
+  .brand img{width:46px;height:46px}
+  .page-hero-grid{padding-top:34px;padding-bottom:34px}
+  .page-hero h1{font-size:clamp(36px,11vw,48px);line-height:1.04}
+  .section-head{margin-bottom:24px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
