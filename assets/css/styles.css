@@ -1057,3 +1057,45 @@ input:focus,select:focus,textarea:focus{outline:3px solid rgba(23,86,160,.13);ou
   .btn,.card,.resource-tile,.hub-overview-card,.practice-choice-card,.topic-set-card,.topic-library-card{transition:none!important}
   .btn:hover{transform:none}
 }
+
+
+/* Premium component harmonisation v74 — presentation only; test/auth/data behaviour untouched. */
+.practice-gateway-head,.topic-intro-card,.dashboard-card{color:var(--mce-ink)}
+.practice-choice-card{
+  overflow:hidden;border:1px solid var(--mce-line);border-radius:var(--mce-radius-lg);
+  background:linear-gradient(180deg,#fff,#fbfdff);box-shadow:var(--mce-shadow-sm);
+}
+.practice-choice-label{color:#946a18;letter-spacing:.09em;text-transform:uppercase}
+.practice-choice-tags span{border-radius:999px;border-color:#dbe4ef;background:#f7faff;color:#405570}
+.practice-back-btn{border-radius:10px;border-color:#ccd8e6;background:#fff;color:var(--mce-navy);font-weight:850}
+.quiz-workspace,.source-quiz-workspace{border-radius:var(--mce-radius-lg)}
+.quiz-command-strip{border-radius:var(--mce-radius);box-shadow:var(--mce-shadow-sm)}
+.quiz-score-box{border-radius:var(--mce-radius)}
+.omr-panel{border-radius:var(--mce-radius);box-shadow:var(--mce-shadow-sm)}
+.topic-intro-card{
+  border:1px solid var(--mce-line);border-radius:var(--mce-radius-lg);
+  background:linear-gradient(180deg,#fff,#fbfdff);box-shadow:var(--mce-shadow-sm);
+}
+.topic-grid,.topic-set-grid{gap:14px}
+.topic-question-card,.topic-side,.topic-score{
+  border-radius:var(--mce-radius);box-shadow:var(--mce-shadow-sm);
+}
+.topic-side{border-color:var(--mce-line)}
+.topic-action,.topic-submit{border-radius:11px;font-weight:850}
+.topic-action.next{background:var(--mce-navy-2)}
+.topic-submit{background:#a97618}
+.topic-bubble.current{background:var(--mce-navy-2);border-color:var(--mce-navy-2)}
+.topic-instruction-card{border-radius:var(--mce-radius-lg);box-shadow:var(--mce-shadow-lg)}
+.dashboard-stat,.dashboard-card,.hub-shortcut{
+  border-color:var(--mce-line);box-shadow:var(--mce-shadow-sm);
+}
+.dashboard-card{border-radius:var(--mce-radius-lg)}
+.hub-shortcut{border-radius:var(--mce-radius);transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.hub-shortcut:hover{transform:translateY(-2px);border-color:#c7d7e9;box-shadow:var(--mce-shadow)}
+.performance-table,.attempt-table,.activity-table{border-radius:var(--mce-radius);overflow:hidden}
+@media(max-width:650px){
+  .practice-choice-card,.topic-intro-card,.dashboard-card{border-radius:18px}
+  .quiz-command-strip,.quiz-score-box,.omr-panel,.topic-question-card,.topic-side,.topic-score{border-radius:16px}
+  .hub-shortcut{min-height:64px}
+}
+@media(prefers-reduced-motion:reduce){.hub-shortcut{transition:none}.hub-shortcut:hover{transform:none}}
