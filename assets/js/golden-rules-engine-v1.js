@@ -1,4 +1,4 @@
-/* V104 — Golden Rules Practice CBT with persistent user/admin attempt records. */
+/* V104 — English Grammar Mastery Challenge CBT with persistent user/admin attempt records. */
 (function(){
   const series=Array.isArray(window.GOLDEN_RULES_SERIES)?window.GOLDEN_RULES_SERIES:(typeof GOLDEN_RULES_SERIES!=='undefined'&&Array.isArray(GOLDEN_RULES_SERIES)?GOLDEN_RULES_SERIES:[]);
   const ATTEMPTS_KEY='mceQuizAttempts',PROFILE_KEY='mceStudentProfileV2';
@@ -12,7 +12,7 @@
 
   function renderTopics(){
     if(!topicGrid)return;
-    if(!topics.length){topicGrid.innerHTML='<div class="topic-empty"><strong>Golden Rules practice is ready.</strong><span>The 100-rule mastery test is ready.</span></div>';return;}
+    if(!topics.length){topicGrid.innerHTML='<div class="topic-empty"><strong>Grammar Mastery Challenge practice is ready.</strong><span>The 100-rule mastery test is ready.</span></div>';return;}
     topicGrid.innerHTML=topics.map((t,i)=>{const sets=series.filter(s=>s.topic===t);return `<button class="topic-card" data-topic="${esc(t)}" type="button"><small>Grammar Mastery</small><h3>${esc(t)}</h3><p>Attempt all 100 Golden Rules in one timed online test.</p><span class="topic-count">${sets.length} Practice Set${sets.length===1?'':'s'}</span></button>`}).join('');
     topicGrid.querySelectorAll('[data-topic]').forEach(b=>b.onclick=()=>showSets(b.dataset.topic));
   }
@@ -44,7 +44,7 @@
 
   function ensureTopbar(){
     document.querySelector('.topic-exam-topbar')?.remove();const bar=document.createElement('div');bar.className='topic-exam-topbar';
-    bar.innerHTML=`<div class="topic-exam-title"><small>NDA/NA English Online Test</small><strong>${esc(activeSet?.label||'Golden Rules Practice')}</strong></div><div class="topic-exam-status"><div class="topic-exam-metric"><span>Question</span><strong id="topicTopQuestion">Q1 / ${activeSet?.questions?.length||0}</strong></div><div class="topic-exam-metric"><span>Time Left</span><strong id="topicTopTimer">${String(activeSet?.duration||80).padStart(2,"0")}:00</strong></div><button class="topic-exam-omr-toggle" type="button">OMR</button><button class="topic-exam-submit" type="button">SUBMIT TEST</button></div>`;
+    bar.innerHTML=`<div class="topic-exam-title"><small>NDA/NA English Online Test</small><strong>${esc(activeSet?.label||'English Grammar Mastery Challenge')}</strong></div><div class="topic-exam-status"><div class="topic-exam-metric"><span>Question</span><strong id="topicTopQuestion">Q1 / ${activeSet?.questions?.length||0}</strong></div><div class="topic-exam-metric"><span>Time Left</span><strong id="topicTopTimer">${String(activeSet?.duration||80).padStart(2,"0")}:00</strong></div><button class="topic-exam-omr-toggle" type="button">OMR</button><button class="topic-exam-submit" type="button">SUBMIT TEST</button></div>`;
     testPanel.prepend(bar);bar.querySelector('.topic-exam-submit').onclick=()=>submitTest(false);bar.querySelector('.topic-exam-omr-toggle').onclick=()=>document.body.classList.toggle('topic-mobile-omr-open');
     if(!document.querySelector('.topic-mobile-omr-close')){const close=document.createElement('button');close.className='topic-mobile-omr-close';close.type='button';close.textContent='Close OMR ×';close.onclick=()=>document.body.classList.remove('topic-mobile-omr-open');document.querySelector('.topic-side')?.prepend(close);}
   }
