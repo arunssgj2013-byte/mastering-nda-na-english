@@ -178,17 +178,3 @@
   .hero .hero-feature-card,.hero .hero-feature-center{transition:none!important}
 }
 
-/* Fifth hero feature: English Grammar Mastery Challenge */
-.hero .hero-feature-extra{
-  width:min(100%,430px);
-  display:flex;
-  justify-content:center;
-  margin:-2px 0 10px;
-}
-.hero .hero-feature-card.golden{
-  background:linear-gradient(135deg,#6d4b12,#b98624 54%,#e1b84b);
-  color:#fff;
-}
-@media (max-width:700px){
-  .hero .hero-feature-extra{margin:0 auto 8px}
-}
