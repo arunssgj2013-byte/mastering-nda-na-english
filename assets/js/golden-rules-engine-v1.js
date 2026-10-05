@@ -12,14 +12,14 @@
 
   function renderTopics(){
     if(!topicGrid)return;
-    if(!topics.length){topicGrid.innerHTML='<div class="topic-empty"><strong>Grammar Mastery Challenge practice is ready.</strong><span>The 100-rule mastery test is ready.</span></div>';return;}
-    topicGrid.innerHTML=topics.map((t,i)=>{const sets=series.filter(s=>s.topic===t);return `<button class="topic-card" data-topic="${esc(t)}" type="button"><small>Grammar Mastery</small><h3>${esc(t)}</h3><p>Attempt all 100 Golden Rules in one timed online test.</p><span class="topic-count">${sets.length} Practice Set${sets.length===1?'':'s'}</span></button>`}).join('');
+    if(!topics.length){topicGrid.innerHTML='<div class="topic-empty"><strong>Grammar Mastery Challenge is ready.</strong><span>Practice sets will appear here as they are added.</span></div>';return;}
+    topicGrid.innerHTML=topics.map((t,i)=>{const sets=series.filter(s=>s.topic===t);return `<button class="topic-card" data-topic="${esc(t)}" type="button"><small>Grammar Mastery</small><h3>${esc(t)}</h3><p>Choose from timed grammar mastery sets with OMR navigation, scoring and explanations.</p><span class="topic-count">${sets.length} Practice Set${sets.length===1?'':'s'}</span></button>`}).join('');
     topicGrid.querySelectorAll('[data-topic]').forEach(b=>b.onclick=()=>showSets(b.dataset.topic));
   }
 
   function showSets(topic){
     const list=series.filter(s=>s.topic===topic);setTitle.textContent=topic;
-    setGrid.innerHTML=list.map((s,i)=>`<button class="topic-set-card" type="button" data-set="${esc(s.id)}"><span class="topic-set-no">${String(s.setNo||i+1).padStart(2,'0')}</span><div><h3>${esc(s.label||`${topic} — Practice Set ${i+1}`)}</h3><p>${s.questions?.length||0} Questions • ${fmt(totalMarks(s))} Marks • ${s.duration||50} Minutes • +4 / −1.33</p></div><span class="topic-set-go">Attempt →</span></button>`).join('');
+    setGrid.innerHTML=list.map((s,i)=>`<button class="topic-set-card" type="button" data-set="${esc(s.id)}"><span class="topic-set-no">${String(s.setNo||i+1).padStart(2,'0')}</span><div><h3>${esc(s.label||`${topic} — Practice Set ${i+1}`)}</h3><p>${s.questions?.length||0} Questions • ${fmt(totalMarks(s))} Marks • ${s.duration||50} Minutes • +4 / −1.33${s.difficulty?` • ${esc(s.difficulty)}`:''}${s.level?` • ${esc(s.level)}`:''}</p></div><span class="topic-set-go">Attempt →</span></button>`).join('');
     setPanel.classList.remove('hidden');testPanel.classList.add('hidden');
     setGrid.querySelectorAll('[data-set]').forEach(b=>b.onclick=()=>prepareSet(b.dataset.set));
     setPanel.scrollIntoView({behavior:'smooth',block:'start'});
