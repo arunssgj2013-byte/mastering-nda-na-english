@@ -7,10 +7,10 @@
 <title>Administrator Dashboard | Mastering NDA/NA English</title>
 <link rel="icon" href="assets/images/mce-mark.png">
 <link rel="stylesheet" href="assets/css/styles.css?v=50">
-<link rel="stylesheet" href="assets/css/admin-tools-v61.css?v=63">
+<link rel="stylesheet" href="assets/css/admin-console-v64.css?v=64">
 </head>
 <body class="admin-body">
-<header class="admin-topbar"><div class="admin-topbar-inner"><a class="admin-brand" href="index.html"><img src="assets/images/mce-mark.png" alt="Mastering NDA/NA English"><div><b>Mastering NDA/NA English</b><span>Secure Administrator Console</span></div></a><a class="admin-home-link" href="index.html">← Public Website</a></div></header>
+<header class="admin-topbar"><div class="admin-topbar-inner"><a class="admin-brand" href="index.html"><img src="assets/images/mce-mark.png" alt="Mastering NDA/NA English"><div><b>Mastering NDA/NA English</b><span>Administrator Control Centre</span></div></a><a class="admin-home-link" href="index.html">← Public Website</a></div></header>
 <main class="admin-wrap">
 <div id="adminStatus" class="admin-status"></div>
 
@@ -37,23 +37,99 @@
 </section>
 
 <section data-admin-screen="dashboard" id="adminDashboard" class="hidden">
-  <div class="admin-dashboard-head"><div><div class="section-kicker">Administrator Command Centre</div><h1>User & Website Analytics</h1><p id="adminIdentity">Secure administrator</p><div class="admin-secure-chip">● Verified private dashboard</div></div><div class="admin-dashboard-actions"><button id="adminRefreshBtn" class="btn btn-outline" type="button">Refresh Data</button><button id="exportStudentsBtn" class="btn btn-outline" type="button">Export CSV</button><button id="adminLogoutBtn" class="btn btn-primary" type="button">Logout</button></div></div>
+  <div class="admin-dashboard-head">
+    <div><div class="section-kicker">Administrator Command Centre</div><h1>User, Activity & Result Control</h1><p id="adminIdentity">Secure administrator</p><div class="admin-secure-chip">● Verified private dashboard</div></div>
+    <div class="admin-dashboard-actions"><button id="adminRefreshBtn" class="btn btn-outline" type="button">Refresh Data</button><button id="exportStudentsBtn" class="btn btn-outline" type="button">Export Users CSV</button><button id="adminLogoutBtn" class="btn btn-primary" type="button">Logout</button></div>
+  </div>
 
-  <div class="admin-mfa-banner"><div><strong id="adminMfaState">2-Step Verification</strong><p>Optional extra protection for private user records.</p></div><button id="enableMfaBtn" class="btn btn-gold" type="button">Enable 2-Step Verification</button></div>
-  <div id="mfaSetupBox" class="admin-card hidden"><div class="admin-card-head"><div><div class="section-kicker">Security Upgrade</div><h2>Set up Authenticator App</h2></div></div><div class="admin-mfa-grid"><img id="mfaSetupQr" alt="Authenticator QR code"><div><p>Scan the QR code in your authenticator app or enter this secret manually:</p><div id="mfaSetupSecret" class="admin-secret"></div><form id="mfaSetupForm" class="admin-auth-form"><label>6-digit Code<input id="mfaSetupCode" name="code" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="one-time-code" required></label><button class="btn btn-primary" type="submit">Confirm 2-Step Verification</button></form></div></div></div>
+  <nav class="admin-console-tabs" aria-label="Administrator sections">
+    <button class="admin-console-tab active" type="button" data-admin-tab="overview" aria-selected="true">Overview<span>At a glance</span></button>
+    <button class="admin-console-tab" type="button" data-admin-tab="users" aria-selected="false">Users<span>Registered records</span></button>
+    <button class="admin-console-tab" type="button" data-admin-tab="results" aria-selected="false">Result Sheets<span>Tests & attempts</span></button>
+    <button class="admin-console-tab" type="button" data-admin-tab="activity" aria-selected="false">Activity<span>Logins & actions</span></button>
+    <button class="admin-console-tab" type="button" data-admin-tab="security" aria-selected="false">Security<span>Admin protection</span></button>
+  </nav>
 
-  <div id="adminStats" class="admin-stats"></div>
+  <section class="admin-panel active" data-admin-panel="overview">
+    <div id="adminStats" class="admin-stats"></div>
+    <div class="admin-overview-grid">
+      <section class="admin-card admin-overview-card">
+        <div class="section-kicker">Quick Access</div><h2>Find any registered user</h2>
+        <p>Search by name, email, school or PIN and jump directly to the full user directory.</p>
+        <div class="admin-quick-search"><input id="adminQuickUserSearch" type="search" placeholder="Name, email, school or PIN…"><button id="adminQuickUserBtn" class="btn btn-primary" type="button">Find User</button></div>
+        <div class="admin-dashboard-actions" style="justify-content:flex-start;margin-top:14px"><button id="adminOpenUsersBtn" class="btn btn-outline" type="button">Open All Users</button><button id="adminOpenResultsBtn" class="btn btn-outline" type="button">Open Result Sheets</button><button id="adminOpenActivityBtn" class="btn btn-outline" type="button">Open Activity</button></div>
+      </section>
+      <section class="admin-card admin-overview-card">
+        <div class="section-kicker">Latest Performance</div><h2>Recent test attempts</h2>
+        <p>See the newest attempts immediately, then open the corresponding user record where available.</p>
+        <div id="adminOverviewAttempts" class="admin-overview-attempts"></div>
+      </section>
+    </div>
+  </section>
 
-  <section class="admin-card"><div class="admin-card-head"><div><div class="section-kicker">Users</div><h2>Registration & Performance Overview</h2></div><small id="adminStudentCountLabel"></small></div><div class="admin-filters"><input id="adminSearch" type="search" placeholder="Search name, email, school, PIN…"><select id="adminRoleFilter"><option value="">All User Types</option><option value="STUDENT">Students</option><option value="TEACHER">Teachers</option><option value="OTHER">Other Users</option></select><select id="adminClassFilter"><option value="">All Classes</option></select><select id="adminStateFilter"><option value="">All States/UTs</option></select><button class="btn btn-outline" type="button" onclick="document.getElementById('adminSearch').value='';document.getElementById('adminRoleFilter').value='';document.getElementById('adminClassFilter').value='';document.getElementById('adminStateFilter').value='';document.getElementById('adminSearch').dispatchEvent(new Event('input'))">Clear Filters</button></div><div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>User</th><th>Role</th><th>Class</th><th>State/UT</th><th>PIN</th><th>School</th><th>Attempts</th><th>Best Score</th><th>Avg Accuracy</th><th>Growth</th><th>Last Activity</th><th>Record</th></tr></thead><tbody id="adminStudentsBody"></tbody></table></div></section>
+  <section class="admin-panel" data-admin-panel="users">
+    <section class="admin-card" id="adminUsersSection">
+      <div class="admin-card-head"><div><div class="section-kicker">Registered Users</div><h2>User Directory & Performance</h2><p class="admin-panel-note">Search, filter and sort all registered users. Open any record to see every available attempt, login and learning activity.</p></div><small id="adminStudentCountLabel"></small></div>
+      <div class="admin-filters">
+        <input id="adminSearch" type="search" placeholder="Search name, email, school, PIN…">
+        <select id="adminRoleFilter"><option value="">All User Types</option><option value="STUDENT">Students</option><option value="TEACHER">Teachers</option><option value="OTHER">Other Users</option></select>
+        <select id="adminClassFilter"><option value="">All Classes</option></select>
+        <select id="adminStateFilter"><option value="">All States/UTs</option></select>
+        <select id="adminSortUsers"><option value="recent">Most Recent Activity</option><option value="attempts">Most Attempts</option><option value="accuracy">Highest Avg Accuracy</option><option value="registered">Newest Registration</option><option value="name">Name A–Z</option></select>
+        <button class="btn btn-outline" type="button" onclick="document.getElementById('adminSearch').value='';document.getElementById('adminRoleFilter').value='';document.getElementById('adminClassFilter').value='';document.getElementById('adminStateFilter').value='';document.getElementById('adminSortUsers').value='recent';document.getElementById('adminSearch').dispatchEvent(new Event('input'))">Clear</button>
+      </div>
+      <div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>User</th><th>Role</th><th>Class</th><th>State/UT</th><th>PIN</th><th>School</th><th>Attempts</th><th>Best Score</th><th>Avg Accuracy</th><th>Growth</th><th>Last Activity</th><th>Record</th></tr></thead><tbody id="adminStudentsBody"></tbody></table></div>
+    </section>
+  </section>
 
-  <section class="admin-card"><div class="admin-card-head"><div><div class="section-kicker">Live Records</div><h2>Recent Website & User Activity</h2></div></div><div class="admin-feed-grid"><div class="admin-feed-box"><h3>Recent Logins</h3><div id="recentAdminLogins" class="admin-feed"></div></div><div class="admin-feed-box"><h3>Recent Quiz Attempts</h3><div id="recentAdminAttempts" class="admin-feed"></div></div><div class="admin-feed-box"><h3>Recent Learning Activity</h3><div id="recentAdminActivity" class="admin-feed"></div></div></div></section>
+  <section class="admin-panel" data-admin-panel="results">
+    <section id="adminTestResultsCentre" class="admin-card admin-results-card">
+      <div class="admin-card-head"><div><div class="section-kicker">Result Sheets</div><h2>Test & Practice Results</h2><p class="admin-results-intro">Choose any recorded test, PYQ, topic set, vocabulary set or Grammar Mastery set. Review the combined sheet, open an individual result, or export the data.</p></div></div>
+      <div class="admin-results-controls">
+        <label>Test / Practice Set<select id="adminTestSelect"><option value="">Loading tests…</option></select></label>
+        <label>Attempt View<select id="adminAttemptMode"><option value="latest">Latest attempt per user</option><option value="best">Best attempt per user</option><option value="first">First attempt per user</option><option value="all">Every attempt</option></select></label>
+        <button id="adminLoadResultsBtn" class="btn btn-primary" type="button">Show Results</button>
+        <button id="adminExportResultsBtn" class="btn btn-outline" type="button" disabled>Download CSV</button>
+        <button id="adminPrintResultsBtn" class="btn btn-outline" type="button" disabled>Print Sheet</button>
+      </div>
+      <div id="adminTestResultStatus" class="admin-result-status"></div>
+      <div id="adminResultSummary" class="admin-result-summary"></div>
+      <div id="adminResultFilters" class="admin-result-filters hidden">
+        <label>Find User<input id="adminResultSearch" type="search" placeholder="Name, email or school"></label>
+        <label>Class<select id="adminResultClass"><option value="">All Classes</option></select></label>
+        <label>State / UT<select id="adminResultState"><option value="">All States/UTs</option></select></label>
+        <button id="adminClearResultFilters" class="btn btn-outline" type="button">Clear</button>
+      </div>
+      <div class="admin-result-table-wrap"><table class="admin-result-table"><thead><tr><th>Rank</th><th>User</th><th>Class</th><th>School</th><th>Score</th><th>%</th><th>Correct</th><th>Wrong</th><th>Unattempted</th><th>Accuracy</th><th>Time</th><th>Attempted</th><th>Open</th></tr></thead><tbody id="adminResultBody"><tr><td colspan="13" class="admin-result-empty">Choose a test or practice set and click <b>Show Results</b>.</td></tr></tbody></table></div>
+      <div class="admin-result-note">Use <b>Result</b> for an individual printable result sheet and <b>User</b> for the learner’s complete record.</div>
+    </section>
+  </section>
+
+  <section class="admin-panel" data-admin-panel="activity">
+    <section class="admin-card" id="adminActivitySection">
+      <div class="admin-card-head"><div><div class="section-kicker">User Activity</div><h2>Recent Website & Learning Activity</h2><p class="admin-panel-note">Logins, test attempts and learning actions are grouped here so you can inspect recent usage without moving between sections.</p></div></div>
+      <div class="admin-activity-toolbar"><input id="adminActivitySearch" type="search" placeholder="Filter visible activity by user, test or action…"></div>
+      <div class="admin-feed-grid">
+        <div class="admin-feed-box"><h3>Recent Logins</h3><div id="recentAdminLogins" class="admin-feed"></div></div>
+        <div class="admin-feed-box"><h3>Recent Test Attempts</h3><div id="recentAdminAttempts" class="admin-feed"></div></div>
+        <div class="admin-feed-box"><h3>Recent Learning Activity</h3><div id="recentAdminActivity" class="admin-feed"></div></div>
+      </div>
+    </section>
+  </section>
+
+  <section class="admin-panel" data-admin-panel="security">
+    <div class="admin-security-stack">
+      <div class="admin-mfa-banner"><div><strong id="adminMfaState">2-Step Verification</strong><p>Extra protection for private user and result records.</p></div><button id="enableMfaBtn" class="btn btn-gold" type="button">Enable 2-Step Verification</button></div>
+      <div id="mfaSetupBox" class="admin-card hidden"><div class="admin-card-head"><div><div class="section-kicker">Security Upgrade</div><h2>Set up Authenticator App</h2></div></div><div class="admin-mfa-grid"><img id="mfaSetupQr" alt="Authenticator QR code"><div><p>Scan the QR code in your authenticator app or enter this secret manually:</p><div id="mfaSetupSecret" class="admin-secret"></div><form id="mfaSetupForm" class="admin-auth-form"><label>6-digit Code<input id="mfaSetupCode" name="code" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="one-time-code" required></label><button class="btn btn-primary" type="submit">Confirm 2-Step Verification</button></form></div></div></div>
+    </div>
+  </section>
 </section>
 </main>
 
-<div id="studentDetailModal" class="admin-modal hidden"><div class="admin-modal-panel"><button id="studentModalClose" class="modal-close" style="float:right" aria-label="Close">×</button><div id="studentDetailContent"></div></div></div>
+<div id="studentDetailModal" class="admin-modal hidden"><div class="admin-modal-panel"><button id="studentModalClose" class="modal-close" style="float:right" aria-label="Close">×</button><div id="studentDetailContent"></div></div></div>\n<div id="attemptResultModal" class="admin-modal hidden"><div class="admin-modal-panel admin-attempt-sheet"><div id="attemptResultContent"></div></div></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="assets/js/admin-core-v50.js?v=63"></script>
-<script src="assets/js/admin-tools-v63.js?v=63"></script>
+<script src="assets/js/admin-core-v64.js?v=64"></script>
+<script src="assets/js/admin-tools-v64.js?v=64"></script>
 </body>
 </html>
