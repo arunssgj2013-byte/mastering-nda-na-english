@@ -25,9 +25,21 @@ const $=id=>document.getElementById(id);
 let pdfDoc=null,selection=0,mode='mock',pages=sets[0],idx=0,phase='observe',timeEnds=0,ticker=null,stories=[],generation=0,runStarted=false;
 function show(section){['setup','exam','completed'].forEach(id=>$(id).classList.toggle('hidden',id!==section));window.scrollTo(0,0)}
 function status(text,error){$('sourceStatus').textContent=text;$('sourceStatus').className=error?'err':'ok'}
-function choose(i){selection=i;mode=i<6?'mock':'individual';pages=i<6?sets[i]:[extra[i-6]];document.querySelectorAll('.choice').forEach((b,j)=>b.classList.toggle('chosen',j===i));$('begin').textContent=mode==='mock'?'Begin 54-minute Mock Test':'Begin Individual Picture Practice'}
+function choose(i){selection=i;mode=i<6?'mock':'individual';pages=i<6?sets[i]:[extra[i-6]];document.querySelectorAll('.choice').forEach((b,j)=>b.classList.toggle('chosen',j===i));$('begin').textContent=mode==='mock'?'Begin 54-minute Mock Test':'Begin Individual Picture Practice';$('begin').disabled=!pdfDoc&&!(i===0&&mock1Ready)}
 for(let i=0;i<15;i++){const b=document.createElement('button');b.type='button';b.className='choice';const title=document.createElement('b');title.textContent=i<6?'Mock Test '+(i+1):'Extra Picture '+(i-5);const s=document.createElement('small');s.textContent=i<6?'11 pictures + blank slide':'One picture · 4 min 30 sec';b.append(title,s);b.addEventListener('click',()=>choose(i));$(i<6?'sets':'extraSets').append(b)}
 choose(0);
+async function preloadMock1(){
+ const images=await Promise.all(mock1Files.map(name=>new Promise(resolve=>{
+  const pic=new Image();pic.decoding='async';
+  pic.onload=async()=>{try{if(pic.decode)await pic.decode()}catch(e){}resolve(pic)};
+  pic.onerror=()=>resolve(null);
+  pic.src='assets/tat/mock-1/'+encodeURIComponent(name);
+ })));
+ mock1Ready=images.every(Boolean);
+ if(mock1Ready){mock1Images.splice(0,mock1Images.length,...images);if(!pdfDoc)status('Mock Test 1: all 11 pictures are loaded and ready. Select Mock Test 1 and begin.',false)}
+ else if(!pdfDoc){const missing=images.filter(x=>!x).length;status('Mock Test 1 is awaiting '+missing+' of its 11 picture files. Timed practice will unlock automatically when all pictures are published.',true)}
+ choose(selection);
+}
 function ready(){if(!pdfDoc)return;$('begin').disabled=false;$('optimise').disabled=pdfDoc.numPages!==125;status('Picture collection loaded. Choose a set and begin when ready.',false)}
 async function loadFile(file){if(!file)return;const version=++generation;$('begin').disabled=true;status('Opening PDF. Please wait…',false);try{if(!window.pdfjsLib)throw Error('PDF renderer could not load. Check your internet connection.');window.pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';const bytes=await file.arrayBuffer();const doc=await window.pdfjsLib.getDocument({data:new Uint8Array(bytes)}).promise;if(version!==generation){await doc.destroy();return}if(doc.numPages!==125&&doc.numPages!==75)throw Error('Please select the original 125-page PDF or the optimised 75-page TAT PDF.');pdfDoc=doc;ready()}catch(e){status('Unable to load pictures: '+e.message,true)}}
 $('pdfFile').addEventListener('change',e=>loadFile(e.target.files[0]));
@@ -57,7 +69,7 @@ message.textContent='Optimised PDF downloaded. Upload it to assets/tat/tat-pictu
 finally{button.disabled=false}
 }
 $('optimise').onclick=optimiseBank;
-async function autoLoad(){if(!window.pdfjsLib){status('PDF renderer unavailable. Please reconnect and reload this page.',true);return}window.pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';try{const response=await fetch(hostedPDF,{method:'HEAD',cache:'no-store'});if(!response.ok)throw Error('not published');const doc=await window.pdfjsLib.getDocument({url:hostedPDF}).promise;if(doc.numPages!==75)throw Error('The published picture bank must contain exactly 75 pages.');pdfDoc=doc;ready();$('uploadPanel').classList.add('hidden')}catch(e){status('The 75-picture bank has not yet been published. The timed test will open for students when the pictures are available. Website editors can expand the local preview below.',true)}}autoLoad();
+async function autoLoad(){if(!window.pdfjsLib){status('PDF renderer unavailable. Please reconnect and reload this page.',true);return}window.pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';try{const response=await fetch(hostedPDF,{method:'HEAD',cache:'no-store'});if(!response.ok)throw Error('not published');const doc=await window.pdfjsLib.getDocument({url:hostedPDF}).promise;if(doc.numPages!==75)throw Error('The published picture bank must contain exactly 75 pages.');pdfDoc=doc;ready();$('uploadPanel').classList.add('hidden')}catch(e){status('The 75-picture bank has not yet been published. The timed test will open for students when the pictures are available. Website editors can expand the local preview below.',true)}}autoLoad().finally(preloadMock1);
 function stopClock(){if(ticker){clearInterval(ticker);ticker=null}}
 function drawClock(){if(runStarted&&Date.now()-timeEnds>15000){if(phase==='write')stories[idx]=$('answer').value.trim();complete(true);$('completionNote').textContent='The timed session was interrupted because the browser was inactive beyond the current phase. For accurate 30-second observation and 4-minute writing periods, please start a fresh attempt.';return}const ms=Math.max(0,timeEnds-Date.now()),s=Math.ceil(ms/1000),total=phase==='observe'?30000:240000;$('clock').textContent=String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');$('clock').classList.toggle('warn',s<=15);$('progress').style.width=(ms/total*100)+'%';if(ms===0){stopClock();advance()}}
 function startClock(ms){stopClock();timeEnds=Date.now()+ms;drawClock();ticker=setInterval(drawClock,200)}
