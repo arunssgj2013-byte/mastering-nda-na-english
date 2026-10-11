@@ -79,7 +79,7 @@ message.textContent='Optimised PDF downloaded. Upload it to assets/tat/tat-pictu
 finally{button.disabled=false}
 }
 $('optimise').onclick=optimiseBank;
-async function autoLoad(){void preloadHostedMock(0);void preloadHostedMock(1);if(!window.pdfjsLib){return}window.pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';try{const response=await fetch(hostedPDF,{method:'HEAD',cache:'no-store'});if(!response.ok)throw Error('not published');const doc=await window.pdfjsLib.getDocument({url:hostedPDF}).promise;if(doc.numPages!==75)throw Error('The published picture bank must contain exactly 75 pages.');pdfDoc=doc;ready();$('uploadPanel').classList.add('hidden')}catch(e){status('Mock Tests 1 and 2 are available once their picture files finish loading. The remaining 75-picture bank and other mock sets have not yet been published.',true)}}
+async function autoLoad(){void preloadHostedMock(0);void preloadHostedMock(1);if(!window.pdfjsLib){return}window.pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';try{const response=await fetch(hostedPDF,{method:'HEAD',cache:'no-store'});if(!response.ok)throw Error('not published');const doc=await window.pdfjsLib.getDocument({url:hostedPDF}).promise;if(doc.numPages!==75)throw Error('The published picture bank must contain exactly 75 pages.');pdfDoc=doc;ready();$('uploadPanel').classList.add('hidden')}catch(e){/* The optional large PDF collection is unavailable; Mock Tests 1 and 2 load independently from hosted pictures. */}}
 function stopClock(){if(ticker){clearInterval(ticker);ticker=null}}
 function drawClock(){if(runStarted&&Date.now()-timeEnds>15000){if(phase==='write')stories[idx]=$('answer').value.trim();complete(true);$('completionNote').textContent='The timed session was interrupted because the browser was inactive beyond the current phase. For accurate 30-second observation and 4-minute writing periods, please start a fresh attempt.';return}const ms=Math.max(0,timeEnds-Date.now()),s=Math.ceil(ms/1000),total=phase==='observe'?30000:240000;$('clock').textContent=String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');$('clock').classList.toggle('warn',s<=15);$('progress').style.width=(ms/total*100)+'%';if(ms===0){stopClock();advance()}}
 function startClock(ms){stopClock();timeEnds=Date.now()+ms;drawClock();ticker=setInterval(drawClock,200)}
@@ -95,6 +95,8 @@ $('download').onclick=()=>{const blob=new Blob(['TAT PRACTICE - PERSONAL NOTES\n
 $('finishPrint').onclick=()=>window.print();
 $('worksheet').onclick=()=>{const w=window.open('','_blank');if(!w)return;w.document.write('<!doctype html><title>TAT Answer Sheet</title><style>body{font:14px Arial;padding:28px}section{break-after:page}h2{margin-bottom:20px}.lines{height:82vh;background:repeating-linear-gradient(white,white 29px,#cbd2da 30px)}@page{size:A4;margin:15mm}</style><h1>TAT Story Writing Answer Sheet</h1>'+Array.from({length:12},(_,i)=>'<section><h2>Story '+(i+1)+(i===11?' · Blank Slide':'')+'</h2><div class="lines"></div></section>').join(''));w.document.close();w.onload=()=>w.print()};
 document.addEventListener('visibilitychange',()=>{if(!document.hidden&&runStarted&&ticker)drawClock()});
+const requestedMock=Number(new URLSearchParams(location.search).get('mock'));
+if(requestedMock===1||requestedMock===2)choose(requestedMock-1);
 void autoLoad();
 })();
 </script></body></html>
