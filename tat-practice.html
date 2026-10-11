@@ -14,10 +14,13 @@
 (function(){
 'use strict';
 const chosenPages=Array.from({length:75},(_,i)=>i+1);
-const pictureOrder=Array.from({length:75},(_,i)=>(i*29)%75+1);
+const pictureOrder=Array.from({length:75},(_,i)=>i+1);
 const sets=Array.from({length:6},(_,i)=>pictureOrder.slice(i*11,i*11+11));
 const extra=pictureOrder.slice(66);
 const hostedPDF='assets/tat/tat-pictures-75-optimised.pdf';
+const mock1Files=["image(20261011-144609).png","image(20261011-144633).png","image(20261011-144640).png","image(20261011-144653).png","image(20261011-144710).png","image(20261011-144721).png","image(20261011-144736).png","image(20261011-144743).png","image(20261011-144750).png","image(20261011-144756).png","image(20261011-144803).png"];
+const mock1Images=[];
+let mock1Ready=false;
 const $=id=>document.getElementById(id);
 let pdfDoc=null,selection=0,mode='mock',pages=sets[0],idx=0,phase='observe',timeEnds=0,ticker=null,stories=[],generation=0,runStarted=false;
 function show(section){['setup','exam','completed'].forEach(id=>$(id).classList.toggle('hidden',id!==section));window.scrollTo(0,0)}
