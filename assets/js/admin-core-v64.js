@@ -155,6 +155,17 @@
     $('#recentAdminLogins').innerHTML=logs.slice(0,30).map(x=>`<div class="admin-feed-row"><span>${esc(x.event_type)}</span><div><b>${esc(x.email)}</b><small>${fmtDate(x.created_at)}</small></div></div>`).join('')||'<p class="muted">No login events yet.</p>';
     $('#recentAdminActivity').innerHTML=acts.slice(0,30).map(x=>`<div class="admin-feed-row"><span>${esc(x.event_type)}</span><div><b>${esc(x.full_name||x.email||'User')}</b><small>${esc(x.resource_title||x.resource_id||'')} · ${fmtDate(x.created_at)}</small></div></div>`).join('')||'<p class="muted">No activity records yet.</p>';
     $('#recentAdminAttempts').innerHTML=atts.slice(0,30).map(x=>`<div class="admin-feed-row"><span>${Number(x.score||0).toFixed(2)}</span><div><b>${esc(x.full_name)} · ${esc(x.paper_title)}</b><small>Attempt ${fmtNum(x.attempt_number)} · ${pct(x.accuracy)} accuracy · ${fmtDate(x.attempted_at)}</small></div></div>`).join('')||'<p class="muted">No quiz attempts yet.</p>';
+    const ssbEvents=acts.filter(x=>String(x.event_type||'').startsWith('ssb_'));
+    const ssbAttempts=atts.filter(x=>String(x.paper_id||'').startsWith('ssb-oir-'));
+    const ssbActivity=$('#recentAdminSSBActivity'),ssbResults=$('#recentAdminSSBAttempts');
+    if(ssbActivity){
+      ssbActivity.innerHTML=ssbEvents.slice(0,30).map(x=>`<div class="admin-feed-row"><span>${esc(String(x.event_type||'').replace(/^ssb_/,'').replaceAll('_',' '))}</span><div><b>${esc(x.full_name||x.email||'Registered User')}</b><small>${esc(x.resource_title||x.resource_id||'SSB Practice')} · ${fmtDate(x.created_at)}</small>${x.email?`<button class="admin-mini-btn" type="button" data-ssb-email="${esc(x.email)}">Open User Record</button>`:''}</div></div>`).join('')||'<p class="muted">No recent SSB practice activity yet. New sessions will appear here after registered candidates begin practising.</p>';
+      $('[data-ssb-email]',ssbActivity).forEach(b=>b.addEventListener('click',()=>openStudentByEmail(b.dataset.ssbEmail)));
+    }
+    if(ssbResults){
+      ssbResults.innerHTML=ssbAttempts.slice(0,20).map(x=>`<div class="admin-feed-row"><span>${Number(x.score||0).toFixed(0)}/80</span><div><b>${esc(x.full_name||'Registered User')} · ${esc(x.paper_title||'OIR Mock')}</b><small>Attempt ${fmtNum(x.attempt_number)} · ${pct(x.accuracy)} answered accuracy · ${fmtDate(x.attempted_at)}</small>${x.email?`<button class="admin-mini-btn" type="button" data-ssb-email="${esc(x.email)}">Open User Record</button>`:''}</div></div>`).join('')||'<p class="muted">No recorded OIR mock results yet.</p>';
+      $('[data-ssb-email]',ssbResults).forEach(b=>b.addEventListener('click',()=>openStudentByEmail(b.dataset.ssbEmail)));
+    }
     const overview=$('#adminOverviewAttempts');
     if(overview){
       overview.innerHTML=atts.slice(0,8).map(x=>`<div class="admin-overview-attempt"><div><b>${esc(x.full_name||'User')}</b><small>${esc(x.paper_title||'Test')} · Attempt ${fmtNum(x.attempt_number)} · ${pct(x.accuracy)} · ${fmtDate(x.attempted_at)}</small></div><div><strong>${Number(x.score||0).toFixed(2)}</strong>${x.email?`<button class="admin-mini-btn" type="button" data-overview-email="${esc(x.email)}">User</button>`:''}</div></div>`).join('')||'<p class="muted">No quiz attempts yet.</p>';
