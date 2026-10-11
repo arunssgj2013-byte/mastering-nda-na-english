@@ -19,11 +19,11 @@ const path=location.pathname.split('/').pop().toLowerCase();
 const moduleInfo=moduleMap[path]||['ssb','SSB Corner Practice'];
 let allowed=isHub,booting=null,task=null;
 let queueBusy=false;
-const queueKey='mneSSBActivityQueueV1';
+const queueKey='mneSSBActivityQueueV2';
 const getProfile=()=>window.MNEPortal?.profile?.();
 const currentId=()=>String(getProfile()?.id||getProfile()?.studentId||'');
-function queueRead(){try{const x=JSON.parse(localStorage.getItem(queueKey)||'[]');return Array.isArray(x)?x:[]}catch{return []}}
-function queueWrite(items){try{localStorage.setItem(queueKey,JSON.stringify(items.slice(-120)))}catch{}}
+function queueRead(){try{const x=JSON.parse(localStorage.getItem(queueKey+':'+currentId())||'[]');return Array.isArray(x)?x:[]}catch{return []}}
+function queueWrite(items){try{if(currentId())localStorage.setItem(queueKey+':'+currentId(),JSON.stringify(items.slice(-120)))}catch{}}
 function safe(value,max=180){return String(value??'').slice(0,max)}
 async function flush(){
  if(queueBusy||!allowed||!window.MNEPortal||!currentId())return;
@@ -31,8 +31,10 @@ async function flush(){
  try{
   let list=queueRead();
   while(list.length){
-   const next=list[0];if(next.studentId!==currentId())break;
-   await window.MNEPortal.logActivity(next.eventType,next.resourceId,next.resourceTitle,next.metadata);
+   const next=list[0];
+   if(next.studentId!==currentId()){list.shift();queueWrite(list);continue}
+   if(next.kind==='attempt')await window.MNEPortal.call('submit_attempt',next.payload,true);
+   else await window.MNEPortal.logActivity(next.eventType,next.resourceId,next.resourceTitle,next.metadata);
    list.shift();queueWrite(list);
   }
  }catch(e){console.warn('SSB activity will retry next time:',e?.message||e)}
@@ -43,6 +45,15 @@ function record(eventType,resourceId,resourceTitle,metadata={}){
  const studentId=currentId();if(!studentId)return;
  const data={eventType:safe(eventType,60),resourceId:safe(resourceId,180),resourceTitle:safe(resourceTitle,220),metadata:{...metadata,section:'SSB Corner',module:moduleInfo[0]},studentId};
  queueWrite([...queueRead(),data]);void flush();
+}
+function saveAttempt(payload){
+ if(!allowed||!window.MNEPortal||!currentId())return;
+ if(!payload||!payload.clientAttemptKey||!payload.paperId)return;
+ const list=queueRead();
+ if(!list.some(x=>x.kind==='attempt'&&x.payload?.clientAttemptKey===payload.clientAttemptKey)){
+  queueWrite([...list,{kind:'attempt',studentId:currentId(),payload}]);
+ }
+ void flush();
 }
 function start(id,title,metadata={}){
  if(!allowed)return;
@@ -97,7 +108,8 @@ function ready(){
   }
  },true);
 }
-window.SSBTracker={start,end,log,gate,flush,get allowed(){return allowed},module:moduleInfo[0],ensure:()=>booting||gate()};
+window.SSBTracker={start,end,log,gate,flush,saveAttempt,get allowed(){return allowed},module:moduleInfo[0],ensure:()=>booting||gate()};
 document.addEventListener('DOMContentLoaded',ready);
 window.addEventListener('online',()=>{if(allowed)void flush()});
+window.addEventListener('pagehide',()=>{if(task&&allowed)end(task.id,task.title,true,{reason:'left_page'});});
 })();
