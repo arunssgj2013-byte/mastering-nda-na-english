@@ -13,9 +13,10 @@
 <script>
 (function(){
 'use strict';
-const chosenPages=[1,68,2,70,4,71,5,72,6,74,7,76,9,77,10,82,11,84,12,86,13,89,14,90,15,93,16,96,17,97,18,98,19,105,20,106,21,107,22,108,23,109,24,110,25,111,26,112,27,113,28,114,29,115,30,116,31,117,32,118,33,119,34,121,35,122,36,123,37,124,42,125,44,45,47];
-const sets=Array.from({length:6},(_,i)=>chosenPages.slice(i*11,i*11+11));
-const extra=chosenPages.slice(66);
+const chosenPages=Array.from({length:75},(_,i)=>i+1);
+const pictureOrder=Array.from({length:75},(_,i)=>(i*29)%75+1);
+const sets=Array.from({length:6},(_,i)=>pictureOrder.slice(i*11,i*11+11));
+const extra=pictureOrder.slice(66);
 const hostedPDF='assets/tat/tat-pictures-75-optimised.pdf';
 const $=id=>document.getElementById(id);
 let pdfDoc=null,selection=0,mode='mock',pages=sets[0],idx=0,phase='observe',timeEnds=0,ticker=null,stories=[],generation=0,runStarted=false;
