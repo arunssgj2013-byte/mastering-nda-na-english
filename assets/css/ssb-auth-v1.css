@@ -1,0 +1,51 @@
+/* Isolated styles for the existing Mastering NDA/NA English student login in SSB Corner. */
+:root{--ssb-navy:#12375d}
+html.ssb-access-pending header,html.ssb-access-pending main,html.ssb-access-pending footer{visibility:hidden!important}
+.auth-gate,.auth-gate *{box-sizing:border-box}
+.auth-gate{position:fixed;inset:0;z-index:99999;background:rgba(5,20,40,.87);display:grid;place-items:center;padding:12px;overflow-y:auto;font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;color:#21344d}
+body.auth-modal-open{overflow:hidden}
+.auth-gate .hidden{display:none!important}
+.auth-shell{position:relative;width:min(730px,100%);max-height:95vh;overflow-y:auto;background:#fff;border-radius:18px;box-shadow:0 24px 70px #0005;padding:24px}
+.auth-close{position:absolute;right:13px;top:12px;border:0;border-radius:50%;background:#e9eff7;color:#163d65;width:38px;height:38px;font-size:23px;cursor:pointer}
+.auth-brand{display:flex;align-items:center;gap:12px;padding-right:32px}
+.auth-brand img{width:47px;height:47px;object-fit:contain}
+.auth-brand b{display:block;color:#12375d;font-size:19px;line-height:1.15}
+.auth-brand span{display:block;font-size:12px;color:#5d7288}
+.auth-visitor{display:inline-flex;align-items:center;gap:10px;margin:13px 0 0;background:#f2f6fb;border:1px solid #d8e4ef;padding:8px 12px;border-radius:12px}
+.auth-visitor span{font-size:12px;color:#536e8a}.auth-visitor strong{color:#164c83}
+.access-gate-notice{margin:13px 0;padding:11px 12px;display:grid;gap:2px;background:#eaf3ff;border-left:4px solid #2b70aa;border-radius:8px;font-size:13px}
+.access-gate-notice b{color:#153e6c}.access-gate-notice span{color:#475d77}
+.auth-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;padding:5px;background:#eaf0f8;border-radius:12px;margin:12px 0 18px}
+.auth-tabs button{border:0;border-radius:9px;padding:11px 5px;background:transparent;font-size:12px;color:#496784;font-weight:800;cursor:pointer}
+.auth-tabs button.active{background:#fff;box-shadow:0 2px 9px #1e4f791a;color:#174a7b}
+.auth-shell h2{font-size:21px;margin:6px 0 5px;color:#163f6c}
+.auth-shell section>p{font-size:13px;color:#5c7087;margin:0 0 13px}
+.auth-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.auth-form label{display:grid;gap:5px;color:#1c3b61;font-size:13px;font-weight:700;min-width:0}
+.auth-form input:not([type="radio"]):not([type="checkbox"]),.auth-form select{width:100%;min-width:0;border:1px solid #afc3d7;border-radius:9px;background:#fff;color:#203a57;padding:11px;font:inherit;font-size:15px}
+.auth-full{grid-column:1/-1}
+.auth-role-section{border:1px solid #dae5ee;border-radius:9px;padding:10px}
+.auth-role-section legend{font-size:12px;font-weight:800;color:#315e88}
+.auth-role-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.auth-role-option{display:block!important;cursor:pointer}
+.auth-role-option input{accent-color:#17639c;margin-right:4px}
+.auth-role-option span{display:block;border:1px solid #c9dbea;border-radius:8px;padding:9px;min-height:72px}
+.auth-role-option input:checked+span{background:#e7f3ff;border-color:#2673ab}
+.auth-role-option b{display:block;font-size:11px}.auth-role-option small{display:block;color:#5c7187;font-size:10px;margin-top:3px}
+.auth-check{display:flex!important;align-items:center;gap:8px}.auth-check input{width:17px;height:17px}
+.auth-message{min-height:14px;font-size:13px;color:#236544}.auth-message.error{color:#af3434}
+.auth-form .btn,.auth-admin-btn{border:0;border-radius:9px;background:#155b99;color:#fff;min-height:44px;padding:12px;font-weight:800;text-align:center;text-decoration:none;cursor:pointer;font:inherit}
+.auth-note{border-top:1px solid #e4edf5;padding-top:10px;margin-top:16px;font-size:11px;color:#627589}
+.auth-admin-panel{text-align:center;padding:8px}.auth-admin-lock{font-size:28px}.auth-admin-panel small{display:block;margin-top:12px;color:#66788b}
+.field-help{font-size:11px;color:#697b8d}
+.search-select{position:relative}.search-select-control{display:flex;align-items:center;border:1px solid #afc3d7;border-radius:9px}
+.search-select-control input{border:0!important;flex:1;min-width:0}
+.search-select-toggle{border:0;background:transparent;min-width:40px;font-size:18px;color:#235687;cursor:pointer}
+.search-select-menu{display:none;position:absolute;left:0;right:0;top:calc(100% + 4px);max-height:190px;overflow:auto;z-index:100001;padding:5px;border:1px solid #bfd1e0;background:white;border-radius:9px;box-shadow:0 8px 20px #0002}
+.search-select.open .search-select-menu{display:block}
+.search-select-option{display:block;width:100%;text-align:left;padding:9px;border:0;border-radius:6px;background:#fff;color:#254562;cursor:pointer}
+.search-select-option:hover,.search-select-option.active{background:#e9f3ff}
+.auth-gate button:focus-visible,.auth-gate input:focus-visible,.auth-gate a:focus-visible{outline:3px solid #eeb957;outline-offset:2px}
+.ssb-access-error{position:fixed;inset:0;z-index:99998;display:grid;place-items:center;background:#eaf1f9;padding:22px}
+.ssb-access-error>div{max-width:500px;background:white;border-radius:14px;padding:24px;box-shadow:0 8px 32px #2345}
+@media(max-width:600px){.auth-gate{padding:7px}.auth-shell{padding:15px;max-height:98vh;border-radius:12px}.auth-brand b{font-size:15px}.auth-brand img{width:39px;height:39px}.auth-form{grid-template-columns:1fr}.auth-role-grid{grid-template-columns:1fr}.auth-role-option span{min-height:auto}.auth-tabs button{font-size:11px}.auth-shell h2{font-size:19px}}
