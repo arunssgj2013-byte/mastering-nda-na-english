@@ -97,30 +97,66 @@
   const nav=document.querySelector('.site-header .nav');
   const currentPage=(location.pathname.split('/').pop()||'index.html').toLowerCase();
 
-  // Add Topic Wise Practice Online as a dedicated top-level navigation tab after Online PYQs & Sample Practice.
-  if(nav && !nav.querySelector('.topic-practice-nav-link')){
-    const quizLink=nav.querySelector(':scope > a.quiz-nav-link') || [...nav.querySelectorAll(':scope > a')].find(a=>a.getAttribute('href')==='quizzes.html');
-    if(quizLink){
-      const topicLink=document.createElement('a');
-      topicLink.href='topic-practice.html';
-      topicLink.className='topic-practice-nav-link';
-      topicLink.innerHTML='Topic Wise Practice Online <span class="nav-flash-badge">NEW</span>';
-      if(currentPage==='topic-practice.html')topicLink.classList.add('active');
-      quizLink.insertAdjacentElement('afterend',topicLink);
-    }
-  }
+  // Group all interactive test destinations under one clean top-level Online Practice dropdown.
+  if(nav){
+    const practicePages=[
+      ['quizzes.html','PYQs & Sample Papers'],
+      ['section-practice.html','Section-wise Practice'],
+      ['topic-practice.html','Topic-wise Grammar Practice'],
+      ['vocabulary-practice.html','Vocabulary Practice'],
+      ['golden-rules-practice.html','English Grammar Mastery Challenge']
+    ];
+    const practiceHrefs=new Set(practicePages.map(([href])=>href));
+    const existingPracticeLinks=[...nav.querySelectorAll('a')].filter(a=>practiceHrefs.has((a.getAttribute('href')||'').split('?')[0]));
+    let practiceDrop=nav.querySelector('.online-practice-dropdown');
 
-  // Add Vocabulary Practice as a dedicated top-level navigation tab after Topic Wise Practice Online.
-  if(nav && !nav.querySelector('.vocabulary-practice-nav-link')){
-    const topicLink=nav.querySelector(':scope > a.topic-practice-nav-link') || [...nav.querySelectorAll(':scope > a')].find(a=>a.getAttribute('href')==='topic-practice.html');
-    const quizLink=nav.querySelector(':scope > a.quiz-nav-link') || [...nav.querySelectorAll(':scope > a')].find(a=>a.getAttribute('href')==='quizzes.html');
-    const vocabLink=document.createElement('a');
-    vocabLink.href='vocabulary-practice.html';
-    vocabLink.className='vocabulary-practice-nav-link';
-    vocabLink.innerHTML='Vocabulary Practice <span class="nav-flash-badge">NEW</span>';
-    if(currentPage==='vocabulary-practice.html')vocabLink.classList.add('active');
-    if(topicLink)topicLink.insertAdjacentElement('afterend',vocabLink);
-    else if(quizLink)quizLink.insertAdjacentElement('afterend',vocabLink);
+    if(!practiceDrop){
+      practiceDrop=document.createElement('div');
+      practiceDrop.className='nav-dropdown online-practice-dropdown';
+      const toggle=document.createElement('button');
+      toggle.className='nav-dropdown-toggle';
+      toggle.type='button';
+      toggle.setAttribute('aria-expanded','false');
+      toggle.setAttribute('aria-haspopup','true');
+      toggle.innerHTML='Online Practice <span aria-hidden="true">⌄</span>';
+      const menu=document.createElement('div');
+      menu.className='nav-dropdown-menu';
+      practiceDrop.append(toggle,menu);
+
+      const firstPracticeTop=[...nav.children].find(el=>{
+        if(el.matches('a')) return practiceHrefs.has((el.getAttribute('href')||'').split('?')[0]);
+        return false;
+      });
+      if(firstPracticeTop) nav.insertBefore(practiceDrop,firstPracticeTop);
+      else {
+        const studyDrop=nav.querySelector('.study-material-dropdown');
+        const resourceLink=[...nav.querySelectorAll(':scope > a')].find(a=>a.getAttribute('href')==='resources.html');
+        const anchor=studyDrop||resourceLink;
+        if(anchor) anchor.insertAdjacentElement('afterend',practiceDrop);
+        else nav.appendChild(practiceDrop);
+      }
+    }
+
+    const toggle=practiceDrop.querySelector('.nav-dropdown-toggle');
+    const menu=practiceDrop.querySelector('.nav-dropdown-menu');
+    const onPracticePage=practicePages.some(([href])=>href===currentPage);
+    if(onPracticePage) toggle?.classList.add('active');
+
+    if(menu){
+      menu.innerHTML='';
+      practicePages.forEach(([href,label])=>{
+        const a=document.createElement('a');
+        a.href=href;
+        a.textContent=label;
+        a.classList.add('mce-nav-color');
+        if(href===currentPage)a.classList.add('active');
+        menu.appendChild(a);
+      });
+    }
+
+    existingPracticeLinks.forEach(a=>{
+      if(!a.closest('.online-practice-dropdown')) a.remove();
+    });
   }
 
   // Keep only the first four About NDA Exam items and colour-highlight them.
@@ -189,9 +225,7 @@
       control.classList.add('mce-topnav',`mce-topnav-theme-${Math.min(i,6)}`);
     });
     nav.querySelector('.study-material-dropdown > .nav-dropdown-toggle')?.classList.add('mce-attention-nav');
-    nav.querySelector(':scope > a.quiz-nav-link')?.classList.add('mce-attention-nav');
-    nav.querySelector(':scope > a.topic-practice-nav-link')?.classList.add('mce-attention-nav');
-    nav.querySelector(':scope > a.vocabulary-practice-nav-link')?.classList.add('mce-attention-nav');
+    nav.querySelector('.online-practice-dropdown > .nav-dropdown-toggle')?.classList.add('mce-attention-nav');
   }
 
   const page=currentPage;
