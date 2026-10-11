@@ -46,6 +46,7 @@ body.auth-modal-open{overflow:hidden}
 .search-select-option{display:block;width:100%;text-align:left;padding:9px;border:0;border-radius:6px;background:#fff;color:#254562;cursor:pointer}
 .search-select-option:hover,.search-select-option.active{background:#e9f3ff}
 .auth-gate button:focus-visible,.auth-gate input:focus-visible,.auth-gate a:focus-visible{outline:3px solid #eeb957;outline-offset:2px}
+.visitor-live-badge{position:fixed;left:12px;bottom:12px;z-index:9000;display:flex;align-items:center;gap:9px;border-radius:999px;padding:7px 11px;background:#12365d;color:#edf6ff;font-size:11px;box-shadow:0 8px 25px #102b4930}.visitor-live-badge strong{font-size:14px;color:#ffe0a1}.search-select-empty{padding:10px;font-size:13px;color:#677d91}.auth-gate a.btn{display:inline-block;background:#165d99;color:#fff;padding:10px 16px;border-radius:9px;text-decoration:none;font-weight:800}.auth-gate .auth-full input[type="email"]{width:100%}
 .ssb-access-error{position:fixed;inset:0;z-index:99998;display:grid;place-items:center;background:#eaf1f9;padding:22px}
 .ssb-access-error>div{max-width:500px;background:white;border-radius:14px;padding:24px;box-shadow:0 8px 32px #2345}
 @media(max-width:600px){.auth-gate{padding:7px}.auth-shell{padding:15px;max-height:98vh;border-radius:12px}.auth-brand b{font-size:15px}.auth-brand img{width:39px;height:39px}.auth-form{grid-template-columns:1fr}.auth-role-grid{grid-template-columns:1fr}.auth-role-option span{min-height:auto}.auth-tabs button{font-size:11px}.auth-shell h2{font-size:19px}}
