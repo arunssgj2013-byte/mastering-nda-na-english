@@ -29,13 +29,18 @@ async function flush(){
  if(queueBusy||!allowed||!window.MNEPortal||!currentId())return;
  queueBusy=true;
  try{
-  let list=queueRead();
-  while(list.length){
+  while(true){
+   const list=queueRead();
+   if(!list.length)break;
    const next=list[0];
-   if(next.studentId!==currentId()){list.shift();queueWrite(list);continue}
+   if(next.studentId!==currentId()){
+    queueWrite(list.slice(1));continue;
+   }
    if(next.kind==='attempt')await window.MNEPortal.call('submit_attempt',next.payload,true);
    else await window.MNEPortal.logActivity(next.eventType,next.resourceId,next.resourceTitle,next.metadata);
-   list.shift();queueWrite(list);
+   const latest=queueRead();
+   const idx=latest.findIndex(x=>x.queueId===next.queueId);
+   if(idx!==-1){latest.splice(idx,1);queueWrite(latest)}
   }
  }catch(e){console.warn('SSB activity will retry next time:',e?.message||e)}
  finally{queueBusy=false}
@@ -43,7 +48,7 @@ async function flush(){
 function record(eventType,resourceId,resourceTitle,metadata={}){
  if(!allowed||!window.MNEPortal)return;
  const studentId=currentId();if(!studentId)return;
- const data={eventType:safe(eventType,60),resourceId:safe(resourceId,180),resourceTitle:safe(resourceTitle,220),metadata:{...metadata,section:'SSB Corner',module:moduleInfo[0]},studentId};
+ const data={eventType:safe(eventType,60),resourceId:safe(resourceId,180),resourceTitle:safe(resourceTitle,220),metadata:{...metadata,section:'SSB Corner',module:moduleInfo[0]},studentId,queueId:Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,12)};
  queueWrite([...queueRead(),data]);void flush();
 }
 function saveAttempt(payload){
@@ -51,7 +56,7 @@ function saveAttempt(payload){
  if(!payload||!payload.clientAttemptKey||!payload.paperId)return;
  const list=queueRead();
  if(!list.some(x=>x.kind==='attempt'&&x.payload?.clientAttemptKey===payload.clientAttemptKey)){
-  queueWrite([...list,{kind:'attempt',studentId:currentId(),payload}]);
+  queueWrite([...list,{kind:'attempt',studentId:currentId(),payload,queueId:payload.clientAttemptKey}]);
  }
  void flush();
 }
