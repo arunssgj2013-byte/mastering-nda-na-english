@@ -123,6 +123,25 @@
       detail.scrollIntoView({ block: 'start', behavior: 'auto' });
     }
   }
+  function showCategories(navigate) {
+    currentTopic = null;
+    listView.hidden = true;
+    detail.hidden = true;
+    search.value = '';
+    tabs.forEach((tab, index) => {
+      tab.setAttribute('aria-selected', 'false');
+      tab.setAttribute('aria-controls', 'ca-list-view');
+      tab.tabIndex = index === 0 ? 0 : -1;
+    });
+    status.textContent = 'Choose one of the five categories to see its topics';
+    if (navigate) {
+      const url = new URL(location.href);
+      ['ca_category', 'ca_topic', 'ca_search'].forEach(key => url.searchParams.delete(key));
+      url.hash = 'currentaffairs';
+      history.pushState({ ca: true }, '', url.href);
+      tabs[0].focus();
+    }
+  }
   function syncFromUrl(focus) {
     if (!data) return;
     const url = new URL(location.href);
@@ -130,7 +149,8 @@
     search.value = url.searchParams.get('ca_search') || '';
     const id = Number(url.searchParams.get('ca_topic'));
     if (Number.isInteger(id) && id >= 1 && id <= 50) openTopic(id, false, focus);
-    else renderList();
+    else if (categories.some(category => category.id === url.searchParams.get('ca_category'))) renderList();
+    else showCategories(false);
   }
   async function ensureLoaded() {
     if (data) return;
@@ -156,12 +176,15 @@
     return loading;
   }
   root.addEventListener('click', event => {
+    if (event.target.closest('[data-ca-categories]')) { showCategories(true); return; }
     const categoryTab = event.target.closest('[data-ca-category]');
     if (categoryTab) {
       setCategory(categoryTab.dataset.caCategory);
       search.value = '';
       if (data) renderList();
+      else { listView.hidden = false; detail.hidden = true; }
       updateUrl(null, false);
+      if (!data) void ensureLoaded();
       if (typeof categoryTab.scrollIntoView === 'function') categoryTab.scrollIntoView({ block: 'nearest', inline: 'nearest' });
       return;
     }
