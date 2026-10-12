@@ -1218,3 +1218,6 @@ input:focus,select:focus,textarea:focus{outline:3px solid rgba(23,86,160,.13);ou
 .practice-choice-card.practice-choice-sample .practice-choice-tags span{
   border-color:rgba(255,255,255,.24);background:rgba(255,255,255,.10);color:#f5f9ff;
 }
+
+/* Hide the three golden stars above the eagle on the website crest without altering the source asset. */
+img[src*="mce-mark.png"]{clip-path:polygon(0 0,37% 0,37% 12%,63% 12%,63% 0,100% 0,100% 100%,0 100%)}
