@@ -17,6 +17,7 @@ async function activate(name,focus){
        await new Promise(resolve=>{
          const dismiss=()=>{close.removeEventListener('click',dismiss);notice.close();resolve()};
          close.addEventListener('click',dismiss);
+         notice.addEventListener('cancel',event=>event.preventDefault(),{once:true});
          notice.showModal();
          close.focus();
        });
