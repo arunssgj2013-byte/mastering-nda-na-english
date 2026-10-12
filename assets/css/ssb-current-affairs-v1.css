@@ -73,3 +73,25 @@
 @media(max-width:760px){.ca-header{flex-direction:column;gap:14px;margin-bottom:20px}.ca-period{width:100%;padding:9px 13px}.ca-period strong{display:inline;margin-right:10px}.ca-category-tabs{display:flex;overflow-x:auto;gap:8px;padding:3px 2px 10px;margin-bottom:15px;scroll-snap-type:x proximity}.ca-category-tab{flex:0 0 175px;min-height:98px;font-size:13px!important;scroll-snap-align:start}.ca-detail-layout{grid-template-columns:1fr}.ca-study-sidebar{position:static;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.ca-study-box{padding:17px}.ca-list-tools{flex-direction:column;align-items:stretch;gap:15px}.ca-search{width:100%}}
 @media(max-width:520px){.ca-cards{grid-template-columns:1fr;gap:13px}.ca-topic-card{min-height:190px;padding:18px}.ca-header p{font-size:14px}.ca-list-tools h3{font-size:21px}.ca-point{padding:13px 12px;gap:10px;font-size:14px;line-height:1.8}.ca-study-sidebar{grid-template-columns:1fr}.ca-detail-top{align-items:flex-start}.ca-back{max-width:78%;font-size:12px!important}.ca-detail-heading h3{font-size:26px}.ca-detail-nav button{padding:11px 13px}.ca-detail-intro{padding:13px 15px;font-size:13px}}
 @media(prefers-reduced-motion:reduce){.ca-topic-card{transition:none}}
+
+/* Strong category colours and clearer labels for student navigation. */
+#ssb-current-affairs .ca-category-tab{
+ background:var(--tab-accent);color:#fff;border:2px solid var(--tab-accent);
+ padding:16px;font-size:17px!important;font-weight:800!important;
+ min-height:132px;line-height:1.45;gap:9px;
+}
+#ssb-current-affairs .ca-category-tab::before{background:#ffffffb3;width:34px}
+#ssb-current-affairs .ca-category-tab span{font-weight:800}
+#ssb-current-affairs .ca-category-tab small{color:#fff;font-size:12px;font-weight:650;opacity:.95}
+#ssb-current-affairs .ca-category-tab[aria-selected=true]{
+ background:var(--tab-accent);color:#fff;border:2px solid #fff;padding:16px;
+ box-shadow:0 0 0 3px #dba849;
+}
+#ssb-current-affairs .ca-category-tab:hover{border-color:#fff}
+#ssb-current-affairs .ca-category-tab:focus-visible{outline:3px solid #18304e;outline-offset:6px}
+#ssb-current-affairs .ca-category-tabs{padding:5px 5px 8px}
+@media(max-width:760px){
+ #ssb-current-affairs .ca-category-tab{font-size:16px!important;flex-basis:195px;min-height:138px}
+ #ssb-current-affairs .ca-category-tab small{font-size:12px}
+ #ssb-current-affairs .ca-category-tabs{padding:5px 5px 11px}
+}
