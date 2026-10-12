@@ -1221,3 +1221,4 @@ input:focus,select:focus,textarea:focus{outline:3px solid rgba(23,86,160,.13);ou
 
 /* Hide the three golden stars above the eagle on the website crest without altering the source asset. */
 img[src*="mce-mark.png"]{clip-path:polygon(0 0,37% 0,37% 12%,63% 12%,63% 0,100% 0,100% 100%,0 100%)}
+.crest-white-backing{display:inline-block;max-width:100%;background:#fff;line-height:0;vertical-align:top}.crest-white-backing img{display:block}
