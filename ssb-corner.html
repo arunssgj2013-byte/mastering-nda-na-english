@@ -10,7 +10,19 @@ async function activate(name,focus){
  if(name==='practice'){
    const ok=await window.SSBTracker.gate({pendingUrl:'ssb-corner.html#practice'});
    if(!ok)name='procedure';
-   else window.SSBTracker.log('ssb_practice_open','ssb-corner','SSB Perform and Practice');
+   else {
+     const notice=document.getElementById('ssbPracticeDisclaimer');
+     const close=document.getElementById('ssbDisclaimerClose');
+     if(notice&&typeof notice.showModal==='function'){
+       await new Promise(resolve=>{
+         const dismiss=()=>{close.removeEventListener('click',dismiss);notice.close();resolve()};
+         close.addEventListener('click',dismiss);
+         notice.showModal();
+         close.focus();
+       });
+     }
+     window.SSBTracker.log('ssb_practice_open','ssb-corner','SSB Perform and Practice');
+   }
  }
  tabs.forEach(t=>{
   const on=t.dataset.target===name;t.classList.toggle('active',on);
