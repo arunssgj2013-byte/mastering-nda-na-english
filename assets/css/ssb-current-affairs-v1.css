@@ -95,3 +95,43 @@
  #ssb-current-affairs .ca-category-tab small{font-size:12px}
  #ssb-current-affairs .ca-category-tabs{padding:5px 5px 11px}
 }
+
+/* Larger reading text and more breathing room throughout Current Affairs. */
+#ssb-current-affairs{font-size:18px}
+#ssb-current-affairs .ca-header p{font-size:17px;line-height:1.65}
+#ssb-current-affairs .ca-eyebrow{font-size:12px;line-height:1.5}
+#ssb-current-affairs .ca-period{font-size:14px}
+#ssb-current-affairs .ca-period strong{font-size:15px}
+#ssb-current-affairs .ca-category-tab small{font-size:13px}
+#ssb-current-affairs .ca-list-tools p,
+#ssb-current-affairs .ca-search label{font-size:15px;line-height:1.6}
+#ssb-current-affairs .ca-search input{font-size:17px!important}
+#ssb-current-affairs .ca-topic-card h4{font-size:21px;line-height:1.4}
+#ssb-current-affairs .ca-topic-card p{font-size:17px;line-height:1.75}
+#ssb-current-affairs .ca-card-meta,
+#ssb-current-affairs .ca-card-meta strong{font-size:13px}
+#ssb-current-affairs .ca-priority{font-size:12px}
+#ssb-current-affairs .ca-card-footer{font-size:14px;line-height:1.5}
+#ssb-current-affairs .ca-detail-count{font-size:14px}
+#ssb-current-affairs .ca-detail-intro{font-size:18px;line-height:1.75}
+#ssb-current-affairs .ca-detail-intro strong{font-size:13px;line-height:1.5}
+#ssb-current-affairs .ca-points-wrap h4{font-size:18px;line-height:1.5}
+#ssb-current-affairs .ca-points{gap:13px}
+#ssb-current-affairs .ca-point{font-size:18px;line-height:1.8;padding:18px;grid-template-columns:30px minmax(0,1fr)}
+#ssb-current-affairs .ca-point-number{font-size:13px;width:29px;height:29px;line-height:29px;margin-top:2px}
+#ssb-current-affairs .ca-study-box h4{font-size:13px;line-height:1.5}
+#ssb-current-affairs .ca-study-box p{font-size:17px;line-height:1.8}
+#ssb-current-affairs .ca-gd-leads li{font-size:15px;line-height:1.5}
+#ssb-current-affairs .ca-source-list a{font-size:16px;line-height:1.65}
+#ssb-current-affairs .ca-source-list small{font-size:13px}
+#ssb-current-affairs .ca-lecturette-tip{font-size:16px!important;line-height:1.8}
+#ssb-current-affairs .ca-back,
+#ssb-current-affairs .ca-detail-nav button{font-size:15px!important;line-height:1.5}
+#ssb-current-affairs .ca-note{font-size:14px;line-height:1.75}
+@media(max-width:520px){
+ #ssb-current-affairs .ca-point{padding:16px 13px;gap:10px}
+ #ssb-current-affairs .ca-topic-card h4{font-size:20px}
+ #ssb-current-affairs .ca-detail-heading h3{font-size:28px;line-height:1.3}
+ #ssb-current-affairs .ca-detail-count{white-space:normal;text-align:right}
+ #ssb-current-affairs .ca-detail-nav button{padding:11px 12px}
+}
