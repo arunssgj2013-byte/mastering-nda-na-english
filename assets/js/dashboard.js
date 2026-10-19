@@ -42,6 +42,36 @@
     if(attempts.length){const a=attempts[0],route=routeInfo(a.paper_id,a.paper_type);el.innerHTML=`<div class="next-route"><div><b>Continue with ${esc(route.label)}</b><small>Continue from your most recent recorded practice route.</small></div><a class="btn btn-primary" href="${route.href}">Continue →</a></div>`;return}
     el.innerHTML='<div class="next-route"><div><b>Start with a verified PYQ</b><small>Your dashboard will become more useful after your first recorded attempt.</small></div><a class="btn btn-primary" href="quizzes.html">Start Practice →</a></div>';
   }
+  function formatDuration(seconds){
+    const n=Number(seconds);if(!Number.isFinite(n)||n<=0)return '—';
+    const mins=Math.round(n/60),hours=Math.floor(mins/60),rest=mins%60;
+    return hours?hours+'h '+String(rest).padStart(2,'0')+'m':mins+' min';
+  }
+  function renderLeaderboard(data){
+    const select=$('leaderboardPaperSelect'),notice=$('leaderboardNotice'),table=$('leaderboardTable');
+    if(!select||!notice||!table)return;
+    const boards=Array.isArray(data?.boards)?data.boards:[];
+    const periodLabel=$('leaderboardPeriodLabel');if(periodLabel)periodLabel.textContent=data?.periodLabel||'This month';
+    if(data?.unavailable){select.innerHTML='<option value="">Temporarily unavailable</option>';notice.textContent='The leaderboard could not be loaded just now. Your personal performance record is unaffected.';table.innerHTML='';return}
+    if(!boards.length){select.innerHTML='<option value="">No tests yet</option>';notice.textContent='No completed tests have been recorded this month yet. Be the first to complete one!';table.innerHTML='<div class="empty-state">Your test will appear here after you submit it.</div>';return}
+    select.innerHTML=boards.map(b=>'<option value="'+esc(b.paperId)+'">'+esc(b.paperTitle)+' ('+Number(b.candidateCount||0)+')</option>').join('');
+    const show=()=>{
+      const board=boards.find(b=>b.paperId===select.value)||boards[0];
+      if(select.value!==board.paperId)select.value=board.paperId;
+      const entries=Array.isArray(board.entries)?board.entries:[];
+      const count=Number(board.candidateCount||0);
+      notice.textContent=count===1?'Only one candidate has completed this test this month. The first result is saved; competitive rankings will appear as more candidates take it.':count+' candidates have completed this test this month. Your best score for this test is shown.';
+      if(!entries.length){table.innerHTML='<div class="empty-state">No completed attempts are available for this test.</div>';return}
+      const rows=[...entries];
+      if(board.myEntry&&!rows.some(e=>e.isCurrentUser))rows.push({...board.myEntry,isCurrentUser:true,displayRank:'Your rank'});
+      table.innerHTML='<div class="public-leaderboard-row header"><span>Rank</span><span>Candidate</span><span>Score</span><span>Accuracy</span><span>Time</span></div>'+rows.map((e,i)=>{
+        const solo=count===1,rank=solo?'First to attempt':(e.displayRank||e.rank||i+1);
+        return '<div class="public-leaderboard-row'+(e.isCurrentUser?' is-current':'')+'"><span class="public-leaderboard-rank">'+esc(rank)+'</span><span class="public-leaderboard-candidate">'+esc(e.candidateNo||'Aspirant No. —')+(e.isCurrentUser?'<small>Your result</small>':'')+'</span><strong>'+Number(e.score||0).toLocaleString('en-IN',{maximumFractionDigits:2})+'</strong><span>'+Number(e.accuracy||0).toFixed(1)+'%</span><span>'+formatDuration(e.durationSeconds)+'</span></div>';
+      }).join('');
+    };
+    if(!select.dataset.bound){select.addEventListener('change',show);select.dataset.bound='true'}
+    select.value=boards[0].paperId;show();
+  }
   function render(data){
     const p=data.user||data.student||{},s=data.summary||{};
     $('dashboardStudentName').textContent=p.name||'User';
@@ -56,6 +86,7 @@
     renderProgress(attempts);
     renderInsights(data.papers||[],attempts);
     renderRecommendedNext(data.papers||[],attempts);
+    renderLeaderboard(data.leaderboard);
     $('recentAttemptsTable').innerHTML=attempts.length?attempts.slice(0,15).map(a=>`<div class="attempt-row"><div><b>${esc(a.paper_title)}</b><span>Attempt ${a.attempt_number} • ${fmtDate(a.attempted_at)}</span></div><strong>${a.correct_count}/${a.total_questions}</strong><span>${Number(a.accuracy||0).toFixed(1)}%</span><span>${Number(a.score||0).toFixed(2)} marks</span><a class="mini-action" href="${reattemptHref(a.paper_id,a.paper_type)}">Reattempt</a></div>`).join(''):'<div class="empty-state">No test attempts yet. Complete an online test to start your performance record.</div>';
     const papers=data.papers||[];
     $('paperPerformanceTable').innerHTML=papers.length?papers.sort((a,b)=>new Date(b.lastAttemptAt)-new Date(a.lastAttemptAt)).map(p=>{const change=Number(p.lastAccuracy||0)-Number(p.firstAccuracy||0);return `<div class="performance-row"><div><b>${esc(p.paperTitle)}</b><small>${p.attempts} attempt${p.attempts===1?'':'s'}</small></div><span>First ${Number(p.firstAccuracy||0).toFixed(1)}%</span><span>Latest ${Number(p.lastAccuracy||0).toFixed(1)}%</span><strong class="${change>0?'growth-up':change<0?'growth-down':''}">${change>0?'+':''}${change.toFixed(1)} pts</strong><a class="mini-action" href="${reattemptHref(p.paperId,p.paperType||p.paper_type)}">Reattempt</a></div>`}).join(''):'<div class="empty-state">Paper-wise progress will appear after your first test.</div>';
