@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1000" viewBox="0 0 720 1000" role="img" aria-labelledby="title desc">
+<title id="title">Blank PPDT answer sheet template</title>
+<desc id="desc">A clean blank answer sheet with spaces for number of characters, approximate age, sex, mood, first noticed character, action, setting, and handwritten story.</desc>
+<rect width="720" height="1000" rx="20" fill="#edf2f7"/><rect x="22" y="18" width="676" height="964" rx="18" fill="#fff" stroke="#cbd7e3" stroke-width="3"/>
+<text x="56" y="69" fill="#173b63" font-family="Arial,sans-serif" font-size="20" font-weight="700" letter-spacing="1.5">PPDT PRACTICE · ANSWER SHEET</text><text x="56" y="112" fill="#253e58" font-family="Arial,sans-serif" font-size="28" font-weight="700">Perception &amp; story</text>
+<line x1="56" y1="136" x2="664" y2="136" stroke="#9fb3c7" stroke-width="2"/>
+<text x="56" y="177" fill="#243f5c" font-family="Arial,sans-serif" font-size="20" font-weight="700">1. Number of characters perceived:</text><line x1="402" y1="181" x2="653" y2="181" stroke="#8799aa" stroke-width="2"/>
+<text x="56" y="224" fill="#243f5c" font-family="Arial,sans-serif" font-size="20" font-weight="700">2. Character details</text><text x="56" y="251" fill="#607489" font-family="Arial,sans-serif" font-size="16">Approximate age · Sex (M/F/P) · Mood (+/0/−) · Circle the first person you noticed</text>
+<rect x="56" y="270" width="608" height="45" rx="6" fill="#eaf0f7"/><text x="74" y="299" fill="#244a70" font-family="Arial,sans-serif" font-size="17" font-weight="700">No.</text><text x="164" y="299" fill="#244a70" font-family="Arial,sans-serif" font-size="17" font-weight="700">Approx. age</text><text x="337" y="299" fill="#244a70" font-family="Arial,sans-serif" font-size="17" font-weight="700">Sex</text><text x="447" y="299" fill="#244a70" font-family="Arial,sans-serif" font-size="17" font-weight="700">Mood</text><text x="541" y="299" fill="#244a70" font-family="Arial,sans-serif" font-size="15" font-weight="700">First?</text>
+<g fill="#fff" stroke="#cad5e0" stroke-width="1"><rect x="56" y="315" width="608" height="49"/><rect x="56" y="364" width="608" height="49"/><rect x="56" y="413" width="608" height="49"/><rect x="56" y="462" width="608" height="49"/><rect x="56" y="511" width="608" height="49"/></g>
+<g stroke="#d4dde6" stroke-width="1"><path d="M145 270v290M320 270v290M420 270v290M530 270v290"/></g>
+<g fill="#36516c" font-family="Arial,sans-serif" font-size="18" font-weight="700"><text x="82" y="347">1</text><text x="82" y="396">2</text><text x="82" y="445">3</text><text x="82" y="494">4</text><text x="82" y="543">5</text></g>
+<text x="56" y="599" fill="#243f5c" font-family="Arial,sans-serif" font-size="19" font-weight="700">3. Action / title</text><line x1="56" y1="635" x2="664" y2="635" stroke="#9aaaba" stroke-width="2"/><line x1="56" y1="664" x2="664" y2="664" stroke="#d2dbe4" stroke-width="2"/>
+<text x="56" y="706" fill="#243f5c" font-family="Arial,sans-serif" font-size="19" font-weight="700">4. Setting (if useful)</text><line x1="56" y1="741" x2="664" y2="741" stroke="#9aaaba" stroke-width="2"/>
+<text x="56" y="783" fill="#243f5c" font-family="Arial,sans-serif" font-size="19" font-weight="700">5. Story (write by hand)</text>
+<g stroke="#d2dbe4" stroke-width="2"><line x1="56" y1="815" x2="664" y2="815"/><line x1="56" y1="848" x2="664" y2="848"/><line x1="56" y1="881" x2="664" y2="881"/><line x1="56" y1="914" x2="664" y2="914"/><line x1="56" y1="947" x2="664" y2="947"/></g>
+</svg>
