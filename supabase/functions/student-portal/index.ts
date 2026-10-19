@@ -166,6 +166,47 @@ Deno.serve(async (req: Request) => {
       await db.from('student_activity').insert({student_id:user.id,event_type:'quiz_submit',resource_id:paperId,resource_title:title,metadata:{attemptNumber:attemptNo,score,accuracy,correct:c,incorrect:w,unattempted:u}});
       return json({ok:true,attempt:row});
     }
+function istMonthStartISO(){
+  const parts=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Kolkata',year:'numeric',month:'2-digit'}).formatToParts(new Date());
+  const values=Object.fromEntries(parts.filter(p=>p.type==='year'||p.type==='month').map(p=>[p.type,p.value]));
+  return new Date(Date.UTC(Number(values.year),Number(values.month)-1,1)-330*60*1000).toISOString();
+}
+function leaderboardPeriodLabel(){
+  return new Intl.DateTimeFormat('en-IN',{timeZone:'Asia/Kolkata',month:'long',year:'numeric'}).format(new Date());
+}
+async function buildLeaderboard(currentUserId:string){
+  const periodStart=istMonthStartISO(),periodLabel=leaderboardPeriodLabel();
+  const {data:students,error:studentError}=await db.from('students').select('id,registered_at,user_type,status').eq('user_type','STUDENT').order('registered_at',{ascending:true}).order('id',{ascending:true}).limit(20000);
+  if(studentError)throw studentError;
+  const candidateNumber=new Map<string,string>();
+  const activeIds=new Set<string>();
+  (students||[]).forEach((s:any,index:number)=>{
+    candidateNumber.set(s.id,'Aspirant No. '+String(index+1).padStart(3,'0'));
+    if(s.status==='active')activeIds.add(s.id);
+  });
+  const {data:attempts,error:attemptError}=await db.from('student_quiz_attempts').select('student_id,paper_id,paper_title,paper_type,attempted_at,correct_count,total_questions,score,accuracy,duration_seconds').gte('attempted_at',periodStart).order('attempted_at',{ascending:false}).limit(20000);
+  if(attemptError)throw attemptError;
+  const byPaper=new Map<string,Map<string,any>>();
+  for(const a of attempts||[]){
+    if(!activeIds.has(a.student_id)||!candidateNumber.has(a.student_id)||!a.paper_id)continue;
+    if(!byPaper.has(a.paper_id))byPaper.set(a.paper_id,new Map());
+    const candidates=byPaper.get(a.paper_id)!;
+    const score=Number(a.score)||0,accuracy=Number(a.accuracy)||0,duration=a.duration_seconds==null?Number.MAX_SAFE_INTEGER:Number(a.duration_seconds);
+    const prior=candidates.get(a.student_id);
+    const priorScore=Number(prior?.score)||0,priorAccuracy=Number(prior?.accuracy)||0,priorDuration=prior?.duration_seconds==null?Number.MAX_SAFE_INTEGER:Number(prior.duration_seconds);
+    if(!prior||score>priorScore||(score===priorScore&&(accuracy>priorAccuracy||(accuracy===priorAccuracy&&duration<priorDuration)))){
+      candidates.set(a.student_id,{candidateNo:candidateNumber.get(a.student_id),studentId:a.student_id,score,accuracy,correctCount:Number(a.correct_count)||0,totalQuestions:Number(a.total_questions)||0,durationSeconds:a.duration_seconds==null?null:Number(a.duration_seconds),attemptedAt:a.attempted_at,paperTitle:a.paper_title||a.paper_id,paperType:a.paper_type||'other'});
+    }
+  }
+  const boards=[...byPaper.entries()].map(([paperId,candidateMap])=>{
+    const all=[...candidateMap.entries()].map(([studentId,row])=>({...row,isCurrentUser:studentId===currentUserId}));
+    all.sort((a,b)=>b.score-a.score||b.accuracy-a.accuracy||(a.durationSeconds??Number.MAX_SAFE_INTEGER)-(b.durationSeconds??Number.MAX_SAFE_INTEGER)||a.candidateNo.localeCompare(b.candidateNo,undefined,{numeric:true}));
+    const ranked=all.map((row,index)=>({...row,rank:index+1}));
+    const own=ranked.find(row=>row.isCurrentUser)||null;
+    return {paperId,paperTitle:ranked[0]?.paperTitle||paperId,paperType:ranked[0]?.paperType||'other',candidateCount:ranked.length,latestAttemptAt:ranked.reduce((v,row)=>!v||row.attemptedAt>v?row.attemptedAt:v,''),entries:ranked.slice(0,10).map(({studentId,...row})=>row),myEntry:own&&own.rank>10?(({studentId,...row})=>row)(own):null};
+  }).sort((a,b)=>b.candidateCount-a.candidateCount||b.latestAttemptAt.localeCompare(a.latestAttemptAt)||a.paperTitle.localeCompare(b.paperTitle));
+  return {periodLabel,periodStart,boards};
+}
     if (action === 'dashboard') {
       const { data: attempts }=await db.from('student_quiz_attempts').select('*').eq('student_id',user.id).order('attempted_at',{ascending:false}).limit(200);
       const { data: activity }=await db.from('student_activity').select('*').eq('student_id',user.id).order('created_at',{ascending:false}).limit(100);
@@ -180,7 +221,9 @@ Deno.serve(async (req: Request) => {
       const first=total?arr[arr.length-1]:null,last=total?arr[0]:null;
       const growth=first&&last?Number((Number(last.accuracy)-Number(first.accuracy)).toFixed(1)):0;
       const publicData=publicUser(user);
-      return json({ok:true,student:publicData,user:publicData,summary:{totalAttempts:total,bestScore:best,averageAccuracy:Number(avg.toFixed(1)),growthPoints:growth,uniquePapers:Object.keys(byPaper).length},attempts:arr,papers:Object.values(byPaper),activity:activity||[]});
+      let leaderboard:any={periodLabel:leaderboardPeriodLabel(),boards:[]};
+      try{leaderboard=await buildLeaderboard(user.id)}catch(error){console.error('Leaderboard unavailable:',error);leaderboard={periodLabel:leaderboardPeriodLabel(),boards:[],unavailable:true}}
+      return json({ok:true,student:publicData,user:publicData,summary:{totalAttempts:total,bestScore:best,averageAccuracy:Number(avg.toFixed(1)),growthPoints:growth,uniquePapers:Object.keys(byPaper).length},attempts:arr,papers:Object.values(byPaper),activity:activity||[],leaderboard});
     }
     return json({error:'Unknown action'},400);
   } catch (e) {
