@@ -28,7 +28,7 @@
         <div class="timebox"><b>4 min</b><span>Story writing</span></div>
       </div>
       <p class="timing-note"><strong>Timing note:</strong> Many PPDT practice guides use 30 seconds to view the picture and 4 minutes to write. Some guides include a separate 1-minute character/action noting stage. This practice centre offers that extra stage; follow the exact instructions given by your SSB board.</p>
-      <div class="prompt-card"><h3>How to use each attempt</h3><p>During the picture stage, observe the setting and people. After it disappears, record the main character's approximate age, mood and action. Then write a beginning, practical response and outcome in your own words.</p></div>
+      <div class="prompt-card"><h3>How to use each attempt</h3><p>During the picture stage, observe the setting and people. After it disappears, record the main character's approximate age, mood and action. Then write a beginning, practical response and outcome in your own words.</p><p style="margin-top:8px">The original scenes cover everyday public settings, teamwork, practical problem-solving and community activity. Actual SSB pictures vary.</p></div>
       <h2 style="font-size:19px;margin-top:20px">Choose a practice mock</h2>
       <div class="tests" id="test-list" aria-label="Five PPDT practice mocks"></div>
       <p class="source-links">Format references: <a href="https://www.ssbguru.com/screening/picture-perception-test-1.php" target="_blank" rel="noopener">SSB Guru</a> describes a 30-second picture, 1-minute character/action stage and 4-minute story; <a href="https://www.ssbpractice.in/" target="_blank" rel="noopener">SSB Practice</a> describes a 30-second picture and 4-minute story followed by group discussion. Timing varies across preparation guidance and can vary in the actual board briefing.</p>
@@ -73,11 +73,11 @@
   (()=>{
     'use strict';
     const mocks=[
-      {title:'Bridge-side situation',file:'ppdt-01.webp'},
-      {title:'At the bus stop',file:'ppdt-02.webp'},
-      {title:'Hillside route',file:'ppdt-03.webp'},
-      {title:'Bicycle on a village road',file:'ppdt-04.webp'},
-      {title:'Community study room',file:'ppdt-05.webp'}
+      {file:'ppdt-01.webp'},
+      {file:'ppdt-02.webp'},
+      {file:'ppdt-03.webp'},
+      {file:'ppdt-04.webp'},
+      {file:'ppdt-05.webp'}
     ];
     const $=id=>document.getElementById(id);
     const list=$('test-list'),intro=$('intro'),exam=$('exam'),review=$('review');
@@ -88,7 +88,7 @@
     function clearStage(){clearInterval(timer);timer=null}
     function showStage(next){clearStage();stage=next;remaining=durations[next];stageDuration=remaining;$('stage-label').textContent=next==='picture'?'Picture observation':next==='notes'?'Character and action notes':'Story writing';$('stage-instruction').textContent=next==='picture'?'Observe the whole picture. Do not write during this stage.':next==='notes'?'The image is hidden. Use this minute to note the people, main action and setting.':'Write your story now. Aim for a clear, practical response and outcome.';$('image-frame').classList.toggle('hidden',next!=='picture');$('notes-stage').classList.toggle('hidden',next!=='notes');$('story-stage').classList.toggle('hidden',next!=='story');$('continue').disabled=true;$('continue').textContent=next==='story'?'Finish story':'Continue';$('status').textContent=next==='picture'?'The picture will disappear when the timer ends.':next==='notes'?'Your notes stay on screen while you write.':'Your story timer will end automatically.';updateClock();timer=setInterval(()=>{remaining--;updateClock();if(remaining<=0)finishStage()},1000)}
     function finishStage(){clearStage();remaining=0;updateClock();if(stage==='picture')showStage('notes');else if(stage==='notes')showStage('story');else{stage='complete';$('stage-label').textContent='Story time complete';$('stage-instruction').textContent='Your timed story is complete. You can now rehearse a one-minute narration.';$('image-frame').classList.add('hidden');$('notes-stage').classList.add('hidden');$('story-stage').classList.remove('hidden');$('story').readOnly=true;$('continue').disabled=false;$('continue').textContent='Review narration and discussion';$('status').textContent='You can review your story below before starting the optional timers.';if(runStarted){window.SSBTracker?.end('ssb-ppdt-mock-'+(selected+1),'PPDT Mock Test '+(selected+1),false,{pictures:1,storiesReached:1,mode:'typed',plannedSeconds:330});runStarted=false}}}
-    function startMock(i){selected=i;stage='picture';$('story').value='';$('story').readOnly=false;['characters','main-character','main-action','setting'].forEach(id=>$(id).value='');$('mock-title').textContent='PPDT Mock '+(i+1)+' · '+mocks[i].title;$('ppdt-image').src='assets/ssb/ppdt/'+mocks[i].file;intro.classList.add('hidden');review.classList.add('hidden');exam.classList.remove('hidden');window.scrollTo({top:0,behavior:'smooth'});runStarted=true;window.SSBTracker?.start('ssb-ppdt-mock-'+(i+1),'PPDT Mock Test '+(i+1),{pictures:1,plannedSeconds:330});showStage('picture')}
+    function startMock(i){selected=i;stage='picture';$('story').value='';$('story').readOnly=false;['characters','main-character','main-action','setting'].forEach(id=>$(id).value='');$('mock-title').textContent='PPDT Mock '+(i+1);$('ppdt-image').src='assets/ssb/ppdt/'+mocks[i].file;intro.classList.add('hidden');review.classList.add('hidden');exam.classList.remove('hidden');window.scrollTo({top:0,behavior:'smooth'});runStarted=true;window.SSBTracker?.start('ssb-ppdt-mock-'+(i+1),'PPDT Mock Test '+(i+1),{pictures:1,plannedSeconds:330});showStage('picture')}
     function leaveAttempt(){clearStage();if(runStarted){window.SSBTracker?.end('ssb-ppdt-mock-'+(selected+1),'PPDT Mock Test '+(selected+1),true,{pictures:1,storiesReached:stage==='story'||stage==='complete'?1:0,mode:'typed',plannedSeconds:330});runStarted=false}exam.classList.add('hidden');review.classList.add('hidden');intro.classList.remove('hidden');stage='idle';$('story').readOnly=false;window.scrollTo({top:0,behavior:'smooth'})}
     $('continue').addEventListener('click',()=>{if(stage==='notes')showStage('story');else if(stage==='complete'){exam.classList.add('hidden');review.classList.remove('hidden');$('review-title').textContent='PPDT Mock '+(selected+1)+' complete';window.scrollTo({top:0,behavior:'smooth'})}});
     $('cancel').addEventListener('click',leaveAttempt);
