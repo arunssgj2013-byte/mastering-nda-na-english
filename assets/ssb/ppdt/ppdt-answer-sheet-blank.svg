@@ -1,17 +1,30 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="720" height="1000" viewBox="0 0 720 1000" role="img" aria-labelledby="title desc">
-<title id="title">Blank PPDT answer sheet template</title>
-<desc id="desc">A clean blank answer sheet with spaces for number of characters, approximate age, sex, mood, first noticed character, action, setting, and handwritten story.</desc>
-<rect width="720" height="1000" rx="20" fill="#edf2f7"/><rect x="22" y="18" width="676" height="964" rx="18" fill="#fff" stroke="#cbd7e3" stroke-width="3"/>
-<text x="56" y="69" fill="#173b63" font-family="Arial,sans-serif" font-size="20" font-weight="700" letter-spacing="1.5">PPDT PRACTICE · ANSWER SHEET</text><text x="56" y="112" fill="#253e58" font-family="Arial,sans-serif" font-size="28" font-weight="700">Perception &amp; story</text>
-<line x1="56" y1="136" x2="664" y2="136" stroke="#9fb3c7" stroke-width="2"/>
-<text x="56" y="177" fill="#243f5c" font-family="Arial,sans-serif" font-size="20" font-weight="700">1. Number of characters perceived:</text><line x1="402" y1="181" x2="653" y2="181" stroke="#8799aa" stroke-width="2"/>
-<text x="56" y="224" fill="#243f5c" font-family="Arial,sans-serif" font-size="20" font-weight="700">2. Character details</text><text x="56" y="251" fill="#607489" font-family="Arial,sans-serif" font-size="16">Approximate age · Sex (M/F/P) · Mood (+/0/−) · Circle the first person you noticed</text>
-<rect x="56" y="270" width="608" height="45" rx="6" fill="#eaf0f7"/><text x="74" y="299" fill="#244a70" font-family="Arial,sans-serif" font-size="17" font-weight="700">No.</text><text x="164" y="299" fill="#244a70" font-family="Arial,sans-serif" font-size="17" font-weight="700">Approx. age</text><text x="337" y="299" fill="#244a70" font-family="Arial,sans-serif" font-size="17" font-weight="700">Sex</text><text x="447" y="299" fill="#244a70" font-family="Arial,sans-serif" font-size="17" font-weight="700">Mood</text><text x="541" y="299" fill="#244a70" font-family="Arial,sans-serif" font-size="15" font-weight="700">First?</text>
-<g fill="#fff" stroke="#cad5e0" stroke-width="1"><rect x="56" y="315" width="608" height="49"/><rect x="56" y="364" width="608" height="49"/><rect x="56" y="413" width="608" height="49"/><rect x="56" y="462" width="608" height="49"/><rect x="56" y="511" width="608" height="49"/></g>
-<g stroke="#d4dde6" stroke-width="1"><path d="M145 270v290M320 270v290M420 270v290M530 270v290"/></g>
-<g fill="#36516c" font-family="Arial,sans-serif" font-size="18" font-weight="700"><text x="82" y="347">1</text><text x="82" y="396">2</text><text x="82" y="445">3</text><text x="82" y="494">4</text><text x="82" y="543">5</text></g>
-<text x="56" y="599" fill="#243f5c" font-family="Arial,sans-serif" font-size="19" font-weight="700">3. Action / title</text><line x1="56" y1="635" x2="664" y2="635" stroke="#9aaaba" stroke-width="2"/><line x1="56" y1="664" x2="664" y2="664" stroke="#d2dbe4" stroke-width="2"/>
-<text x="56" y="706" fill="#243f5c" font-family="Arial,sans-serif" font-size="19" font-weight="700">4. Setting (if useful)</text><line x1="56" y1="741" x2="664" y2="741" stroke="#9aaaba" stroke-width="2"/>
-<text x="56" y="783" fill="#243f5c" font-family="Arial,sans-serif" font-size="19" font-weight="700">5. Story (write by hand)</text>
-<g stroke="#d2dbe4" stroke-width="2"><line x1="56" y1="815" x2="664" y2="815"/><line x1="56" y1="848" x2="664" y2="848"/><line x1="56" y1="881" x2="664" y2="881"/><line x1="56" y1="914" x2="664" y2="914"/><line x1="56" y1="947" x2="664" y2="947"/></g>
+<title id="title">Blank PP&amp;DT answer sheet preview</title>
+<desc id="desc">A blank PP&amp;DT sheet based on the attached layout. Candidate details appear at the top, character perception on the left, action on the right, and lined story-writing space below.</desc>
+<rect width="720" height="1000" rx="18" fill="#eef2f7"/><rect x="20" y="16" width="680" height="968" rx="16" fill="#fff" stroke="#cbd5e0" stroke-width="3"/>
+<text x="360" y="58" text-anchor="middle" fill="#173b63" font-family="Arial,sans-serif" font-size="26" font-weight="700" letter-spacing="1">PP&amp;DT</text><line x1="82" y1="77" x2="638" y2="77" stroke="#173b63" stroke-width="3"/>
+<g font-family="Arial,sans-serif" font-size="17" fill="#2e4053" font-weight="700">
+<text x="46" y="116">No. of SSB</text><line x1="143" y1="120" x2="253" y2="120" stroke="#8c9cab" stroke-width="1.5"/>
+<text x="280" y="116">Batch No.</text><line x1="370" y1="120" x2="472" y2="120" stroke="#8c9cab" stroke-width="1.5"/>
+<text x="507" y="116">Chest No.</text><line x1="597" y1="120" x2="671" y2="120" stroke="#8c9cab" stroke-width="1.5"/>
+<text x="46" y="159">Name</text><line x1="102" y1="163" x2="293" y2="163" stroke="#8c9cab" stroke-width="1.5"/>
+<text x="316" y="159">Age</text><line x1="357" y1="163" x2="435" y2="163" stroke="#8c9cab" stroke-width="1.5"/>
+<text x="467" y="159">Date</text><line x1="516" y1="163" x2="671" y2="163" stroke="#8c9cab" stroke-width="1.5"/>
+</g>
+<rect x="42" y="190" width="294" height="370" rx="12" fill="#fbfdff" stroke="#9caebe" stroke-width="2"/>
+<path d="M42 202a12 12 0 0 1 12-12h270a12 12 0 0 1 12 12v41H42z" fill="#eaf1f8"/>
+<text x="60" y="220" fill="#1e4d78" font-family="Arial,sans-serif" font-size="17" font-weight="700">CHARACTER PERCEPTION</text>
+<text x="60" y="237" fill="#596f84" font-family="Arial,sans-serif" font-size="12">Circle the first character you noticed</text>
+<text x="58" y="272" fill="#405a72" font-family="Arial,sans-serif" font-size="13" font-weight="700">NO.</text><text x="106" y="272" fill="#405a72" font-family="Arial,sans-serif" font-size="13" font-weight="700">AGE</text><text x="176" y="272" fill="#405a72" font-family="Arial,sans-serif" font-size="13" font-weight="700">SEX</text><text x="238" y="272" fill="#405a72" font-family="Arial,sans-serif" font-size="13" font-weight="700">MOOD</text>
+<g fill="#fff" stroke="#d4dde6" stroke-width="1"><rect x="54" y="283" width="270" height="48"/><rect x="54" y="331" width="270" height="48"/><rect x="54" y="379" width="270" height="48"/><rect x="54" y="427" width="270" height="48"/><rect x="54" y="475" width="270" height="48"/></g>
+<g stroke="#d4dde6" stroke-width="1"><path d="M94 283v240M164 283v240M225 283v240"/></g>
+<g fill="#8b9baa" font-family="Arial,sans-serif" font-size="17" font-weight="700"><text x="68" y="314">1</text><text x="68" y="362">2</text><text x="68" y="410">3</text><text x="68" y="458">4</text><text x="68" y="506">5</text></g>
+<text x="59" y="543" fill="#687d90" font-family="Arial,sans-serif" font-size="12">Add approximate age, sex and mood.</text>
+<rect x="352" y="190" width="326" height="370" rx="12" fill="#fbfdff" stroke="#9caebe" stroke-width="2"/>
+<path d="M352 202a12 12 0 0 1 12-12h302a12 12 0 0 1 12 12v41H352z" fill="#eaf1f8"/><text x="372" y="222" fill="#1e4d78" font-family="Arial,sans-serif" font-size="18" font-weight="700">ACTION</text>
+<text x="372" y="270" fill="#6a7f93" font-family="Arial,sans-serif" font-size="14">Write a brief title or one-line summary.</text>
+<g stroke="#d1dae3" stroke-width="2"><line x1="372" y1="312" x2="658" y2="312"/><line x1="372" y1="352" x2="658" y2="352"/><line x1="372" y1="392" x2="658" y2="392"/><line x1="372" y1="432" x2="658" y2="432"/><line x1="372" y1="472" x2="658" y2="472"/><line x1="372" y1="512" x2="658" y2="512"/></g>
+<rect x="42" y="585" width="636" height="365" rx="12" fill="#fff" stroke="#9caebe" stroke-width="2"/><path d="M42 597a12 12 0 0 1 12-12h612a12 12 0 0 1 12 12v43H42z" fill="#eaf1f8"/>
+<text x="62" y="615" fill="#1e4d78" font-family="Arial,sans-serif" font-size="18" font-weight="700">STORY</text><text x="62" y="634" fill="#596f84" font-family="Arial,sans-serif" font-size="13">Write your own story by hand in the space below.</text>
+<g stroke="#d1dae3" stroke-width="2"><line x1="62" y1="674" x2="658" y2="674"/><line x1="62" y1="711" x2="658" y2="711"/><line x1="62" y1="748" x2="658" y2="748"/><line x1="62" y1="785" x2="658" y2="785"/><line x1="62" y1="822" x2="658" y2="822"/><line x1="62" y1="859" x2="658" y2="859"/><line x1="62" y1="896" x2="658" y2="896"/><line x1="62" y1="933" x2="658" y2="933"/></g>
 </svg>
