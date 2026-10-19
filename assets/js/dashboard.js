@@ -63,7 +63,7 @@
       notice.textContent=count===1?'Only one candidate has completed this test this month. The first result is saved; competitive rankings will appear as more candidates take it.':count+' candidates have completed this test this month. Your best score for this test is shown.';
       if(!entries.length){table.innerHTML='<div class="empty-state">No completed attempts are available for this test.</div>';return}
       const rows=[...entries];
-      if(board.myEntry&&!rows.some(e=>e.isCurrentUser))rows.push({...board.myEntry,isCurrentUser:true,displayRank:'Your rank'});
+      if(board.myEntry&&!rows.some(e=>e.isCurrentUser))rows.push({...board.myEntry,isCurrentUser:true});
       table.innerHTML='<div class="public-leaderboard-row header"><span>Rank</span><span>Candidate</span><span>Score</span><span>Accuracy</span><span>Time</span></div>'+rows.map((e,i)=>{
         const solo=count===1,rank=solo?'First to attempt':(e.displayRank||e.rank||i+1);
         return '<div class="public-leaderboard-row'+(e.isCurrentUser?' is-current':'')+'"><span class="public-leaderboard-rank">'+esc(rank)+'</span><span class="public-leaderboard-candidate">'+esc(e.candidateNo||'Aspirant No. —')+(e.isCurrentUser?'<small>Your result</small>':'')+'</span><strong>'+Number(e.score||0).toLocaleString('en-IN',{maximumFractionDigits:2})+'</strong><span>'+Number(e.accuracy||0).toFixed(1)+'%</span><span>'+formatDuration(e.durationSeconds)+'</span></div>';
