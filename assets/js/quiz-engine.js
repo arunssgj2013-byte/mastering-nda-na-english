@@ -2,7 +2,8 @@
 const QUIZ_ATTEMPTS_KEY='mceQuizAttempts';
 const QUIZ_PROFILE_KEY='mceStudentProfileV2';
 (function(){
-  const sets=(window.getStoredQuizSeries?window.getStoredQuizSeries(QUIZ_SERIES):(Array.isArray(QUIZ_SERIES)?JSON.parse(JSON.stringify(QUIZ_SERIES)):[]));
+  const rawSets=(window.getStoredQuizSeries?window.getStoredQuizSeries(QUIZ_SERIES):(Array.isArray(QUIZ_SERIES)?JSON.parse(JSON.stringify(QUIZ_SERIES)):[]));
+  const sets=[...new Map(rawSets.map(set=>[set.id,set])).values()];
   const kindButtons=[...document.querySelectorAll('[data-series-kind]')];
   const grid=document.getElementById('setSelectorGrid');
   const seriesKicker=document.getElementById('seriesKicker');
