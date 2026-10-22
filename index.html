@@ -164,6 +164,16 @@
     font-size:16px;
   }
 }
+@media(min-width:1001px){
+  .hero .hero-grid{
+    grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);
+    gap:38px;
+  }
+  .hero h1{
+    font-size:clamp(44px,2.8vw,48px);
+    line-height:1.05;
+  }
+}
 </style><style>
 /* Homepage refinement v70 — accessibility, responsive polish, calmer motion. */
 .hero .premium-hero-slider{min-height:500px;border-radius:26px}
