@@ -431,28 +431,37 @@ footer{border-top:4px solid #c99b39}
 </style>
 
 <style id="home-vocabulary-spotlight-css">
-.home-word-spotlight{margin:8px auto 18px}
-.home-word-spotlight-card{position:relative;display:grid;grid-template-columns:minmax(170px,.8fr) minmax(0,1.8fr) auto;align-items:center;gap:18px;overflow:hidden;padding:19px 22px;border:1px solid rgba(240,198,111,.62);border-radius:20px;background:linear-gradient(112deg,#10294b 0%,#194b72 58%,#087d79 100%);color:#fff;box-shadow:0 16px 36px rgba(14,42,74,.16)}
-.home-word-spotlight-card:before{content:"";position:absolute;inset:0 auto 0 0;width:5px;background:#f0c66f}
-.home-vocab-intro{min-width:0}
-.home-vocab-kicker{display:block;margin-bottom:5px;color:#f2cb70;font-size:.76rem;font-weight:900;letter-spacing:.13em;text-transform:uppercase}
-.home-vocab-word{margin:0;color:#fff;font-size:clamp(1.7rem,3.1vw,2.35rem);font-weight:950;line-height:1.08;letter-spacing:.025em}
-.home-vocab-hindi{margin:6px 0 0;color:#bcf2e9;font-size:1.15rem;font-weight:850}
-.home-vocab-detail{min-width:0}
-.home-vocab-syn-label{margin:0 0 6px;color:#ffdc82;font-size:.74rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
-.home-vocab-synonyms{display:flex;flex-wrap:wrap;gap:6px}
-.home-vocab-synonym{display:inline-flex;align-items:center;padding:5px 10px;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:rgba(255,255,255,.12);color:#fff;font-size:.91rem;font-weight:800}
-.home-vocab-example{margin:8px 0 0;color:rgba(255,255,255,.88);font-size:.91rem;font-weight:600;line-height:1.45}
-.home-vocab-actions{display:flex;flex-direction:column;align-items:stretch;gap:7px}
-.home-vocab-cta{display:inline-flex;justify-content:center;align-items:center;min-height:42px;padding:9px 13px;border-radius:11px;background:#f2c35b;color:#132b49;font-size:.85rem;font-weight:900;text-align:center;text-decoration:none;white-space:nowrap;transition:transform .18s ease,background .18s ease}
-.home-vocab-cta:hover{transform:translateY(-1px);background:#ffda78}
-.home-vocab-control{min-height:34px;padding:6px 10px;border:1px solid rgba(255,255,255,.34);border-radius:9px;background:rgba(7,24,48,.18);color:#fff;font:inherit;font-size:.78rem;font-weight:750;cursor:pointer}
-.home-word-spotlight-card.is-changing .home-vocab-content{opacity:.55}
+.hero-slider-note.home-word-spotlight-card{display:block;width:250px;max-width:38%;padding:14px 15px;border:1px solid rgba(240,198,111,.72);border-radius:17px;background:linear-gradient(145deg,rgba(8,27,54,.94),rgba(11,71,93,.91));box-shadow:0 12px 32px rgba(2,11,25,.3);color:#fff;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.hero-slider-note.home-word-spotlight-card:before{content:"";position:absolute;left:0;top:15px;bottom:15px;width:3px;border-radius:3px;background:linear-gradient(#f7d77b,#c99b39)}
+.home-vocab-intro,.home-vocab-detail{min-width:0}
+.hero-slider-note .home-vocab-kicker{display:block;margin:0 0 3px;color:#f3ce72;font-size:.62rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.hero-slider-note .home-vocab-word{margin:0;color:#fff;font-size:clamp(1.25rem,2vw,1.65rem);font-weight:950;line-height:1.08;letter-spacing:.02em;overflow-wrap:anywhere}
+.hero-slider-note .home-vocab-hindi{margin:5px 0 9px;color:#c7f4e9;font-size:1rem;font-weight:850;line-height:1.3}
+.hero-slider-note .home-vocab-syn-label{margin:0 0 5px;color:#f5d77f;font-size:.61rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+.hero-slider-note .home-vocab-synonyms{display:flex;flex-wrap:wrap;gap:5px}
+.hero-slider-note .home-vocab-synonym{display:inline-flex;align-items:center;padding:3px 8px;border:1px solid rgba(255,255,255,.23);border-radius:999px;background:rgba(255,255,255,.11);color:#fff;font-size:.72rem;font-weight:800;line-height:1.3}
+.hero-slider-note .home-vocab-example{margin:7px 0 0;color:rgba(255,255,255,.9);font-size:.74rem;font-weight:600;line-height:1.4}
+.hero-slider-note .home-vocab-actions{display:grid;gap:6px;margin-top:10px}
+.hero-slider-note .home-vocab-cta{display:flex;justify-content:center;align-items:center;min-height:33px;padding:6px 8px;border-radius:9px;background:#f2c35b;color:#132b49;font-size:.72rem;font-weight:900;line-height:1.25;text-align:center}
+.hero-slider-note .home-vocab-cta:hover{background:#ffda78}
+.hero-slider-note .home-vocab-controls{display:flex;gap:6px}
+.hero-slider-note .home-vocab-control{flex:1;min-height:29px;padding:4px 7px;border:1px solid rgba(255,255,255,.3);border-radius:8px;background:rgba(7,24,48,.26);color:#fff;font:inherit;font-size:.68rem;font-weight:800;cursor:pointer}
+.hero-slider-note .home-vocab-cta:focus-visible,.hero-slider-note .home-vocab-control:focus-visible{outline:3px solid #fff;outline-offset:2px}
 .home-vocab-content{transition:opacity .22s ease}
-.home-vocab-cta:focus-visible,.home-vocab-control:focus-visible{outline:3px solid #fff;outline-offset:3px}
-@media(max-width:850px){.home-word-spotlight-card{grid-template-columns:minmax(130px,.8fr) minmax(0,1.5fr);gap:14px}.home-vocab-actions{grid-column:1/-1;flex-direction:row;justify-content:flex-end;align-items:center}.home-vocab-cta{white-space:normal}.home-vocab-control{white-space:nowrap}}
-@media(max-width:560px){.home-word-spotlight{margin:4px auto 16px}.home-word-spotlight-card{grid-template-columns:1fr;gap:12px;padding:17px 17px 16px 20px;border-radius:17px}.home-vocab-word{font-size:1.85rem}.home-vocab-hindi{font-size:1.1rem}.home-vocab-actions{grid-column:auto;justify-content:stretch}.home-vocab-cta{flex:1}.home-vocab-example{font-size:.9rem}}
-@media(prefers-reduced-motion:reduce){.home-vocab-content,.home-vocab-cta{transition:none}}
+.home-word-spotlight-card.is-changing .home-vocab-content{opacity:.58}
+@media(max-width:1000px){.hero-slider-note.home-word-spotlight-card{width:230px;max-width:40%}}
+@media(max-width:650px){
+ .hero-slider-note.home-word-spotlight-card{display:block;top:62px;right:12px;width:min(235px,54%);max-width:235px;padding:11px 11px 10px;border-radius:14px}
+ .hero-slider-note .home-vocab-kicker{font-size:.56rem}
+ .hero-slider-note .home-vocab-word{font-size:clamp(1.08rem,5vw,1.35rem)}
+ .hero-slider-note .home-vocab-hindi{margin:4px 0 7px;font-size:.9rem}
+ .hero-slider-note .home-vocab-synonym{padding:3px 6px;font-size:.65rem}
+ .hero-slider-note .home-vocab-example{font-size:.68rem;line-height:1.35}
+ .hero-slider-note .home-vocab-actions{gap:5px;margin-top:8px}
+ .hero-slider-note .home-vocab-cta{min-height:30px;font-size:.67rem}
+ .hero-slider-note .home-vocab-control{min-height:27px;padding:3px 5px;font-size:.63rem}
+}
+@media(prefers-reduced-motion:reduce){.home-vocab-content{transition:none}}
 </style></head><body><div class="announce"><div class="container"><strong>Latest Release:</strong> NDA/NA English Practice Book · 22 PYQ Sets · 23 Sample Papers</div></div>
 <header class="site-header"><div class="container navrow"><a class="brand" href="index.html"><img src="assets/images/mce-mark.png" alt="Mastering NDA/NA English logo"><span class="brand-copy"><b>Mastering NDA/NA English</b><small>National Defence Academy & Naval Academy</small></span></a><button class="menu-btn" aria-label="Menu" aria-expanded="false">☰</button><nav class="nav"><a href="index.html" class="active">Home</a><div class="nav-dropdown"><button class="nav-dropdown-toggle" type="button" aria-expanded="false" aria-haspopup="true">About NDA Exam <span aria-hidden="true">⌄</span></button><div class="nav-dropdown-menu"><a href="about-nda.html#overview">NDA/NA Overview</a><a href="about-nda.html#eligibility">Eligibility Criteria</a><a href="about-nda.html#exam-structure">Exam Structure</a><a href="about-nda.html#syllabus">NDA/NA Syllabus</a><a href="about-nda.html#written-pattern">Written Exam Pattern</a><a href="about-nda.html#gat-english">GAT & English</a><a href="about-nda.html#selection">Selection Process</a><a href="about-nda.html#ssb-medical">SSB & Medical</a></div></div><a href="resources.html">Study Material</a><div class="nav-dropdown online-practice-dropdown"><button class="nav-dropdown-toggle" type="button" aria-expanded="false" aria-haspopup="true">Online Practice <span aria-hidden="true">⌄</span></button><div class="nav-dropdown-menu"><a href="quizzes.html">PYQs &amp; Sample Papers</a><a href="section-practice.html">Section-wise Practice</a><a href="topic-practice.html">Topic-wise Grammar Practice</a><a href="vocabulary-practice.html">Vocabulary Practice</a><a href="golden-rules-practice.html">English Grammar Mastery Challenge</a></div></div><div class="nav-dropdown"><button class="nav-dropdown-toggle" type="button" aria-expanded="false" aria-haspopup="true">SSB Corner <span aria-hidden="true">⌄</span></button><div class="nav-dropdown-menu"><a href="ssb-corner.html#procedure">Procedure</a><a href="ssb-corner.html#olqs">OLQs</a><a href="ssb-corner.html#practice">Perform and Practice</a><a href="ssb-corner.html#currentaffairs">Current Affairs</a></div></div><a href="dashboard.html" class="student-nav-link">User Hub</a><a href="books.html">Books</a><a href="author-contact.html">Author &amp; Contact</a></nav></div></header><section class="home-account-access" aria-label="Student account access"><div class="container home-account-access-inner"><span class="home-account-access-label">Student account access</span><div class="home-account-access-actions"><a class="home-account-access-btn register" href="index.html" data-auth-required data-auth-gate-tab="register">Register Free</a><a class="home-account-access-btn login" href="index.html" data-auth-required data-auth-gate-tab="login">Login</a></div></div></section><aside class="vertical-quick-nav" aria-label="Quick navigation"><div class="vertical-nav-title">Quick Links</div><a class="vertical-link active" href="index.html" title="Home"><b>HM</b><span>Home</span></a><a class="vertical-link" href="about-nda.html" title="About NDA Exam"><b>NE</b><span>About NDA Exam</span></a><a class="vertical-link" href="books.html" title="Books"><b>BK</b><span>Books</span></a><a class="vertical-link" href="resources.html" title="NDA/NA Study Material"><b>ND</b><span>NDA/NA Study Material</span></a><a class="vertical-link" href="quizzes.html" title="Online Practice"><b>OP</b><span>Online PYQs</span></a><a class="vertical-link" href="dashboard.html" title="User Hub"><b>ST</b><span>User Hub</span></a><a class="vertical-link" href="author-contact.html" title="Author & Contact"><b>AC</b><span>Author & Contact</span></a></aside>
 <main>
@@ -473,30 +482,26 @@ footer{border-top:4px solid #c99b39}
 <a class="home-action-card ssb-home-action" href="ssb-corner.html"><strong>SSB Corner</strong><span>Selection Procedure • OLQs • SSB Practice</span></a>
 </div>
 <div class="home-secondary-actions"><a href="dashboard.html">User Login / Hub →</a><a href="books.html">Explore Books →</a></div>
-</div><div class="hero-visual"><div class="hero-slider premium-hero-slider" id="heroSlider"><div class="hero-slide active"><img src="assets/images/carousel-online-practice.webp" alt="Aspirant practising an online English quiz on a laptop" decoding="async" fetchpriority="high"><div class="hero-slide-overlay"><span class="slide-tag">Online Practice</span><h3>Practise with focus. Build confidence.</h3><p>Timed quizzes, OMR-style answering and instant results help you review your performance.</p></div></div><div class="hero-slide"><img src="assets/images/carousel-study-materials.webp" alt="English practice books, a question paper and a phone quiz" loading="lazy" decoding="async"><div class="hero-slide-overlay"><span class="slide-tag">Books &amp; Study Material</span><h3>Learn the rule. Apply it in practice.</h3><p>Explore exam-focused grammar, vocabulary, PYQs and sample papers.</p></div></div><div class="hero-slide"><img src="assets/images/carousel-group-preparation.webp" alt="A group of students preparing together with a laptop and notebooks" loading="lazy" decoding="async"><div class="hero-slide-overlay"><span class="slide-tag">Prepare Together</span><h3>Discuss ideas. Express them clearly.</h3><p>Build confidence through focused English and SSB preparation resources.</p></div></div><div class="hero-slide"><img src="assets/images/nda-parade-dark.jpg" alt="Cadets marching in a passing-out parade" loading="lazy" decoding="async"><div class="hero-slide-overlay"><span class="slide-tag">Aim High</span><h3>Your goal. Your preparation.</h3><p>Build knowledge and discipline one practice session at a time.</p></div></div><div class="hero-slider-topline"><span>PYQs + Sample Papers</span><span>Grammar + Vocabulary</span><span>Online + SSB Practice</span></div><div class="hero-slider-controls"><button class="hero-arrow" type="button" data-slide="prev" aria-label="Previous slide">‹</button><div class="hero-slider-dots"><button class="active" type="button" data-slide-to="0" aria-label="Slide 1"></button><button type="button" data-slide-to="1" aria-label="Slide 2"></button><button type="button" data-slide-to="2" aria-label="Slide 3"></button><button type="button" data-slide-to="3" aria-label="Slide 4"></button></div><button class="hero-arrow" type="button" data-slide="next" aria-label="Next slide">›</button></div><div class="hero-slider-note"><strong>Academy-style preparation platform</strong><span>Books • Study Material • Online Practice • User Hub</span></div></div></div></div></section>
-<div class="container stats-wrap"><div class="stats"><div class="stat"><strong>4</strong><span>NDA/NA Learning Books</span></div><div class="stat"><strong>22</strong><span>PYQ Sets in Latest Book</span></div><div class="stat"><strong>23</strong><span>Sample Papers</span></div><div class="stat"><strong>20</strong><span>Years Topic-wise PYQ Coverage</span></div></div></div><section class="home-word-spotlight" aria-label="Vocabulary word spotlight">
-  <div class="container">
-    <div class="home-word-spotlight-card" id="homeWordSpotlight">
-      <div class="home-vocab-intro home-vocab-content">
-        <span class="home-vocab-kicker">Vocabulary spotlight</span>
-        <h2 class="home-vocab-word" id="homeVocabWord">ABUNDANT</h2>
-        <p class="home-vocab-hindi" id="homeVocabHindi">प्रचुर • भरपूर</p>
-      </div>
-      <div class="home-vocab-detail home-vocab-content">
-        <p class="home-vocab-syn-label">Three synonyms</p>
-        <div class="home-vocab-synonyms" id="homeVocabSynonyms"><span class="home-vocab-synonym">plentiful</span><span class="home-vocab-synonym">ample</span><span class="home-vocab-synonym">copious</span></div>
-        <p class="home-vocab-example" id="homeVocabExample">Fresh mangoes were abundant at the village market.</p>
-      </div>
-      <div class="home-vocab-actions">
-        <a class="home-vocab-cta" href="vocabulary-500-words.html">Explore all 700 words →</a>
-        <div style="display:flex;gap:7px">
-          <button class="home-vocab-control" id="homeVocabToggle" type="button" aria-label="Pause vocabulary rotation">Pause</button>
-          <button class="home-vocab-control" id="homeVocabNext" type="button" aria-label="Show next vocabulary word">Next word →</button>
-        </div>
-      </div>
+</div><div class="hero-visual"><div class="hero-slider premium-hero-slider" id="heroSlider"><div class="hero-slide active"><img src="assets/images/carousel-online-practice.webp" alt="Aspirant practising an online English quiz on a laptop" decoding="async" fetchpriority="high"><div class="hero-slide-overlay"><span class="slide-tag">Online Practice</span><h3>Practise with focus. Build confidence.</h3><p>Timed quizzes, OMR-style answering and instant results help you review your performance.</p></div></div><div class="hero-slide"><img src="assets/images/carousel-study-materials.webp" alt="English practice books, a question paper and a phone quiz" loading="lazy" decoding="async"><div class="hero-slide-overlay"><span class="slide-tag">Books &amp; Study Material</span><h3>Learn the rule. Apply it in practice.</h3><p>Explore exam-focused grammar, vocabulary, PYQs and sample papers.</p></div></div><div class="hero-slide"><img src="assets/images/carousel-group-preparation.webp" alt="A group of students preparing together with a laptop and notebooks" loading="lazy" decoding="async"><div class="hero-slide-overlay"><span class="slide-tag">Prepare Together</span><h3>Discuss ideas. Express them clearly.</h3><p>Build confidence through focused English and SSB preparation resources.</p></div></div><div class="hero-slide"><img src="assets/images/nda-parade-dark.jpg" alt="Cadets marching in a passing-out parade" loading="lazy" decoding="async"><div class="hero-slide-overlay"><span class="slide-tag">Aim High</span><h3>Your goal. Your preparation.</h3><p>Build knowledge and discipline one practice session at a time.</p></div></div><div class="hero-slider-topline"><span>PYQs + Sample Papers</span><span>Grammar + Vocabulary</span><span>Online + SSB Practice</span></div><div class="hero-slider-controls"><button class="hero-arrow" type="button" data-slide="prev" aria-label="Previous slide">‹</button><div class="hero-slider-dots"><button class="active" type="button" data-slide-to="0" aria-label="Slide 1"></button><button type="button" data-slide-to="1" aria-label="Slide 2"></button><button type="button" data-slide-to="2" aria-label="Slide 3"></button><button type="button" data-slide-to="3" aria-label="Slide 4"></button></div><button class="hero-arrow" type="button" data-slide="next" aria-label="Next slide">›</button></div><aside class="hero-slider-note home-word-spotlight-card" id="homeWordSpotlight" aria-label="Rotating vocabulary spotlight">
+  <div class="home-vocab-intro home-vocab-content">
+    <span class="home-vocab-kicker">Word spotlight</span>
+    <h2 class="home-vocab-word" id="homeVocabWord">ABUNDANT</h2>
+    <p class="home-vocab-hindi" id="homeVocabHindi">प्रचुर • भरपूर</p>
+  </div>
+  <div class="home-vocab-detail home-vocab-content">
+    <p class="home-vocab-syn-label">Synonyms</p>
+    <div class="home-vocab-synonyms" id="homeVocabSynonyms"><span class="home-vocab-synonym">plentiful</span><span class="home-vocab-synonym">ample</span><span class="home-vocab-synonym">copious</span></div>
+    <p class="home-vocab-example" id="homeVocabExample">Fresh mangoes were abundant at the village market.</p>
+  </div>
+  <div class="home-vocab-actions">
+    <a class="home-vocab-cta" href="vocabulary-500-words.html">Explore all 700 words →</a>
+    <div class="home-vocab-controls">
+      <button class="home-vocab-control" id="homeVocabToggle" type="button" aria-label="Pause vocabulary rotation">Pause</button>
+      <button class="home-vocab-control" id="homeVocabNext" type="button" aria-label="Show next vocabulary word">Next →</button>
     </div>
   </div>
-</section><nav class="home-section-jump" aria-label="Homepage sections">
+</aside></div></div></div></section>
+<div class="container stats-wrap"><div class="stats"><div class="stat"><strong>4</strong><span>NDA/NA Learning Books</span></div><div class="stat"><strong>22</strong><span>PYQ Sets in Latest Book</span></div><div class="stat"><strong>23</strong><span>Sample Papers</span></div><div class="stat"><strong>20</strong><span>Years Topic-wise PYQ Coverage</span></div></div></div><nav class="home-section-jump" aria-label="Homepage sections">
 <div class="container home-section-jump-inner">
 <span>Explore:</span>
 <a href="#home-online-practice">Online Practice</a>
