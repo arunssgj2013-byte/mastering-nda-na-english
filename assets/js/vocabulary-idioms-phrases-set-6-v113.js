@@ -5,7 +5,7 @@ const c='Direction: Select the alternative that best expresses the meaning of th
 const n=items.length;
 const questions=items.map(([idiom,meaning],i)=>{
   const d=[items[(i+17)%n][1],items[(i+31)%n][1],items[(i+47)%n][1]];
-  let o=[meaning,...d]; const shift=i%4; o=o.slice(shift).concat(o.slice(0,shift));
+  let o=[meaning,...d]; const shift=i%4; o=o.slice(shift).concat(o.slice(0,shift)); const oldAnswer=o.indexOf(meaning); o.splice(oldAnswer,1); o.splice(Number('011003323003221011223031022303232313112200302202303130213011320011221312310'[i]),0,meaning);
   const target=idiom.toUpperCase();
   return {n:i+1,c,q:`The idiom ${target} means:`,o,a:o.indexOf(meaning),e:`${idiom.charAt(0).toUpperCase()+idiom.slice(1)} means ${meaning}.`,t:target};
 });
