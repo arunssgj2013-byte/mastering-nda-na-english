@@ -32,7 +32,7 @@ if(mode!=='handwritten'&&!typed)return fail('Please enter your responses.');if(m
 if(!window.MNEPortal?.token?.())return fail('Please sign in with your free student account, then return here.');button.disabled=true;$('newAttempt').classList.add('hidden');$('result').classList.add('hidden');status.textContent='Reading and assessing your response…';
 try{const attachments=await Promise.all(files.map(fileData)),endpoint=window.MNEPortal.api.replace(/student-portal\/?$/,'ssb-ai-assessor'),key=window.MNEPortal.apiKey;
 const r=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json','apikey':key,'Authorization':'Bearer '+key,'x-student-token':window.MNEPortal.token()},body:JSON.stringify({test_type:$('testType').value,mode,typed_answers:typed,context:$('context').value.trim(),files:attachments})});let body={};try{body=await r.json()}catch{}if(!r.ok)throw new Error(body.error||'Assessment could not be completed. Please try again.');
-render(body);status.textContent='Assessment complete.';window.SSBTracker?.log('ssb_ai_assessment','ssb-ai-assessor',$('testType').value+' response assessment',{testType:$('testType').value,mode});$('newAttempt').classList.remove('hidden')
+render(body);status.textContent='Assessment complete.';$('newAttempt').classList.remove('hidden')
 }catch(err){fail(err.message||'Something went wrong. Please try again.')}finally{button.disabled=false}});
 $('newAttempt').addEventListener('click',()=>{form.reset();$('result').classList.add('hidden');$('fileList').textContent='';$('status').textContent='';status.classList.remove('error');modeChanged();window.scrollTo({top:0,behavior:'smooth'})});
 document.addEventListener('DOMContentLoaded',()=>{if(window.SSBTracker)void window.SSBTracker.ensure()});
