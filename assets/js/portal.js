@@ -90,6 +90,6 @@
       location.href=href;
     });
   }
-  window.MNEPortal={call,token,profile,visitorId,saveSession,clearSession,requireSession,showAuthGate:authGate,STATES,CLASSES,api:API,roleLabel,logActivity:(eventType,resourceId='',resourceTitle='',metadata={})=>call('activity',{eventType,resourceId,resourceTitle,metadata},true)};
+  window.MNEPortal={call,token,profile,visitorId,saveSession,clearSession,requireSession,showAuthGate:authGate,STATES,CLASSES,api:API,apiKey:ANON,roleLabel,logActivity:(eventType,resourceId='',resourceTitle='',metadata={})=>call('activity',{eventType,resourceId,resourceTitle,metadata},true)};
   document.addEventListener('DOMContentLoaded',async()=>{visitorBadge();pingVisitor();bindProtectedLinks();await hydrateSession()});
 })();
