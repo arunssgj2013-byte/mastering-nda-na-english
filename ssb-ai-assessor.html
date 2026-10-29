@@ -15,6 +15,7 @@
 <script src="assets/js/portal.js?v=51"></script><script src="assets/js/ssb-tracking-v1.js?v=3"></script><script>
 (()=>{'use strict';const $=id=>document.getElementById(id),form=$('assessorForm'),status=$('status'),button=$('assessButton');
 function modeChanged(){const m=$('answerMode').value,typed=m!=='handwritten',files=m!=='typed';$('typedWrap').classList.toggle('hidden',!typed);$('fileWrap').classList.toggle('hidden',!files);$('typedAnswers').required=typed;$('answerFiles').required=files}
+const params=new URLSearchParams(location.search),requestedTest=(params.get('test')||'').toUpperCase(),requestedMode=params.get('mode')||'';if(['WAT','TAT','SRT','PPDT'].includes(requestedTest))$('testType').value=requestedTest;if(['typed','handwritten','both'].includes(requestedMode))$('answerMode').value=requestedMode;
 $('answerMode').addEventListener('change',modeChanged);modeChanged();$('answerFiles').addEventListener('change',()=>{$('fileList').textContent=[...$('answerFiles').files].map(f=>f.name+' · '+Math.ceil(f.size/1024)+' KB').join('  |  ')});
 function fileData(file){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve({name:file.name,type:file.type,data:r.result});r.onerror=()=>reject(new Error('Could not read '+file.name));r.readAsDataURL(file)})}
 function node(tag,text,cls){const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(cls)e.className=cls;return e}
