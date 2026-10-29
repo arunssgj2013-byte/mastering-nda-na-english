@@ -12,7 +12,7 @@
 <div class="full"><label class="check"><input id="consent" type="checkbox" required><span>I understand this submission is sent to an AI service for this assessment. Only test type and usage count are kept for service limits; this website will not save my answer text or uploaded files. I will avoid including private personal information.</span></label></div></div>
 <div class="actions"><button class="primary" id="assessButton" type="submit">Assess my response</button><button class="secondary hidden" id="newAttempt" type="button">Assess another response</button><span id="status" class="status" role="status" aria-live="polite"></span></div></form></section>
 <section id="result" class="panel result hidden" aria-live="polite"></section></main><footer>OLQ-informed practice feedback · Educational use only · Responses are not saved by this page.</footer>
-<script src="assets/js/portal.js?v=50"></script><script src="assets/js/ssb-tracking-v1.js?v=3"></script><script>
+<script src="assets/js/portal.js?v=51"></script><script src="assets/js/ssb-tracking-v1.js?v=3"></script><script>
 (()=>{'use strict';const $=id=>document.getElementById(id),form=$('assessorForm'),status=$('status'),button=$('assessButton');
 function modeChanged(){const m=$('answerMode').value,typed=m!=='handwritten',files=m!=='typed';$('typedWrap').classList.toggle('hidden',!typed);$('fileWrap').classList.toggle('hidden',!files);$('typedAnswers').required=typed;$('answerFiles').required=files}
 $('answerMode').addEventListener('change',modeChanged);modeChanged();$('answerFiles').addEventListener('change',()=>{$('fileList').textContent=[...$('answerFiles').files].map(f=>f.name+' · '+Math.ceil(f.size/1024)+' KB').join('  |  ')});
