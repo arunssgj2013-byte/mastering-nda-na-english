@@ -1,5 +1,7 @@
 // V118 navigation bridge + legal footer links + colourful dropdowns/mobile tabs + PWA support
 (function(){
+  if(!document.querySelector('script[data-mne-chat-widget-loader]')){const chat=document.createElement('script');chat.src='assets/js/site-chat-widget-v1.js?v=1';chat.setAttribute('data-mne-chat-widget-loader','');document.head.appendChild(chat);}
+
   // PWA shell: manifest, theme, install support and service-worker registration.
   if(!document.querySelector('link[rel="manifest"]')){
     const manifest=document.createElement('link');
