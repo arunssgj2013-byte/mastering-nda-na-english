@@ -1,4 +1,6 @@
 (function(){
+  if(!document.querySelector('script[data-mne-chat-widget-loader]')){const chat=document.createElement('script');chat.src='assets/js/site-chat-widget-v1.js?v=1';chat.setAttribute('data-mne-chat-widget-loader','');document.head.appendChild(chat);}
+
   const API='https://qwpmbrysjxqislxnwwlk.supabase.co/functions/v1/student-portal';
   const ANON='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBiYXNlIiwicmVmIjoicXdwbWJyeXNqeHFpc2x4bnd3bGsiLCJyb2xlIjoiYW5vbiIsImlhdCI6MTc5MDI3Mjg5NywiZXhwIjoyMTA1ODQ4ODk3fQ.Ag2YF0Ocn1x9z-fr3CSZLr49XmlAmov2Xa2f7nttFRY';
   const TOKEN_KEY='mneStudentSessionV45', PROFILE_KEY='mceStudentProfileV2', VISITOR_KEY='mneVisitorIdV1', PENDING_KEY='mnePendingAccessV50';
