@@ -28,7 +28,7 @@
       '<div class="messages" id="messages" role="log" aria-live="polite" aria-relevant="additions text"></div>'+
       '<div class="quick" id="quick"><button class="chip" type="button">Find a practice page</button><button class="chip" type="button">Explain an English topic</button><button class="chip" type="button">How do I practise WAT?</button></div>'+
       '<form class="form" id="form"><textarea class="question" id="question" maxlength="1800" rows="1" aria-label="Type your question" placeholder="Ask about the site or a topic…"></textarea><button class="send" id="send" type="submit">Ask</button></form>'+
-      '<div class="note">AI replies may be imperfect. Messages are processed to answer you; this site logs usage only. Please do not share passwords or private details.</div></section>';
+      '<div class="note">AI replies may be imperfect. Messages are sent to an AI service; this site logs usage metadata only. Sign-in required · 20 questions per 24 hours. Do not share passwords or private details.</div></section>';
     const $=id=>root.getElementById(id);
     const launcher=$('launcher'),panel=$('panel'),messages=$('messages'),form=$('form'),question=$('question'),send=$('send');
     const history=[];
