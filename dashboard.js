@@ -111,3 +111,27 @@ form?.addEventListener('submit',async e=>{
 signOut?.addEventListener('click',async()=>{try{await window.mneSupabase?.auth.signOut()}catch{}localStorage.removeItem(PROFILE_KEY);location.href='dashboard.html'});
 window.mneSupabase?.auth.onAuthStateChange((event)=>{if(event==='SIGNED_IN')setTimeout(boot,0)});
 boot();
+
+
+function initLeaderboardExamSearch(){
+  const search=document.getElementById('leaderboardPaperSearch');
+  const select=document.getElementById('leaderboardPaperSelect');
+  const help=document.getElementById('leaderboardSearchHelp');
+  if(!search||!select)return;
+  function filterExamOptions(){
+    const query=search.value.trim().toLocaleLowerCase();
+    let matches=0;
+    [...select.options].forEach(option=>{
+      if(!option.value){option.hidden=false;return}
+      const match=!query||option.textContent.trim().toLocaleLowerCase().includes(query)||option.value.toLocaleLowerCase().includes(query);
+      option.hidden=!match&&!option.selected;
+      if(match)matches++;
+    });
+    if(help)help.textContent=query?(matches?matches+' matching test'+(matches===1?'':'s')+'. Choose one from the list.':'No matching tests. Try a shorter search.'):'Type part of a test name to narrow the list.';
+  }
+  search.addEventListener('input',filterExamOptions);
+  select.addEventListener('change',filterExamOptions);
+  new MutationObserver(filterExamOptions).observe(select,{childList:true,subtree:true,characterData:true,attributes:true});
+  filterExamOptions();
+}
+initLeaderboardExamSearch();
