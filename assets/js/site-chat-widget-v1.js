@@ -8,7 +8,7 @@
     if(!document.body||document.getElementById('mneSiteChatRoot'))return;
     const host=document.createElement('div');
     host.id='mneSiteChatRoot';
-    host.style.cssText='position:fixed;z-index:2147482000;right:16px;bottom:18px;';
+    host.style.cssText='position:fixed;z-index:2147482000;right:8px;bottom:4px;';
     document.body.appendChild(host);
     const root=host.attachShadow({mode:'open'});
     root.innerHTML='<style>'+
@@ -20,7 +20,7 @@
       '.messages{flex:1;overflow:auto;padding:14px;background:#f4f7fb;display:flex;flex-direction:column;gap:10px;overscroll-behavior:contain}.bubble{max-width:90%;padding:10px 12px;border-radius:13px;font-size:14px;line-height:1.45;white-space:pre-wrap;overflow-wrap:anywhere}.assistant{align-self:flex-start;background:#fff;border:1px solid #dbe5f0;color:#233c5c;border-top-left-radius:4px}.user{align-self:flex-end;background:#2454a5;color:#fff;border-top-right-radius:4px}.error{border-color:#f0c6bb;background:#fff4f1;color:#803522}.quick{display:flex;flex-wrap:wrap;gap:7px;padding:0 12px 10px;background:#f4f7fb}.chip{border:1px solid #b9cce2;background:white;color:#234d7d;border-radius:999px;padding:7px 10px;font-size:12px;cursor:pointer}'+
       '.form{padding:10px 11px 8px;border-top:1px solid #dbe5f0;background:#fff;display:flex;gap:8px;align-items:flex-end}.question{flex:1;resize:none;min-height:42px;max-height:108px;border:1px solid #b9c9dc;border-radius:10px;padding:10px;font:14px Arial,sans-serif;color:#18304e;box-sizing:border-box}.question:focus{outline:2px solid #2454a5;border-color:#2454a5}.send{border:0;border-radius:10px;background:#2454a5;color:#fff;padding:0 14px;height:42px;font:700 14px Arial,sans-serif;cursor:pointer}.send:disabled{opacity:.55;cursor:wait}.note{font:11px/1.4 Arial,sans-serif;color:#64758a;text-align:center;padding:0 12px 10px;background:white}.note a{color:#2454a5}.dots{animation:dots 1s steps(3,end) infinite}'+
       '@keyframes chatPulse{0%{box-shadow:0 5px 20px #0b224966,0 0 0 0 #2454a566}70%{box-shadow:0 5px 20px #0b224966,0 0 0 12px #2454a500}100%{box-shadow:0 5px 20px #0b224966,0 0 0 0 #2454a500}}@keyframes dots{0%{opacity:.3}50%{opacity:1}100%{opacity:.3}}'+
-      '@media(max-width:520px){.launcher{right:12px;bottom:14px;min-height:54px;padding:0 15px}.panel{right:8px;bottom:78px;width:calc(100vw - 16px);height:min(640px,calc(100dvh - 96px));min-height:300px}.bubble{font-size:14px}}@media(prefers-reduced-motion:reduce){.launcher,.dots{animation:none}}@media print{#mneSiteChatRoot{display:none!important}}'+
+      '@media(max-width:520px){.launcher{right:8px;bottom:4px;min-height:48px;padding:0 13px;font-size:14px}.panel{right:8px;bottom:68px;width:calc(100vw - 16px);height:min(640px,calc(100dvh - 86px));min-height:300px}.bubble{font-size:14px}}@media(prefers-reduced-motion:reduce){.launcher,.dots{animation:none}}@media print{#mneSiteChatRoot{display:none!important}}'+
       '</style>'+
       '<button class="launcher" id="launcher" type="button" aria-label="Open the Mastering NDA AI Study Guide" aria-expanded="false"><span class="spark" aria-hidden="true">✦</span><span>Ask AI</span></button>'+
       '<section class="panel" id="panel" role="dialog" aria-modal="false" aria-labelledby="chatTitle" hidden>'+
