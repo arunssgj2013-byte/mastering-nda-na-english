@@ -5,6 +5,7 @@ const isHub=/\/ssb-corner\.html$/i.test(location.pathname);
 const moduleMap={
 'ssb-oir-practice.html':['oir','Officer Intelligence Rating (OIR)'],
 'wat-practice.html':['wat','Word Association Test (WAT)'],
+'ssb-ai-assessor.html':['ai-assessor','SSB AI Response Assessor'],
 'srt-practice.html':['srt','Situation Reaction Test (SRT)'],
 'sdt-practice.html':['sdt','Self Description Test (SDT)'],
 'tat-practice.html':['tat','Thematic Apperception Test (TAT)'],
