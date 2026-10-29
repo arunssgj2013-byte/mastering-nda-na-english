@@ -5,12 +5,12 @@
   if (!root || !panel) return;
   const categories = [
     { id: 'defence', name: 'Defence & National Security', colour: '#2454a5', tint: '#eef4fc' },
-    { id: 'international', name: 'International Relations', colour: '#7043a0', tint: '#f4effa' },
-    { id: 'society', name: 'India, Society & Youth', colour: '#00767a', tint: '#eef8f8' },
-    { id: 'economy', name: 'Economy & Technology', colour: '#a55514', tint: '#fcf4ec' },
-    { id: 'environment', name: 'Environment, Energy & Sports', colour: '#267542', tint: '#eff8f1' }
+    { id: 'international', name: 'International Relations', colour: '#2454a5', tint: '#eef4fc' },
+    { id: 'society', name: 'India, Society & Youth', colour: '#2454a5', tint: '#eef4fc' },
+    { id: 'economy', name: 'Economy & Technology', colour: '#2454a5', tint: '#eef4fc' },
+    { id: 'environment', name: 'Environment, Energy & Sports', colour: '#2454a5', tint: '#eef4fc' }
   ];
-  const pointColours = ['#2454a5', '#00767a', '#7043a0', '#a64b24', '#267542', '#193f68', '#8e356b', '#006784', '#876113', '#435a72'];
+  const pointColours = ['#2454a5'];
   const tabs = Array.from(root.querySelectorAll('[data-ca-category]'));
   const listView = document.getElementById('ca-list-view');
   const cards = document.getElementById('ca-cards');
