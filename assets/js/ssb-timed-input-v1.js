@@ -6,7 +6,7 @@ const test=testByPage[page];
 if(!test||window.SSBTimedResponseCapture)return;
 window.SSBTimedResponseCapture=true;
 const answers=new Map();
-let activeKey='',activePrompt='',mode='typed',field=null,modeSelect=null,promptAdded=false;
+let activeKey='',activePrompt='',mode='typed',field=null,modeSelect=null,promptAdded=false,promptVisible=false;
 function addStyle(){
  const style=document.createElement('style');
  style.textContent=[
@@ -91,7 +91,6 @@ function attachTimedList(kind){
   const now=currentCounter(counterId,promptId);if(!now)return;
   const token=now.key+'|'+now.prompt;
   if(token===activeKey)return;
-  const previous=currentCounter(counterId,promptId);
   if(activeKey)capture(activeKey.split('|')[0],activePrompt,field.input.value);
   activeKey=token;activePrompt=now.prompt;
   field.input.value='';
@@ -154,15 +153,15 @@ function answerText(){
 }
 function visible(el){return !!el&&!el.classList.contains('hidden')&&!el.closest('.hidden')}
 function addUploadPrompt(){
- if(promptAdded)return;
  const section={
   WAT:document.getElementById('complete'),
   TAT:document.getElementById('completed'),
   SRT:document.getElementById('done'),
   PPDT:document.getElementById('review')
  }[test];
- if(!visible(section))return;
- promptAdded=true;
+ if(!visible(section)){promptVisible=false;return}
+ if(promptAdded){if(!promptVisible){const existing=section.querySelector('#ssbUploadFlash');if(existing){existing.style.animation='none';void existing.offsetWidth;existing.style.animation=''}}promptVisible=true;return}
+ promptAdded=true;promptVisible=true;
  const card=document.createElement('aside');card.className='ssb-upload-flash';card.id='ssbUploadFlash';card.setAttribute('role','status');card.setAttribute('aria-live','polite');
  const strong=document.createElement('strong');strong.textContent='Timed responses complete — upload handwritten answers for AI feedback.';
  const p=document.createElement('p');p.textContent='Typed answers entered on this page are ready to assess. If you wrote on paper, upload a clear photo or PDF of your answer sheet.';
@@ -183,7 +182,6 @@ function addUploadPrompt(){
 function watchCompletion(){
  const target={WAT:document.getElementById('complete'),TAT:document.getElementById('completed'),SRT:document.getElementById('done'),PPDT:document.getElementById('review')}[test];
  if(target)new MutationObserver(addUploadPrompt).observe(target,{attributes:true,attributeFilter:['class'],childList:true});
- setInterval(addUploadPrompt,400);
 }
 addStyle();
 if(test==='WAT'||test==='SRT')attachTimedList(test);
