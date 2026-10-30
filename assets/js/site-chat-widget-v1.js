@@ -22,13 +22,13 @@
       '@keyframes chatPulse{0%{box-shadow:0 5px 20px #0b224966,0 0 0 0 #2454a566}70%{box-shadow:0 5px 20px #0b224966,0 0 0 12px #2454a500}100%{box-shadow:0 5px 20px #0b224966,0 0 0 0 #2454a500}}@keyframes dots{0%{opacity:.3}50%{opacity:1}100%{opacity:.3}}'+
       '@media(max-width:520px){.launcher{right:8px;bottom:4px;min-height:48px;padding:0 13px;font-size:14px}.panel{right:8px;bottom:68px;width:calc(100vw - 16px);height:min(640px,calc(100dvh - 86px));min-height:300px}.bubble{font-size:14px}}@media(prefers-reduced-motion:reduce){.launcher,.dots{animation:none}}@media print{#mneSiteChatRoot{display:none!important}}'+
       '</style>'+
-      '<button class="launcher" id="launcher" type="button" aria-label="Open the Mastering NDA AI Study Guide" aria-expanded="false"><span class="spark" aria-hidden="true">✦</span><span>Ask AI</span></button>'+
+      '<button class="launcher" id="launcher" type="button" aria-label="Open the Mastering NDA AI Study Guide" aria-expanded="false"><span class="spark" aria-hidden="true">✦</span><span>Study Help</span></button>'+
       '<section class="panel" id="panel" role="dialog" aria-modal="false" aria-labelledby="chatTitle" hidden>'+
-      '<header class="top"><div class="brand"><strong id="chatTitle">Mastering NDA Guide</strong><small>AI study assistant</small></div><button class="clear" id="clear" type="button" aria-label="Clear conversation">Clear</button><button class="close" id="close" type="button" aria-label="Close chat">×</button></header>'+
+      '<header class="top"><div class="brand"><strong id="chatTitle">Mastering NDA Guide</strong><small>Free website study help</small></div><button class="clear" id="clear" type="button" aria-label="Clear conversation">Clear</button><button class="close" id="close" type="button" aria-label="Close chat">×</button></header>'+
       '<div class="messages" id="messages" role="log" aria-live="polite" aria-relevant="additions text"></div>'+
       '<div class="quick" id="quick"><button class="chip" type="button">Find a practice page</button><button class="chip" type="button">Explain an English topic</button><button class="chip" type="button">How do I practise WAT?</button></div>'+
       '<form class="form" id="form"><textarea class="question" id="question" maxlength="1800" rows="1" aria-label="Type your question" placeholder="Ask about the site or a topic…"></textarea><button class="send" id="send" type="submit">Ask</button></form>'+
-      '<div class="note">AI replies may be imperfect. Messages are sent to an AI service; this site logs usage metadata only. Sign-in required · 20 questions per 24 hours. Do not share passwords or private details.</div></section>';
+      '<div class="note">Free automated help using prepared guidance; not a live generative AI service. Do not share private details.</div></section>';
     const $=id=>root.getElementById(id);
     const launcher=$('launcher'),panel=$('panel'),messages=$('messages'),form=$('form'),question=$('question'),send=$('send');
     const history=[];
@@ -41,7 +41,7 @@
       const link=document.createElement('a');link.href='dashboard.html';link.textContent='Open User Hub';link.style.color='#2454a5';link.style.fontWeight='700';bubble.appendChild(link);
       messages.appendChild(bubble);messages.scrollTop=messages.scrollHeight;
     }
-    append('assistant','Hello! Ask me about this website, English topics, NDA/NA preparation or SSB practice. Sign in to your free student account to start a chat.');
+    append('assistant','Hello! I can guide you to website resources, English practice, and SSB preparation. This is a free automated help tool.');
     function open(){panel.hidden=false;launcher.hidden=true;launcher.setAttribute('aria-expanded','true');question.focus()}
     function close(){panel.hidden=true;launcher.hidden=false;launcher.setAttribute('aria-expanded','false');launcher.focus()}
     launcher.addEventListener('click',open);$('close').addEventListener('click',close);
@@ -49,23 +49,25 @@
     root.querySelectorAll('.chip').forEach(chip=>chip.addEventListener('click',()=>{question.value=chip.textContent;form.requestSubmit()}));
     question.addEventListener('keydown',event=>{if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();form.requestSubmit()}});
     root.addEventListener('keydown',event=>{if(event.key==='Escape'&&!panel.hidden)close()});
-    form.addEventListener('submit',async event=>{
-      event.preventDefault();const text=question.value.trim();if(!text||send.disabled)return;
-      let token='';
-      try{token=window.MNEPortal?.token?.()||localStorage.getItem(TOKEN_KEY)||''}catch{}
-      append('user',text);question.value='';history.push({role:'user',content:text});
-      if(!token){linkBubble();return}
-      send.disabled=true;const waiting=append('assistant','Thinking…');
-      try{
-        const portal=window.MNEPortal,api=portal?.api?portal.api.replace(/student-portal\/?$/,'site-chatbot'):API,key=portal?.apiKey||ANON;
-        const response=await fetch(api,{method:'POST',headers:{'Content-Type':'application/json','apikey':key,'Authorization':'Bearer '+key,'x-student-token':token},
-          body:JSON.stringify({messages:history.slice(-10),page:location.pathname,title:document.title,description:document.querySelector('meta[name="description"]')?.content||''})});
-        let data={};try{data=await response.json()}catch{}
-        waiting.remove();
-        if(!response.ok){append('assistant',data.error||'I could not answer right now. Please try again.',true);if(response.status===401)linkBubble();return}
-        const answer=String(data.answer||'').slice(0,5000);append('assistant',answer||'I could not prepare a reply. Please try a shorter question.');history.push({role:'assistant',content:answer});
-      }catch{waiting.remove();append('assistant','Connection problem. Please check your internet and try again.',true)}
-      finally{send.disabled=false;question.focus()}
+    function guide(text){
+      const q=text.toLowerCase();
+      const link=(page,label)=>'Open '+label+': '+page;
+      if(/wat|word association/.test(q))return 'For WAT, write a short, constructive sentence for each displayed word within the timer. '+link('wat-practice.html','WAT Practice')+'. You may submit your completed responses for administrator review; individual feedback is not guaranteed.';
+      if(/tat|thematic apperception/.test(q))return 'For TAT, observe the picture, identify a realistic situation and write a clear story with constructive action. '+link('tat-practice.html','TAT Practice')+'.';
+      if(/srt|situation reaction/.test(q))return 'For SRT, respond briefly and practically to each situation within the time limit. '+link('srt-practice.html','SRT Practice')+'.';
+      if(/ppdt|picture perception/.test(q))return 'For PPDT, observe the picture, write a coherent story and practise narration and group discussion. '+link('ppdt-practice.html','PPDT Practice')+'.';
+      if(/ssb|interview|lecturette|gpe|group discussion/.test(q))return 'Explore WAT, TAT, SRT, PPDT, interview and GTO practice in '+link('ssb-corner.html','SSB Corner')+'. These are educational practice resources, not official SSB assessments.';
+      if(/vocab|synonym|antonym|word bank/.test(q))return 'Build vocabulary using '+link('vocabulary-practice.html','Vocabulary Practice')+' and the vocabulary bank. Revise meanings, synonyms and example sentences daily.';
+      if(/grammar|error|tense|preposition|article|voice|narration|subject.verb/.test(q))return 'Use '+link('topic-practice.html','Topic-wise English Practice')+' and '+link('golden-rules-practice.html','Grammar Mastery Challenge')+'. For detailed explanations, consult the relevant grammar rules before attempting timed quizzes.';
+      if(/pyq|previous.year|sample paper|mock|quiz|test/.test(q))return 'Try '+link('quizzes.html','PYQs and Quizzes')+' or '+link('topic-practice.html','Topic-wise Practice')+'. Review mistakes after each attempt.';
+      if(/login|log in|sign in|register|account|password|dashboard/.test(q))return 'Open '+link('dashboard.html','User Hub')+' to register or sign in. Never share your password or OTP in chat.';
+      if(/nda|naval academy|exam|syllabus|preparation/.test(q))return 'Start with '+link('nda-english-preparation.html','NDA/NA English Preparation')+', then practise PYQs and timed quizzes regularly.';
+      if(/upload|submit|response|answer sheet/.test(q))return 'After completing WAT, TAT, SRT or PPDT practice, use the Submit Responses option to send typed answers or a PDF/photo for administrator review. Individual feedback is not guaranteed.';
+      return 'I provide free prepared guidance rather than live AI-generated answers. Try asking about WAT, TAT, SRT, PPDT, grammar, vocabulary, PYQs, registration or answer submission. For practice resources, open ssb-corner.html or topic-practice.html.';
+    }
+    form.addEventListener('submit',event=>{
+      event.preventDefault();const text=question.value.trim();if(!text)return;
+      append('user',text);question.value='';append('assistant',guide(text));question.focus();
     });
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
