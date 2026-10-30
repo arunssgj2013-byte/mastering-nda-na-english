@@ -163,10 +163,10 @@ function addUploadPrompt(){
  if(promptAdded){if(!promptVisible){const existing=section.querySelector('#ssbUploadFlash');if(existing){existing.style.animation='none';void existing.offsetWidth;existing.style.animation=''}}promptVisible=true;return}
  promptAdded=true;promptVisible=true;
  const card=document.createElement('aside');card.className='ssb-upload-flash';card.id='ssbUploadFlash';card.setAttribute('role','status');card.setAttribute('aria-live','polite');
- const strong=document.createElement('strong');strong.textContent='Timed responses complete — upload handwritten answers for AI feedback.';
+ const strong=document.createElement('strong');strong.textContent='Timed responses complete — upload handwritten answers for administrator review.';
  const p=document.createElement('p');p.textContent='Typed answers entered on this page are ready to assess. If you wrote on paper, upload a clear photo or PDF of your answer sheet.';
  const actions=document.createElement('div');actions.className='ssb-upload-actions';
- const typedButton=document.createElement('button');typedButton.type='button';typedButton.className='ssb-upload-action';typedButton.textContent='Assess typed responses';
+ const typedButton=document.createElement('button');typedButton.type='button';typedButton.className='ssb-upload-action';typedButton.textContent='Submit typed responses';
  const typed=answerText();typedButton.disabled=!typed;
  if(!typed)typedButton.textContent='No typed responses captured';
  typedButton.addEventListener('click',()=>{
@@ -176,7 +176,7 @@ function addUploadPrompt(){
  });
  const upload=document.createElement('a');upload.className='ssb-upload-action secondary';upload.href='ssb-ai-assessor.html?test='+test+'&mode=handwritten';upload.textContent='Upload handwritten answers';
  actions.append(typedButton,upload);
- const small=document.createElement('small');small.textContent='The assessor gives educational practice feedback, not an official SSB score or selection prediction. Your typed draft is kept only in this browser until you open the assessor.';
+ const small=document.createElement('small');small.textContent='Responses may be viewed by the website administrator. Feedback is not guaranteed. Your typed draft is kept only in this browser until you open the assessor.';
  card.append(strong,p,actions,small);section.prepend(card);
 }
 function watchCompletion(){
