@@ -47,7 +47,7 @@
     <button class="admin-console-tab" type="button" data-admin-tab="users" aria-selected="false">Users<span>Registered records</span></button>
     <button class="admin-console-tab" type="button" data-admin-tab="results" aria-selected="false">Result Sheets<span>Tests & attempts</span></button>
     <button class="admin-console-tab" type="button" data-admin-tab="activity" aria-selected="false">Activity<span>Logins & actions</span></button>
-    <button class="admin-console-tab" type="button" data-admin-tab="security" aria-selected="false">Security<span>Admin protection</span></button>
+    <button class="admin-console-tab" type="button" data-admin-tab="ssb">SSB Submissions<span>Practice responses</span></button><button class="admin-console-tab" type="button" data-admin-tab="security" aria-selected="false">Security<span>Admin protection</span></button>
   </nav>
 
   <section class="admin-panel active" data-admin-panel="overview">
@@ -125,6 +125,7 @@
     </section>
   </section>
 
+  <section class="admin-panel" data-admin-panel="ssb"><section class="admin-card"><h2>SSB Practice Submissions</h2><p>Private student responses submitted for possible administrator review. Individual feedback is not guaranteed.</p><button class="btn btn-primary" id="loadSsbSubmissions" type="button">Load latest submissions</button><p id="ssbAdminStatus" role="status"></p><div id="ssbAdminRows"></div><button class="btn btn-outline" id="nextSsbSubmissions" type="button" style="display:none">Older submissions</button></section></section>
   <section class="admin-panel" data-admin-panel="security">
     <div class="admin-security-stack">
       <div class="admin-mfa-banner"><div><strong id="adminMfaState">2-Step Verification</strong><p>Extra protection for private user and result records.</p></div><button id="enableMfaBtn" class="btn btn-gold" type="button">Enable 2-Step Verification</button></div>
@@ -139,5 +140,5 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="assets/js/admin-core-v64.js?v=66"></script>
 <script src="assets/js/admin-tools-v64.js?v=64"></script>
-<script defer src="assets/js/site-chat-widget-v1.js?v=1" data-mne-chat-widget-loader></script></body>
+<script defer src="assets/js/site-chat-widget-v1.js?v=1" data-mne-chat-widget-loader></script><script defer src="assets/js/admin-ssb-submissions-v1.js?v=1"></script></body>
 </html>
