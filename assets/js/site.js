@@ -98,6 +98,12 @@
 
   const nav=document.querySelector('.site-header .nav');
   const currentPage=(location.pathname.split('/').pop()||'index.html').toLowerCase();
+  // Learning Word Bank is a separate navigation destination from timed Vocabulary Practice.
+  if(nav && !nav.querySelector('a[href="vocabulary-500-words.html"]')){
+    const wordLink=document.createElement('a');wordLink.href='vocabulary-500-words.html';wordLink.textContent='Word Bank';if(currentPage==='vocabulary-500-words.html'){wordLink.classList.add('active');wordLink.setAttribute('aria-current','page');}
+    const ssb=nav.querySelector('a[href="ssb-corner.html"]');if(ssb)nav.insertBefore(wordLink,ssb);else nav.appendChild(wordLink);
+  }
+
 
   // Group all interactive test destinations under one clean top-level Online Practice dropdown.
   if(nav){
