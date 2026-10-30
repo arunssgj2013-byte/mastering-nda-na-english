@@ -26,7 +26,7 @@
   }
 
   function switchTab(name,{updateHash=true}={}){
-    const valid=['overview','users','results','activity','security'];
+    const valid=['overview','users','results','activity','ssb','security'];
     if(!valid.includes(name))name='overview';
     $$('.admin-console-tab').forEach(b=>{
       const active=b.dataset.adminTab===name;
@@ -43,7 +43,7 @@
   function bindTabs(){
     $$('.admin-console-tab').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.adminTab)));
     const h=location.hash.replace('#','');
-    switchTab(['overview','users','results','activity','security'].includes(h)?h:'overview',{updateHash:false});
+    switchTab(['overview','users','results','activity','ssb','security'].includes(h)?h:'overview',{updateHash:false});
   }
 
   function bindQuickUserSearch(){
