@@ -19,15 +19,17 @@
 
   function showSets(topic){
     const list=series.filter(s=>s.topic===topic);setTitle.textContent=topic;
-    setGrid.innerHTML=list.map((s,i)=>`<button class="topic-set-card" type="button" data-set="${esc(s.id)}"><span class="topic-set-no">${String(s.setNo||i+1).padStart(2,'0')}</span><div><h3>${esc(s.label||`${topic} — Practice Set ${i+1}`)}</h3><p>${s.questions?.length||0} Questions • ${fmt(totalMarks(s))} Marks • ${s.duration||50} Minutes • +4 / −1.33${s.difficulty?` • ${esc(s.difficulty)}`:''}${s.level?` • ${esc(s.level)}`:''}</p></div><span class="topic-set-go">Attempt →</span></button>`).join('');
+    setGrid.innerHTML=list.map((s,i)=>`<button class="topic-set-card" type="button" data-set="${esc(s.id)}"><span class="topic-set-no">${String(s.setNo||i+1).padStart(2,'0')}</span><div><h3>${esc(s.label||`${topic} — Practice Set ${i+1}`)}</h3>${s.id==='golden-rules-100'?'<small>FREE GUEST ACCESS · NO REGISTRATION</small>':''}<p>${s.questions?.length||0} Questions • ${fmt(totalMarks(s))} Marks • ${s.duration||50} Minutes • +4 / −1.33${s.difficulty?` • ${esc(s.difficulty)}`:''}${s.level?` • ${esc(s.level)}`:''}</p></div><span class="topic-set-go">Attempt →</span></button>`).join('');
     setPanel.classList.remove('hidden');testPanel.classList.add('hidden');
     setGrid.querySelectorAll('[data-set]').forEach(b=>b.onclick=()=>prepareSet(b.dataset.set));
     setPanel.scrollIntoView({behavior:'smooth',block:'start'});
   }
 
+  // Practice Set 1 is an open guest preview; Sets 2 and 3 remain registration-only.
+  const GUEST_GOLDEN_SET_ID='golden-rules-100';
   async function prepareSet(id){
     const s=series.find(x=>x.id===id);if(!s)return;
-    if(window.MNEPortal?.requireSession){const ok=await window.MNEPortal.requireSession({pendingUrl:`golden-rules-practice.html?set=${encodeURIComponent(id)}`,mustAuthenticate:true});if(!ok)return;}
+    if(s.id!==GUEST_GOLDEN_SET_ID&&window.MNEPortal?.requireSession){const ok=await window.MNEPortal.requireSession({pendingUrl:`golden-rules-practice.html?set=${encodeURIComponent(id)}`,mustAuthenticate:true});if(!ok)return;}
     activeSet=s;
     history.replaceState(null,'',`golden-rules-practice.html?set=${encodeURIComponent(id)}`);
     window.MNEPortal?.logActivity?.('golden_rules_quiz_open',s.id,s.label,{kind:'golden-rules',topic:s.topic}).catch(()=>{});
