@@ -159,7 +159,7 @@ const QUIZ_PROFILE_KEY='mceStudentProfileV2';
     if(seriesDescription)seriesDescription.textContent=kind==='pyq'?'Only manually corrected PYQ papers are published here. Each set preserves the supplied questions, directions, answer key and explanations.':'Only manually corrected Sample Papers are published here.';
     if(!grid)return;
     if(!list.length){grid.innerHTML='<div class="quiz-empty-state"><strong>No verified set published yet</strong><span>More corrected papers will be added progressively.</span></div>';return;}
-    grid.innerHTML=list.map((s,i)=>`<button class="series-set-card" type="button" data-set-id="${esc(s.id)}"><span class="series-set-no">${String(i+1).padStart(2,'0')}</span><div><small>${kind==='pyq'?'MANUALLY VERIFIED PYQ':'SAMPLE PRACTICE PAPER'}</small><h3>${esc(s.label)}</h3><p>50 Questions • 200 Marks • 50 Minutes • ${kind==='pyq'?'Source-corrected':'Exam-oriented practice'}</p></div><span class="series-go">Attempt →</span></button>`).join('');
+    grid.innerHTML=list.map((s,i)=>`<button class="series-set-card" type="button" data-set-id="${esc(s.id)}"><span class="series-set-no">${String(i+1).padStart(2,'0')}</span><div><small>${isGuestPYQ(s)?'FREE GUEST ACCESS · NO REGISTRATION':kind==='pyq'?'MANUALLY VERIFIED PYQ':'SAMPLE PRACTICE PAPER'}</small><h3>${esc(s.label)}</h3><p>50 Questions • 200 Marks • 50 Minutes • ${kind==='pyq'?'Source-corrected':'Exam-oriented practice'}</p></div><span class="series-go">Attempt →</span></button>`).join('');
     grid.querySelectorAll('[data-set-id]').forEach(btn=>btn.addEventListener('click',()=>guardedLoadSet(btn.dataset.setId,true,false)));
   }
   function setCurrentOmr(qNum){
@@ -343,10 +343,13 @@ const QUIZ_PROFILE_KEY='mceStudentProfileV2';
     if(window.MNEPortal)window.MNEPortal.logActivity('quiz_open',set.id,set.label,{kind:set.kind}).catch(()=>{});
     if(scroll)document.getElementById('quizArena')?.scrollIntoView({behavior:'smooth',block:'start'});
   }
+  // Only these two verified PYQs are guest-accessible; every other set retains its sign-in gate.
+  const GUEST_PYQ_IDS=new Set(['pyq-2026-ii','pyq-2026-i']);
+  function isGuestPYQ(set){return set?.kind==='pyq'&&GUEST_PYQ_IDS.has(set.id)}
   async function guardedLoadSet(id,scroll=false,startAfter=false){
     const set=getSet(id);if(!set)return false;
     const pendingUrl=`quizzes.html?mode=${encodeURIComponent(set.kind)}&set=${encodeURIComponent(set.id)}`;
-    if(window.MNEPortal){const ok=await window.MNEPortal.requireSession({pendingUrl});if(!ok)return false}
+    if(!isGuestPYQ(set)&&window.MNEPortal){const ok=await window.MNEPortal.requireSession({pendingUrl});if(!ok)return false}
     loadSet(id,scroll);if(startAfter)startTimer();return true;
   }
   function saveAttempt(result,sectionStats={}){
