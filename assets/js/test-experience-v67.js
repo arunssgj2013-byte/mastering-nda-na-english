@@ -71,8 +71,8 @@ document.write('<script src="assets/js/sample-paper-23-v82.js?v=82"><\/script>')
     pendingSetId=btn?.dataset?.setId||'';
     pendingSetLabel=btn?.querySelector('h3')?.textContent?.trim()||'Selected NDA/NA English Test';
     if(!pendingSetButton||!pendingSetId)return;
-    // The two 2026 PYQs are open guest previews; other tests still require registration.
-    const guestPreview=pendingSetId==='pyq-2026-ii'||pendingSetId==='pyq-2026-i';
+    // Two 2026 PYQs and Sample Papers 1–2 are open guest previews; other tests require registration.
+    const guestPreview=['pyq-2026-ii','pyq-2026-i','sample-01','sample-02'].includes(pendingSetId);
     if(!guestPreview&&window.MNEPortal?.requireSession){
       const ok=await window.MNEPortal.requireSession({mustAuthenticate:true});
       if(!ok){pendingAfterAuth=true;return}
