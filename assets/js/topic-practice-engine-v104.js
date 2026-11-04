@@ -13,21 +13,23 @@
   function renderTopics(){
     if(!topicGrid)return;
     if(!topics.length){topicGrid.innerHTML='<div class="topic-empty"><strong>Topic-wise practice is ready.</strong><span>Your first practice set will appear here as soon as it is uploaded.</span></div>';return;}
-    topicGrid.innerHTML=topics.map((t,i)=>{const sets=series.filter(s=>s.topic===t);return `<button class="topic-card" data-topic="${esc(t)}" type="button"><small>Topic ${String(i+1).padStart(2,'0')}</small><h3>${esc(t)}</h3><p>Choose a practice set and attempt it online.</p><span class="topic-count">${sets.length} Practice Set${sets.length===1?'':'s'}</span></button>`}).join('');
+    topicGrid.innerHTML=topics.map((t,i)=>{const sets=series.filter(s=>s.topic===t);return `<button class="topic-card" data-topic="${esc(t)}" type="button"><small>Topic ${String(i+1).padStart(2,'0')}${i<2?' · FREE GUEST ACCESS':''}</small><h3>${esc(t)}</h3><p>Choose a practice set and attempt it online.</p><span class="topic-count">${sets.length} Practice Set${sets.length===1?'':'s'}</span></button>`}).join('');
     topicGrid.querySelectorAll('[data-topic]').forEach(b=>b.onclick=()=>showSets(b.dataset.topic));
   }
 
   function showSets(topic){
     const list=series.filter(s=>s.topic===topic);setTitle.textContent=topic;
-    setGrid.innerHTML=list.map((s,i)=>`<button class="topic-set-card" type="button" data-set="${esc(s.id)}"><span class="topic-set-no">${String(s.setNo||i+1).padStart(2,'0')}</span><div><h3>${esc(s.label||`${topic} — Practice Set ${i+1}`)}</h3><p>${s.questions?.length||0} Questions • ${fmt(totalMarks(s))} Marks • 50 Minutes • +4 / −1.33</p></div><span class="topic-set-go">Attempt →</span></button>`).join('');
+    setGrid.innerHTML=list.map((s,i)=>`<button class="topic-set-card" type="button" data-set="${esc(s.id)}"><span class="topic-set-no">${String(s.setNo||i+1).padStart(2,'0')}</span><div><h3>${esc(s.label||`${topic} — Practice Set ${i+1}`)}</h3>${GUEST_TOPIC_SET_IDS.has(s.id)?'<small>FREE · NO REGISTRATION</small>':''}<p>${s.questions?.length||0} Questions • ${fmt(totalMarks(s))} Marks • 50 Minutes • +4 / −1.33</p></div><span class="topic-set-go">Attempt →</span></button>`).join('');
     setPanel.classList.remove('hidden');testPanel.classList.add('hidden');
     setGrid.querySelectorAll('[data-set]').forEach(b=>b.onclick=()=>prepareSet(b.dataset.set));
     setPanel.scrollIntoView({behavior:'smooth',block:'start'});
   }
 
+  // Guest previews: both practice sets under Topics 1 and 2 only.
+  const GUEST_TOPIC_SET_IDS=new Set(['sva-set-1','sva-set-2','direct-indirect-set-1','direct-indirect-set-2']);
   async function prepareSet(id){
     const s=series.find(x=>x.id===id);if(!s)return;
-    if(window.MNEPortal?.requireSession){const ok=await window.MNEPortal.requireSession({pendingUrl:`topic-practice.html?set=${encodeURIComponent(id)}`,mustAuthenticate:true});if(!ok)return;}
+    if(!GUEST_TOPIC_SET_IDS.has(s.id)&&window.MNEPortal?.requireSession){const ok=await window.MNEPortal.requireSession({pendingUrl:`topic-practice.html?set=${encodeURIComponent(id)}`,mustAuthenticate:true});if(!ok)return;}
     activeSet=s;
     history.replaceState(null,'',`topic-practice.html?set=${encodeURIComponent(id)}`);
     window.MNEPortal?.logActivity?.('topic_quiz_open',s.id,s.label,{kind:'topic',topic:s.topic}).catch(()=>{});
